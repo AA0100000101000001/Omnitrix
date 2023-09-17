@@ -28,7 +28,7 @@
 #define ALIEN_NUMBER 11
 
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
-#define DEEP_SLEEP_TIMER 8000 // sec
+#define DEEP_SLEEP_TIMER 10000 // sec
 uint32_t start; //timer for deep sleep
 
 #define ALIEN_TRANSFORMATION_TIME_TEST 5000 //5 sec
