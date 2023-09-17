@@ -17,6 +17,9 @@ void setup() {
   pinMode(rgb_b, OUTPUT);
   //pinMode(TFT_BL, OUTPUT); //Screen
 
+  //Reduce Power consumption
+  setCpuFrequencyMhz(80);
+
   //DFT sound initialise
   /*Serial1.begin(115200, SERIAL_8N1, RXD1, TXD1);
   while(!DF1201S.begin(Serial1)){
