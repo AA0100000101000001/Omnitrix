@@ -18,7 +18,8 @@ void setup() {
   //pinMode(TFT_BL, OUTPUT); //Screen
 
   //Reduce Power consumption
-  setCpuFrequencyMhz(80);
+  setCpuFrequencyMhz(80); //Reduce CPU Freq
+  WiFi.mode(WIFI_OFF); //Turn off WIFI
 
   //DFT sound initialise
   /*Serial1.begin(115200, SERIAL_8N1, RXD1, TXD1);
