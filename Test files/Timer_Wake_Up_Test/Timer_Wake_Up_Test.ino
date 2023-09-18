@@ -16,6 +16,13 @@ void setup() {
 
   Serial.begin(115200);
 
+  //Increment boot number and print it every reboot
+  ++bootCount;
+  Serial.println("Boot number: " + String(bootCount));
+
+  //Print the wakeup reason for ESP32
+  get_wakeup_reason();
+
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED, OUTPUT);
   pinMode(buttonPin, INPUT);
@@ -55,7 +62,7 @@ void get_wakeup_reason() {
 
   esp_sleep_wakeup_cause_t wakeup_reason;
   wakeup_reason = esp_sleep_get_wakeup_cause();
-  
+
   switch(wakeup_reason)
   {
     case ESP_SLEEP_WAKEUP_EXT0 : Serial.println("Wakeup caused by external signal using RTC_IO"); break;
