@@ -63,6 +63,6 @@ void loop() {
       mode = 1;
       delay(200);
       Serial.println("Button pressed");
-  }
+    }
   }
 }
