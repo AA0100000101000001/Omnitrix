@@ -3,7 +3,7 @@
 To Do List: ✅ ☐  
 	☐ Mini switches instead of Encoder  
 	☐ Fix timer in Deep Sleep mode  
-	☐ Update ShowSelectSymbols and ShowSymbols with PNGdec  
+	✅ Update ShowSelectSymbols and ShowSymbols with PNGdec  
 	☐ Power reduction code  
 	☐ Power reduction code for LCD display  
 	☐ GPIO pins as Vcc for inputs and reduce energy when in Deep Sleep  
