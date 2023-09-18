@@ -26,7 +26,7 @@ void  ShowSelectSymbols() {
 
   delay(100);
 
-  int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[9], sizeof(omnitrix_anim[9]), pngDraw);
+  int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[10], sizeof(omnitrix_anim[10]), pngDraw);
 
   if (rc == PNG_SUCCESS) {
     Serial.println("Successfully png file");

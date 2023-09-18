@@ -61,18 +61,6 @@ void setup() {
   //analogWrite(TFT_BL, 100);
   //esp_lcd_panel_disp_on_off(,on)
   
-  //Initialise up line sprite
-  upLine.setColorDepth(8);
-  upLine.createSprite(40, 60);
-
-  upLine.fillSprite(TFT_TRANSPARENT);
-
-  //Initialise down line sprite
-  downLine.setColorDepth(8);
-  downLine.createSprite(40, 60);
-
-  downLine.fillSprite(TFT_TRANSPARENT);
-  
   //After the wake up, display apropriate screen
   if (mode == 1) {
 

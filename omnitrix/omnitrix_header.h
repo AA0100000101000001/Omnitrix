@@ -99,11 +99,7 @@ int16_t xpos = 0;
 int16_t ypos = 0;
 
 TFT_eSPI tft = TFT_eSPI();
-/*
-//TFT sprites
-TFT_eSprite upLine = TFT_eSprite(&tft);
-TFT_eSprite downLine = TFT_eSprite(&tft);
-*/
+
 //DFT sound
 DFRobot_DF1201S DF1201S;
 bool mute = false;
