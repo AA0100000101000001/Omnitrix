@@ -4,7 +4,7 @@
 void showAnimation() {
 
   int frame = 0;
-  int fps = 40;
+  int fps = 30;
 
   for (; frame <= omnitrix_anim_N; frame++)  {
     
