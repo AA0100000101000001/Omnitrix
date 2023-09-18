@@ -6,7 +6,7 @@ void setup() {
 
   Serial.begin(9600);
   Serial.println("START");
-  
+  delay(100);
 
   //Pins
   pinMode(buttonPin, INPUT);
