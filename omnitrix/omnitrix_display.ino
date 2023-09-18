@@ -24,7 +24,7 @@ void showAnimation() {
 //Method that shows the symbols for select mode
 void  ShowSelectSymbols() {
 
-  delay(100);
+  //delay(100);
 
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[10], sizeof(omnitrix_anim[10]), pngDraw);
 
@@ -42,7 +42,7 @@ void  ShowSelectSymbols() {
 //Function that displays start icon symbols
 void ShowSymbols() {
 
-  delay(100);
+  //delay(100);
 
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[0], sizeof(omnitrix_anim[0]), pngDraw);
 
