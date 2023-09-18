@@ -83,55 +83,16 @@ void  ShowSelectSymbols() {
 //Function that displays start icon symbols
 void ShowSymbols() {
 
-  int XLup1, XLup2, YLup1, YLup2, XLdown1, XLdown2, YLdown1, YLdown2;
-  int XRup1, XRup2, YRup1, YRup2, XRdown1, XRdown2, YRdown1, YRdown2;
-  int black;
+  delay(100);
 
+  int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[0], sizeof(omnitrix_anim[0]), pngDraw);
 
-  upLine.drawLine(0, 0, 40, 60, OMNITRIX_GRAY);
-  downLine.drawLine(40, 0, 0, 60, OMNITRIX_GRAY);
+  if (rc == PNG_SUCCESS) {
+    Serial.println("Successfully png file");
 
-  //draw down and upper left symbol
-  XLup1 = -80;
-  YLup1 = 0;
-  XLdown1 = -40;
-  YLdown1 = 119;
-  XLup2 = -40;  //x=80*y/120
-  YLup2 = 60;   //y=x*120/80
-  XLdown2 = -80;
-  YLdown2 = 178;
-  //draw down and upper right symbol
-  XRup1 = 240;  //240-80
-  YRup1 = 120;
-  XRdown1 = 280;
-  YRdown1 = 1;
-  YRup2 = 180;
-  XRup2 = 280;
-  XRdown2 = 240;
-  YRdown2 = 60;
-  for (; XLup1 <= -5 | XLup2 <= 35 | XRup1 >= 315; XLup1++, XLdown1++, XLup2++, XLdown2++, XRup1--, XRdown1--, XRup2--, XRdown2--) {
-    upLine.pushSprite(XLup1, YLup1, TFT_TRANSPARENT);
-    downLine.pushSprite(XLdown1, YLdown1, TFT_TRANSPARENT);
-    upLine.pushSprite(XLup2, YLup2, TFT_TRANSPARENT);
-    downLine.pushSprite(XLdown2, YLdown2, TFT_TRANSPARENT);
-    upLine.pushSprite(XRup1, YRup1, TFT_TRANSPARENT);
-    downLine.pushSprite(XRdown1, YRdown1, TFT_TRANSPARENT);
-    upLine.pushSprite(XRup2, YRup2, TFT_TRANSPARENT);
-    downLine.pushSprite(XRdown2, YRdown2, TFT_TRANSPARENT);
-  }
-
-  //draw black lines
-  upLine.drawLine(0, 0, 40, 60, TFT_BLACK);
-  downLine.drawLine(40, 0, 0, 60, TFT_BLACK);
-  for (black = 0; black <= BLACK_LINE_WIDTH; black++, XLup1++, XLdown1++, XLup2++, XLdown2++, XRup1--, XRdown1--, XRup2--, XRdown2--) {
-    upLine.pushSprite(XLup1, YLup1, TFT_TRANSPARENT);
-    downLine.pushSprite(XLdown1, YLdown1, TFT_TRANSPARENT);
-    upLine.pushSprite(XLup2, YLup2, TFT_TRANSPARENT);
-    downLine.pushSprite(XLdown2, YLdown2, TFT_TRANSPARENT);
-    upLine.pushSprite(XRup1, YRup1, TFT_TRANSPARENT);
-    downLine.pushSprite(XRdown1, YRdown1, TFT_TRANSPARENT);
-    upLine.pushSprite(XRup2, YRup2, TFT_TRANSPARENT);
-    downLine.pushSprite(XRdown2, YRdown2, TFT_TRANSPARENT);
+    tft.startWrite();
+    rc = png.decode(NULL, 0);
+    tft.endWrite();
   }
  
 }
