@@ -4,7 +4,7 @@
 
 void setup() {
 
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println("START");
   delay(100);
 
@@ -60,7 +60,7 @@ void setup() {
   tft.begin();
   //analogWrite(TFT_BL, 100);
   //esp_lcd_panel_disp_on_off(,on)
-  
+
   //After the wake up, display apropriate screen
   if (mode == 1) {
 
