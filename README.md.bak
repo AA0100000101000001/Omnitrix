@@ -2,6 +2,9 @@
 
 # Work in Progress  
 
+![IMG_20230619_164351](media/Images/IMG_20230619_164351.jpg) 
+
+
 This project is meant to be the omnitrix from the Ben 10 Classic series as accurate as posible. It uses a ESP32 Development Board - NodeMCU-32S2 module, a Round LCD Display GC9A01, a Fermion DFPlayer Pro for sound, a Rotary Encoder with Switch and a tack switch.
 (The Rotary Encoder is planned to be changed by Mini Switches for space saving. Also RGB LEDs and battery will to be added) Arduino IDE is used for the software part of the project but could be changed for ESP-IDF in order to use the ULP Coprocessor.  
 
