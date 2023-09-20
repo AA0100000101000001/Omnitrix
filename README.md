@@ -5,8 +5,8 @@
 ![IMG_20230619_164351](media/Images/IMG_20230619_164351.jpg) 
 
 
-This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series in as accurate as posible form. It uses a ESP32 Development Board - NodeMCU-32S2 module, a Round LCD Display GC9A01, a Fermion DFPlayer Pro for sound, a Rotary Encoder with Switch and a tack switch.
-(The Rotary Encoder is planned to be changed by Mini Switches for space saving. Also RGB LEDs and battery will to be added)  
+This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as posible. It uses a ESP32 Development Board - NodeMCU-32S2 module, a Round LCD Display GC9A01, a Fermion DFPlayer Pro for sound, a Rotary Encoder with Switch and a tact switch for user input.
+The Rotary Encoder is planned to be changed by Mini Switches for reducing space. Also RGB LEDs and battery will be added  
 
 Arduino IDE is used for the software part of the project but could be changed for ESP-IDF in order to use the ULP Coprocessor for better power reduction. For the graphics Bodmer's TFT_eSPI library is used and for the sound the DFRobot_DF1201S library.  
 
@@ -38,7 +38,7 @@ https://uniwagr-my.sharepoint.com/:v:/g/personal/ice19390009_uniwa_gr/EfeOqV_51W
 ☐ Power reduction code for LCD display  
 ☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
 ☐ RGB LEDs  
-☐ Conect 6V battery with switch in 5V pin  
+☐ Conect battery with switch in 5V pin  
 	
 # Future Plans:  
 ☐ Secret combination for Master Control Mode  
@@ -51,5 +51,5 @@ https://uniwagr-my.sharepoint.com/:v:/g/personal/ice19390009_uniwa_gr/EfeOqV_51W
 - ☐ Time  
 - ☐ Battery state  
 - ☐ Sound options  
-- ☐ Change tranformation Time variables  
-- ☐ A Demo Mode  
+- ☐ Options for Changing tranformation Time variables  
+- ☐ Option for a Demo Mode  
