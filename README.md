@@ -6,7 +6,7 @@
 
 
 This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as posible. It uses a ESP32 Development Board - NodeMCU-32S2 module, a Round LCD Display GC9A01, a Fermion DFPlayer Pro for sound, a Rotary Encoder with Switch and a tact switch for user input.
-The Rotary Encoder is planned to be changed by Mini Switches for reducing space. Also RGB LEDs and battery will be added  
+The Rotary Encoder is planned to be changed by Micro Switches for reducing space. Also RGB LEDs and battery will be added  
 
 Arduino IDE is used for the software part of the project but could be changed for ESP-IDF in order to use the ULP Coprocessor for better power reduction. For the graphics Bodmer's TFT_eSPI library is used and for the sound the DFRobot_DF1201S library.  
 
@@ -28,21 +28,23 @@ https://uniwagr-my.sharepoint.com/:v:/g/personal/ice19390009_uniwa_gr/EfeOqV_51W
   
 
 # To Do List:  
-☐ Use Mini switches instead of Encoder  
+☐ Use Micro switches instead of Encoder  
 ☐ Fix transformation time in Deep Sleep mode  
 ✅ Update ShowSelectSymbols and ShowSymbols with PNGdec  
 ✅ Power reduction code  
 ☐ Increase resistance of voltage dividers  
-☐ Only enable GPIO outputs at the last moment  
-☐ Remove all Serial.println  
-☐ Power reduction code for LCD display  
+☐ Power reduction code and pin rearangement for LCD display  
 ☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
 ☐ RGB LEDs  
+☐ Only enable GPIO outputs (LEDs) at the last moment  
+☐ Remove all Serial.println  
 ☐ Conect battery with switch in 5V pin  
+☐ Make PCB  
 	
 # Future Plans:  
+☐ Make rotary encoder mechanism with micro switches  
+☐ Create the rest of the mechanics using a CAD program  
 ☐ Secret combination for Master Control Mode  
-☐ Add more interrupts for Deep Sleep  
 ☐ Smoother animation  
 ☐ Xtra animation  
 ☐ Update code with FOTA  
