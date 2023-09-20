@@ -12,11 +12,11 @@ Video of a first test of the project with most of the features included:
 https://uniwagr-my.sharepoint.com/:v:/g/personal/ice19390009_uniwa_gr/EfeOqV_51WFMiZ7XlbTfxEgBar_7Mj2zRy3ds0np9BVFCA?e=VAcc18&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19
 
 # Current Features:  
-Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
-Array of PNG images decoded into HEX representing the first twelve aliens  
-Animation  
-Sound (commented for now)  
-Ability to go into Deep Sleep Mode after a short time of inactivity (tranformation mode in progress)  
+- Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
+- Array of PNG images decoded into HEX representing the first twelve aliens  
+- Animation  
+- Sound (commented for now)  
+- Ability to go into Deep Sleep Mode after a short time of inactivity (tranformation mode in progress)  
   
 
 # To Do List:  
