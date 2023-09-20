@@ -1,26 +1,5 @@
 
-//TFT_eSPI > PNG > Flash_transparent_PNG
-// This example renders a png file that is stored in a FLASH array
-// using the PNGdec library (available via library manager).
-
-// The example png is encoded as ARGB 8 bits per pixel with indexed colour
-// It was created using GIMP and has a transparent background area.
-
-// Image files can be converted to arrays using the tool here:
-// https://notisrac.github.io/FileToCArray/
-// To use this tool:
-//   1. Drag and drop PNG image file on "Browse..." button
-//   2. Tick box "Treat as binary"
-//   3. Click "Convert"
-//   4. Click "Save as file" and move the header file to sketch folder
-//      (alternatively use the "Copy to clipboard" and paste into a new tab)
-//   5. Open the sketch in IDE
-//   6. Include the header file containing the array (SpongeBob.h in this example)
-
-// Include the PNG decoder library, available via the IDE library manager
 #include <PNGdec.h>
-// Include the jpeg decoder library
-//#include <TJpg_Decoder.h>
 
 // Include image array
 #include "omnitrix_aliens.h"
@@ -35,12 +14,11 @@ PNG png; // PNG decoder instance
 #define OMNITRIX_RED 0xC000
 #define OMNITRIX_GRAY 0xAD55
 
-// Include the TFT library - see https://github.com/Bodmer/TFT_eSPI for library information
+
 #include "SPI.h"
 #include <TFT_eSPI.h>              // Hardware-specific library
 TFT_eSPI tft = TFT_eSPI();         // Invoke custom library
 
-// Position variables must be global (PNGdec does not handle position coordinates)
 int16_t xpos = 0;
 int16_t ypos = 0;
 
@@ -48,16 +26,10 @@ int16_t ypos = 0;
 int N = 11;
 int Npos = 0;
 
-//====================================================================================
-//                                    Setup
-//====================================================================================
 void setup()
 {
   Serial.begin(115200);
   Serial.println("\n\n Using the PNGdec library");
-
-  //TJpgDec.setSwapBytes(true);
-  //TJpgDec.setCallback(tft_output);
 
   // Initialise the TFT
   tft.begin();
@@ -67,9 +39,7 @@ void setup()
 
 }
 
-//====================================================================================
-//                                    Loop
-//====================================================================================
+
 void loop()
 {
 
@@ -81,14 +51,7 @@ void loop()
     eraseAlien();
     showAlien();
     delay(1000);
-/*
-    if ((Npos + 1) > N ) {
-      Npos = 0;
-    }
-    else {
-      Npos += 1;
-    }
-*/
+
   }
 
   tft.fillScreen(OMNITRIX_GREEN);
@@ -117,19 +80,8 @@ void showAnimation() {
   }
 
 }
-/*
-bool tft_output(int16_t x, int16_t y, uint16_t w, uint16_t h, uint16_t* bitmap)
-{
-  // Stop further decoding as image is running off bottom of screen
-  if ( y >= tft.height() ) return 0;
 
-  // This function will clip the image block rendering automatically at the TFT boundaries
-  tft.pushImage(x, y, w, h, bitmap);
 
-  // Return 1 to decode next block
-  return 1;
-}
-*/
 void showAlien() {
 
   uint16_t pngw = 0, pngh = 0; // To store width and height of image

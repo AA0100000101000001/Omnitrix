@@ -22,7 +22,6 @@ void setup() {
 
 void loop() {
 
-  //encoderPos += (digitalRead(A) == digitalRead(B)) ? -1 : 1;
 
   rightState = digitalRead(A);
 
