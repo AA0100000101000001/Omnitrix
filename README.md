@@ -7,7 +7,7 @@ This project is meant to be the omnitrix from the Ben 10 Classic series as accur
 
 Scematic images will be added shortly  
 
-This is a first test of the project with most of the features included:  
+Video of a first test of the project with most of the features included:  
 
 https://uniwagr-my.sharepoint.com/:v:/g/personal/ice19390009_uniwa_gr/EfeOqV_51WFMiZ7XlbTfxEgBar_7Mj2zRy3ds0np9BVFCA?e=VAcc18&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19
 
@@ -19,20 +19,20 @@ Sound (commented for now)
 Ability to go into Deep Sleep Mode after a short time of inactivity (tranformation mode in progress)  
   
 
-# To Do List: ✅ ☐  
-	☐ Use Mini switches instead of Encoder  
-	☐ Fix transformation time in Deep Sleep mode  
-	✅ Update ShowSelectSymbols and ShowSymbols with PNGdec  
-	✅ Power reduction code  
-		☐ Increase resistance of voltage dividers  
-		☐ Only enable GPIO outputs at the last moment  
-		☐ Remove all Serial.println  
-	☐ Power reduction code for LCD display  
-	☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
-	☐ RGB LEDs  
-	☐ Conect 6V battery with switch in 5V pin  
+# To Do List:  
+☐ Use Mini switches instead of Encoder  
+☐ Fix transformation time in Deep Sleep mode  
+✅ Update ShowSelectSymbols and ShowSymbols with PNGdec  
+✅ Power reduction code  
+- ☐ Increase resistance of voltage dividers  
+- ☐ Only enable GPIO outputs at the last moment  
+- ☐ Remove all Serial.println  
+☐ Power reduction code for LCD display  
+☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
+☐ RGB LEDs  
+☐ Conect 6V battery with switch in 5V pin  
 	
-Future Plans:  
+# Future Plans:  
 	☐ Secret combination for Master Control Mode  
 	☐ Add more interrupts for Deep Sleep  
 	☐ Smoother animation  
