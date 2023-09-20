@@ -24,6 +24,7 @@ void setup() {
   WiFi.mode(WIFI_OFF); //Turn off WIFI
 
   //DFT sound initialise
+  //Uncomment for sound
   /*Serial1.begin(115200, SERIAL_8N1, RXD1, TXD1);
   while(!DF1201S.begin(Serial1)){
     Serial.println("Init failed, please check the wire connection!");
@@ -173,6 +174,7 @@ void playSound(int16_t s) {
 
   //If mute is false then play selected sound
   if (!mute) {
+    //Uncomment for sound
     //DF1201S.playFileNum(s); 
   }
 }
