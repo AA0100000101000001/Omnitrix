@@ -24,24 +24,24 @@ Ability to go into Deep Sleep Mode after a short time of inactivity (tranformati
 ☐ Fix transformation time in Deep Sleep mode  
 ✅ Update ShowSelectSymbols and ShowSymbols with PNGdec  
 ✅ Power reduction code  
-- ☐ Increase resistance of voltage dividers  
-- ☐ Only enable GPIO outputs at the last moment  
-- ☐ Remove all Serial.println  
+☐ Increase resistance of voltage dividers  
+☐ Only enable GPIO outputs at the last moment  
+☐ Remove all Serial.println  
 ☐ Power reduction code for LCD display  
 ☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
 ☐ RGB LEDs  
 ☐ Conect 6V battery with switch in 5V pin  
 	
 # Future Plans:  
-	☐ Secret combination for Master Control Mode  
-	☐ Add more interrupts for Deep Sleep  
-	☐ Smoother animation  
-	☐ Xtra animation  
-	☐ Update code with FOTA  
-	☐ Download additional aliens from a server  
-	☐ Add Menu that includes:  
-		☐ Time  
-		☐ Battery state  
-		☐ Sound options  
-		☐ Change tranformation Time variables  
-		☐ A Demo Mode  
+☐ Secret combination for Master Control Mode  
+☐ Add more interrupts for Deep Sleep  
+☐ Smoother animation  
+☐ Xtra animation  
+☐ Update code with FOTA  
+☐ Download additional aliens from a server  
+☐ Add Menu that includes:  
+- ☐ Time  
+- ☐ Battery state  
+- ☐ Sound options  
+- ☐ Change tranformation Time variables  
+- ☐ A Demo Mode  
