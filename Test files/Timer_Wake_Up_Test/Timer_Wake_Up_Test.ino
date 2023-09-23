@@ -3,10 +3,10 @@
 #define DEEP_SLEEP_TIMER 5000 // sec
 uint32_t start; //timer for deep sleep
 
-#define ALIEN_TRANSFORMATION_TIME_TEST 7 //5 sec
-#define OMNITRIX_RECHARGE_TIME_TEST 5000
-#define ALIEN_TRANSFORMATION_TIME_DEFAULT 60000 //1 min
-#define OMNITRIX_RECHARGE_TIME_DEFAULT 60000
+#define ALIEN_TRANSFORMATION_TIME_TEST 10 //10 sec
+#define OMNITRIX_RECHARGE_TIME_TEST 5
+#define ALIEN_TRANSFORMATION_TIME_DEFAULT 60 //1 min
+#define OMNITRIX_RECHARGE_TIME_DEFAULT 60
 
 int transform_time_val = ALIEN_TRANSFORMATION_TIME_TEST;
 int recharge_time_val = OMNITRIX_RECHARGE_TIME_TEST;
@@ -34,27 +34,20 @@ void setup() {
   //Increment boot number and print it every reboot
   ++bootCount;
   Serial.println("Boot number: " + String(bootCount));
+  delay(100);
+  Serial.print("Mode: ");
+  Serial.println(mode);
 
   //The omnitrix will wake up when the button is pressed
   esp_sleep_enable_ext0_wakeup(GPIO_NUM_5,1);
-
-  //Disable waking up by timer
-  esp_err_t disable_source = esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-
-  //Check if timer is enabled or disabled
-  if (disable_source == ESP_OK ) {
-    Serial.println("Timer is now disabled");
-  } else if (disable_source == ESP_ERR_INVALID_STATE ){
-    Serial.println("Timer was not enabled");
-  }
-
-  //Print the wakeup reason for ESP32
-  get_wakeup_reason();
 
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED, OUTPUT);
   pinMode(buttonPin, INPUT);
   pinMode(SW, INPUT_PULLUP);
+
+  //Check the wakeup reason for ESP32
+  get_wakeup_reason();
 
   //reset timer
   start = offsetMillis();
@@ -88,12 +81,19 @@ void loop() {
     
     mode2();
     
-  
+  //Transormation mode
   } else if (mode == 3) {
+
+
 
     //Check timer for deep sleep
     check_timer();
 
+  //Recharging mode
+  } else if (mode == 4) {
+
+    //Check timer for deep sleep
+    check_timer();
   }
 
 }
@@ -155,10 +155,7 @@ void check_timer() {
   //if the time has passed then go to deep sleep
   if ((offsetMillis() - start) > DEEP_SLEEP_TIMER) {
 
-    //Go to start after transformation time is finished
-    if (mode == 3) {
-      mode = 1;
-    }
+    
 
     Serial.println("Going to sleep");
     
@@ -173,11 +170,36 @@ void get_wakeup_reason() {
 
   switch(wakeup_reason)
   {
-    case ESP_SLEEP_WAKEUP_EXT0 : Serial.println("Wakeup caused by external signal using RTC_IO"); break;
-    case ESP_SLEEP_WAKEUP_EXT1 : Serial.println("Wakeup caused by external signal using RTC_CNTL"); break;
-    case ESP_SLEEP_WAKEUP_TIMER : Serial.println("Wakeup caused by timer"); break;
-    case ESP_SLEEP_WAKEUP_TOUCHPAD : Serial.println("Wakeup caused by touchpad"); break;
-    case ESP_SLEEP_WAKEUP_ULP : Serial.println("Wakeup caused by ULP program"); break;
+    case ESP_SLEEP_WAKEUP_EXT0 : {
+
+      Serial.println("Wakeup caused by external signal using RTC_IO"); 
+      break;
+    }
+    case ESP_SLEEP_WAKEUP_TIMER : {
+
+      Serial.println("Wakeup caused by timer"); 
+
+      //Go to recharge mode after transformation time is finished
+      if (mode == 3) {
+      
+        //Configure the wake up source to wake up every time the recharge is done
+        esp_sleep_enable_timer_wakeup(OMNITRIX_RECHARGE_TIME_TEST * uS_TO_S_FACTOR);
+        Serial.println("Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST) +
+       " Seconds");
+
+        mode = 4;
+    
+        //Go to start mode after recharge timer is finished
+        } else if (mode == 4) {
+
+          //Disable waking up by timer
+          esp_err_t disable_source = esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
+          Serial.println("Disabled Timer");
+
+          mode = 1;
+        }
+        break;
+      }
     default : Serial.printf("Wakeup was not caused by deep sleep: %d\n",wakeup_reason); break;
   }
 
