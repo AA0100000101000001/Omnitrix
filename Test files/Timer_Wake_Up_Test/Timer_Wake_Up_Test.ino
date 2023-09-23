@@ -3,7 +3,7 @@
 #define DEEP_SLEEP_TIMER 5000 // sec
 uint32_t start; //timer for deep sleep
 
-#define ALIEN_TRANSFORMATION_TIME_TEST 5000 //5 sec
+#define ALIEN_TRANSFORMATION_TIME_TEST 5 //5 sec
 #define OMNITRIX_RECHARGE_TIME_TEST 5000
 #define ALIEN_TRANSFORMATION_TIME_DEFAULT 60000 //1 min
 #define OMNITRIX_RECHARGE_TIME_DEFAULT 60000
@@ -38,6 +38,11 @@ void setup() {
   //The omnitrix will wake up when the button is pressed
   esp_sleep_enable_ext0_wakeup(GPIO_NUM_5,1);
 
+  //Configure the wake up source to wake up every time the transfomation is done
+  esp_sleep_enable_timer_wakeup(ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR);
+  Serial.println("Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST) +
+  " Seconds");
+
   //Print the wakeup reason for ESP32
   get_wakeup_reason();
 
@@ -61,7 +66,7 @@ void loop() {
 
     if (buttonState == HIGH) {
       // turn LED on:
-      digitalWrite(LED, HIGH);
+      //digitalWrite(LED, HIGH);
       mode = 2;
       delay(200);
       Serial.println("Button pressed, select alien");
@@ -81,6 +86,8 @@ void loop() {
   
   } else if (mode == 3) {
 
+    //Check timer for deep sleep
+    check_timer();
 
   }
 
@@ -108,7 +115,7 @@ void mode2() {
     // check if start button is pressed. If it is then go to the previous mode
     if (buttonState == HIGH) {
       // turn LED off:
-      digitalWrite(LED, LOW);
+      //digitalWrite(LED, LOW);
       mode = 1;
       delay(200);
       Serial.println("Button pressed back to start");
