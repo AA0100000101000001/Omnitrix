@@ -1,6 +1,6 @@
 
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
-#define DEEP_SLEEP_TIMER 10000 // sec
+#define DEEP_SLEEP_TIMER 5000 // sec
 uint32_t start; //timer for deep sleep
 
 #define ALIEN_TRANSFORMATION_TIME_TEST 5000 //5 sec
@@ -45,23 +45,33 @@ void setup() {
   pinMode(LED, OUTPUT);
   pinMode(buttonPin, INPUT);
   pinMode(SW, INPUT_PULLUP);
+
+  //reset timer
+  start = offsetMillis();
 }
 
 // the loop function runs over and over again forever
 void loop() {
-  
-	buttonState = digitalRead(buttonPin);
 
   //If button is pressed then led is turned on
   if (mode == 1) {
+
     // check if the pushbutton is pressed. If it is, the buttonState is LOW:
+	  buttonState = digitalRead(buttonPin);
+
     if (buttonState == HIGH) {
       // turn LED on:
       digitalWrite(LED, HIGH);
       mode = 2;
       delay(200);
       Serial.println("Button pressed, select alien");
+
+      //reset timer
+      start = offsetMillis();
     }
+
+    //Check timer for deep sleep
+    check_timer();
 
   //If button is pressed then led is turned off
   } else if (mode == 2) {
@@ -71,7 +81,6 @@ void loop() {
   
   } else if (mode == 3) {
 
-    Serial.print("Tranformed into alien ");
 
   }
 
@@ -88,6 +97,9 @@ void mode2() {
     if (selectbuttonState == LOW) {
       mode = 3;
       Serial.println("Tranformed into alien");
+
+      //reset timer
+      start = offsetMillis();
     }
 
     //Read stasrt button state
@@ -100,11 +112,36 @@ void mode2() {
       mode = 1;
       delay(200);
       Serial.println("Button pressed back to start");
+
+      //reset timer
+      start = offsetMillis();
     }
 
+    //Check timer for deep sleep
+    check_timer();
 
   }
 
+}
+
+//Function for saving millis() time over deep sleep
+unsigned long offsetMillis()
+{
+    return millis() + millisOffset;
+}
+
+//Check time for deep sleep
+void check_timer() {
+
+  //Serial.println((offsetMillis() - start));
+  
+  //if the time has passed then go to deep sleep
+  if ((offsetMillis() - start) > DEEP_SLEEP_TIMER) {
+
+    Serial.println("Going to sleep");
+    
+    esp_deep_sleep_start();
+  }
 }
 
 void get_wakeup_reason() {
