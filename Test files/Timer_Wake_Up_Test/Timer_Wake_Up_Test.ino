@@ -3,7 +3,7 @@
 #define DEEP_SLEEP_TIMER 5000 // sec
 uint32_t start; //timer for deep sleep
 
-#define ALIEN_TRANSFORMATION_TIME_TEST 5 //5 sec
+#define ALIEN_TRANSFORMATION_TIME_TEST 7 //5 sec
 #define OMNITRIX_RECHARGE_TIME_TEST 5000
 #define ALIEN_TRANSFORMATION_TIME_DEFAULT 60000 //1 min
 #define OMNITRIX_RECHARGE_TIME_DEFAULT 60000
@@ -38,10 +38,15 @@ void setup() {
   //The omnitrix will wake up when the button is pressed
   esp_sleep_enable_ext0_wakeup(GPIO_NUM_5,1);
 
-  //Configure the wake up source to wake up every time the transfomation is done
-  esp_sleep_enable_timer_wakeup(ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR);
-  Serial.println("Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST) +
-  " Seconds");
+  //Disable waking up by timer
+  esp_err_t disable_source = esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
+
+  //Check if timer is enabled or disabled
+  if (disable_source == ESP_OK ) {
+    Serial.println("Timer is now disabled");
+  } else if (disable_source == ESP_ERR_INVALID_STATE ){
+    Serial.println("Timer was not enabled");
+  }
 
   //Print the wakeup reason for ESP32
   get_wakeup_reason();
@@ -105,11 +110,16 @@ void mode2() {
       mode = 3;
       Serial.println("Tranformed into alien");
 
+      //Configure the wake up source to wake up every time the transfomation is done
+      esp_sleep_enable_timer_wakeup(ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR);
+      Serial.println("Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST) +
+      " Seconds");
+
       //reset timer
       start = offsetMillis();
     }
 
-    //Read stasrt button state
+    //Read start button state
     buttonState = digitalRead(buttonPin);
 
     // check if start button is pressed. If it is then go to the previous mode
@@ -144,6 +154,11 @@ void check_timer() {
   
   //if the time has passed then go to deep sleep
   if ((offsetMillis() - start) > DEEP_SLEEP_TIMER) {
+
+    //Go to start after transformation time is finished
+    if (mode == 3) {
+      mode = 1;
+    }
 
     Serial.println("Going to sleep");
     
