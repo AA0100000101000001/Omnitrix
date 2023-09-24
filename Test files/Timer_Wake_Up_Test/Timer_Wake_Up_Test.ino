@@ -1,3 +1,5 @@
+/* This program tests the ability of the omnitrix to go into deep sleep mode after a short period of time of inactivity and wake up when the transformation time is over 
+in order to go to the recharging state.*/
 
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
 #define DEEP_SLEEP_TIMER 5000 // sec

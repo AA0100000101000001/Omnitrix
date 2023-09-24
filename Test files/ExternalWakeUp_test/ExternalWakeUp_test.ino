@@ -21,6 +21,8 @@ Author:
 Pranav Cherukupalli <cherukupallip@gmail.com>
 */
 
+/* This program uses the ext0 wakeup method to wake up the ESP32 with the use of a button.*/
+
 //#define BUTTON_PIN_BITMASK 0x200000000 // 2^33 in hex
 
 const int buttonPin = 5;

@@ -1,3 +1,4 @@
+/* This program displays on the LCD screen the omnitrix start animation followed by all the alien figures displayed one after the other in a loop. */
 
 #include <PNGdec.h>
 

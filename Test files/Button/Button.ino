@@ -1,3 +1,4 @@
+/* This program uses a button in pull down resistor connection and the inbuild LED. When the button is pressed then the LED is turned on and when it is pressed again then the LED is turned off.*/
 
 const int buttonPin = 5;  // the number of the pushbutton pin
 const int ledPin = 2;    // the number of the LED pin

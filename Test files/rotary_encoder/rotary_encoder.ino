@@ -1,3 +1,4 @@
+/* This program tests the rotatry encoder in input pull up connection.*/
 
 int anienNo = 0;
 int rightState = 0;

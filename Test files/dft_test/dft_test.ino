@@ -1,3 +1,6 @@
+/* This program is testing the DFRobot_DF1201S library with a ESP32. It uses a button as input to play three sounds. When the button is pressed then the first sound is played, 
+when it is pressed again then the second sound is played and when it is pressed for the third time then the third sound is played. If the button is pressed again then the sequence
+will repeat from the first sound.*/
 
 #include <DFRobot_DF1201S.h>
 //#include <SoftwareSerial.h>
