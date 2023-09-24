@@ -1,10 +1,8 @@
 /* This program tests the ability of the omnitrix to go into deep sleep mode after a short period of time of inactivity and wake up when the transformation time is over 
-in order to go to the recharging state. It tests that by reading RTC time */
+in order to go to the recharging state.*/
 
-#include <Wire.h>
-
-//Byte variables to be read by Wire
-byte ss=0, mi=0, hh=0, wd=6, dd=1, mo=1, yy=0;
+#include <ESP32Time.h>
+ESP32Time rtc;
 
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
 #define DEEP_SLEEP_TIMER 5000 // 5 sec
@@ -38,7 +36,6 @@ int selectbuttonState = 0; //State of select button
 // the setup function runs once when you press reset or power the board or wake up from deep sleep
 void setup() {
 
-  Wire.begin();
   Serial.begin(115200);
 
   //Increment boot number and print it every reboot
@@ -47,6 +44,10 @@ void setup() {
   delay(100);
   Serial.print("Mode: ");
   Serial.println(mode);
+
+  if (bootCount == 1) {
+    rtc.setTime(0, 0, 0, 1, 1, 2023);  // 1st Jan 2023 00:00:00
+  }
 
   //The omnitrix will wake up when the button is pressed
   esp_sleep_enable_ext0_wakeup(GPIO_NUM_5,1);
@@ -119,13 +120,13 @@ void mode2() {
       delay(200);
       Serial.println("Tranformed into alien");
 
+      //Serial.println(rtc.getTime("%A, %B %d %Y %H:%M:%S"));   // (String) returns time with specified format
+      Serial.println(rtc.getLocalEpoch()); //Get minutes passed since first boot
+
       //Configure the wake up source to wake up every time the transfomation is done
       esp_sleep_enable_timer_wakeup(transform_time_val);
       Serial.println("Setup ESP32 to sleep for every " + String(transform_time_val) +
       " Milli Seconds");
-
-      //Show time
-      printTime();
 
       //reset timer
       start = offsetMillis();
@@ -244,6 +245,9 @@ void get_wakeup_reason() {
         Serial.println("Setup ESP32 to sleep for every " + String(recharge_time_val) +
         " Milli Seconds");
 
+        //Serial.println(rtc.getTime("%A, %B %d %Y %H:%M:%S"));   // (String) returns time with specified format
+        Serial.println(rtc.getLocalEpoch()); //Get minutes passed since first boot
+
         mode = 4;
         //transform_time_val = ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR;
     
@@ -261,60 +265,4 @@ void get_wakeup_reason() {
     default : Serial.printf("Wakeup was not caused by deep sleep: %d\n",wakeup_reason); break;
   }
 
-}
-
-void printTime() {
-
-  // ask RTC for the time
-  // send request to receive data starting at register 0
-  Wire.beginTransmission(0x68); // 0x68 is DS3231 device address
-  Wire.write((byte)0); // start at register 0
-  Wire.endTransmission();
-  Wire.requestFrom(0x68, 7); // request seven bytes (ss, mi, hh, wd, dd, mo, yy)
-  // check for a reply from the RTC, and use it if we can
-  if (Wire.available() >= 7) { 
-    // if we're here, we got a reply and it is long enough
-    // so now we read the time
-    ss = bcd2bin(Wire.read()); // get seconds
-    mi = bcd2bin(Wire.read()); // get minutes
-    hh = bcd2bin(Wire.read()); // get hours
-    wd = bcd2bin(Wire.read());
-    dd = bcd2bin(Wire.read());
-    mo = bcd2bin(Wire.read());
-    yy = bcd2bin(Wire.read());
-    // show that we successfully got the time
-    Serial.print("Got the time: ");
-
-    //Print time
-    Serial.print ("\'");
-    if (yy<10) Serial.print("0"); Serial.print(yy,DEC); Serial.print("-");
-    if (mo<10) Serial.print("0"); Serial.print(mo,DEC); Serial.print("-");
-    if (dd<10) Serial.print("0"); Serial.print(dd,DEC); Serial.print("(");
-    switch (wd) {
-      case 1: Serial.print("Mon"); break;
-      case 2: Serial.print("Tue"); break; 
-      case 3: Serial.print("Wed"); break; 
-      case 4: Serial.print("Thu"); break; 
-      case 5: Serial.print("Fri"); break; 
-      case 6: Serial.print("Sat"); break; 
-      case 7: Serial.print("Sun"); break;
-      default: Serial.print("Bad");  
-    }
-    Serial.print(") ");
-    if (hh<10) Serial.print("0"); Serial.print(hh,DEC); Serial.print(":");
-    if (mi<10) Serial.print("0"); Serial.print(mi,DEC); Serial.print(":");
-    if (ss<10) Serial.print("0"); Serial.print(ss,DEC); Serial.println("");
-
-  }
-  else {
-    // if we're here, that means we were unable to read the time
-    Serial.println("Unable to read time from RTC"); 
-  }
-  delay(500);
-
-}
-
-byte bcd2bin(byte x) {
-  // converts from binary-coded decimal to a "regular" binary number
-  return ((((x >> 4) & 0xF) * 10) + (x & 0xF)) ;
 }

@@ -121,7 +121,7 @@ void mode2() {
       Serial.println("Tranformed into alien");
 
       //Serial.println(rtc.getTime("%A, %B %d %Y %H:%M:%S"));   // (String) returns time with specified format
-      Serial.println(rtc.getTime()); //Get minutes passed since first boot
+      Serial.println(rtc.getLocalEpoch()); //Get minutes passed since first boot
 
       //Configure the wake up source to wake up every time the transfomation is done
       esp_sleep_enable_timer_wakeup(transform_time_val);
@@ -246,7 +246,7 @@ void get_wakeup_reason() {
         " Milli Seconds");
 
         //Serial.println(rtc.getTime("%A, %B %d %Y %H:%M:%S"));   // (String) returns time with specified format
-        Serial.println(rtc.getTime()); //Get minutes passed since first boot
+        Serial.println(rtc.getLocalEpoch()); //Get minutes passed since first boot
 
         mode = 4;
         //transform_time_val = ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR;
