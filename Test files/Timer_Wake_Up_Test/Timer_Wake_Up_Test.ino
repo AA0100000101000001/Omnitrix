@@ -18,6 +18,9 @@ RTC_DATA_ATTR uint32_t transform_timer;
 RTC_DATA_ATTR uint32_t recharge_timer;
 RTC_DATA_ATTR unsigned long millisOffset=0;
 
+RTC_DATA_ATTR uint32_t transformation_start_time;
+RTC_DATA_ATTR uint32_t recharging_start_time;
+
 RTC_DATA_ATTR int bootCount = 0;
 RTC_DATA_ATTR int mode = 1;
 
@@ -113,12 +116,14 @@ void mode2() {
       Serial.println("Tranformed into alien");
 
       //Configure the wake up source to wake up every time the transfomation is done
-      esp_sleep_enable_timer_wakeup(ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR);
-      Serial.println("Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST) +
+      esp_sleep_enable_timer_wakeup(transform_time_val * uS_TO_S_FACTOR);
+      Serial.println("Setup ESP32 to sleep for every " + String(transform_time_val) +
       " Seconds");
 
       //reset timer
       start = offsetMillis();
+      //reset transformation time
+      transformation_start_time = offsetMillis();
     }
 
     //Read start button state
@@ -152,7 +157,22 @@ unsigned long offsetMillis()
 //Check time for deep sleep
 void check_timer() {
 
-  //Serial.println((offsetMillis() - start));
+  //Serial.println(offsetMillis() - start);
+
+  //Check transormation time if state is in transformation mode
+  if (mode == 3) {
+
+    Serial.println(transformation_start_time);
+    Serial.println(offsetMillis() - transformation_start_time);
+    Serial.println(transform_time_val*uS_TO_S_FACTOR);
+
+    if ((offsetMillis() - transformation_start_time) > transform_time_val*uS_TO_S_FACTOR) {
+
+      mode == 4;
+
+    }
+
+  }
   
   //if the time has passed then go to deep sleep
   if ((offsetMillis() - start) > DEEP_SLEEP_TIMER) {
@@ -185,8 +205,8 @@ void get_wakeup_reason() {
       if (mode == 3) {
       
         //Configure the wake up source to wake up every time the recharge is done
-        esp_sleep_enable_timer_wakeup(OMNITRIX_RECHARGE_TIME_TEST * uS_TO_S_FACTOR);
-        Serial.println("Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST) +
+        esp_sleep_enable_timer_wakeup(recharge_time_val * uS_TO_S_FACTOR);
+        Serial.println("Setup ESP32 to sleep for every " + String(recharge_time_val) +
        " Seconds");
 
         mode = 4;
