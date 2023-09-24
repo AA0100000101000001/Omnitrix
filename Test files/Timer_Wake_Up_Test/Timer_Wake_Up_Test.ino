@@ -2,28 +2,26 @@
 in order to go to the recharging state.*/
 
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
-#define DEEP_SLEEP_TIMER 5000 // sec
+#define DEEP_SLEEP_TIMER 5000 // 5 sec
 uint32_t start; //timer for deep sleep
 
 #define ALIEN_TRANSFORMATION_TIME_TEST 10 //10 sec
-#define OMNITRIX_RECHARGE_TIME_TEST 5
+#define OMNITRIX_RECHARGE_TIME_TEST 5 //5 sec
 #define ALIEN_TRANSFORMATION_TIME_DEFAULT 60 //1 min
-#define OMNITRIX_RECHARGE_TIME_DEFAULT 60
+#define OMNITRIX_RECHARGE_TIME_DEFAULT 60 //1 min
 
+//Convert timer variables int micro seconds
 int transform_time_val = ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR;
 int recharge_time_val = OMNITRIX_RECHARGE_TIME_TEST * uS_TO_S_FACTOR;
 
 //Time variables that are saved in deep sleep mode
 RTC_DATA_ATTR uint32_t transformation_start_time;
 RTC_DATA_ATTR uint32_t recharging_start_time;
-//RTC_DATA_ATTR uint32_t transformation_start_time_offset;
-//RTC_DATA_ATTR uint32_t recharging_start_time_offset;
 
 RTC_DATA_ATTR unsigned long millisOffset=0;
 
-
-RTC_DATA_ATTR int bootCount = 0;
-RTC_DATA_ATTR int mode = 1;
+RTC_DATA_ATTR int bootCount = 0; //Number of times the system wakes up
+RTC_DATA_ATTR int mode = 1; //Omnitrix state
 
 int LED = 2;
 const int buttonPin = 5; //Start button
@@ -32,7 +30,7 @@ const int SW = 3; //Encoder button
 int buttonState = 0; //State of start button
 int selectbuttonState = 0; //State of select button
 
-// the setup function runs once when you press reset or power the board
+// the setup function runs once when you press reset or power the board or wake up from deep sleep
 void setup() {
 
   Serial.begin(115200);
@@ -47,7 +45,7 @@ void setup() {
   //The omnitrix will wake up when the button is pressed
   esp_sleep_enable_ext0_wakeup(GPIO_NUM_5,1);
 
-  // initialize digital pin LED_BUILTIN as an output.
+  //initialize inputs and outputs.
   pinMode(LED, OUTPUT);
   pinMode(buttonPin, INPUT);
   pinMode(SW, INPUT_PULLUP);
@@ -55,19 +53,20 @@ void setup() {
   //Check the wakeup reason for ESP32
   get_wakeup_reason();
 
-  //reset timer
+  //reset timer 
   start = offsetMillis();
 }
 
 // the loop function runs over and over again forever
 void loop() {
 
-  //If button is pressed then led is turned on
+  //Start mode
   if (mode == 1) {
 
-    // check if the pushbutton is pressed. If it is, the buttonState is LOW:
+    //Check if the pushbutton is pressed. 
 	  buttonState = digitalRead(buttonPin);
 
+    //If it is, then go to Alien Selection mode
     if (buttonState == HIGH) {
       // turn LED on:
       //digitalWrite(LED, HIGH);
@@ -82,7 +81,7 @@ void loop() {
     //Check timer for deep sleep
     check_timer();
 
-  //If button is pressed then led is turned off
+  //Alien Selection mode
   } else if (mode == 2) {
     
     mode2();
@@ -90,10 +89,7 @@ void loop() {
   //Transormation mode
   } else if (mode == 3) {
 
-
-
-    //Check timer for deep sleep
-    check_timer();
+    mode3();
 
   //Recharging mode
   } else if (mode == 4) {
@@ -146,6 +142,33 @@ void mode2() {
     check_timer();
 
   }
+
+}
+
+void mode3() {
+
+  //Check timer for deep sleep
+  check_timer();
+
+  delay(200);
+
+  //Read select button state
+  selectbuttonState = digitalRead(SW);
+
+  //if encoder button is pressed then go to Start mode
+  if (selectbuttonState == LOW) {
+
+    delay(200);
+    mode = 1;
+    Serial.println("Button pressed, untransforming and going back to Start mode");
+
+    //Disable waking up by timer
+    esp_err_t disable_source = esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
+    Serial.println("Disabled Timer");
+
+    //reset timer
+    start = offsetMillis();
+    }
 
 }
 
