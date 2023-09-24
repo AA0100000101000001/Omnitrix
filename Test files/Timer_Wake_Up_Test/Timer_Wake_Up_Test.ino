@@ -160,28 +160,9 @@ unsigned long offsetMillis()
 void check_timer() {
 
   //Serial.println(offsetMillis() - start);
-
-  //Check transormation time if state is in transformation mode
-  if (mode == 3) {
-
-    //transform_time_val = transform_time_val - transformation_start_time_offset;
-    Serial.println(offsetMillis());
-    Serial.println(transformation_start_time);
-    Serial.println(offsetMillis() - transformation_start_time);
-    Serial.println(transform_time_val);
-
-    if ((offsetMillis() - transformation_start_time) > transform_time_val) {
-
-      mode == 4;
-
-    }
-
-  }
   
   //if the time has passed then go to deep sleep
   if ((offsetMillis() - start) > DEEP_SLEEP_TIMER) {
-
-    
 
     Serial.println("Going to sleep");
     
@@ -199,7 +180,6 @@ void get_wakeup_reason() {
     case ESP_SLEEP_WAKEUP_EXT0 : {
 
       Serial.println("Wakeup caused by external signal using RTC_IO"); 
-      //transformation_start_time_offset =  offsetMillis();
 
       //If Transformation mode is still in prosses enable again deep sleep timer
       if (mode == 3) {
