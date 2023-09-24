@@ -46,7 +46,7 @@ void setup() {
   Serial.println(mode);
 
   if (bootCount == 1) {
-    rtc.setTime(0, 0, 0, 1, 1, 2021);  // 1st Jan 2023 00:00:00
+    rtc.setTime(0, 0, 0, 1, 1, 2023);  // 1st Jan 2023 00:00:00
   }
 
   //The omnitrix will wake up when the button is pressed
@@ -120,7 +120,8 @@ void mode2() {
       delay(200);
       Serial.println("Tranformed into alien");
 
-      Serial.println(rtc.getTime("%A, %B %d %Y %H:%M:%S"));   // (String) returns time with specified format
+      //Serial.println(rtc.getTime("%A, %B %d %Y %H:%M:%S"));   // (String) returns time with specified format
+      Serial.println(rtc.getTime()); //Get minutes passed since first boot
 
       //Configure the wake up source to wake up every time the transfomation is done
       esp_sleep_enable_timer_wakeup(transform_time_val);
@@ -244,7 +245,8 @@ void get_wakeup_reason() {
         Serial.println("Setup ESP32 to sleep for every " + String(recharge_time_val) +
         " Milli Seconds");
 
-        Serial.println(rtc.getTime("%A, %B %d %Y %H:%M:%S"));   // (String) returns time with specified format
+        //Serial.println(rtc.getTime("%A, %B %d %Y %H:%M:%S"));   // (String) returns time with specified format
+        Serial.println(rtc.getTime()); //Get minutes passed since first boot
 
         mode = 4;
         //transform_time_val = ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR;
