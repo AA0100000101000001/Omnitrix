@@ -14,14 +14,13 @@ int transform_time_val = ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR;
 int recharge_time_val = OMNITRIX_RECHARGE_TIME_TEST * uS_TO_S_FACTOR;
 
 //Time variables that are saved in deep sleep mode
-RTC_DATA_ATTR uint32_t transform_timer;
-RTC_DATA_ATTR uint32_t recharge_timer;
-RTC_DATA_ATTR unsigned long millisOffset=0;
-
 RTC_DATA_ATTR uint32_t transformation_start_time;
 RTC_DATA_ATTR uint32_t recharging_start_time;
 //RTC_DATA_ATTR uint32_t transformation_start_time_offset;
 //RTC_DATA_ATTR uint32_t recharging_start_time_offset;
+
+RTC_DATA_ATTR unsigned long millisOffset=0;
+
 
 RTC_DATA_ATTR int bootCount = 0;
 RTC_DATA_ATTR int mode = 1;
@@ -119,8 +118,8 @@ void mode2() {
 
       //Configure the wake up source to wake up every time the transfomation is done
       esp_sleep_enable_timer_wakeup(transform_time_val);
-      Serial.println("Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST) +
-      " Seconds");
+      Serial.println("Setup ESP32 to sleep for every " + String(transform_time_val) +
+      " Milli Seconds");
 
       //reset timer
       start = offsetMillis();
@@ -186,8 +185,8 @@ void get_wakeup_reason() {
 
         //Configure the wake up source to wake up every time the transfomation is done
         esp_sleep_enable_timer_wakeup(transform_time_val);
-        Serial.println("Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST) +
-        " Seconds");
+        Serial.println("Setup ESP32 to sleep for every " + String(transform_time_val) +
+        " Milli Seconds");
 
       }
       //If Recharging mode is still in process enable again deep sleep timer
@@ -195,8 +194,8 @@ void get_wakeup_reason() {
 
         //Configure the wake up source to wake up every time the recharge is done
         esp_sleep_enable_timer_wakeup(recharge_time_val);
-        Serial.println("Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST) +
-        " Seconds");
+        Serial.println("Setup ESP32 to sleep for every " + String(recharge_time_val) +
+        " Milli Seconds");
 
       }
 
@@ -211,8 +210,8 @@ void get_wakeup_reason() {
       
         //Configure the wake up source to wake up every time the recharge is done
         esp_sleep_enable_timer_wakeup(recharge_time_val);
-        Serial.println("Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST) +
-        " Seconds");
+        Serial.println("Setup ESP32 to sleep for every " + String(recharge_time_val) +
+        " Milli Seconds");
 
         mode = 4;
         //transform_time_val = ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR;
