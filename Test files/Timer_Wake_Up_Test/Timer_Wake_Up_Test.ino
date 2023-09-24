@@ -1,6 +1,9 @@
 /* This program tests the ability of the omnitrix to go into deep sleep mode after a short period of time of inactivity and wake up when the transformation time is over 
 in order to go to the recharging state.*/
 
+#include <ESP32Time.h>
+ESP32Time rtc;
+
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
 #define DEEP_SLEEP_TIMER 5000 // 5 sec
 uint32_t start; //timer for deep sleep
@@ -41,6 +44,10 @@ void setup() {
   delay(100);
   Serial.print("Mode: ");
   Serial.println(mode);
+
+  if (bootCount == 1) {
+    rtc.setTime(0, 0, 0, 1, 1, 2021);  // 1st Jan 2023 00:00:00
+  }
 
   //The omnitrix will wake up when the button is pressed
   esp_sleep_enable_ext0_wakeup(GPIO_NUM_5,1);
@@ -110,7 +117,10 @@ void mode2() {
     //If select button is pressed then go to next mode
     if (selectbuttonState == LOW) {
       mode = 3;
+      delay(200);
       Serial.println("Tranformed into alien");
+
+      Serial.println(rtc.getTime("%A, %B %d %Y %H:%M:%S"));   // (String) returns time with specified format
 
       //Configure the wake up source to wake up every time the transfomation is done
       esp_sleep_enable_timer_wakeup(transform_time_val);
@@ -149,8 +159,6 @@ void mode3() {
 
   //Check timer for deep sleep
   check_timer();
-
-  delay(200);
 
   //Read select button state
   selectbuttonState = digitalRead(SW);
@@ -235,6 +243,8 @@ void get_wakeup_reason() {
         esp_sleep_enable_timer_wakeup(recharge_time_val);
         Serial.println("Setup ESP32 to sleep for every " + String(recharge_time_val) +
         " Milli Seconds");
+
+        Serial.println(rtc.getTime("%A, %B %d %Y %H:%M:%S"));   // (String) returns time with specified format
 
         mode = 4;
         //transform_time_val = ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR;
