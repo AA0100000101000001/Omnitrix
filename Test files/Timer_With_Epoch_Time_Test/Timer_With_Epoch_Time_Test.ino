@@ -9,7 +9,7 @@ ESP32Time rtc;
 uint32_t start; //timer for deep sleep
 
 #define ALIEN_TRANSFORMATION_TIME_TEST 10 //10 sec
-#define OMNITRIX_RECHARGE_TIME_TEST 5 //5 sec
+#define OMNITRIX_RECHARGE_TIME_TEST 10 //10 sec
 #define ALIEN_TRANSFORMATION_TIME_DEFAULT 60 //1 min
 #define OMNITRIX_RECHARGE_TIME_DEFAULT 60 //1 min
 
@@ -128,8 +128,8 @@ void mode2() {
 
       //Configure the wake up source to wake up every time the transfomation is done
       esp_sleep_enable_timer_wakeup(transform_time_val - transformation_start_time_offset * ALIEN_TRANSFORMATION_TIME_TEST);
-      Serial.println("Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST) +
-      " Milli Seconds");
+      Serial.println("Transformation: Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST) +
+      " Seconds");
 
       //reset timer
       start = rtc.getLocalEpoch();
@@ -176,8 +176,8 @@ void mode3() {
     Serial.println("Button pressed, untransforming and going back to Start mode");
 
     //Disable waking up by timer
-    esp_err_t disable_source = esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-    Serial.println("Disabled Timer");
+    esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
+    Serial.println("Disabled Timer1");
 
     //reset timer
     start = rtc.getLocalEpoch();
@@ -190,28 +190,48 @@ void check_timer() {
 
   //Serial.println(rtc.getLocalEpoch() - start);
 
+  //Check transformation time
   if (mode == 3) {
 
     //Serial.println(rtc.getLocalEpoch() - transformation_start_time);
 
+    //Transformation time is done
     if ((rtc.getLocalEpoch() - transformation_start_time) > ALIEN_TRANSFORMATION_TIME_TEST) {
 
       mode = 4;
 
       //Configure the wake up source to wake up every time the recharge is done
-      esp_sleep_enable_timer_wakeup(recharge_time_val);
-      Serial.println("Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST) +
+      esp_sleep_enable_timer_wakeup(recharge_time_val - recharging_start_time_offset * OMNITRIX_RECHARGE_TIME_TEST);
+      Serial.println("Recharging1: Setup ESP32 to sleep for every " + String(recharge_time_val - recharging_start_time_offset * OMNITRIX_RECHARGE_TIME_TEST) +
       " Milli Seconds");
 
-
+    //Transformation time is not finished
     } else {
-
       transformation_start_time_offset = rtc.getLocalEpoch() - transformation_start_time;
-
     }
 
   }
-  
+  //Check recharging time
+  if (mode == 4) {
+
+    Serial.println(rtc.getLocalEpoch() - recharging_start_time);
+
+    //Recharging time is done
+    if ((rtc.getLocalEpoch() - recharging_start_time) > OMNITRIX_RECHARGE_TIME_TEST) {
+
+      //Disable waking up by timer
+      esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
+      Serial.println("Disabled Timer2");
+
+      mode = 1;
+
+    //Recharging time is not finished
+    } else {
+      recharging_start_time_offset = rtc.getLocalEpoch() - recharging_start_time;
+    }
+
+  }
+
   //if the time has passed then go to deep sleep
   if ((rtc.getLocalEpoch() - start) > DEEP_SLEEP_TIMER) {
 
@@ -226,8 +246,10 @@ void get_wakeup_reason() {
   esp_sleep_wakeup_cause_t wakeup_reason;
   wakeup_reason = esp_sleep_get_wakeup_cause();
 
+  //Check wake up reason
   switch(wakeup_reason)
   {
+    //Wake up by button
     case ESP_SLEEP_WAKEUP_EXT0 : {
 
       Serial.println("Wakeup caused by external signal using RTC_IO"); 
@@ -237,25 +259,27 @@ void get_wakeup_reason() {
 
         //reset recgarging time
         recharging_start_time = rtc.getLocalEpoch();
+        recharging_start_time_offset = recharging_start_time;
 
         //Configure the wake up source to wake up every time the transfomation is done
         esp_sleep_enable_timer_wakeup(transform_time_val - transformation_start_time_offset * ALIEN_TRANSFORMATION_TIME_TEST);
-        Serial.println("Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST) +
-        " Milli Seconds");
+        Serial.println("Transfomation: Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST) +
+        " Seconds");
 
       }
       //Recharging mode is done, disable timer
       else if (mode == 4) {
 
         //Configure the wake up source to wake up every time the recharge is done
-        esp_sleep_enable_timer_wakeup(recharge_time_val);
-        Serial.println("Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST) +
+        esp_sleep_enable_timer_wakeup(recharge_time_val - recharging_start_time_offset * OMNITRIX_RECHARGE_TIME_TEST);
+        Serial.println("Recharging2: Setup ESP32 to sleep for every " + String(recharge_time_val - recharging_start_time_offset * OMNITRIX_RECHARGE_TIME_TEST) +
         " Milli Seconds");
 
       }
 
       break;
     }
+    //Wake up by timer
     case ESP_SLEEP_WAKEUP_TIMER : {
 
       Serial.println("Wakeup caused by timer"); 
@@ -264,8 +288,8 @@ void get_wakeup_reason() {
       if (mode == 3) {
       
         //Configure the wake up source to wake up every time the recharge is done
-        esp_sleep_enable_timer_wakeup(recharge_time_val);
-        Serial.println("Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST) +
+        esp_sleep_enable_timer_wakeup(recharge_time_val - recharging_start_time_offset * OMNITRIX_RECHARGE_TIME_TEST);
+        Serial.println("Recharging3: Setup ESP32 to sleep for every " + String(recharge_time_val - recharging_start_time_offset * OMNITRIX_RECHARGE_TIME_TEST) +
         " Milli Seconds");
 
         //Serial.println(rtc.getTime("%A, %B %d %Y %H:%M:%S"));   // (String) returns time with specified format
@@ -274,15 +298,15 @@ void get_wakeup_reason() {
         mode = 4;
         //transform_time_val = ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR;
     
-        //Go to start mode after recharge timer is finished
-        } else if (mode == 4) {
+      //Go to start mode after recharge timer is finished
+      } else if (mode == 4) {
 
-          //Disable waking up by timer
-          esp_err_t disable_source = esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-          Serial.println("Disabled Timer");
+        //Disable waking up by timer
+        esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
+        Serial.println("Disabled Timer3");
 
-          mode = 1;
-        }
+        mode = 1;
+      }
         break;
       }
     default : Serial.printf("Wakeup was not caused by deep sleep: %d\n",wakeup_reason); break;
