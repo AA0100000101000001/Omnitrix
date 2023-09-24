@@ -10,8 +10,8 @@ uint32_t start; //timer for deep sleep
 #define ALIEN_TRANSFORMATION_TIME_DEFAULT 60 //1 min
 #define OMNITRIX_RECHARGE_TIME_DEFAULT 60
 
-int transform_time_val = ALIEN_TRANSFORMATION_TIME_TEST;
-int recharge_time_val = OMNITRIX_RECHARGE_TIME_TEST;
+int transform_time_val = ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR;
+int recharge_time_val = OMNITRIX_RECHARGE_TIME_TEST * uS_TO_S_FACTOR;
 
 //Time variables that are saved in deep sleep mode
 RTC_DATA_ATTR uint32_t transform_timer;
@@ -20,6 +20,8 @@ RTC_DATA_ATTR unsigned long millisOffset=0;
 
 RTC_DATA_ATTR uint32_t transformation_start_time;
 RTC_DATA_ATTR uint32_t recharging_start_time;
+RTC_DATA_ATTR uint32_t transformation_start_time_offset;
+RTC_DATA_ATTR uint32_t recharging_start_time_offset;
 
 RTC_DATA_ATTR int bootCount = 0;
 RTC_DATA_ATTR int mode = 1;
@@ -116,8 +118,8 @@ void mode2() {
       Serial.println("Tranformed into alien");
 
       //Configure the wake up source to wake up every time the transfomation is done
-      esp_sleep_enable_timer_wakeup(transform_time_val * uS_TO_S_FACTOR);
-      Serial.println("Setup ESP32 to sleep for every " + String(transform_time_val) +
+      esp_sleep_enable_timer_wakeup(transform_time_val);
+      Serial.println("Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST) +
       " Seconds");
 
       //reset timer
@@ -162,11 +164,12 @@ void check_timer() {
   //Check transormation time if state is in transformation mode
   if (mode == 3) {
 
+    Serial.println(offsetMillis());
     Serial.println(transformation_start_time);
     Serial.println(offsetMillis() - transformation_start_time);
-    Serial.println(transform_time_val*uS_TO_S_FACTOR);
+    Serial.println(transform_time_val);
 
-    if ((offsetMillis() - transformation_start_time) > transform_time_val*uS_TO_S_FACTOR) {
+    if ((offsetMillis() - transformation_start_time) > transform_time_val) {
 
       mode == 4;
 
@@ -195,6 +198,14 @@ void get_wakeup_reason() {
     case ESP_SLEEP_WAKEUP_EXT0 : {
 
       Serial.println("Wakeup caused by external signal using RTC_IO"); 
+      transformation_start_time_offset =  offsetMillis();
+
+      if (mode == 3) {
+
+        transform_time_val = transform_time_val - transformation_start_time_offset;
+
+      }
+
       break;
     }
     case ESP_SLEEP_WAKEUP_TIMER : {
@@ -205,8 +216,8 @@ void get_wakeup_reason() {
       if (mode == 3) {
       
         //Configure the wake up source to wake up every time the recharge is done
-        esp_sleep_enable_timer_wakeup(recharge_time_val * uS_TO_S_FACTOR);
-        Serial.println("Setup ESP32 to sleep for every " + String(recharge_time_val) +
+        esp_sleep_enable_timer_wakeup(recharge_time_val);
+        Serial.println("Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST) +
        " Seconds");
 
         mode = 4;
