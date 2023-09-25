@@ -15,6 +15,19 @@ Video showcasing a first test of the project with most of the features included:
 
 https://uniwagr-my.sharepoint.com/:v:/g/personal/ice19390009_uniwa_gr/EfeOqV_51WFMiZ7XlbTfxEgBar_7Mj2zRy3ds0np9BVFCA?e=VAcc18&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19
 
+# Instructions
+This is a work in progress and the instructions to recreate this project will change.  
+  
+For now you will need:  
+ESP32 Development Board - NodeMCU-32S2 module,  
+Round LCD Display GC9A01,  
+Waveshare Rotation Encoder,  
+Fermion DFPlayer Pro,  
+2X Mini Metal Speaker w/ Wires - 8 ohm 0.5W,  
+Breadboard, jumper wires, button, switch, 10 kohm resistor, 2X 47 nF capacitors
+  
+Follow the schematic on how to connect the wires. Some soldering will be needed to connect the pin headers and the speakers to the Fermion DFPlayer Pro.  
+Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the MCU.
 
 # Schematic:  
 ![omnitrix_schematic_v4](media/Images/omnitrix_schematic_v4.bmp) 
