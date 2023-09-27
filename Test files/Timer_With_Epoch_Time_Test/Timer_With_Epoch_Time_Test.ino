@@ -148,7 +148,7 @@ void mode2() {
 
 }
 
-mode2ToMode3() {
+void mode2ToMode3() {
 
   mode = 3;
   delay(200);
@@ -206,7 +206,7 @@ void mode4() {
 
 }
 
-mode3ToMode4() {
+void mode3ToMode4() {
 
   //reset recharging time
   recharging_start_time = rtc.getLocalEpoch();
@@ -221,7 +221,7 @@ mode3ToMode4() {
 
 }
 
-mode4ToMode1() {
+void mode4ToMode1() {
 
   mode = 1;
 
@@ -332,7 +332,7 @@ void get_wakeup_reason() {
       } else if (mode == 4) {
 
         mode4ToMode1();
-        
+
       }
         break;
       }
