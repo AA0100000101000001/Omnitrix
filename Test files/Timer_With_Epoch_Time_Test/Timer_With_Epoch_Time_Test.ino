@@ -211,7 +211,8 @@ void mode3ToMode4() {
 
   //reset recharging time
   recharging_start_time = rtc.getLocalEpoch();
-  recharging_start_time_offset = recharging_start_time;
+  //Set offset to time passed since last time the timer was checked (in sec)
+  recharging_start_time_offset = rtc.getLocalEpoch() - recharging_start_time;
 
   Serial.println(recharging_start_time_offset);
   Serial.println(recharge_time_val);
@@ -220,8 +221,8 @@ void mode3ToMode4() {
 
   //Configure the wake up source to wake up every time the recharge is done
   esp_sleep_enable_timer_wakeup(recharge_time_val - recharging_start_time_offset * uS_TO_S_FACTOR);
-  Serial.println("Recharging1: Setup ESP32 to sleep for every " + String(recharge_time_val - recharging_start_time_offset * OMNITRIX_RECHARGE_TIME_TEST) +
-  " Milli Seconds");
+  Serial.println("Recharging1: Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST - recharging_start_time_offset) +
+  " Seconds");
 
 }
 
@@ -252,6 +253,7 @@ void check_timer() {
 
     //Transformation time is not finished
     } else {
+      //Set offset to time passed since last time the timer was checked (in sec)
       transformation_start_time_offset = rtc.getLocalEpoch() - transformation_start_time;
     }
 
@@ -271,6 +273,7 @@ void check_timer() {
 
     //Recharging time is not finished
     } else {
+      //Set offset to time passed since last time the timer was checked (in sec)
       recharging_start_time_offset = rtc.getLocalEpoch() - recharging_start_time;
     }
 
@@ -306,17 +309,20 @@ void get_wakeup_reason() {
 
         //Configure the wake up source to wake up every time the transfomation is done
         esp_sleep_enable_timer_wakeup(transform_time_val - transformation_start_time_offset * uS_TO_S_FACTOR);
-        Serial.println("Transfomation: Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST) +
+        Serial.println("Transformation: Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST - transformation_start_time_offset) +
         " Seconds");
 
       }
       //Recharging mode is done, disable timer
       else if (mode == 4) {
 
+        //Set offset to time passed since last time the timer was checked (in sec)
+        recharging_start_time_offset = rtc.getLocalEpoch() - recharging_start_time;
+
         //Configure the wake up source to wake up every time the recharge is done
         esp_sleep_enable_timer_wakeup(recharge_time_val - recharging_start_time_offset * uS_TO_S_FACTOR);
-        Serial.println("Recharging2: Setup ESP32 to sleep for every " + String(recharge_time_val - recharging_start_time_offset * OMNITRIX_RECHARGE_TIME_TEST) +
-        " Milli Seconds");
+        Serial.println("Recharging1: Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST - recharging_start_time_offset) +
+        " Seconds");
 
       }
 
