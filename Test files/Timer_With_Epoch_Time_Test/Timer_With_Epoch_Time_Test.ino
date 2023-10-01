@@ -155,13 +155,14 @@ void mode2ToMode3() {
   Serial.println("Tranformed into alien");
 
   Serial.println(rtc.getLocalEpoch()); //Get minutes passed since first boot
-  //reset transformation time
+  //reset transformation time to current epoch
   transformation_start_time = rtc.getLocalEpoch();
-  transformation_start_time_offset = transformation_start_time;
+  //Set offset to time passed since last time the timer was checked (in sec)
+  transformation_start_time_offset = rtc.getLocalEpoch() - transformation_start_time;
 
   //Configure the wake up source to wake up every time the transfomation is done
   esp_sleep_enable_timer_wakeup(transform_time_val - transformation_start_time_offset * uS_TO_S_FACTOR);
-  Serial.println("Transformation: Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST) +
+  Serial.println("Transformation: Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST - transformation_start_time_offset) +
   " Seconds");
 
 }
@@ -299,6 +300,9 @@ void get_wakeup_reason() {
 
       //Transformation mode is done, enable deep sleep timer for recharhing
       if (mode == 3) {
+
+        //Set offset to time passed since last time the timer was checked (in sec)
+        transformation_start_time_offset = rtc.getLocalEpoch() - transformation_start_time;
 
         //Configure the wake up source to wake up every time the transfomation is done
         esp_sleep_enable_timer_wakeup(transform_time_val - transformation_start_time_offset * uS_TO_S_FACTOR);
