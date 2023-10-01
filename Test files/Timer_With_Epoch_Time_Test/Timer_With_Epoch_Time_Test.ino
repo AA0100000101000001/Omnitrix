@@ -8,8 +8,8 @@ ESP32Time rtc;
 #define DEEP_SLEEP_TIMER 5 // 5 sec
 uint32_t start; //timer for deep sleep
 
-#define ALIEN_TRANSFORMATION_TIME_TEST 10 //10 sec
-#define OMNITRIX_RECHARGE_TIME_TEST 10 //10 sec
+#define ALIEN_TRANSFORMATION_TIME_TEST 20 //10 sec
+#define OMNITRIX_RECHARGE_TIME_TEST 20 //10 sec
 #define ALIEN_TRANSFORMATION_TIME_DEFAULT 60 //1 min
 #define OMNITRIX_RECHARGE_TIME_DEFAULT 60 //1 min
 
@@ -21,7 +21,7 @@ int recharge_time_val = OMNITRIX_RECHARGE_TIME_TEST * uS_TO_S_FACTOR;
 RTC_DATA_ATTR uint32_t transformation_start_time;
 RTC_DATA_ATTR uint32_t recharging_start_time;
 RTC_DATA_ATTR uint32_t transformation_start_time_offset;
-RTC_DATA_ATTR uint32_t recharging_start_time_offset = 0;
+RTC_DATA_ATTR uint32_t recharging_start_time_offset;
 
 RTC_DATA_ATTR unsigned long millisOffset=0;
 
@@ -212,6 +212,9 @@ void mode3ToMode4() {
   recharging_start_time = rtc.getLocalEpoch();
   recharging_start_time_offset = recharging_start_time;
 
+  Serial.println(recharging_start_time_offset);
+  Serial.println(recharge_time_val);
+
   mode = 4;
 
   //Configure the wake up source to wake up every time the recharge is done
@@ -255,10 +258,10 @@ void check_timer() {
   //Check recharging time
   if (mode == 4) {
 
-    Serial.println(rtc.getLocalEpoch());
-    Serial.println(recharging_start_time);
-    Serial.println(rtc.getLocalEpoch() - recharging_start_time);
-    Serial.println(OMNITRIX_RECHARGE_TIME_TEST);
+    //Serial.println(rtc.getLocalEpoch());
+    //Serial.println(recharging_start_time);
+    //Serial.println(rtc.getLocalEpoch() - recharging_start_time);
+    //Serial.println(OMNITRIX_RECHARGE_TIME_TEST);
 
     //Recharging time is done
     if ((rtc.getLocalEpoch() - recharging_start_time) > OMNITRIX_RECHARGE_TIME_TEST) {
