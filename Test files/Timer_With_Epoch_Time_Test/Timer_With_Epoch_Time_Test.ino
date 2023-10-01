@@ -171,6 +171,18 @@ void mode3() {
 
   for(;mode == 3;) {
 
+    //Check transformation time
+    //Transformation time is done while omnitrix does not sleep
+    if ((rtc.getLocalEpoch() - transformation_start_time) > ALIEN_TRANSFORMATION_TIME_TEST) {
+
+      mode3ToMode4();
+
+    //Transformation time is not finished
+    } else {
+      //Set offset to time passed since last time the timer was checked (in sec)
+      transformation_start_time_offset = rtc.getLocalEpoch() - transformation_start_time;
+    }
+
     //Check timer for deep sleep
     check_timer();
 
@@ -199,6 +211,19 @@ void mode3() {
 void mode4() {
   
   for(;mode == 4;) {
+
+    //Check recharging time
+    //Recharging time is done
+    if ((rtc.getLocalEpoch() - recharging_start_time) > OMNITRIX_RECHARGE_TIME_TEST) {
+
+      mode4ToMode1();
+
+    //Recharging time is not finished
+    } else {
+      //Set offset to time passed since last time the timer was checked (in sec)
+      recharging_start_time_offset = rtc.getLocalEpoch() - recharging_start_time;
+    }
+  
 
     //Check timer for deep sleep
     check_timer();
@@ -238,46 +263,6 @@ void mode4ToMode1() {
 
 //Check time for deep sleep
 void check_timer() {
-
-  //Serial.println(rtc.getLocalEpoch() - start);
-
-  //Check transformation time
-  if (mode == 3) {
-
-    //Serial.println(rtc.getLocalEpoch() - transformation_start_time);
-
-    //Transformation time is done when omnitrix did not sleep
-    if ((rtc.getLocalEpoch() - transformation_start_time) > ALIEN_TRANSFORMATION_TIME_TEST) {
-
-      mode3ToMode4();
-
-    //Transformation time is not finished
-    } else {
-      //Set offset to time passed since last time the timer was checked (in sec)
-      transformation_start_time_offset = rtc.getLocalEpoch() - transformation_start_time;
-    }
-
-  }
-  //Check recharging time
-  if (mode == 4) {
-
-    //Serial.println(rtc.getLocalEpoch());
-    //Serial.println(recharging_start_time);
-    //Serial.println(rtc.getLocalEpoch() - recharging_start_time);
-    //Serial.println(OMNITRIX_RECHARGE_TIME_TEST);
-
-    //Recharging time is done
-    if ((rtc.getLocalEpoch() - recharging_start_time) > OMNITRIX_RECHARGE_TIME_TEST) {
-
-      mode4ToMode1();
-
-    //Recharging time is not finished
-    } else {
-      //Set offset to time passed since last time the timer was checked (in sec)
-      recharging_start_time_offset = rtc.getLocalEpoch() - recharging_start_time;
-    }
-
-  }
 
   //if the time has passed then go to deep sleep
   if ((rtc.getLocalEpoch() - start) > DEEP_SLEEP_TIMER) {
