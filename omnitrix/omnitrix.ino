@@ -20,7 +20,7 @@ void setup() {
   //pinMode(TFT_BL, OUTPUT); //Screen
 
   //Reduce Power consumption
-  setCpuFrequencyMhz(80); //Reduce CPU Freq
+  //setCpuFrequencyMhz(80); //Reduce CPU Freq
   WiFi.mode(WIFI_OFF); //Turn off WIFI
 
   //DFT sound initialise
@@ -52,6 +52,8 @@ void setup() {
 
   //disconnect TFT_BL from deep sleep to save energy
   //gpio_reset_pin(GPIO_NUM_38);
+
+  delay(400);
 
   tft.begin();
   //analogWrite(TFT_BL, 100);
