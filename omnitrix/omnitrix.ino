@@ -104,13 +104,13 @@ void setup() {
 
   //Check the wakeup reason for ESP32
   get_wakeup_reason();
-  
-  //reset timer
-  start = rtc.getLocalEpoch();
 
 }
 
 void loop() {
+  
+  //reset timer
+  start = rtc.getLocalEpoch();
   
   //Omnitrix is in start mode
   if (mode == 1) {
@@ -145,10 +145,14 @@ void loop() {
 //Check time for deep sleep
 void check_timer() {
 
+  //Serial.println("Checking timer");
+
   //if the time has passed then go to deep sleep
   if ((rtc.getLocalEpoch() - start) > DEEP_SLEEP_TIMER) {
 
     Serial.println("Going to sleep");
+    //Close Screen
+    tft.fillScreen(TFT_BLACK);
     
     esp_deep_sleep_start();
   }
