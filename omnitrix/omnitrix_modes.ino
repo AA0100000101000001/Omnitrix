@@ -195,13 +195,7 @@ void transformedMode() {
     //if encoder button is pressed then go to Start mode
     if (selectbuttonState == LOW) {
 
-      playSound(4); //Play move backwards 
-
-      delay(300);
-
-      //display start
-      tft.fillScreen(OMNITRIX_GREEN);
-      ShowSymbols();
+      delay(200);
 
       //Go to Start mode
       mode3to1();
