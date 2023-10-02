@@ -4,7 +4,7 @@
 #include "SPI.h"
 #include <DFRobot_DF1201S.h>
 #include <WiFi.h>
-//#include <ESP32Time.h>
+#include <ESP32Time.h>
 //#include <PCM.h>
 
 //ESP32Time rtc(3600);  // offset in seconds GMT+1
@@ -27,22 +27,27 @@
 
 #define ALIEN_NUMBER 11
 
+//Time Variables
+ESP32Time rtc;
+
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
-#define DEEP_SLEEP_TIMER 10000 // sec
+#define DEEP_SLEEP_TIMER 5 // 5 sec
 uint32_t start; //timer for deep sleep
 
-#define ALIEN_TRANSFORMATION_TIME_TEST 5000 //5 sec
-#define OMNITRIX_RECHARGE_TIME_TEST 5000
-#define ALIEN_TRANSFORMATION_TIME_DEFAULT 60000 //1 min
-#define OMNITRIX_RECHARGE_TIME_DEFAULT 60000
+#define ALIEN_TRANSFORMATION_TIME_TEST 20 //10 sec
+#define OMNITRIX_RECHARGE_TIME_TEST 20 //10 sec
+#define ALIEN_TRANSFORMATION_TIME_DEFAULT 60 //1 min
+#define OMNITRIX_RECHARGE_TIME_DEFAULT 60 //1 min
 
-int transform_time_val = ALIEN_TRANSFORMATION_TIME_TEST;
-int recharge_time_val = OMNITRIX_RECHARGE_TIME_TEST;
+//Convert timer variables into micro seconds
+int transform_time_val = ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR;
+int recharge_time_val = OMNITRIX_RECHARGE_TIME_TEST * uS_TO_S_FACTOR;
 
 //Time variables that are saved in deep sleep mode
-RTC_DATA_ATTR uint32_t transform_timer;
-RTC_DATA_ATTR uint32_t recharge_timer;
-RTC_DATA_ATTR unsigned long millisOffset=0;
+RTC_DATA_ATTR uint32_t transformation_start_time;
+RTC_DATA_ATTR uint32_t recharging_start_time;
+RTC_DATA_ATTR uint32_t transformation_start_time_offset;
+RTC_DATA_ATTR uint32_t recharging_start_time_offset;
 
 /* Colours
 RGB to HEX: http://www.rinkydinkelectronics.com/calc_rgb565.php

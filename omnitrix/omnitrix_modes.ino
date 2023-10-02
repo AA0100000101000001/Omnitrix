@@ -18,12 +18,14 @@ void startMode() {
       delay(200);
       //tft.fillScreen(OMNITRIX_GREEN);
       //ShowSelectSymbols();
+      
+	    delay(400);
 
-		  mode = 2;
-		  Serial.println("Button pressed, select alien");
-		  delay(400);
+      //Go to next mode
+		  mode1to2();
+
       //reset timer
-      start = offsetMillis();
+      start = rtc.getLocalEpoch();
 		}
 
     //Check timer for deep sleep
@@ -68,7 +70,7 @@ void selectAlienMode() {
       delay(200);
 
       //reset timer
-      start = offsetMillis();
+      start = rtc.getLocalEpoch();
     }
     //Encoder is turned left
     else if (leftState == LOW) {
@@ -96,7 +98,7 @@ void selectAlienMode() {
       delay(200);
       
       //reset timer
-      start = offsetMillis();
+      start = rtc.getLocalEpoch();
     }
 
     //Read select button state
@@ -104,7 +106,6 @@ void selectAlienMode() {
 
     //If select button is pressed then go to next mode
     if (selectbuttonState == LOW) {
-      mode = 3;
 
       playSound(5); //Play transformation sound
 
@@ -118,16 +119,11 @@ void selectAlienMode() {
 
       delay(200);
 
-      Serial.print("Tranformed into alien ");
-      Serial.println(alienNo);
-
-      //Start timer for transormation
-      transform_timer = offsetMillis();
-      Serial.print("Transformation time ");
-      Serial.println(transform_timer);
+      //Go to next mode
+      mode2to3();
       
       //reset timer
-      //start = offsetMillis();
+      start = rtc.getLocalEpoch();
 
     }
 
@@ -140,17 +136,17 @@ void selectAlienMode() {
       
       playSound(4); //Play move backwards 
 
-      mode = 1;
       delay(300);
 
       //display start
       tft.fillScreen(OMNITRIX_GREEN);
       ShowSymbols();
 
-      Serial.println("Button pressed, back to start");
+      //Go to previous mode
+      mode2to1();
       
       //reset timer
-      start = offsetMillis();
+      start = rtc.getLocalEpoch();
     }
 
     //Check timer for deep sleep
@@ -166,19 +162,12 @@ void transformedMode() {
 
   for (;mode == 3;) {
 
-    //Serial.println(millis());
-
-
-    //if encoder button is pressed then go to previous mode
-
-    //check if transformation time is over
-    if ((offsetMillis() - transform_timer) > transform_time_val) {
+    //Check transformation time
+    //Transformation time is done while omnitrix does not sleep
+    if ((rtc.getLocalEpoch() - transformation_start_time) > ALIEN_TRANSFORMATION_TIME_TEST) {
       
       playSound(7); //Play detransformation sound
       delay(2500);
-
-      //Go to next mode
-      mode = 4;
 
       //Red led colour
       analogWrite(rgb_r, GREEN_LED_R);
@@ -189,20 +178,37 @@ void transformedMode() {
       tft.fillScreen(OMNITRIX_RED);
       ShowSymbols();
 
-      Serial.println("Omnitrix is recharging");
-      
-      //Reset transform timer
-      transform_timer = 0;
-
-      //Start timer for recharging
-      recharge_timer = offsetMillis();
-      Serial.print("recharging time ");
-      Serial.println(recharge_timer);
+      //Go to next mode
+      mode3to4();
+    //Transformation time is not finished
+    } else {
+      //Set offset to time passed since last time the timer was checked (in sec)
+      transformation_start_time_offset = rtc.getLocalEpoch() - transformation_start_time;
     }
 
     //Check timer for deep sleep
     check_timer();
-    
+
+    //Read select button state
+    selectbuttonState = digitalRead(SW);
+
+    //if encoder button is pressed then go to Start mode
+    if (selectbuttonState == LOW) {
+
+      playSound(4); //Play move backwards 
+
+      delay(300);
+
+      //display start
+      tft.fillScreen(OMNITRIX_GREEN);
+      ShowSymbols();
+
+      //Go to Start mode
+      mode3to1();
+
+      //reset timer
+      start = rtc.getLocalEpoch();
+    }
 
   }
 }
@@ -213,14 +219,9 @@ void rechargeMode() {
 
   for (;mode == 4;) {
 
-    //Serial.println(millis());
-    
-    //check if recharge time is over
-    if ((offsetMillis() - recharge_timer) > recharge_time_val) {
-
-      //Go to first mode
-      mode = 1;
-      Serial.println("Going back to start");
+    //Check recharging time
+    //Recharging time is done
+    if ((rtc.getLocalEpoch() - recharging_start_time) > OMNITRIX_RECHARGE_TIME_TEST) {
 
       //Green led colour
       analogWrite(rgb_r, RED_LED_R);
@@ -230,9 +231,13 @@ void rechargeMode() {
       //Display green screen
       tft.fillScreen(OMNITRIX_GREEN);
       ShowSymbols();
-
-      //Reset recharge timer
-      recharge_timer = 0;
+      
+      //Go to first mode
+      mode4to1();
+    //Recharging time is not finished
+    } else {
+      //Set offset to time passed since last time the timer was checked (in sec)
+      recharging_start_time_offset = rtc.getLocalEpoch() - recharging_start_time;
     }
 
     //Check timer for deep sleep
