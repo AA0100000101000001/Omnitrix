@@ -42,7 +42,8 @@ Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the
 
 # To Do List:  
 ☐ Use Micro switches instead of Encoder  
-☐ Fix transformation time in Deep Sleep mode  
+☐ Find the source of Guru Meditation Error  
+✅ Fix transformation time in Deep Sleep mode  
 ✅ Update ShowSelectSymbols and ShowSymbols with PNGdec  
 ✅ Power reduction code  
 ☐ Increase resistance of voltage dividers  
