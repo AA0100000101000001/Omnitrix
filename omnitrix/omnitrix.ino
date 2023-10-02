@@ -5,6 +5,7 @@
 void setup() {
 
   Serial.begin(115200);
+  Serial.println("START");
   delay(100);
 
   //Pins
@@ -52,17 +53,7 @@ void setup() {
   //disconnect TFT_BL from deep sleep to save energy
   //gpio_reset_pin(GPIO_NUM_38);
 
-  Serial.println("START");
-
-  //Find Memory Used
-  Serial.println("Total heap: %d" + String(ESP.getHeapSize()));
-  Serial.println("Free heap: %d" + String(ESP.getFreeHeap()));
-  Serial.println("Total PSRAM: %d" + String(ESP.getPsramSize()));
-  Serial.println("Free PSRAM: %d" + String(ESP.getFreePsram()));
-
-  //Check the wakeup reason for ESP32
-  get_wakeup_reason();
-  delay(600);
+  delay(400);
 
   tft.begin();
   //analogWrite(TFT_BL, 100);
@@ -110,6 +101,9 @@ void setup() {
 
   //The omnitrix will wake up when the button is pressed
   esp_sleep_enable_ext0_wakeup(GPIO_NUM_5,1);
+
+  //Check the wakeup reason for ESP32
+  get_wakeup_reason();
 
 }
 
@@ -182,7 +176,6 @@ void playSound(int16_t s) {
 
 void get_wakeup_reason() {
 
-  Serial.println("START1");
   esp_sleep_wakeup_cause_t wakeup_reason;
   wakeup_reason = esp_sleep_get_wakeup_cause();
 
@@ -243,9 +236,7 @@ void get_wakeup_reason() {
         break;
       }
     //Wake up not caused by deep sleep
-    default : { } //Serial.printf("Wakeup was not caused by deep sleep: %d\n",wakeup_reason); break;
+    //default : Serial.printf("Wakeup was not caused by deep sleep: %d\n",wakeup_reason); break;
   }
-  
-  Serial.println("START4");
 
 }
