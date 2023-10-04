@@ -17,8 +17,8 @@
 #define TFT_MOSI 35 
 #define TFT_SCLK 36
 #define TFT_CS   34 
-#define TFT_DC   33 
-#define TFT_RST  26
+#define TFT_DC   26
+#define TFT_RST  33
 #define TFT_BL   38
 #define RXD1 18 //RX1
 #define TXD1 17 //TX1
