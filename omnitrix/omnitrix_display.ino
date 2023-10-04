@@ -27,7 +27,7 @@ void  ShowSelectSymbols() {
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[10], sizeof(omnitrix_anim[10]), pngDraw);
 
   if (rc == PNG_SUCCESS) {
-    Serial.println("Successfully png file");
+    //Serial.println("Successfully png file");
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
@@ -43,7 +43,7 @@ void ShowSymbols() {
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[0], sizeof(omnitrix_anim[0]), pngDraw);
 
   if (rc == PNG_SUCCESS) {
-    Serial.println("Successfully png file");
+    //Serial.println("Successfully png file");
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
@@ -72,7 +72,7 @@ void eraseAlien() {
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_alien_backround, sizeof(omnitrix_alien_backround), pngDraw);
 
   if (rc == PNG_SUCCESS) {
-    Serial.println("Successfully png file");
+    //Serial.println("Successfully png file");
 
     tft.startWrite();
     rc = png.decode(NULL, 0);

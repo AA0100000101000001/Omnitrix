@@ -19,7 +19,7 @@ void setup() {
   //pinMode(TFT_BL, OUTPUT); //Screen
 
   //Reduce Power consumption
-  //setCpuFrequencyMhz(80); //Reduce CPU Freq
+  setCpuFrequencyMhz(80); //Reduce CPU Freq
   WiFi.mode(WIFI_OFF); //Turn off WIFI
 
   //DFT sound initialise
@@ -151,8 +151,6 @@ void loop() {
 //Check time for deep sleep
 void check_timer() {
 
-  //Serial.println("Checking timer");
-
   //if the time has passed then go to deep sleep
   if ((rtc.getLocalEpoch() - start) > DEEP_SLEEP_TIMER) {
 
@@ -163,13 +161,6 @@ void check_timer() {
     esp_deep_sleep_start();
   }
 }
-
-//or use rtc.getMillis()
-//Function for saving millis() time over deep sleep
-/*unsigned long offsetMillis()
-{
-    return millis() + millisOffset;
-}*/
 
 void playSound(int16_t s) {
 
@@ -229,8 +220,6 @@ void get_wakeup_reason() {
       if (mode == 3) {
 
         mode3to4();
-
-        Serial.println(rtc.getLocalEpoch()); //Get minutes passed since first boot
 
     
       //Go to start mode after recharge timer is finished

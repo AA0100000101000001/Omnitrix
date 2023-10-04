@@ -7,21 +7,23 @@
 #include <ESP32Time.h>
 //#include <PCM.h>
 
-//ESP32Time rtc(3600);  // offset in seconds GMT+1
-
 #include "omnitrix_aliens.h"
 #include "omnitrix_alien_backround.h"
 #include "omnitrix_anim.h"
-//#include "omnitrix_sounds.h"
 
+//LCD pins
+/*
 #define TFT_MOSI 35 
 #define TFT_SCLK 36
 #define TFT_CS   34 
 #define TFT_DC   26
 #define TFT_RST  33
 #define TFT_BL   38
+*/
+
 #define RXD1 18 //RX1
 #define TXD1 17 //TX1
+
 
 #define MAX_IMAGE_WDITH 240 // Set rendering line buffer lengths for image
 
