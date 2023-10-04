@@ -30,7 +30,7 @@ Follow the schematic on how to connect the wires. Some soldering will be needed 
 Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the MCU.
 
 # Schematic:  
-![omnitrix_schematic_v4](media/Images/omnitrix_schematic_v4.bmp) 
+![omnitrix_schematic_v4](media/Images/omnitrix_schematic_v4.1.bmp) 
 
 # Current Features:  
 - Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
