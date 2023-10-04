@@ -74,19 +74,19 @@ void setup() {
     //Display start screen
     tft.fillScreen(OMNITRIX_GREEN);
     ShowSymbols();
-  } else if (mode == 2) {
+  } /* else if (mode == 2) {
 
     //Display backround selection screen
     tft.fillScreen(OMNITRIX_GREEN);
     ShowSelectSymbols();
-  } else if (mode == 3) {
+  } else  if (mode == 3) {
 
     Serial.print("Transformation time ");
 
     //Display transformation screen
     tft.fillScreen(TFT_WHITE);
     ShowSymbols();
-  } else if (mode == 4) {
+  } else */ if (mode == 4) {
 
     Serial.print("recharging time ");
 
@@ -94,6 +94,7 @@ void setup() {
     tft.fillScreen(OMNITRIX_RED);
     ShowSymbols();
   }
+  
 
   //After the wake up, turn on leds
   if (mode == 4) {
@@ -155,8 +156,10 @@ void check_timer() {
   if ((rtc.getLocalEpoch() - start) > DEEP_SLEEP_TIMER) {
 
     Serial.println("Going to sleep");
-    //Close Screen
-    tft.fillScreen(TFT_BLACK);
+    //Enter Display Sleep mode
+    //tft.fillScreen(TFT_BLACK);
+    tft.writecommand(0x10);
+    delay(5);
     
     esp_deep_sleep_start();
   }
