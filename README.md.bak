@@ -65,10 +65,10 @@ Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the
 ☐ Xtra animation  
 ☐ Update code with FOTA  
 ☐ Download additional aliens from a server  
+☐ Make Omnitrix Microcontroller based on ESP32  
 ☐ Add Menu that includes:  
 - ☐ Time  
 - ☐ Battery state  
 - ☐ Sound options  
 - ☐ Options for Changing tranformation Time variables  
 - ☐ Option for a Demo Mode  
-☐ Make Omnitrix Microcontroller based on ESP32  

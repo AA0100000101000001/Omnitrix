@@ -51,6 +51,7 @@ Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the
 ☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
 ☐ RGB LEDs  
 ☐ Only enable GPIO outputs (LEDs) at the last moment  
+☐ Reduce size and memory usage of program sketch  
 ☐ Remove all Serial.println  
 ☐ Conect battery with switch in 5V pin  
 ☐ Make Schematic using JLCPCB  
