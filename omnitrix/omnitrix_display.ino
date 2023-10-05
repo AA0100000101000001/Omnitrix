@@ -1,4 +1,7 @@
 
+// Display position variables must be global for PNGdec
+int16_t xpos = 0;
+int16_t ypos = 0;
 
 //Method that shows animation
 void showAnimation() {

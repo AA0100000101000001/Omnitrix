@@ -27,7 +27,7 @@
 
 #define MAX_IMAGE_WDITH 240 // Set rendering line buffer lengths for image
 
-#define ALIEN_NUMBER 11
+#define ALIEN_NUMBER 11 //0...11 = 12
 
 //Time Variables
 ESP32Time rtc;
@@ -68,7 +68,6 @@ gray RGB: 171, 171, 171 = 0xABABAB = 0xAD55 in RGB565
 #define OMNITRIX_GREEN 0xA707
 #define OMNITRIX_RED 0xC000
 #define OMNITRIX_GRAY 0xAD55
-#define BLACK_LINE_WIDTH 11
 
 #define GREEN_LED_R 168
 #define GREEN_LED_G 226
@@ -100,10 +99,6 @@ int selectbuttonState = 0; //State of select button
 
 //Display variables
 PNG png; // PNG decoder instance
-
-// Display position variables must be global for PNGdec
-int16_t xpos = 0;
-int16_t ypos = 0;
 
 TFT_eSPI tft = TFT_eSPI();
 

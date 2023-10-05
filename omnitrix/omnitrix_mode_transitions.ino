@@ -21,7 +21,8 @@ void mode2to3() {
   mode = 3;
   Serial.println("Tranformed into alien");
 
-  //reset transformation time to current epoch
+  //Start transformation timer
+  //Set transformation start time to current epoch time
   transformation_start_time = rtc.getLocalEpoch();
   //Set offset to time passed since last time the timer was checked (in sec)
   transformation_start_time_offset = rtc.getLocalEpoch() - transformation_start_time;
@@ -50,7 +51,8 @@ void mode3to4() {
 
   Serial.println("Omnitrix is recharging");
 
-  //reset recharging time
+  //Start Rechargin timer
+  //Set recharging start time to current epoch time
   recharging_start_time = rtc.getLocalEpoch();
   //Set offset to time passed since last time the timer was checked (in sec)
   recharging_start_time_offset = rtc.getLocalEpoch() - recharging_start_time;
@@ -62,7 +64,7 @@ void mode3to4() {
 
   //Configure the wake up source to wake up every time the recharge is done
   esp_sleep_enable_timer_wakeup(recharge_time_val - recharging_start_time_offset * uS_TO_S_FACTOR);
-  Serial.println("Recharging1: Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST - recharging_start_time_offset) +
+  Serial.println("Recharging: Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST - recharging_start_time_offset) +
   " Seconds");
 }
 

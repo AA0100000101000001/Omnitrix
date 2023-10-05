@@ -54,19 +54,12 @@ void setup() {
 
   Serial.println("START");
 
-  //Find Memory Used
-  /*Serial.println("Total heap: %d" + String(ESP.getHeapSize()));
-  Serial.println("Free heap: %d" + String(ESP.getFreeHeap()));
-  Serial.println("Total PSRAM: %d" + String(ESP.getPsramSize()));
-  Serial.println("Free PSRAM: %d" + String(ESP.getFreePsram()));*/
-
   //Check the wakeup reason for ESP32
   get_wakeup_reason();
 
   tft.begin();
   delay(1000);
   //analogWrite(TFT_BL, 100);
-  //esp_lcd_panel_disp_on_off(,on)
 
   //After the wake up, display apropriate screen
   /*if (mode == 1) {
@@ -128,7 +121,7 @@ void loop() {
   //Omnitrix is ready to select alien
   } else if (mode == 2) {
     
-    ShowAlien();
+    //ShowAlien();
     
     //Go to selection mode
     selectAlienMode();
@@ -157,7 +150,6 @@ void check_timer() {
 
     Serial.println("Going to sleep");
     //Enter Display Sleep mode
-    //tft.fillScreen(TFT_BLACK);
     tft.writecommand(0x10);
     delay(5);
     
@@ -187,7 +179,7 @@ void get_wakeup_reason() {
 
       //Serial.println("Wakeup caused by external signal using RTC_IO"); 
 
-      //Transformation mode is done, enable deep sleep timer for recharhing
+      //Transformation mode is not done, enable deep sleep timer for transformation offset
       if (mode == 3) {
 
         //Set offset to time passed since last time the timer was checked (in sec)
@@ -199,7 +191,7 @@ void get_wakeup_reason() {
         " Seconds");
 
       }
-      //Recharging mode is done, disable timer
+      //Recharging mode is not done, enable deep sleep timer for recharging offset
       else if (mode == 4) {
 
         //Set offset to time passed since last time the timer was checked (in sec)
@@ -219,13 +211,13 @@ void get_wakeup_reason() {
 
       //Serial.println("Wakeup caused by timer"); 
 
-      //Go to recharge mode after transformation time is finished
+      //Transformation mode is done, enable deep sleep timer for recharhing
       if (mode == 3) {
 
         mode3to4();
 
     
-      //Go to start mode after recharge timer is finished
+      //Recharging mode is done, disable timer and go to start mode
       } else if (mode == 4) {
 
         mode4to1();

@@ -15,11 +15,8 @@ void startMode() {
 
       //Display animation
       showAnimation();
-      delay(200);
-      //tft.fillScreen(OMNITRIX_GREEN);
-      //ShowSelectSymbols();
       
-	    delay(400);
+	    delay(600);
 
       //Go to next mode
 		  mode1to2();
@@ -58,11 +55,9 @@ void selectAlienMode() {
         alienNo += 1;
       }
 
-      //Display alien
-      //tft.fillScreen(OMNITRIX_GREEN);
-      //ShowSelectSymbols();
       //Display green backround png to erase previous alien
       eraseAlien();
+      //Display alien
       ShowAlien();
 
       Serial.print("Right, alien no:");
@@ -86,11 +81,9 @@ void selectAlienMode() {
         alienNo -= 1;
       }
 
-      //Display alien
-      //tft.fillScreen(OMNITRIX_GREEN);
-      //ShowSelectSymbols();
       //Erase previous alien
       eraseAlien();
+      //Display alien
       ShowAlien();
 
       Serial.print("Left, alien no:");
@@ -214,7 +207,7 @@ void rechargeMode() {
       
       //Go to first mode
       mode4to1();
-      
+
     //Recharging time is not finished
     } else {
       //Set offset to time passed since last time the timer was checked (in sec)
