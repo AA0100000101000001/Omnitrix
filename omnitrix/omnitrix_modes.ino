@@ -165,21 +165,10 @@ void transformedMode() {
     //Check transformation time
     //Transformation time is done while omnitrix does not sleep
     if ((rtc.getLocalEpoch() - transformation_start_time) > ALIEN_TRANSFORMATION_TIME_TEST) {
-      
-      playSound(7); //Play detransformation sound
-      delay(2500);
-
-      //Red led colour
-      analogWrite(rgb_r, GREEN_LED_R);
-      analogWrite(rgb_g, GREEN_LED_G);
-      analogWrite(rgb_b, GREEN_LED_B);
-      
-      //Display red screen
-      tft.fillScreen(OMNITRIX_RED);
-      ShowSymbols();
 
       //Go to next mode
       mode3to4();
+
     //Transformation time is not finished
     } else {
       //Set offset to time passed since last time the timer was checked (in sec)
@@ -222,18 +211,10 @@ void rechargeMode() {
     //Check recharging time
     //Recharging time is done
     if ((rtc.getLocalEpoch() - recharging_start_time) > OMNITRIX_RECHARGE_TIME_TEST) {
-
-      //Green led colour
-      analogWrite(rgb_r, RED_LED_R);
-      analogWrite(rgb_g, RED_LED_G);
-      analogWrite(rgb_b, RED_LED_B);
-
-      //Display green screen
-      tft.fillScreen(OMNITRIX_GREEN);
-      ShowSymbols();
       
       //Go to first mode
       mode4to1();
+      
     //Recharging time is not finished
     } else {
       //Set offset to time passed since last time the timer was checked (in sec)

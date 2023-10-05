@@ -35,6 +35,18 @@ void mode2to3() {
 
 //Transformation mode to Recharging mode
 void mode3to4() {
+      
+  playSound(7); //Play detransformation sound
+  delay(2500);
+
+  //Red led colour
+  analogWrite(rgb_r, GREEN_LED_R);
+  analogWrite(rgb_g, GREEN_LED_G);
+  analogWrite(rgb_b, GREEN_LED_B);
+      
+  //Display red screen
+  tft.fillScreen(OMNITRIX_RED);
+  ShowSymbols();
 
   Serial.println("Omnitrix is recharging");
 
@@ -67,6 +79,15 @@ void mode3to1() {
 
 //Rechargin mode to Start mode
 void mode4to1() {
+
+  //Green led colour
+  analogWrite(rgb_r, RED_LED_R);
+  analogWrite(rgb_g, RED_LED_G);
+  analogWrite(rgb_b, RED_LED_B);
+
+  //Display green screen
+  tft.fillScreen(OMNITRIX_GREEN);
+  ShowSymbols();
 
   Serial.println("Going back to start");
   

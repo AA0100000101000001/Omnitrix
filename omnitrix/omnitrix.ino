@@ -69,12 +69,12 @@ void setup() {
   //esp_lcd_panel_disp_on_off(,on)
 
   //After the wake up, display apropriate screen
-  if (mode == 1) {
+  /*if (mode == 1) {
 
     //Display start screen
     tft.fillScreen(OMNITRIX_GREEN);
     ShowSymbols();
-  } /* else if (mode == 2) {
+  }  else if (mode == 2) {
 
     //Display backround selection screen
     tft.fillScreen(OMNITRIX_GREEN);
@@ -86,7 +86,7 @@ void setup() {
     //Display transformation screen
     tft.fillScreen(TFT_WHITE);
     ShowSymbols();
-  } else */ if (mode == 4) {
+  } else  if (mode == 4) {
 
     Serial.print("recharging time ");
 
@@ -94,7 +94,7 @@ void setup() {
     tft.fillScreen(OMNITRIX_RED);
     ShowSymbols();
   }
-  
+  */
 
   //After the wake up, turn on leds
   if (mode == 4) {
