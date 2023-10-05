@@ -64,7 +64,7 @@ void setup() {
   get_wakeup_reason();
 
   tft.begin();
-  delay(800);
+  delay(1000);
   //analogWrite(TFT_BL, 100);
   //esp_lcd_panel_disp_on_off(,on)
 
