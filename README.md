@@ -37,7 +37,7 @@ Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the
 - Array of PNG images decoded into HEX representing the first twelve aliens  
 - Animation  
 - Sound (commented for now)  
-- Ability to go into Deep Sleep Mode after a short time of inactivity (tranformation mode in progress)  
+- Ability to go into Deep Sleep Mode after a short time of inactivity  
   
 
 # To Do List:  
@@ -53,11 +53,13 @@ Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the
 ☐ Only enable GPIO outputs (LEDs) at the last moment  
 ☐ Remove all Serial.println  
 ☐ Conect battery with switch in 5V pin  
+☐ Make Schematic using JLCPCB  
 ☐ Make PCB  
 	
 # Future Plans:  
 ☐ Make rotary encoder mechanism with micro switches  
 ☐ Create the rest of the mechanics using a CAD program  
+☐ Rewrite code to use GPIO interrupts  
 ☐ Secret combination for Master Control Mode  
 ☐ Smoother animation  
 ☐ Xtra animation  
@@ -69,3 +71,4 @@ Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the
 - ☐ Sound options  
 - ☐ Options for Changing tranformation Time variables  
 - ☐ Option for a Demo Mode  
+☐ Make Omnitrix Microcontroller based on ESP32  

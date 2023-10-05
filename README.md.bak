@@ -37,12 +37,12 @@ Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the
 - Array of PNG images decoded into HEX representing the first twelve aliens  
 - Animation  
 - Sound (commented for now)  
-- Ability to go into Deep Sleep Mode after a short time of inactivity (tranformation mode in progress)  
+- Ability to go into Deep Sleep Mode after a short time of inactivity  
   
 
 # To Do List:  
 ☐ Use Micro switches instead of Encoder  
-✅ Fixed Guru Meditation Error by delaying tft initialisation and changing DC and RST pins
+✅ Fixed Guru Meditation Error by delaying tft initialisation and changing DC and RST pins  
 ✅ Fix transformation time in Deep Sleep mode  
 ✅ Update ShowSelectSymbols and ShowSymbols with PNGdec  
 ✅ Power reduction code  
@@ -53,6 +53,7 @@ Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the
 ☐ Only enable GPIO outputs (LEDs) at the last moment  
 ☐ Remove all Serial.println  
 ☐ Conect battery with switch in 5V pin  
+☐ Make Schematic using JLCPCB  
 ☐ Make PCB  
 	
 # Future Plans:  
