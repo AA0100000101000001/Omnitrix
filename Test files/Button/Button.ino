@@ -2,17 +2,30 @@
 
 const int buttonPin = 5;  // the number of the pushbutton pin
 const int ledPin = 2;    // the number of the LED pin
+int A = 1;
+int B = 4;
+int S = 3;
 
 int buttonState = 0;  // variable for reading the pushbutton status
+int rightState = 0;
+int leftState = 0;
+int selectButtonState = 0;
 int mode = 1;
 
 void setup() {
+  
+  // initialize left and right buttons
+  pinMode(A, INPUT);
+  pinMode(B, INPUT);
+  // initalize select button
+  pinMode(S, INPUT);
+
   // initialize the LED pin as an output:
   pinMode(ledPin, OUTPUT);
   // initialize the pushbutton pin as an input:
   pinMode(buttonPin, INPUT);
 
-  Serial.begin(9600);
+  Serial.begin(115200);
 }
 
 void loop() {
@@ -41,4 +54,32 @@ void loop() {
       Serial.println("Button pressed");
     }
   }
+
+  //read right botton state
+  rightState = digitalRead(A);
+
+  //right botton is pressed
+  if (rightState == HIGH) {
+    delay(200);
+    Serial.println("Right");
+  }
+  /*
+  //read left botton state
+  leftState = digitalRead(B);
+
+  //left botton is pressed
+  if (leftState == HIGH) {
+    delay(200);
+    Serial.println("Left");
+  }
+
+  //read select botton state
+  selectButtonState = digitalRead(B);
+
+  //left botton is pressed
+  if (selectButtonState == HIGH) {
+    delay(200);
+    Serial.println("Select button pressed");
+  }
+  */
 }
