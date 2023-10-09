@@ -37,6 +37,13 @@ void setup() {
   DF1201S.setPlayMode(DF1201S.SINGLE); //Play one sound only
   */
 
+  Serial.println("START");
+
+  tft.begin();
+  delay(1000);
+  //disconnect TFT_BL from deep sleep to save energy
+  //gpio_reset_pin(GPIO_NUM_38);
+
   //If the omnitrix is booting for the first time then initialise alienNo, mode
   //When it wakes up from deep sleep the values will be saved
   if (bootCount == 0) {
@@ -44,50 +51,18 @@ void setup() {
     mode = 1;
     rtc.setTime(0, 0, 0, 1, 1, 2023);  // Set Time to 1st Jan 2023 00:00:00
     playSound(1); //Play boot sound
+
+    //Display start screen
+    tft.fillScreen(OMNITRIX_GREEN);
+    ShowSymbols();
   }
   bootCount++;
   Serial.print("Boot number: ");
   Serial.println(bootCount);
 
-  //disconnect TFT_BL from deep sleep to save energy
-  //gpio_reset_pin(GPIO_NUM_38);
-
-  Serial.println("START");
-
   //Check the wakeup reason for ESP32
   get_wakeup_reason();
-
-  tft.begin();
-  delay(1000);
   //analogWrite(TFT_BL, 100);
-
-  //After the wake up, display apropriate screen
-  /*if (mode == 1) {
-
-    //Display start screen
-    tft.fillScreen(OMNITRIX_GREEN);
-    ShowSymbols();
-  }  else if (mode == 2) {
-
-    //Display backround selection screen
-    tft.fillScreen(OMNITRIX_GREEN);
-    ShowSelectSymbols();
-  } else  if (mode == 3) {
-
-    Serial.print("Transformation time ");
-
-    //Display transformation screen
-    tft.fillScreen(TFT_WHITE);
-    ShowSymbols();
-  } else  if (mode == 4) {
-
-    Serial.print("recharging time ");
-
-    //Display red screen
-    tft.fillScreen(OMNITRIX_RED);
-    ShowSymbols();
-  }
-  */
 
   //After the wake up, turn on leds
   if (mode == 4) {
@@ -121,7 +96,7 @@ void loop() {
   //Omnitrix is ready to select alien
   } else if (mode == 2) {
     
-    //ShowAlien();
+    ShowAlien();
     
     //Go to selection mode
     selectAlienMode();
@@ -213,13 +188,15 @@ void get_wakeup_reason() {
 
       //Transformation mode is done, enable deep sleep timer for recharhing
       if (mode == 3) {
-
+        
+        delay(200);
         mode3to4();
 
     
       //Recharging mode is done, disable timer and go to start mode
       } else if (mode == 4) {
 
+        delay(200);
         mode4to1();
 
       }

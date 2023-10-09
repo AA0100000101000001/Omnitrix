@@ -59,17 +59,18 @@ Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the
 	
 # Future Plans:  
 ☐ Make rotary encoder mechanism with micro switches  
-☐ Create the rest of the mechanics using a CAD program  
+☐ Create the rest of the mechanisms using a CAD program  
 ☐ Rewrite code to use GPIO interrupts  
-☐ Secret combination for Master Control Mode  
+☐ Secret combination input for Master Control Mode  
 ☐ Smoother animation  
 ☐ Xtra animation  
 ☐ Update code with FOTA  
 ☐ Download additional aliens from a server  
-☐ Make Omnitrix Microcontroller based on ESP32  
+☐ Make Omnitrix Microcontroller based on ESP32 chip  
 ☐ Add Menu that includes:  
 - ☐ Time  
 - ☐ Battery state  
 - ☐ Sound options  
 - ☐ Options for Changing tranformation Time variables  
 - ☐ Option for a Demo Mode  
+- ☐ Search for Updates  

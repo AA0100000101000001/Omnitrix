@@ -12,12 +12,13 @@
 #include "omnitrix_anim.h"
 
 //LCD pins
-/*
+
 #define TFT_MOSI 35 
 #define TFT_SCLK 36
 #define TFT_CS   34 
 #define TFT_DC   26
 #define TFT_RST  33
+/*
 #define TFT_BL   38
 */
 

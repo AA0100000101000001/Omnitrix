@@ -7,7 +7,7 @@ int16_t ypos = 0;
 void showAnimation() {
 
   int frame = 0;
-  int fps = 30;
+  int fps = 10;
 
   for (; frame <= omnitrix_anim_N; frame++)  {
     
@@ -42,6 +42,8 @@ void  ShowSelectSymbols() {
 
 //Function that displays start icon symbols
 void ShowSymbols() {
+
+  //Serial.println("show symbols");
 
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[0], sizeof(omnitrix_anim[0]), pngDraw);
 
