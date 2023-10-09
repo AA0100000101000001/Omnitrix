@@ -28,7 +28,7 @@ Breadboard, jumper wires, button, switch, 10 kohm resistor, 2X 47 nF capacitors
   
 Follow the schematic on how to connect the wires. Some soldering will be needed to connect the pin headers and the speakers to the Fermion DFPlayer Pro.  
 Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the MCU.  
-*Remember to enable PSRAM to avoid Guru Meditation Error*
+## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
 # Schematic:  
 ![omnitrix_schematic_v4](media/Images/omnitrix_schematic_v4.1.bmp) 
