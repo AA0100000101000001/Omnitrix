@@ -27,7 +27,7 @@ Fermion DFPlayer Pro,
 Breadboard, jumper wires, button, switch, 10 kohm resistor, 2X 47 nF capacitors
   
 Follow the schematic on how to connect the wires. Some soldering will be needed to connect the pin headers and the speakers to the Fermion DFPlayer Pro.  
-Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the MCU.
+Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the MCU.  
 *Remember to enable PSRAM to avoid Guru Meditation Error*
 
 # Schematic:  
@@ -62,11 +62,14 @@ Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the
 ☐ Make rotary encoder mechanism with micro switches  
 ☐ Create the rest of the mechanisms using a CAD program  
 ☐ Rewrite code to use GPIO interrupts  
+☐ Find cheaper components  
 ☐ Secret combination input for Master Control Mode  
 ☐ Smoother animation  
 ☐ Xtra animation  
 ☐ Update code with FOTA  
+☐ Rechargable battery  
 ☐ Download additional aliens from a server  
+☐ Add motor to elevate display (for fun!)  
 ☐ Make Omnitrix Microcontroller based on ESP32 chip  
 ☐ Add Menu that includes:  
 - ☐ Time  
