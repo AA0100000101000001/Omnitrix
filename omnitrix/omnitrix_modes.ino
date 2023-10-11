@@ -18,6 +18,9 @@ void startMode() {
       
 	    delay(600);
 
+      //Display alien
+      ShowAlien();
+
       //Go to next mode
 		  mode1to2();
 

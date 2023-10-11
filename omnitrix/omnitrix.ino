@@ -96,8 +96,6 @@ void loop() {
   //Omnitrix is ready to select alien
   } else if (mode == 2) {
     
-    ShowAlien();
-    
     //Go to selection mode
     selectAlienMode();
   
