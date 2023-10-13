@@ -31,7 +31,8 @@ Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
 # Schematic:  
-![omnitrix_schematic_v4](media/Images/omnitrix_schematic_v4.1.bmp) 
+<!-- ![omnitrix_schematic_v4](media/Images/omnitrix_schematic_v4.1.bmp) -->
+Will be updated shortly.  
 
 # Current Features:  
 - Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
