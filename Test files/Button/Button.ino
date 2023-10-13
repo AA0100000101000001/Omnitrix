@@ -32,6 +32,12 @@ void loop() {
   // read the state of the pushbutton value:
   buttonState = digitalRead(buttonPin);
 
+  if (buttonState == HIGH) {
+    
+    delay(200);
+    Serial.println("Button pressed");
+  }
+/*
   //If button is pressed then led is turned on
   if (mode == 1) {
     // check if the pushbutton is pressed. If it is, the buttonState is LOW:
@@ -54,32 +60,32 @@ void loop() {
       Serial.println("Button pressed");
     }
   }
-
+*/
   //read right botton state
   rightState = digitalRead(A);
 
   //right botton is pressed
-  if (rightState == HIGH) {
+  if (rightState == LOW) {
     delay(200);
     Serial.println("Right");
   }
-  /*
+  
   //read left botton state
   leftState = digitalRead(B);
 
   //left botton is pressed
-  if (leftState == HIGH) {
-    delay(200);
+  if (leftState == LOW) {
+    delay(300);
     Serial.println("Left");
   }
 
   //read select botton state
-  selectButtonState = digitalRead(B);
+  selectButtonState = digitalRead(S);
 
   //left botton is pressed
   if (selectButtonState == HIGH) {
     delay(200);
     Serial.println("Select button pressed");
   }
-  */
+  
 }
