@@ -61,12 +61,13 @@ void loop() {
     }
   }
 */
+
   //read right botton state
   rightState = digitalRead(A);
 
   //right botton is pressed
   if (rightState == LOW) {
-    delay(200);
+    delay(300);
     Serial.println("Right");
   }
   
@@ -83,8 +84,8 @@ void loop() {
   selectButtonState = digitalRead(S);
 
   //left botton is pressed
-  if (selectButtonState == HIGH) {
-    delay(200);
+  if (selectButtonState == LOW) {
+    delay(300);
     Serial.println("Select button pressed");
   }
   
