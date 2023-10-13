@@ -55,7 +55,7 @@ Install ESP32 in Arduino IDE and upload the code (in the omnitrix folder) to the
 ☐ Reduce size and memory usage of program sketch  
 ☐ Remove all Serial.println  
 ☐ Conect battery with switch in 5V pin  
-☐ Make Schematic using JLCPCB  
+☐ Make Schematic using EasyEDA  
 ☐ Make PCB  
 	
 # Future Plans:  
