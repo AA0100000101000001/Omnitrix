@@ -9,9 +9,9 @@ void setup() {
 
   //Pins
   pinMode(buttonPin, INPUT);
-  pinMode(A, INPUT_PULLUP);
-  pinMode(B, INPUT_PULLUP);
-  pinMode(SW, INPUT_PULLUP);
+  pinMode(A, INPUT);
+  pinMode(B, INPUT);
+  pinMode(SW, INPUT);
   //leds
   pinMode(rgb_r, OUTPUT);
   pinMode(rgb_g, OUTPUT);
