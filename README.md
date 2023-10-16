@@ -43,7 +43,7 @@ Will be updated shortly.
   
 
 # To Do List:  
-☐ Use Micro switches instead of Encoder  
+✅ Use Micro switches instead of Encoder  
 ✅ Fixed Guru Meditation Error by delaying tft initialization and changing DC and RST pins  
 ✅ Fix transformation time in Deep Sleep mode  
 ✅ Update ShowSelectSymbols and ShowSymbols with PNGdec  
