@@ -33,7 +33,7 @@ Install ESP32 in Arduino IDE and upload the code (omnitrix folder) to the MCU.
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
 # Schematic:  
-![omnitrix_schematic_v4](media/Images/omnitrix_schematic_v4.1.bmp)
+![Schematic_omnitrix_2023-10-19](media/Images/Schematic_omnitrix_2023-10-19.png)
 Will be updated shortly.  
 
 # Current Features:  
@@ -58,7 +58,7 @@ Will be updated shortly.
 ☐ Reduce size and memory usage of program sketch  
 ☐ Remove all Serial.println  
 ☐ Conect battery with switch in 5V pin  
-☐ Make Schematic using EasyEDA  
+✅ Make Schematic using EasyEDA  
 ☐ Make PCB  
 	
 # Future Plans:  
