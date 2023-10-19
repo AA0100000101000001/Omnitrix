@@ -42,7 +42,6 @@ Install ESP32 in Arduino IDE and upload the code (omnitrix folder) to the MCU.
 - Sound (commented for now)  
 - Ability to go into Deep Sleep Mode after a short time of inactivity  
   
-  
 # Status
 A provisional PCB needs to be made to fix the wire connection problem with the breadboard.
 
