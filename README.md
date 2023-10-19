@@ -5,8 +5,8 @@
 ![IMG_20230619_164351](media/Images/IMG_20230619_164351.jpg) 
 
 
-This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as posible. It uses a ESP32 Development Board - NodeMCU-32S2 module, a Round LCD Display GC9A01, a Fermion DFPlayer Pro for sound, a Rotary Encoder with Switch and a tact switch for user input.
-The Rotary Encoder is planned to be changed by Micro Switches for reducing space. Also RGB LEDs and battery will be added  
+This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as posible. It uses a ESP32 Development Board - NodeMCU-32S2 module, a Round LCD Display GC9A01, a Fermion DFPlayer Pro for sound, Micro Switches implementing an encoder and a tact switch for user input.
+RGB LEDs and battery will be added.  
 
 Arduino IDE is used for the software part of the project but could be changed for ESP-IDF in order to use the ULP Coprocessor for better power reduction. For the graphics Bodmer's TFT_eSPI library is used and for the sound the DFRobot_DF1201S library.  
 
@@ -63,6 +63,7 @@ Will be updated shortly.
 ☐ Make rotary encoder mechanism with micro switches  
 ☐ Create the rest of the mechanisms using a CAD program  
 ☐ Rewrite code to use GPIO interrupts  
+☐ Create Omnitrix library for GC9A01 driver based on TFT-eSPI  
 ☐ Find cheaper components  
 ☐ Secret combination input for Master Control Mode  
 ☐ Smoother animation  

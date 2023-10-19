@@ -43,7 +43,7 @@ Will be updated shortly.
   
 
 # To Do List:  
-☐ Use Micro switches instead of Encoder  
+✅ Use Micro switches instead of Encoder  
 ✅ Fixed Guru Meditation Error by delaying tft initialization and changing DC and RST pins  
 ✅ Fix transformation time in Deep Sleep mode  
 ✅ Update ShowSelectSymbols and ShowSymbols with PNGdec  
@@ -63,6 +63,7 @@ Will be updated shortly.
 ☐ Make rotary encoder mechanism with micro switches  
 ☐ Create the rest of the mechanisms using a CAD program  
 ☐ Rewrite code to use GPIO interrupts  
+☐ Create Omnitrix library for GC9A01 driver based on TFT-eSPI  
 ☐ Find cheaper components  
 ☐ Secret combination input for Master Control Mode  
 ☐ Smoother animation  
