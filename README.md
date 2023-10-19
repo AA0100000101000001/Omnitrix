@@ -34,7 +34,6 @@ Install ESP32 in Arduino IDE and upload the code (omnitrix folder) to the MCU.
 
 # Schematic:  
 ![Schematic_omnitrix_2023-10-19](media/Images/Schematic_omnitrix_2023-10-19.png)
-Will be updated shortly.  
 
 # Current Features:  
 - Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
