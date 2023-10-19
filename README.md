@@ -24,8 +24,8 @@ Round LCD Display GC9A01
 Fermion DFPlayer Pro  
 2X Mini Metal Speaker w/ Wires - 8 ohm 0.5W  
 2X MicroSwitch SPDT ON-(ON) - Long Lever 18mm (A,B on the Schematic)  
-MicroSwitch SPDT ON-(ON) - Roller Lever (SW on the Schematic)
-Tact Switch 6x6mm 5mm  
+MicroSwitch SPDT ON-(ON) - Roller Lever (SW on the Schematic)  
+Tact Switch 6x6mm 5mm (ButtonPin on the Schematic)  
 Breadboard, jumper wires, 4X 10 kohm resistor
   
 Follow the schematic on how to connect the wires. Some soldering will be needed to connect the pin headers and the speakers to the Fermion DFPlayer Pro.  
