@@ -1,6 +1,6 @@
 # Omnitrix
 
-# Work in Progress  
+# Work in Progress (Image will be updated)  
 
 ![IMG_20230619_164351](media/Images/IMG_20230619_164351.jpg) 
 
