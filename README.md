@@ -1,6 +1,6 @@
 # Omnitrix
 
-# Work in Progress (Image will be updated)  
+# Work in Progress (See Status)  
 
 ![IMG_20230619_164351](media/Images/IMG_20230619_164351.jpg) 
 
@@ -42,6 +42,8 @@ Install ESP32 in Arduino IDE and upload the code (omnitrix folder) to the MCU.
 - Sound (commented for now)  
 - Ability to go into Deep Sleep Mode after a short time of inactivity  
   
+# Status
+A provisional PCB needs to be made to fix the wire connection problem with the breadboard.
 
 # To Do List:  
 ✅ Use Micro switches instead of Encoder  
