@@ -66,6 +66,7 @@ A provisional PCB needs to be made to fix the wire connection problem with the b
 ☐ Rewrite code to use GPIO interrupts  
 ☐ Create Omnitrix library for GC9A01 driver based on TFT-eSPI  
 ☐ Find cheaper components  
+☐ Add energy system  
 ☐ Secret combination input for Master Control Mode  
 ☐ Smoother animation  
 ☐ Xtra animation  
