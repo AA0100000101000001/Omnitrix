@@ -47,19 +47,17 @@ A provisional PCB needs to be made to fix the wire connection problem with the b
 
 # To Do List:  
 ✅ Use Micro switches instead of Encoder  
-✅ Fixed Guru Meditation Error by delaying tft initialization and changing DC and RST pins  
-✅ Fix transformation time in Deep Sleep mode  
-✅ Update ShowSelectSymbols and ShowSymbols with PNGdec  
 ✅ Power reduction code  
-☐ Increase resistance of voltage dividers  
+✅ Make Schematic using EasyEDA  
 ☐ Power reduction code and pin rearangement for LCD display  
 ☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
 ☐ RGB LEDs  
+☐ Increase resistance of voltage dividers  
 ☐ Only enable GPIO outputs (LEDs) at the last moment  
+☐ Make RGB LED PCB  
 ☐ Reduce size and memory usage of program sketch  
 ☐ Remove all Serial.println  
 ☐ Conect battery with switch in 5V pin  
-✅ Make Schematic using EasyEDA  
 ☐ Make PCB  
 	
 # Future Plans:  

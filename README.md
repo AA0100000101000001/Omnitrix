@@ -78,6 +78,7 @@ A provisional PCB needs to be made to fix the wire connection problem with the b
 - ☐ Time  
 - ☐ Battery state  
 - ☐ Sound options  
+- ☐ Option to turn off LEDs
 - ☐ Options for Changing tranformation Time variables  
 - ☐ Option for a Demo Mode  
 - ☐ Search for Updates  
