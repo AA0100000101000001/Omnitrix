@@ -54,6 +54,7 @@ A provisional PCB needs to be made to fix the wire connection problem with the b
 ☐ RGB LEDs  
 ☐ Increase resistance of voltage dividers  
 ☐ Only enable GPIO outputs (LEDs) at the last moment  
+☐ Test current for LED PCB
 ☐ Make RGB LED PCB  
 ☐ Reduce size and memory usage of program sketch  
 ☐ Remove all Serial.println  
