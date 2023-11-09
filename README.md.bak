@@ -5,8 +5,8 @@
 ![IMG_20230619_164351](media/Images/IMG_20230619_164351.jpg) 
 
 
-This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as posible. It uses a ESP32 Development Board - NodeMCU-32S2 module, a Round LCD Display GC9A01, a Fermion DFPlayer Pro for sound, Micro Switches implementing an encoder and a tact switch for user input.
-RGB LEDs and battery will be added.  
+This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible. It uses an ESP32 Development Board - NodeMCU-32S2 module, a Round LCD Display GC9A01, a Fermion DFPlayer Pro for sound, Micro Switches implementing an encoder and a tact switch for user input.
+RGB LEDs and battery are planned to be added.  
 
 Arduino IDE is used for the software part of the project but could be changed for ESP-IDF in order to use the ULP Coprocessor for better power reduction. For the graphics Bodmer's TFT_eSPI library is used and for the sound the DFRobot_DF1201S library.  
 
@@ -29,7 +29,7 @@ Tact Switch 6x6mm 5mm (ButtonPin on the Schematic)
 Breadboard, jumper wires, 4X 10 kohm resistor
   
 Follow the schematic on how to connect the wires. Some soldering will be needed to connect the pin headers and the speakers to the Fermion DFPlayer Pro.  
-Install ESP32 in Arduino IDE and upload the code (omnitrix folder) to the MCU.  
+You can check the Omnitrix-Test-Files repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
 # Schematic:  
@@ -71,6 +71,7 @@ A provisional PCB needs to be made to fix the wire connection problem with the b
 ☐ Secret combination input for Master Control Mode  
 ☐ Smoother animation  
 ☐ Xtra animation  
+☐ Download aliens from a server  
 ☐ Update code with FOTA  
 ☐ Rechargable battery  
 ☐ Download additional aliens from a server  
