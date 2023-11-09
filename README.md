@@ -71,6 +71,7 @@ A provisional PCB needs to be made to fix the wire connection problem with the b
 ☐ Secret combination input for Master Control Mode  
 ☐ Smoother animation  
 ☐ Xtra animation  
+☐ Download aliens from a server  
 ☐ Update code with FOTA  
 ☐ Rechargable battery  
 ☐ Download additional aliens from a server  
