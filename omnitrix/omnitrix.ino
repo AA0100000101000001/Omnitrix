@@ -24,18 +24,20 @@ void setup() {
 
   //DFT sound initialise
   //Uncomment for sound
-  /*Serial1.begin(115200, SERIAL_8N1, RXD1, TXD1);
-  while(!DF1201S.begin(Serial1)){
-    Serial.println("Init failed, please check the wire connection!");
+  Serial1.begin(115200, SERIAL_8N1, RXD1, TXD1);
+  //Check Connection
+  if (!DF1201S.begin(Serial1)){
+    Serial.println("Init failed, please check the wire connection! Muted");
     mute = true; //If no sound device is detected mute audio
     delay(1000);
+  } else {
+    DF1201S.setVol(10); //Volume = 10
+    DF1201S.setPrompt(false); //shut down starting tone
+    DF1201S.setLED(false); //Set DFplayer led off
+    DF1201S.switchFunction(DF1201S.MUSIC); //MUSIC function
+    DF1201S.setPlayMode(DF1201S.SINGLE); //Play one sound only
   }
-  DF1201S.setVol(10); //Volume = 10
-  DF1201S.setPrompt(false); //shut down starting tone
-  DF1201S.setLED(false); //Set DFplayer led off
-  DF1201S.switchFunction(DF1201S.MUSIC); //MUSIC function
-  DF1201S.setPlayMode(DF1201S.SINGLE); //Play one sound only
-  */
+  
 
   Serial.println("START");
 
@@ -135,7 +137,7 @@ void playSound(int16_t s) {
   //If mute is false then play selected sound
   if (!mute) {
     //Uncomment for sound
-    //DF1201S.playFileNum(s); 
+    DF1201S.playFileNum(s); 
   }
 }
 
