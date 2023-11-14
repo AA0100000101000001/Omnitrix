@@ -58,8 +58,8 @@ void mode3to4() {
   //Set offset to time passed since last time the timer was checked (in sec)
   recharging_start_time_offset = rtc.getLocalEpoch() - recharging_start_time;
 
-  Serial.println(recharging_start_time_offset);
-  Serial.println(recharge_time_val);
+  //Serial.println(recharging_start_time_offset);
+  //Serial.println(recharge_time_val);
 
   mode = 4;
 

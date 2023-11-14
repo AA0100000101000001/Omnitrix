@@ -111,7 +111,7 @@ void selectAlienMode() {
 
       tft.fillScreen(TFT_WHITE);
       ShowSymbols();
-      Serial.println(alienNo);
+      //Serial.println(alienNo);
 
       delay(200);
 
