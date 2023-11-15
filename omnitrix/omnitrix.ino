@@ -28,15 +28,16 @@ void setup() {
   //Check Connection
   if (!DF1201S.begin(Serial1)){
     Serial.println("Init failed, please check the wire connection! Muted");
-    mute = true; //If no sound device is detected mute audio
+    //mute = true; //If no sound device is detected mute audio
     delay(1000);
-  } else {
+  } 
+  //else {
     DF1201S.setVol(10); //Volume = 10
-    DF1201S.setPrompt(false); //shut down starting tone
-    DF1201S.setLED(false); //Set DFplayer led off
+    DF1201S.setPrompt(true); //shut down starting tone
+    DF1201S.setLED(true); //Set DFplayer led off
     DF1201S.switchFunction(DF1201S.MUSIC); //MUSIC function
     DF1201S.setPlayMode(DF1201S.SINGLE); //Play one sound only
-  }
+  //}
   
 
   Serial.println("START");
