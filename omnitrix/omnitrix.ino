@@ -38,6 +38,7 @@ void setup() {
     DF1201S.switchFunction(DF1201S.MUSIC); //MUSIC function
     DF1201S.setPlayMode(DF1201S.SINGLE); //Play one sound only
   //}
+  playSound(1); //Play boot sound
   
 
   Serial.println("START");
