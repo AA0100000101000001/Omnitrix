@@ -29,7 +29,7 @@ Tact Switch 6x6mm 5mm (ButtonPin on the Schematic)
 Breadboard, jumper wires, 4X 10 kohm resistor
   
 Follow the schematic on how to connect the wires. Some soldering will be needed to connect the pin headers and the speakers to the Fermion DFPlayer Pro.  
-You can check the Omnitrix-Test-Files repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
+You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
 # Schematic:  
