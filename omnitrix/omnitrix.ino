@@ -48,8 +48,6 @@ void setup() {
   //disconnect TFT_BL from deep sleep to save energy
   //gpio_reset_pin(GPIO_NUM_38);
 
-  //readDisplayStatus();
-
   //If the omnitrix is booting for the first time then initialise alienNo, mode
   //When it wakes up from deep sleep the values will be saved
   if (bootCount == 0) {
@@ -210,33 +208,4 @@ void get_wakeup_reason() {
     default : { } //Serial.printf("Wakeup was not caused by deep sleep: %d\n",wakeup_reason); break;
   }
 
-}
-
-void readDisplayStatus() {
-
-  /*uint8_t d1 = 0;
-  uint8_t d2 = 0;
-  uint8_t d3 = 0;
-  uint8_t d4 = 0;
-  */
-
-  uint32_t data = 0;
-  data = tft.readcommand32(0x04);
-  Serial.print("data : ");
-  Serial.println(data);
-  
-  /*tft.writecommand(0x09); //Read Display Status
-  // Dummy read to throw away don't care value
-  tft.readcommand8();
-  
-
-  Serial.print("d1 : ");
-  Serial.println(d1);
-  Serial.print("d2 : ");
-  Serial.println(d2);
-  Serial.print("d3 : ");
-  Serial.println(d3);
-  Serial.print("d4 : ");
-  Serial.println(d4);
-  */
 }
