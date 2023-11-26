@@ -28,7 +28,7 @@ void setup() {
   //Check Connection
   if (!DF1201S.begin(Serial1)){
     Serial.println("DFT Init failed, please check the wire connection! Muted");
-    //mute = true; //If no sound device is detected mute audio
+    mute = true; //If no sound device is detected mute audio
     delay(1000);
   } 
   else {
