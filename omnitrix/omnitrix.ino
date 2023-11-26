@@ -28,16 +28,16 @@ void setup() {
   //Check Connection
   if (!DF1201S.begin(Serial1)){
     Serial.println("DFT Init failed, please check the wire connection! Muted");
-    //mute = true; //If no sound device is detected mute audio
+    mute = true; //If no sound device is detected mute audio
     delay(1000);
   } 
-  //else {
+  else {
     DF1201S.setVol(10); //Volume = 10
     DF1201S.setPrompt(true); //shut down starting tone
     DF1201S.setLED(true); //Set DFplayer led off
     DF1201S.switchFunction(DF1201S.MUSIC); //MUSIC function
     DF1201S.setPlayMode(DF1201S.SINGLE); //Play one sound only
-  //}
+  }
   playSound(1); //Play boot sound
   
 
@@ -82,7 +82,7 @@ void setup() {
   }
 
   //The omnitrix will wake up when the button is pressed
-  esp_sleep_enable_ext0_wakeup(GPIO_NUM_5,1);
+  esp_sleep_enable_ext0_wakeup(GPIO_NUM_5,0);
 
 }
 

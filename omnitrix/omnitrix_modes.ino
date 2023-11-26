@@ -9,7 +9,7 @@ void startMode() {
 		buttonState = digitalRead(buttonPin);
 
 		// check if start button is pressed. If it is then go to the next mode
-		if (buttonState == HIGH) {
+		if (buttonState == LOW) {
 
       playSound(2); //Play select sound
 
@@ -128,7 +128,7 @@ void selectAlienMode() {
     buttonState = digitalRead(buttonPin);
 
     // check if start button is pressed. If it is then go to the previous mode
-    if (buttonState == HIGH) {
+    if (buttonState == LOW) {
       
       playSound(4); //Play move backwards 
 

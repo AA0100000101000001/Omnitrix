@@ -1,6 +1,9 @@
 # Omnitrix
 
-# Work in Progress (See Status)  
+# Status
+It seems that I ran into some issues with UART and SPI. Currently investigating the problem in my board
+
+# Work in Progress
 
 ![IMG_20230619_164351](media/Images/IMG_20230619_164351.jpg) 
 
@@ -41,9 +44,6 @@ You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Om
 - Animation  
 - Sound (commented for now)  
 - Ability to go into Deep Sleep Mode after a short time of inactivity  
-  
-# Status
-A provisional PCB needs to be made to fix the wire connection problem with the breadboard.
 
 # To Do List:  
 ✅ Use Micro switches instead of Encoder  
