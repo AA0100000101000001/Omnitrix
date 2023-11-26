@@ -3,7 +3,7 @@
 #include <PNGdec.h>
 #include "SPI.h"
 #include <DFRobot_DF1201S.h>
-#include <WiFi.h>
+//#include <WiFi.h>
 #include <ESP32Time.h>
 //#include <PCM.h>
 

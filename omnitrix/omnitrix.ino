@@ -20,7 +20,7 @@ void setup() {
 
   //Reduce Power consumption
   setCpuFrequencyMhz(80); //Reduce CPU Freq
-  WiFi.mode(WIFI_OFF); //Turn off WIFI
+  //WiFi.mode(WIFI_OFF); //Turn off WIFI
 
   //DFT sound initialise
   //Uncomment for sound
@@ -31,13 +31,13 @@ void setup() {
     //mute = true; //If no sound device is detected mute audio
     delay(1000);
   } 
-  else {
+  //else {
     DF1201S.setVol(10); //Volume = 10
     DF1201S.setPrompt(true); //shut down starting tone
     DF1201S.setLED(true); //Set DFplayer led off
     DF1201S.switchFunction(DF1201S.MUSIC); //MUSIC function
     DF1201S.setPlayMode(DF1201S.SINGLE); //Play one sound only
-  }
+  //}
   playSound(1); //Play boot sound
   
 
