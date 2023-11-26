@@ -28,7 +28,7 @@ void setup() {
   //Check Connection
   if (!DF1201S.begin(Serial1)){
     Serial.println("DFT Init failed, please check the wire connection! Muted");
-    mute = true; //If no sound device is detected mute audio
+    //mute = true; //If no sound device is detected mute audio
     delay(1000);
   } 
   else {
@@ -38,7 +38,6 @@ void setup() {
     DF1201S.switchFunction(DF1201S.MUSIC); //MUSIC function
     DF1201S.setPlayMode(DF1201S.SINGLE); //Play one sound only
   }
-  playSound(1); //Play boot sound
   
 
   Serial.println("START");
