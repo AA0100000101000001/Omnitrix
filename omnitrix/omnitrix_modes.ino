@@ -9,7 +9,7 @@ void startMode() {
 		buttonState = digitalRead(buttonPin);
 
 		// check if start button is pressed. If it is then go to the next mode
-		if (buttonState == LOW) {
+		if (buttonState == HIGH) {
 
       playSound(2); //Play select sound
 
@@ -45,7 +45,7 @@ void selectAlienMode() {
     leftState = digitalRead(B);
 
     //Encoder is turned right
-    if (rightState == LOW) {
+    if (rightState == HIGH) {
 
       playSound(3); //Play move encoder forward 
 
@@ -71,7 +71,7 @@ void selectAlienMode() {
       start = rtc.getLocalEpoch();
     }
     //Encoder is turned left
-    else if (leftState == LOW) {
+    else if (leftState == HIGH) {
       
       playSound(4); //Play move encoder backwards 
 
@@ -101,7 +101,7 @@ void selectAlienMode() {
     selectbuttonState = digitalRead(SW);
 
     //If select button is pressed then go to next mode
-    if (selectbuttonState == LOW) {
+    if (selectbuttonState == HIGH) {
 
       playSound(5); //Play transformation sound
 
@@ -128,7 +128,7 @@ void selectAlienMode() {
     buttonState = digitalRead(buttonPin);
 
     // check if start button is pressed. If it is then go to the previous mode
-    if (buttonState == LOW) {
+    if (buttonState == HIGH) {
       
       playSound(4); //Play move backwards 
 
@@ -178,7 +178,7 @@ void transformedMode() {
     selectbuttonState = digitalRead(SW);
 
     //if encoder button is pressed then go to Start mode
-    if (selectbuttonState == LOW) {
+    if (selectbuttonState == HIGH) {
 
       playSound(4); //Play move backwards 
 
