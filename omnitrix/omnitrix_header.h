@@ -34,7 +34,7 @@
 ESP32Time rtc;
 
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
-#define DEEP_SLEEP_TIMER 5 // 5 sec
+#define DEEP_SLEEP_TIMER 30 //5 // 5 sec
 uint32_t start; //timer for deep sleep
 
 #define ALIEN_TRANSFORMATION_TIME_TEST 20 //10 sec
