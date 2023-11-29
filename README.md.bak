@@ -1,7 +1,9 @@
 # Omnitrix
 
 # Status
-It seems that I ran into some issues with UART. Currently investigating the problem in my board
+It seems that I ran into some issues with UART. Currently investigating the problem in my board.  
+I changed the Waveshare LCD display with the EC Buying one from Aliexpress.
+
 
 # Work in Progress
 
@@ -37,7 +39,7 @@ You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Om
 
 # Schematic:  
 ![EC Buying Display](media/Images/EC_Buying_Display.png)
-I have also made one with the [Waveshare Display]{(media/Images/Wavesgare_Display.png)
+I have also made one with the Waveshare Display in the media/Images/ folder.
 
 # Current Features:  
 - Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)

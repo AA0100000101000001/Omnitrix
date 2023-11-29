@@ -39,7 +39,7 @@ You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Om
 
 # Schematic:  
 ![EC Buying Display](media/Images/EC_Buying_Display.png)
-I have also made one with the [Waveshare Display]{(media/Images/Wavesgare_Display.png)
+I have also made one with the Waveshare Display in the /media/Images/ folder.
 
 # Current Features:  
 - Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
