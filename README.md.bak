@@ -1,7 +1,7 @@
 # Omnitrix
 
 # Status
-It seems that I ran into some issues with UART and SPI. Currently investigating the problem in my board
+It seems that I ran into some issues with UART. Currently investigating the problem in my board
 
 # Work in Progress
 
@@ -23,7 +23,7 @@ This is a work in progress and the instructions to recreate this project will ch
   
 For now you will need:  
 ESP32 Development Board - NodeMCU-32S2 module  
-Round LCD Display GC9A01  
+Round LCD Display GC9A01, I am now using the [EC Buying](https://www.aliexpress.com/item/1005004786844308.html) one  
 Fermion DFPlayer Pro  
 2X Mini Metal Speaker w/ Wires - 8 ohm 0.5W  
 2X MicroSwitch SPDT ON-(ON) - Long Lever 18mm (A,B on the Schematic)  
@@ -36,7 +36,8 @@ You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Om
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
 # Schematic:  
-![Schematic_omnitrix_2023-10-19](media/Images/Schematic_omnitrix_2023-10-19.png)
+![EC Buying Display](media/Images/EC_Buying_Display.png)
+I have also made one with the [Waveshare Display]{(media/Images/Wavesgare_Display.png)
 
 # Current Features:  
 - Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
