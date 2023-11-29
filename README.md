@@ -52,7 +52,11 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 ✅ Use Micro switches instead of Encoder  
 ✅ Power reduction code  
 ✅ Make Schematic using EasyEDA  
-☐ Power reduction code and pin rearangement for LCD display  
+☐ Find cheaper components  
+☐ Create Omnitrix graphics library for GC9A01 driver that uses SVG images  
+☐ Power reduction code and pin rearangement for LCD display   
+☐ Make rotary encoder mechanism with micro switches  
+☐ Rewrite code to use GPIO interrupts  
 ☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
 ☐ RGB LEDs  
 ☐ Increase resistance of voltage dividers  
@@ -65,11 +69,7 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 ☐ Make PCB  
 	
 # Future Plans:  
-☐ Make rotary encoder mechanism with micro switches  
 ☐ Create the rest of the mechanisms using a CAD program  
-☐ Rewrite code to use GPIO interrupts  
-☐ Create Omnitrix library for GC9A01 driver based on TFT-eSPI  
-☐ Find cheaper components  
 ☐ Add energy system  
 ☐ Secret combination input for Master Control Mode  
 ☐ Smoother animation  

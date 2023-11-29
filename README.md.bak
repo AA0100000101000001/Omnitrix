@@ -39,7 +39,7 @@ You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Om
 
 # Schematic:  
 ![EC Buying Display](media/Images/EC_Buying_Display.png)
-I have also made one with the Waveshare Display in the media/Images/ folder.
+I have also made one with the Waveshare Display in the /media/Images/ folder.
 
 # Current Features:  
 - Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
@@ -52,6 +52,8 @@ I have also made one with the Waveshare Display in the media/Images/ folder.
 ✅ Use Micro switches instead of Encoder  
 ✅ Power reduction code  
 ✅ Make Schematic using EasyEDA  
+☐ Find cheaper components  
+☐ Create Omnitrix graphics library for GC9A01 driver that uses SVG images   
 ☐ Power reduction code and pin rearangement for LCD display  
 ☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
 ☐ RGB LEDs  
@@ -68,8 +70,6 @@ I have also made one with the Waveshare Display in the media/Images/ folder.
 ☐ Make rotary encoder mechanism with micro switches  
 ☐ Create the rest of the mechanisms using a CAD program  
 ☐ Rewrite code to use GPIO interrupts  
-☐ Create Omnitrix library for GC9A01 driver based on TFT-eSPI  
-☐ Find cheaper components  
 ☐ Add energy system  
 ☐ Secret combination input for Master Control Mode  
 ☐ Smoother animation  
