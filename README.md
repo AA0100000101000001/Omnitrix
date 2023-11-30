@@ -1,9 +1,7 @@
 # Omnitrix
 
 # Status
-It seems that I ran into some issues with UART. Currently investigating the problem in my board.  
-I changed the Waveshare LCD display with the EC Buying one from Aliexpress.
-
+It seems that I ran into some issues with UART. It could be my boards fault so I am going to replace it with another one or try to make a custom one. Also I am going to re write the code using the ESP-IDF framework.  
 
 # Work in Progress
 
@@ -45,18 +43,18 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 - Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
 - Array of PNG images decoded into HEX representing the first twelve aliens  
 - Animation  
-- Sound (commented for now)  
+- Sound  
 - Ability to go into Deep Sleep Mode after a short time of inactivity  
 
 # To Do List:  
 ✅ Use Micro switches instead of Encoder  
 ✅ Power reduction code  
 ✅ Make Schematic using EasyEDA  
+☐ Rewrite code to use GPIO interrupts  
+☐ Make rotary encoder mechanism with micro switches  
 ☐ Find cheaper components  
 ☐ Create Omnitrix graphics library for GC9A01 driver that uses SVG images  
 ☐ Power reduction code and pin rearangement for LCD display   
-☐ Make rotary encoder mechanism with micro switches  
-☐ Rewrite code to use GPIO interrupts  
 ☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
 ☐ RGB LEDs  
 ☐ Increase resistance of voltage dividers  
