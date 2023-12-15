@@ -1,25 +1,24 @@
 # Omnitrix
 
 # Status
-It seems that I ran into some issues with UART. It could be my boards fault so I am going to replace it with another one or try to make a custom one. Also I am going to re write the code using the ESP-IDF framework.  
+Currently working on the software part specifically on interrupts.  
 
 # Work in Progress
 
 ![IMG_20230619_164351](media/Images/IMG_20230619_164351.jpg) 
 
 
-This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible. It uses an ESP32 Development Board - NodeMCU-32S2 module, a Round LCD Display GC9A01, a Fermion DFPlayer Pro for sound, Micro Switches implementing an encoder and a tact switch for user input.
+This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible. I started it to learn how to develop a mechatronic project using the ESP32. It uses an ESP32 Development Board - NodeMCU-32S2 module, a Round LCD Display GC9A01, a Fermion DFPlayer Pro for sound and switches for user input.
 RGB LEDs and battery are planned to be added.  
 
-Arduino IDE is used for the software part of the project but could be changed for ESP-IDF in order to use the ULP Coprocessor for better power reduction. For the graphics Bodmer's TFT_eSPI library is used and for the sound the DFRobot_DF1201S library.  
-
+I am also planning to develop an ESP-IDF framework version. See [ESP IDF Omnitrix Tests] (https://github.com/AA0100000101000001/ESP-IDF-Omnitrix-Tests) for testing the features.  
 
 Video showcasing a first test of the project with most of the features included:  
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/lkjPJR9iCuw/0.jpg)](https://www.youtube.com/watch?v=lkjPJR9iCuw)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/lkjPJR9iCuw/0.jpg)](https://www.youtube.com/watch?v=lkjPJR9iCuw) 
 
 # Instructions
-This is a work in progress and the instructions to recreate this project will change.  
+This is a work in progress and the instructions to recreate this project will change. Support for more boards will be added.  
   
 For now you will need:  
 ESP32 Development Board - NodeMCU-32S2 module  
@@ -35,6 +34,13 @@ Follow the schematic on how to connect the wires. Some soldering will be needed 
 You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
+##Suport
+- This project is developed in Arduino IDE version 2.1.1  
+- It uses the arduino-esp32 core by Espressif Systems version 2.0.14  
+- TFT_eSPI library version 2.5.34  
+- PNGdec library version 1.0.1  
+- DFRobot_DF1201S library version 1.0.2 
+
 # Schematic:  
 ![EC Buying Display](media/Images/EC_Buying_Display.png)
 I have also made one with the Waveshare Display in the /media/Images/ folder.
@@ -43,13 +49,14 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 - Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
 - Array of PNG images decoded into HEX representing the first twelve aliens  
 - Animation  
-- Sound (commented for now)  
+- Sound  
 - Ability to go into Deep Sleep Mode after a short time of inactivity  
 
 # To Do List:  
 ✅ Use Micro switches instead of Encoder  
 ✅ Power reduction code  
 ✅ Make Schematic using EasyEDA  
+☐ Add support for touch lcd  
 ☐ Rewrite code to use GPIO interrupts  
 ☐ Make rotary encoder mechanism with micro switches  
 ☐ Find cheaper components  
@@ -84,5 +91,6 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 - ☐ Sound options  
 - ☐ Option to turn off LEDs  
 - ☐ Options for Changing tranformation Time variables  
-- ☐ Option for a Demo Mode  
+- ☐ Low power mode disable/enable (ULP coprossesor use in ESP-IDF)  
+- ☐ Demo Mode disable/enable  
 - ☐ Search for Updates  
