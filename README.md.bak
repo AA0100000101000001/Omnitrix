@@ -47,7 +47,7 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 
 # Current Features:  
 - Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
-- Array of PNG images decoded into HEX representing the first twelve aliens  
+- Support of the first twelve aliens  
 - Animation  
 - Sound  
 - Ability to go into Deep Sleep Mode after a short time of inactivity  

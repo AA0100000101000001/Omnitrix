@@ -34,7 +34,7 @@ Follow the schematic on how to connect the wires. Some soldering will be needed 
 You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
-## Suport
+## Support
 - This project is developed in Arduino IDE version 2.1.1  
 - It uses the arduino-esp32 core by Espressif Systems version 2.0.14  
 - TFT_eSPI library version 2.5.34  
