@@ -18,7 +18,7 @@ Video showcasing a first test of the project with most of the features included:
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/lkjPJR9iCuw/0.jpg)](https://www.youtube.com/watch?v=lkjPJR9iCuw) 
 
 # Instructions
-This is a work in progress and the instructions to recreate this project will change. Support for more boards will be added.  
+This is a work in progress and the instructions to recreate this project will change. Support for more boards will be added  
   
 For now you will need:  
 ESP32 Development Board - NodeMCU-32S2 module  
@@ -34,7 +34,7 @@ Follow the schematic on how to connect the wires. Some soldering will be needed 
 You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
-##Suport
+## Suport
 - This project is developed in Arduino IDE version 2.1.1  
 - It uses the arduino-esp32 core by Espressif Systems version 2.0.14  
 - TFT_eSPI library version 2.5.34  
@@ -47,7 +47,7 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 
 # Current Features:  
 - Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
-- Array of PNG images decoded into HEX representing the first twelve aliens  
+- Support of the first twelve aliens  
 - Animation  
 - Sound  
 - Ability to go into Deep Sleep Mode after a short time of inactivity  
