@@ -53,7 +53,7 @@ void setup() {
   if (bootCount == 0) {
     alienNo = 0;
     mode = 1;
-    rtc.setTime(0, 0, 0, 1, 1, 2023);  // Set Time to 1st Jan 2023 00:00:00
+    RTC_setTime(0, 0, 0, 1, 1, 2023, 0);  // Set Time to 1st Jan 2023 00:00:00:00
     playSound(1); //Play boot sound
 
     //Display start screen
@@ -89,7 +89,7 @@ void setup() {
 void loop() {
   
   //reset timer
-  start = rtc.getLocalEpoch();
+  start = RTC_getLocalEpoch();
   
   //Omnitrix is in start mode
   if (mode == 1) {
@@ -123,7 +123,7 @@ void loop() {
 void check_timer() {
 
   //if the time has passed then go to deep sleep
-  if ((rtc.getLocalEpoch() - start) > DEEP_SLEEP_TIMER) {
+  if ((RTC_getLocalEpoch() - start) > DEEP_SLEEP_TIMER) {
 
     Serial.println("Going to sleep");
     //Enter Display Sleep mode
@@ -160,7 +160,7 @@ void get_wakeup_reason() {
       if (mode == 3) {
 
         //Set offset to time passed since last time the timer was checked (in sec)
-        transformation_start_time_offset = rtc.getLocalEpoch() - transformation_start_time;
+        transformation_start_time_offset = RTC_getLocalEpoch() - transformation_start_time;
 
         //Configure the wake up source to wake up every time the transfomation is done
         esp_sleep_enable_timer_wakeup(transform_time_val - transformation_start_time_offset * uS_TO_S_FACTOR);
@@ -172,7 +172,7 @@ void get_wakeup_reason() {
       else if (mode == 4) {
 
         //Set offset to time passed since last time the timer was checked (in sec)
-        recharging_start_time_offset = rtc.getLocalEpoch() - recharging_start_time;
+        recharging_start_time_offset = RTC_getLocalEpoch() - recharging_start_time;
 
         //Configure the wake up source to wake up every time the recharge is done
         esp_sleep_enable_timer_wakeup(recharge_time_val - recharging_start_time_offset * uS_TO_S_FACTOR);

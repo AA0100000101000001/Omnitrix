@@ -4,22 +4,21 @@
 #include "SPI.h"
 #include <DFRobot_DF1201S.h>
 //#include <WiFi.h>
-#include <ESP32Time.h>
 //#include <PCM.h>
 
 #include "omnitrix_aliens.h"
 #include "omnitrix_alien_backround.h"
 #include "omnitrix_anim.h"
 
-//LCD pins
+//LCD pins in User_Setup.h
 /*
-#define TFT_MOSI 35 
+#define TFT_MOSI 35 // In some display driver board, it might be written as "SDA" and so on.
 #define TFT_SCLK 36
-#define TFT_CS   34 
-#define TFT_DC   26
-#define TFT_RST  33
+#define TFT_CS   34  // Chip select control pin
+#define TFT_DC   26  // Data Command control pin
+#define TFT_RST  33  // Reset pin (could connect to Arduino RESET pin)
 
-#define TFT_BL   38
+//#define TFT_BL   38  // LED back-light
 */
 
 #define RXD1 18 //RX1
@@ -31,8 +30,6 @@
 #define ALIEN_NUMBER 11 //0...11 = 12
 
 //Time Variables
-ESP32Time rtc;
-
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
 #define DEEP_SLEEP_TIMER 5 // 5 sec
 uint32_t start; //timer for deep sleep
