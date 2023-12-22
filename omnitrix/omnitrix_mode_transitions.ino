@@ -23,9 +23,9 @@ void mode2to3() {
 
   //Start transformation timer
   //Set transformation start time to current epoch time
-  transformation_start_time = rtc.getLocalEpoch();
+  transformation_start_time = RTC_getLocalEpoch();
   //Set offset to time passed since last time the timer was checked (in sec)
-  transformation_start_time_offset = rtc.getLocalEpoch() - transformation_start_time;
+  transformation_start_time_offset = RTC_getLocalEpoch() - transformation_start_time;
 
   //Configure the wake up source to wake up every time the transfomation is done
   esp_sleep_enable_timer_wakeup(transform_time_val - transformation_start_time_offset * uS_TO_S_FACTOR);
@@ -54,9 +54,9 @@ void mode3to4() {
 
   //Start Rechargin timer
   //Set recharging start time to current epoch time
-  recharging_start_time = rtc.getLocalEpoch();
+  recharging_start_time = RTC_getLocalEpoch();
   //Set offset to time passed since last time the timer was checked (in sec)
-  recharging_start_time_offset = rtc.getLocalEpoch() - recharging_start_time;
+  recharging_start_time_offset = RTC_getLocalEpoch() - recharging_start_time;
 
   //Serial.println(recharging_start_time_offset);
   //Serial.println(recharge_time_val);
