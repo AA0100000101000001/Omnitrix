@@ -2,16 +2,34 @@
 //Start mode to Alien Selection mode
 void mode1to2() {
 
+  playSound(2); //Play select sound
+
   mode = 2;
 	Serial.println("Button pressed, select alien");
+
+  //Display animation
+  showAnimation();
+      
+	delay(600);
+
+  //Display alien
+  ShowAlien();
 
 }
 
 //Alien Selection mode to Start mode
 void mode2to1() {
+      
+  playSound(4); //Play move backwards 
 
   mode = 1;
   Serial.println("Button pressed, back to start");
+
+  delay(300);
+
+  //display start
+  tft.fillScreen(OMNITRIX_GREEN);
+  ShowSymbols();
 
 }
 
@@ -20,6 +38,18 @@ void mode2to3() {
 
   mode = 3;
   Serial.println("Tranformed into alien");
+
+  playSound(5); //Play transformation sound
+
+  //Display tranformation image
+  tft.fillScreen(OMNITRIX_GREEN);
+  delay(600);
+
+  //Display transformed state image
+  tft.fillScreen(TFT_WHITE);
+  ShowSymbols();
+
+  delay(200);
 
   //Start transformation timer
   //Set transformation start time to current epoch time
@@ -72,8 +102,15 @@ void mode3to4() {
 //Transformation mode to Start mode
 void mode3to1() {
 
+  playSound(4); //Play move backwards 
+  delay(300);
+
   mode = 1;
   Serial.println("Button pressed, untransforming and going back to Start mode");
+
+  //display start
+  tft.fillScreen(OMNITRIX_GREEN);
+  ShowSymbols();
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
