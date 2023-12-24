@@ -15,9 +15,6 @@ void transformedMode() {
     //Set offset to time passed since last time the timer was checked (in sec)
     transformation_start_time_offset = RTC_getLocalEpoch() - transformation_start_time;
   }
-
-  //Check timer for deep sleep
-  check_timer();
 }
 
 //Mode 4
@@ -36,8 +33,5 @@ void rechargeMode() {
     //Set offset to time passed since last time the timer was checked (in sec)
     recharging_start_time_offset = RTC_getLocalEpoch() - recharging_start_time;
   }
-
-  //Check timer for deep sleep
-  check_timer();
   
 }
