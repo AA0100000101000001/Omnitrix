@@ -278,8 +278,8 @@ void check_timer() {
 
     Serial.println("Going to sleep");
     //Enter Display Sleep mode
-    tft.writecommand(0x10);
-    delay(10);
+    //tft.writecommand(0x10);
+    //delay(10);
     
     esp_deep_sleep_start();
   }
