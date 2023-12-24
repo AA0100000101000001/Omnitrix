@@ -2,17 +2,68 @@
 
 #include "omnitrix_header.h"
 
+//------INTERRUPTS------------------------
+//----------------------------------------
+
+void IRAM_ATTR button_interrupt() {
+  //Debouncing
+  button_time = millis();
+  if (button_time - last_button_time > 200)
+  {
+    buttonState = true;
+    last_button_time = button_time;
+  }
+}
+
+void IRAM_ATTR Rightbutton_interrupt() {
+  //Debouncing
+  button_time = millis();
+  if (button_time - last_button_time > 200)
+  {
+    rightState = true;
+    last_button_time = button_time;
+  }
+}
+
+void IRAM_ATTR Leftbutton_interrupt() {
+  //Debouncing
+  button_time = millis();
+  if (button_time - last_button_time > 200)
+  {
+    leftState = true;
+    last_button_time = button_time;
+  }
+}
+
+void IRAM_ATTR Selectbutton_interrupt() {
+  //Debouncing
+  button_time = millis();
+  if (button_time - last_button_time > 200)
+  {
+    selectbuttonState = true;
+    last_button_time = button_time;
+  }
+}
+
+//------INTERRUPTS-END--------------------
+//----------------------------------------
+
 void setup() {
 
   Serial.begin(115200);
   delay(100);
 
-  //Pins
+  //initialize inputs and interrupts
   pinMode(buttonPin, INPUT);
-  pinMode(A, INPUT);
-  pinMode(B, INPUT);
-  pinMode(SW, INPUT);
-  //leds
+  attachInterrupt(buttonPin, button_interrupt, RISING);
+  pinMode(RightPin, INPUT);
+  attachInterrupt(RightPin, Rightbutton_interrupt, RISING);
+  pinMode(LeftPin, INPUT);
+  attachInterrupt(LeftPin, Leftbutton_interrupt, RISING);
+  pinMode(SelectPin, INPUT);
+  attachInterrupt(SelectPin, Selectbutton_interrupt, RISING);
+
+  //Init leds
   pinMode(rgb_r, OUTPUT);
   pinMode(rgb_g, OUTPUT);
   pinMode(rgb_b, OUTPUT);
@@ -64,6 +115,9 @@ void setup() {
   Serial.print("Boot number: ");
   Serial.println(bootCount);
 
+  //The omnitrix will wake up when the button is pressed
+  esp_sleep_enable_ext0_wakeup(GPIO_NUM_5,1);
+
   //Check the wakeup reason for ESP32
   get_wakeup_reason();
   //analogWrite(TFT_BL, 100);
@@ -80,42 +134,139 @@ void setup() {
     analogWrite(rgb_g, GREEN_LED_G);
     analogWrite(rgb_b, GREEN_LED_B);
   }
-
-  //The omnitrix will wake up when the button is pressed
-  esp_sleep_enable_ext0_wakeup(GPIO_NUM_5,1);
+  
+  //reset timer
+  start = RTC_getLocalEpoch();
 
 }
 
 void loop() {
   
-  //reset timer
-  start = RTC_getLocalEpoch();
-  
-  //Omnitrix is in start mode
-  if (mode == 1) {
+  if (buttonState) {
+      //Serial.printf("Button pressed\n");
+      buttonState = false;
 
-    //Go to start mode
-    startMode();
+      switch (mode) {
+        //Omnitrix is in start mode
+        case 1:
+          //Go to select alien mode
+		      mode1to2();
 
-  //Omnitrix is ready to select alien
-  } else if (mode == 2) {
-    
-    //Go to selection mode
-    selectAlienMode();
-  
-  //Alien is selected
-  } else if (mode == 3) {
+          //reset timer
+          start = RTC_getLocalEpoch();
+          break;
 
-    //Go to tranformed mode
-    transformedMode();
+        //Omnitrix is in select alien mode
+         case 2:
+          //Go to start mode
+          mode2to1();
 
-  //Omnitrix is recharging
-  } else if (mode == 4) {
-    
-    //Go to recharge mode
-    rechargeMode();
+          //reset timer
+          start = RTC_getLocalEpoch();
+          break;
+      }
+      
+    }
+    if (rightState) {
+      Serial.printf("Right Button pressed\n");
+      rightState = false;
 
-  }
+      playSound(3); //Play move encoder forward 
+
+      switch (mode) {
+        //Omnitrix is in select alien mode
+        case 2:
+          //If the next alien number is bigger than the total number of aliens
+          //then go back to first alien, else go to the next alien
+          if ((alienNo  + 1)> ALIEN_NUMBER ) {
+            alienNo = 0;
+          }
+          else {
+            alienNo += 1;
+          }
+
+          //Display green backround png to erase previous alien
+          eraseAlien();
+          //Display alien
+          ShowAlien();
+
+          Serial.print("Right, alien no:");
+          Serial.println(alienNo);
+          delay(200);
+          break;
+      }
+
+      //reset timer
+      start = RTC_getLocalEpoch();
+    }
+    if (leftState) {
+      Serial.printf("Left Button pressed\n");
+      leftState = false;
+
+      playSound(4); //Play move encoder backwards 
+
+      switch (mode) {
+        //Omnitrix is in select alien mode
+        case 2:
+          //If the next alien number is less than 0
+          //then go back to the last alien, else go to the previous alien
+          if ((alienNo - 1) < 0 ) {
+            alienNo = ALIEN_NUMBER;
+          }
+          else {
+            alienNo -= 1;
+          }
+          
+          //Erase previous alien
+          eraseAlien();
+          //Display alien
+          ShowAlien();
+
+          Serial.print("Left, alien no:");
+          Serial.println(alienNo);
+          delay(200);
+          break;
+      }
+
+      //reset timer
+      start = RTC_getLocalEpoch();
+    }
+    if (selectbuttonState) {
+      //Serial.printf("Select Button pressed\n");
+      selectbuttonState = false;
+
+      switch (mode) {
+        //Omnitrix is in select alien mode
+        case 2:
+          //Go to transformation mode
+          mode2to3();
+
+          //reset timer
+          start = RTC_getLocalEpoch();
+          break;
+
+        //Omnitrix is in transformation mode
+         case 3:
+          //Go to Start mode
+          mode3to1();
+
+          //reset timer
+          start = RTC_getLocalEpoch();
+          break;
+      }
+      Serial.print("mode ");
+      Serial.println(mode);
+
+    }
+    if (mode == 3){
+      transformedMode();
+    }
+    if (mode == 4){
+      rechargeMode();
+    }
+
+    //Check timer for deep sleep
+    check_timer();
 
 }
 
