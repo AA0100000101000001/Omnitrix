@@ -10,6 +10,17 @@
 #include "omnitrix_alien_backround.h"
 #include "omnitrix_anim.h"
 
+//Input pins
+#define buttonPin 5 //Start button
+#define RightPin 1 //Right button
+#define LeftPin 4 //Left button
+#define SelectPin 3 //Select button
+
+//Output pins
+const int rgb_r = 6;
+const int rgb_g = 7;
+const int rgb_b = 8;
+
 //LCD pins in User_Setup.h
 /*
 #define TFT_MOSI 35 // In some display driver board, it might be written as "SDA" and so on.
@@ -74,21 +85,16 @@ gray RGB: 171, 171, 171 = 0xABABAB = 0xAD55 in RGB565
 #define RED_LED_G 28
 #define RED_LED_B 34
 
-//Pins
-const int buttonPin = 5; //Start button
-const int A = 1; //Encoder right
-const int B = 4; //Encoder left
-const int SW = 3; //Encoder button
-
-const int rgb_r = 6;
-const int rgb_g = 7;
-const int rgb_b = 8;
-
 //Variables that are saved in deep sleep mode
 RTC_DATA_ATTR int bootCount = 0;
 RTC_DATA_ATTR int alienNo;
 RTC_DATA_ATTR int mode;
 
+//variables to keep track of the timing of recent interrupts
+unsigned long button_time = 0;  
+unsigned long last_button_time = 0; 
+
+//Input states
 int buttonState = 0; //State of start button
 int rightState = 0; //State of right
 int leftState = 0; //State of left
