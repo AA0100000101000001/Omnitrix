@@ -97,6 +97,9 @@ void mode3to4() {
   esp_sleep_enable_timer_wakeup(recharge_time_val - recharging_start_time_offset * uS_TO_S_FACTOR);
   Serial.println("Recharging: Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST - recharging_start_time_offset) +
   " Seconds");
+
+  //reset timer
+  start = RTC_getLocalEpoch();
 }
 
 //Transformation mode to Start mode
@@ -137,4 +140,7 @@ void mode4to1() {
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
   Serial.println("Disabled Timer2");
+  
+  //reset timer
+  start = RTC_getLocalEpoch();
 }
