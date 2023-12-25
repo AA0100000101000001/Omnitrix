@@ -1,7 +1,7 @@
 # Omnitrix
 
 # Status
-Currently working on the software part specifically on interrupts.  
+Currently working on adding support for ESP32-S3 ROUND LCD 1.28.  
 
 # Work in Progress
 
@@ -56,11 +56,11 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 ✅ Use Micro switches instead of Encoder  
 ✅ Power reduction code  
 ✅ Make Schematic using EasyEDA  
+✅ Rewrite code to use GPIO interrupts  
 ☐ Add support for touch lcd  
-☐ Rewrite code to use GPIO interrupts  
 ☐ Make rotary encoder mechanism with micro switches  
 ☐ Find cheaper components  
-☐ Create Omnitrix graphics library for GC9A01 driver that uses SVG images  
+☐ Create Omnitrix graphics library for GC9A01 driver that uses transparent images  
 ☐ Power reduction code and pin rearangement for LCD display   
 ☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
 ☐ RGB LEDs  
