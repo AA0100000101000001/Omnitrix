@@ -74,8 +74,7 @@ void mode3to4() {
   analogWrite(rgb_r, GREEN_LED_R);
   analogWrite(rgb_g, GREEN_LED_G);
   analogWrite(rgb_b, GREEN_LED_B);
-      
-  Serial.println("red screen");
+  
   //Display red screen
   tft.fillScreen(OMNITRIX_RED);
   ShowSymbols();
