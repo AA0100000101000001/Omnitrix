@@ -1,7 +1,8 @@
 # Omnitrix
 
 # Status
-Currently working on adding support for ESP32-S3 ROUND LCD 1.28.  
+| Currently working on adding support for ESP32-S3 ROUND LCD 1.28.|
+|----|  
 
 # Work in Progress
 
@@ -21,36 +22,36 @@ Video showcasing a first test of the project with most of the features included:
 This is a work in progress and the instructions to recreate this project will change. Support for more boards will be added  
   
 For now you will need:  
-ESP32 Development Board - NodeMCU-32S2 module  
-Round LCD Display GC9A01, I am now using the [EC Buying](https://www.aliexpress.com/item/1005004786844308.html) one  
-Fermion DFPlayer Pro  
-2X Mini Metal Speaker w/ Wires - 8 ohm 0.5W  
-2X MicroSwitch SPDT ON-(ON) - Long Lever 18mm (A,B on the Schematic)  
-MicroSwitch SPDT ON-(ON) - Roller Lever (SW on the Schematic)  
-Tact Switch 6x6mm 5mm (ButtonPin on the Schematic)  
-Breadboard, jumper wires, 4X 10 kohm resistor
+* ESP32 Development Board - NodeMCU-32S2 module  
+* Round LCD Display GC9A01, I am now using the [EC Buying](https://www.aliexpress.com/item/1005004786844308.html) one  
+* Fermion DFPlayer Pro  
+* 2X Mini Metal Speaker w/ Wires - 8 ohm 0.5W  
+* 2X MicroSwitch SPDT ON-(ON) - Long Lever 18mm (A,B on the Schematic)  
+* MicroSwitch SPDT ON-(ON) - Roller Lever (SW on the Schematic)  
+* Tact Switch 6x6mm 5mm (ButtonPin on the Schematic)  
+* Breadboard, jumper wires, 4X 10 kohm resistor
   
 Follow the schematic on how to connect the wires. Some soldering will be needed to connect the pin headers and the speakers to the Fermion DFPlayer Pro.  
 You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
 ## Support
-- This project is developed in Arduino IDE version 2.1.1  
-- It uses the arduino-esp32 core by Espressif Systems version 2.0.14  
-- TFT_eSPI library version 2.5.34  
-- PNGdec library version 1.0.1  
-- DFRobot_DF1201S library version 1.0.2 
+* This project is developed in Arduino IDE version 2.1.1  
+* It uses the arduino-esp32 core by Espressif Systems version 2.0.14  
+* TFT_eSPI library version 2.5.34  
+* PNGdec library version 1.0.1  
+* DFRobot_DF1201S library version 1.0.2 
 
 # Schematic:  
 ![EC Buying Display](media/Images/EC_Buying_Display.png)
 I have also made one with the Waveshare Display in the /media/Images/ folder.
 
 # Current Features:  
-- Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
-- Support of the first twelve aliens  
-- Animation  
-- Sound  
-- Ability to go into Deep Sleep Mode after a short time of inactivity  
+* Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
+* Support of the first twelve aliens  
+* Animation  
+* Sound  
+* Ability to go into Deep Sleep Mode after a short time of inactivity  
 
 # To Do List:  
 ✅ Use Micro switches instead of Encoder  
@@ -86,11 +87,11 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 ☐ Add motor to elevate display (for fun!)  
 ☐ Make Omnitrix Microcontroller based on ESP32 chip  
 ☐ Add Menu that includes:  
-- ☐ Time  
-- ☐ Battery state  
-- ☐ Sound options  
-- ☐ Option to turn off LEDs  
-- ☐ Options for Changing tranformation Time variables  
-- ☐ Low power mode disable/enable (ULP coprossesor use in ESP-IDF)  
-- ☐ Demo Mode disable/enable  
-- ☐ Search for Updates  
+* ☐ Time  
+* ☐ Battery state  
+* ☐ Sound options  
+* ☐ Option to turn off LEDs  
+* ☐ Options for Changing tranformation Time variables  
+* ☐ Low power mode disable/enable (ULP coprossesor use in ESP-IDF)  
+* ☐ Demo Mode disable/enable  
+* ☐ Search for Updates  
