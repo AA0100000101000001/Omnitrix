@@ -1,7 +1,8 @@
 # Omnitrix
 
 # Status
-Currently working on adding support for ESP32-S3 ROUND LCD 1.28.  
+| Currently working on adding support for ESP32-S3 ROUND LCD 1.28.|
+|-----------------------------------------------------------------|  
 
 # Work in Progress
 
