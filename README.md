@@ -75,15 +75,6 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 	
 # Future Plans:  
 ☐ Create the rest of the mechanisms using a CAD program  
-☐ Add Menu that includes:  
-* ☐ Time  
-* ☐ Battery state  
-* ☐ Sound options  
-* ☐ Option to turn off LEDs  
-* ☐ Options for Changing tranformation Time variables  
-* ☐ Low power mode disable/enable (ULP coprossesor use in ESP-IDF)  
-* ☐ Demo Mode disable/enable  
-* ☐ Search for Updates  
 ☐ Add energy system  
 ☐ Secret combination input for Master Control Mode  
 ☐ Smoother animation  
@@ -94,3 +85,12 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 ☐ Download additional aliens from a server  
 ☐ Add motor to elevate display (for fun!)  
 ☐ Make Omnitrix Microcontroller based on ESP32 chip  
+☐ Add Menu that includes:  
+* ☐ Time  
+* ☐ Battery state  
+* ☐ Sound options  
+* ☐ Option to turn off LEDs  
+* ☐ Options for Changing tranformation Time variables  
+* ☐ Low power mode disable/enable (ULP coprossesor use in ESP-IDF)  
+* ☐ Demo Mode disable/enable  
+* ☐ Search for Updates  
