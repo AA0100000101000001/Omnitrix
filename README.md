@@ -60,8 +60,8 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 ✅ Rewrite code to use GPIO interrupts  
 ☐ Add support for touch lcd  
 ☐ Make rotary encoder mechanism with micro switches  
-☐ Find cheaper components  
-☐ Create Omnitrix graphics library for GC9A01 driver that uses transparent images  
+☐ Find cheaper component for sound or use passive buzzer  
+☐ Create Omnitrix graphics for GC9A01 driver that uses TFT commands for animation  
 ☐ Power reduction code and pin rearangement for LCD display   
 ☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
 ☐ RGB LEDs  
