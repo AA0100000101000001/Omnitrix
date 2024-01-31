@@ -62,7 +62,8 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 ☐ Make rotary encoder mechanism with micro switches  
 ☐ RGB LEDs  
 ☐ Find cheaper component for sound or use passive buzzer  
-☐ Only enable GPIO outputs (LEDs) at the last moment  
+☐ Only enable GPIO outputs (LEDs) at the last moment 
+☐ Use multiple inputs to wake up from deep sleep (ext1)  
 ☐ Make PCB for multiple RGB LEDs  
 ☐ Test current for LED PCB  
 ☐ Make PCB that has RGB LEDs, micro switches and speaker  
