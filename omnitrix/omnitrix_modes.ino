@@ -122,7 +122,7 @@ void selectbuttonModes() {
 void transformedMode() {
 
   //Check transformation time
-  //Transformation time is done while omnitrix does not sleep
+  //Transformation time is done while omnitrix is not sleeping
   if ((RTC_getLocalEpoch() - transformation_start_time) > ALIEN_TRANSFORMATION_TIME_TEST) {
 
     //Go to next mode
@@ -140,7 +140,7 @@ void transformedMode() {
 void rechargeMode() {
 
   //Check recharging time
-  //Recharging time is done
+  //Recharging time is done while omnitrix is not sleeping
   if ((RTC_getLocalEpoch() - recharging_start_time) > OMNITRIX_RECHARGE_TIME_TEST) {
       
     //Go to first mode

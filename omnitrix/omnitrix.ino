@@ -74,11 +74,10 @@ void setup() {
   //WiFi.mode(WIFI_OFF); //Turn off WIFI
 
   //DFT sound initialise
-  //Uncomment for sound
   Serial1.begin(115200, SERIAL_8N1, RXD1, TXD1);
   //Check Connection
   if (!DF1201S.begin(Serial1)){
-    Serial.println("DFT Init failed, please check the wire connection! Muted");
+    Serial.println("DFT Init failed, Muted");
     mute = true; //If no sound device is detected mute audio
     delay(1000);
   } 
@@ -118,7 +117,7 @@ void setup() {
   //The omnitrix will wake up when the button is pressed
   esp_sleep_enable_ext0_wakeup(GPIO_NUM_5,1);
 
-  //Check the wakeup reason for ESP32
+  //Check the wakeup reason for ESP32 and operate accordingly for timers
   get_wakeup_reason();
 
   //After the wake up, turn on leds
@@ -204,7 +203,6 @@ void playSound(int16_t s) {
 
   //If mute is false then play selected sound
   if (!mute) {
-    //Uncomment for sound
     DF1201S.playFileNum(s); 
   }
 }
@@ -217,7 +215,7 @@ void get_wakeup_reason() {
   //Check wake up reason
   switch(wakeup_reason)
   {
-    //Wake up by button
+    //Wake up by button so timer is not finished if enabled
     case ESP_SLEEP_WAKEUP_EXT0 : {
 
       //Serial.println("Wakeup caused by external signal using RTC_IO"); 
