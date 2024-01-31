@@ -1,7 +1,7 @@
 # Omnitrix
 
 # Status
-| Currently working on adding support for ESP32-S3 ROUND LCD 1.28.|
+| Found a better board to use. It's [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) and it has a lot of pins usable for peripherals. Planning to add support for that.|
 |----|  
 
 # Work in Progress
@@ -58,24 +58,25 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 ✅ Power reduction code  
 ✅ Make Schematic using EasyEDA  
 ✅ Rewrite code to use GPIO interrupts  
-☐ Add support for touch lcd  
+☐ Add config file for pin selection   
 ☐ Make rotary encoder mechanism with micro switches  
+☐ RGB LEDs  
 ☐ Find cheaper component for sound or use passive buzzer  
-☐ Create Omnitrix graphics library for GC9A01 driver that uses TFT commands for animation  
+☐ Only enable GPIO outputs (LEDs) at the last moment  
+☐ Make PCB for multiple RGB LEDs  
+☐ Test current for LED PCB  
+☐ Make PCB that has RGB LEDs, micro switches and speaker  
+☐ Test LiPo battery with the board  
+☐ Reduce size and memory usage of program sketch  
+☐ Create Omnitrix graphics for GC9A01 driver that uses TFT commands for animation  
 ☐ Power reduction code and pin rearangement for LCD display   
 ☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
-☐ RGB LEDs  
 ☐ Increase resistance of voltage dividers  
-☐ Only enable GPIO outputs (LEDs) at the last moment  
-☐ Test current for LED PCB  
-☐ Make RGB LED PCB  
-☐ Reduce size and memory usage of program sketch  
-☐ Remove all Serial.println  
-☐ Conect battery with switch in 5V pin  
-☐ Make PCB  
+☐ Test operation when all Serial.println are removed  
 	
 # Future Plans:  
 ☐ Create the rest of the mechanisms using a CAD program  
+☐ Add support for touch lcd  
 ☐ Add energy system  
 ☐ Secret combination input for Master Control Mode  
 ☐ Smoother animation  
