@@ -51,7 +51,8 @@ uint32_t start; //timer for deep sleep
 #define TRANSFORMATION_TIME_DEFAULT 60 //1 min
 #define OMNITRIX_RECHARGE_TIME_DEFAULT 60 //1 min
 
-//Initialise timer variables as DEMO (in seconds). Up to 65535 seconds = 1092.25 min = 18.2 hours
+//Initialise timer variables as DEMO (in seconds)
+// Up to 65535 seconds = 1092.25 min = 18.2 hours of recharging/transformation
 uint16_t transform_time_val = TRANSFORMATION_TIME_DEMO; // Transformation Time Variable
 uint16_t recharge_time_val = OMNITRIX_RECHARGE_TIME_DEMO; // Recharging Time Variable
 
