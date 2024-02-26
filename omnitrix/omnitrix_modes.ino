@@ -67,7 +67,8 @@ void leftButtonModes() {
     case 2:
       //If the next alien number is less than 0
       //then go back to the last alien, else go to the previous alien
-      if ((alienNo - 1) < 0 ) {
+      int alien_overflow = alienNo;
+      if ((alien_overflow - 1) < 0 ) {
         alienNo = ALIEN_NUMBER;
       }
       else {
@@ -123,7 +124,7 @@ void transformedMode() {
 
   //Check transformation time
   //Transformation time is done while omnitrix is not sleeping
-  if ((RTC_getLocalEpoch() - transformation_start_time) > ALIEN_TRANSFORMATION_TIME_TEST) {
+  if ((RTC_getLocalEpoch() - transformation_start_time) > transform_time_val) {
 
     //Go to next mode
     mode3to4();
@@ -141,7 +142,7 @@ void rechargeMode() {
 
   //Check recharging time
   //Recharging time is done while omnitrix is not sleeping
-  if ((RTC_getLocalEpoch() - recharging_start_time) > OMNITRIX_RECHARGE_TIME_TEST) {
+  if ((RTC_getLocalEpoch() - recharging_start_time) > recharge_time_val) {
       
     //Go to first mode
     mode4to1();

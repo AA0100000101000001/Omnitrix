@@ -58,8 +58,8 @@ void mode2to3() {
   transformation_start_time_offset = RTC_getLocalEpoch() - transformation_start_time;
 
   //Configure the wake up source to wake up every time the transfomation is done
-  esp_sleep_enable_timer_wakeup(transform_time_val - transformation_start_time_offset * uS_TO_S_FACTOR);
-  Serial.println("Transformation: Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST - transformation_start_time_offset) +
+  esp_sleep_enable_timer_wakeup((transform_time_val - transformation_start_time_offset) * uS_TO_S_FACTOR);
+  Serial.println("Transformation: Setup ESP32 to sleep for every " + String(transform_time_val - transformation_start_time_offset) +
   " Seconds");
 
 }
@@ -71,9 +71,9 @@ void mode3to4() {
   delay(2500);
 
   //Red led colour
-  analogWrite(rgb_r, GREEN_LED_R);
-  analogWrite(rgb_g, GREEN_LED_G);
-  analogWrite(rgb_b, GREEN_LED_B);
+  analogWrite(RGB_R_PIN, GREEN_LED_R);
+  analogWrite(RGB_G_PIN, GREEN_LED_G);
+  analogWrite(RGB_B_PIN, GREEN_LED_B);
   
   //Display red screen
   tft.fillScreen(OMNITRIX_RED);
@@ -93,8 +93,8 @@ void mode3to4() {
   mode = 4;
 
   //Configure the wake up source to wake up every time the recharge is done
-  esp_sleep_enable_timer_wakeup(recharge_time_val - recharging_start_time_offset * uS_TO_S_FACTOR);
-  Serial.println("Recharging: Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST - recharging_start_time_offset) +
+  esp_sleep_enable_timer_wakeup((recharge_time_val - recharging_start_time_offset) * uS_TO_S_FACTOR);
+  Serial.println("Recharging: Setup ESP32 to sleep for every " + String(recharge_time_val - recharging_start_time_offset) +
   " Seconds");
 
   //reset timer
@@ -123,9 +123,9 @@ void mode3to1() {
 void mode4to1() {
 
   //Green led colour
-  analogWrite(rgb_r, RED_LED_R);
-  analogWrite(rgb_g, RED_LED_G);
-  analogWrite(rgb_b, RED_LED_B);
+  analogWrite(RGB_R_PIN, RED_LED_R);
+  analogWrite(RGB_G_PIN, RED_LED_G);
+  analogWrite(RGB_B_PIN, RED_LED_B);
 
   Serial.println("green screen");
   //Display green screen

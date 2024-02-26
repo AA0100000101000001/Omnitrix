@@ -64,9 +64,9 @@ void setup() {
   attachInterrupt(SelectPin, Selectbutton_interrupt, RISING);
 
   //Init leds
-  pinMode(rgb_r, OUTPUT);
-  pinMode(rgb_g, OUTPUT);
-  pinMode(rgb_b, OUTPUT);
+  pinMode(RGB_R_PIN, OUTPUT);
+  pinMode(RGB_G_PIN, OUTPUT);
+  pinMode(RGB_B_PIN, OUTPUT);
   //pinMode(TFT_BL, OUTPUT); //Screen
 
   //Reduce Power consumption
@@ -103,7 +103,7 @@ void setup() {
   if (bootCount == 0) {
     alienNo = 0;
     mode = 1;
-    RTC_setTime(0, 0, 0, 1, 1, 2023, 0);  // Set Time to 1st Jan 2023 00:00:00:00
+    RTC_setTime(0, 0, 0, 1, 1, 2023);  // Set Time to 1st Jan 2023 00:00:00
     playSound(1); //Play boot sound
 
     //Display start screen
@@ -123,14 +123,14 @@ void setup() {
   //After the wake up, turn on leds
   if (mode == 4) {
     //Green led colour
-    analogWrite(rgb_r, RED_LED_R);
-    analogWrite(rgb_g, RED_LED_G);
-    analogWrite(rgb_b, RED_LED_B);
+    analogWrite(RGB_R_PIN, RED_LED_R);
+    analogWrite(RGB_G_PIN, RED_LED_G);
+    analogWrite(RGB_B_PIN, RED_LED_B);
   } else {
     //Red led colour
-    analogWrite(rgb_r, GREEN_LED_R);
-    analogWrite(rgb_g, GREEN_LED_G);
-    analogWrite(rgb_b, GREEN_LED_B);
+    analogWrite(RGB_R_PIN, GREEN_LED_R);
+    analogWrite(RGB_G_PIN, GREEN_LED_G);
+    analogWrite(RGB_B_PIN, GREEN_LED_B);
   }
   
   //reset timer
@@ -227,8 +227,8 @@ void get_wakeup_reason() {
         transformation_start_time_offset = RTC_getLocalEpoch() - transformation_start_time;
 
         //Configure the wake up source to wake up every time the transfomation is done
-        esp_sleep_enable_timer_wakeup(transform_time_val - transformation_start_time_offset * uS_TO_S_FACTOR);
-        Serial.println("Transformation: Setup ESP32 to sleep for every " + String(ALIEN_TRANSFORMATION_TIME_TEST - transformation_start_time_offset) +
+        esp_sleep_enable_timer_wakeup((transform_time_val - transformation_start_time_offset) * uS_TO_S_FACTOR);
+        Serial.println("Transformation: Setup ESP32 to sleep for every " + String(transform_time_val - transformation_start_time_offset) +
         " Seconds");
 
       }
@@ -239,8 +239,8 @@ void get_wakeup_reason() {
         recharging_start_time_offset = RTC_getLocalEpoch() - recharging_start_time;
 
         //Configure the wake up source to wake up every time the recharge is done
-        esp_sleep_enable_timer_wakeup(recharge_time_val - recharging_start_time_offset * uS_TO_S_FACTOR);
-        Serial.println("Recharging1: Setup ESP32 to sleep for every " + String(OMNITRIX_RECHARGE_TIME_TEST - recharging_start_time_offset) +
+        esp_sleep_enable_timer_wakeup((recharge_time_val - recharging_start_time_offset) * uS_TO_S_FACTOR);
+        Serial.println("Recharging1: Setup ESP32 to sleep for every " + String(recharge_time_val - recharging_start_time_offset) +
         " Seconds");
 
       }
