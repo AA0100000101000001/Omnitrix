@@ -123,7 +123,7 @@ void transformedMode() {
 
   //Check transformation time
   //Transformation time is done while omnitrix is not sleeping
-  if ((RTC_getLocalEpoch() - transformation_start_time) > ALIEN_TRANSFORMATION_TIME_TEST) {
+  if ((RTC_getLocalEpoch() - transformation_start_time) > transform_time_val) {
 
     //Go to next mode
     mode3to4();
@@ -141,7 +141,7 @@ void rechargeMode() {
 
   //Check recharging time
   //Recharging time is done while omnitrix is not sleeping
-  if ((RTC_getLocalEpoch() - recharging_start_time) > OMNITRIX_RECHARGE_TIME_TEST) {
+  if ((RTC_getLocalEpoch() - recharging_start_time) > recharge_time_val) {
       
     //Go to first mode
     mode4to1();

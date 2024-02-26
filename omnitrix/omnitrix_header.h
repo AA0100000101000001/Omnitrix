@@ -45,20 +45,21 @@
 #define DEEP_SLEEP_TIMER 5 // 5 sec
 uint32_t start; //timer for deep sleep
 
-#define ALIEN_TRANSFORMATION_TIME_TEST 20 //10 sec
-#define OMNITRIX_RECHARGE_TIME_TEST 20 //10 sec
-#define ALIEN_TRANSFORMATION_TIME_DEFAULT 60 //1 min
+//Time definitions for demo and default mode
+#define TRANSFORMATION_TIME_DEMO 20 //20 sec
+#define OMNITRIX_RECHARGE_TIME_DEMO 20 //20 sec
+#define TRANSFORMATION_TIME_DEFAULT 60 //1 min
 #define OMNITRIX_RECHARGE_TIME_DEFAULT 60 //1 min
 
-//Convert timer variables into micro seconds
-int transform_time_val = ALIEN_TRANSFORMATION_TIME_TEST * uS_TO_S_FACTOR;
-int recharge_time_val = OMNITRIX_RECHARGE_TIME_TEST * uS_TO_S_FACTOR;
+//Initialise timer variables as DEMO (in seconds). Up to 65535 seconds = 1092.25 min = 18.2 hours
+uint16_t transform_time_val = TRANSFORMATION_TIME_DEMO; // Transformation Time Variable
+uint16_t recharge_time_val = OMNITRIX_RECHARGE_TIME_DEMO; // Recharging Time Variable
 
 //Time variables that are saved in deep sleep mode
 RTC_DATA_ATTR uint32_t transformation_start_time;
 RTC_DATA_ATTR uint32_t recharging_start_time;
-RTC_DATA_ATTR uint32_t transformation_start_time_offset;
-RTC_DATA_ATTR uint32_t recharging_start_time_offset;
+RTC_DATA_ATTR uint16_t transformation_start_time_offset;
+RTC_DATA_ATTR uint16_t recharging_start_time_offset;
 
 /* Colours
 RGB to HEX: http://www.rinkydinkelectronics.com/calc_rgb565.php

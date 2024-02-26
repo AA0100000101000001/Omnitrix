@@ -10,7 +10,7 @@ static bool overflow;
 uint32_t startTime;
 uint32_t timePassed;
 
-void RTC_setTime(int sc, int mn, int hr, int dy, int mt, int yr, int ms) {
+void RTC_setTime(int sc, int mn, int hr, int dy, int mt, int yr) { //, int ms) {
   // seconds, minute, hour, day, month, year $ microseconds(optional)
   // ie setTime(20, 34, 8, 1, 4, 2021) = 8:34:20 1/4/2021
   struct tm t = {0, 0, 0, 0, 0, 0, 0, 0, 0};      // Initalize to all 0's
@@ -21,7 +21,7 @@ void RTC_setTime(int sc, int mn, int hr, int dy, int mt, int yr, int ms) {
   t.tm_min = mn;
   t.tm_sec = sc;
   time_t timeSinceEpoch = mktime(&t);
-  setTime(timeSinceEpoch, ms);
+  //setTime(timeSinceEpoch, ms);
 }
 
 void setTime(unsigned long epoch, int ms) {
