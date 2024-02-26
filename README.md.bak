@@ -59,22 +59,27 @@ I have also made one with the Waveshare Display in the /media/Images/ folder.
 ✅ Make Schematic using EasyEDA  
 ✅ Rewrite code to use GPIO interrupts  
 ☐ Add config file for pin selection   
+☐ Add Demo mode   
+☐ Check current consumption  
+☐ Add support for ESP32-S3 Development Board   
+☐ Make PCB for ESP32-S3-LCD-1.28 1.27mm headers to 2.54mm   
+☐ Find cheaper component for sound or use passive buzzer  
 ☐ Make rotary encoder mechanism with micro switches  
 ☐ RGB LEDs  
-☐ Find cheaper component for sound or use passive buzzer  
-☐ Only enable GPIO outputs (LEDs) at the last moment 
-☐ Use multiple inputs to wake up from deep sleep (ext1)   
-☐ Make PCB for multiple RGB LEDs  
-☐ Test current for LED PCB  
-☐ Make PCB that has RGB LEDs, micro switches and speaker  
+☐ Only enable GPIO outputs (LEDs) at the last moment   
+☐ Use multiple inputs to wake up from deep sleep (ext1)  
+☐ Make PCB that has RGB LEDs, micro switches and speaker for ESP32-S3-LCD-1.28  
 ☐ Power reduction code for LCD display   
 ☐ Test LiPo battery with the board  
 ☐ Reduce size and memory usage of program sketch  
-☐ Create Omnitrix graphics for GC9A01 driver that uses library commands for animation  
 ☐ Test operation when all Serial.println are removed  
 ☐ Create the rest of the mechanisms using a CAD program  
 	
 # Future Plans:  
+☐ Create Omnitrix graphics for GC9A01 driver that uses library commands for animation  
+☐ Make PCB for multiple RGB LEDs  
+☐ Test current for LED PCB  
+☐ Make PCB that has RGB LEDs, micro switches and speaker   
 ☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
 ☐ Add support for touch lcd  
 ☐ Add energy system  
