@@ -61,7 +61,7 @@ RTC_DATA_ATTR uint32_t recharging_start_time;
 RTC_DATA_ATTR uint16_t transformation_start_time_offset;
 RTC_DATA_ATTR uint16_t recharging_start_time_offset;
 
-/* Colours
+/* LCD Colours
 RGB to HEX: http://www.rinkydinkelectronics.com/calc_rgb565.php
 HEX to RGB565: https://rgbcolorpicker.com/565
 green RGB: 160, 225, 58 = 0xA0E13A = 0xA707 in RGB565
@@ -87,19 +87,22 @@ gray RGB: 171, 171, 171 = 0xABABAB = 0xAD55 in RGB565
 #define RED_LED_B 34
 
 //Variables that are saved in deep sleep mode
-RTC_DATA_ATTR int bootCount = 0;
-RTC_DATA_ATTR int alienNo;
-RTC_DATA_ATTR int mode;
+RTC_DATA_ATTR uint16_t bootCount = 0;  // Up to 65535 reboots before overflow
+RTC_DATA_ATTR uint16_t alienNo; // Up to 65535 aliens
+RTC_DATA_ATTR byte mode; // Up to 255 modes
 
-//variables to keep track of the timing of recent interrupts
-unsigned long button_time = 0;  
-unsigned long last_button_time = 0; 
+//Variables to keep track of the timing of recent interrupts
+//This button timer uses millis() instead of Epoch so it can be smaller 
+//since it will often reset because of sleep mode.
+//Up to 18.2 hours of being awake and buttons functioning normaly
+uint16_t button_time = 0;  
+uint16_t last_button_time = 0; 
 
 //Input states
-int buttonState = 0; //State of start button
-int rightState = 0; //State of right
-int leftState = 0; //State of left
-int selectbuttonState = 0; //State of select button
+bool buttonState = 0; //State of start button
+bool rightState = 0; //State of right
+bool leftState = 0; //State of left
+bool selectbuttonState = 0; //State of select button
 
 
 //Display variables
