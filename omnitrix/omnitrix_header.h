@@ -17,9 +17,9 @@
 #define SelectPin 3 //Select button
 
 //Output pins
-const int rgb_r = 6;
-const int rgb_g = 7;
-const int rgb_b = 8;
+#define RGB_R_PIN 6
+#define RGB_G_PIN 7
+#define RGB_B_PIN 8
 
 //LCD pins in User_Setup.h
 /*

@@ -64,9 +64,9 @@ void setup() {
   attachInterrupt(SelectPin, Selectbutton_interrupt, RISING);
 
   //Init leds
-  pinMode(rgb_r, OUTPUT);
-  pinMode(rgb_g, OUTPUT);
-  pinMode(rgb_b, OUTPUT);
+  pinMode(RGB_R_PIN, OUTPUT);
+  pinMode(RGB_G_PIN, OUTPUT);
+  pinMode(RGB_B_PIN, OUTPUT);
   //pinMode(TFT_BL, OUTPUT); //Screen
 
   //Reduce Power consumption
@@ -123,14 +123,14 @@ void setup() {
   //After the wake up, turn on leds
   if (mode == 4) {
     //Green led colour
-    analogWrite(rgb_r, RED_LED_R);
-    analogWrite(rgb_g, RED_LED_G);
-    analogWrite(rgb_b, RED_LED_B);
+    analogWrite(RGB_R_PIN, RED_LED_R);
+    analogWrite(RGB_G_PIN, RED_LED_G);
+    analogWrite(RGB_B_PIN, RED_LED_B);
   } else {
     //Red led colour
-    analogWrite(rgb_r, GREEN_LED_R);
-    analogWrite(rgb_g, GREEN_LED_G);
-    analogWrite(rgb_b, GREEN_LED_B);
+    analogWrite(RGB_R_PIN, GREEN_LED_R);
+    analogWrite(RGB_G_PIN, GREEN_LED_G);
+    analogWrite(RGB_B_PIN, GREEN_LED_B);
   }
   
   //reset timer

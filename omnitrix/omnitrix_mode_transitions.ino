@@ -71,9 +71,9 @@ void mode3to4() {
   delay(2500);
 
   //Red led colour
-  analogWrite(rgb_r, GREEN_LED_R);
-  analogWrite(rgb_g, GREEN_LED_G);
-  analogWrite(rgb_b, GREEN_LED_B);
+  analogWrite(RGB_R_PIN, GREEN_LED_R);
+  analogWrite(RGB_G_PIN, GREEN_LED_G);
+  analogWrite(RGB_B_PIN, GREEN_LED_B);
   
   //Display red screen
   tft.fillScreen(OMNITRIX_RED);
@@ -123,9 +123,9 @@ void mode3to1() {
 void mode4to1() {
 
   //Green led colour
-  analogWrite(rgb_r, RED_LED_R);
-  analogWrite(rgb_g, RED_LED_G);
-  analogWrite(rgb_b, RED_LED_B);
+  analogWrite(RGB_R_PIN, RED_LED_R);
+  analogWrite(RGB_G_PIN, RED_LED_G);
+  analogWrite(RGB_B_PIN, RED_LED_B);
 
   Serial.println("green screen");
   //Display green screen
