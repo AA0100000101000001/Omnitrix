@@ -2,7 +2,9 @@
 //Start mode to Alien Selection mode
 void mode1to2() {
 
+  #if defined SOUND_ENABLED
   playSound(2); //Play select sound
+  #endif
 
   mode = 2;
 	Serial.println("Button pressed, select alien");
@@ -20,7 +22,9 @@ void mode1to2() {
 //Alien Selection mode to Start mode
 void mode2to1() {
       
+  #if defined SOUND_ENABLED
   playSound(4); //Play move backwards 
+  #endif
 
   mode = 1;
   Serial.println("Button pressed, back to start");
@@ -39,7 +43,9 @@ void mode2to3() {
   mode = 3;
   Serial.println("Tranformed into alien");
 
+  #if defined SOUND_ENABLED
   playSound(5); //Play transformation sound
+  #endif
 
   //Display tranformation image
   tft.fillScreen(OMNITRIX_GREEN);
@@ -66,14 +72,18 @@ void mode2to3() {
 
 //Transformation mode to Recharging mode
 void mode3to4() {
-      
+  
+  #if defined SOUND_ENABLED
   playSound(7); //Play detransformation sound
+  #endif
   delay(2500);
 
   //Red led colour
-  analogWrite(RGB_R_PIN, GREEN_LED_R);
-  analogWrite(RGB_G_PIN, GREEN_LED_G);
-  analogWrite(RGB_B_PIN, GREEN_LED_B);
+  #if defined RGB_LEDS_ENABLED
+    analogWrite(RGB_R_PIN, GREEN_LED_R);
+    analogWrite(RGB_G_PIN, GREEN_LED_G);
+    analogWrite(RGB_B_PIN, GREEN_LED_B);
+  #endif
   
   //Display red screen
   tft.fillScreen(OMNITRIX_RED);
@@ -104,8 +114,9 @@ void mode3to4() {
 //Transformation mode to Start mode
 void mode3to1() {
 
+  #if defined SOUND_ENABLED
   playSound(4); //Play move backwards 
-  delay(300);
+  #endif
 
   mode = 1;
   Serial.println("Button pressed, untransforming and going back to Start mode");
@@ -123,9 +134,11 @@ void mode3to1() {
 void mode4to1() {
 
   //Green led colour
+  #if defined RGB_LEDS_ENABLED
   analogWrite(RGB_R_PIN, RED_LED_R);
   analogWrite(RGB_G_PIN, RED_LED_G);
   analogWrite(RGB_B_PIN, RED_LED_B);
+  #endif
 
   Serial.println("green screen");
   //Display green screen
