@@ -4,7 +4,8 @@
 
 //Uncomment for CST816S touch driver and GC9A01 lcd display
 //#define ESP32_S3_TOUCH_LCD_1_28
-//Uncomment for no touch GC9A01 display
+//Uncomment one for use of a development board 
+//and no touch GC9A01 display
 //#define ESP32_S2_PINOUT
 
 //Uncomment for buttons

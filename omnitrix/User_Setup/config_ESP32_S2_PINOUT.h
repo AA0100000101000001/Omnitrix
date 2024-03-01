@@ -1,5 +1,5 @@
 
-//Uncomment for use of a development board 
+//Uncomment one for use of a development board 
 //and no touch GC9A01 display
 #define ESP32_S2_PINOUT
 
@@ -14,7 +14,7 @@
 
 
 //Uncomment for sound
-#define SOUND_ENABLED
+//#define SOUND_ENABLED
 
 #define CONFIG_RXD1 18
 #define CONFIG_RXD1 17
