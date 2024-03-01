@@ -53,8 +53,8 @@ uint32_t start; //timer for deep sleep
 
 //Initialise timer variables as DEMO (in seconds)
 // Up to 65535 seconds = 1092.25 min = 18.2 hours of recharging/transformation
-uint16_t transform_time_val = TRANSFORMATION_TIME_DEMO; // Transformation Time Variable
-uint16_t recharge_time_val = OMNITRIX_RECHARGE_TIME_DEMO; // Recharging Time Variable
+RTC_DATA_ATTR uint16_t transform_time_val = TRANSFORMATION_TIME_DEMO; // Transformation Time Variable
+RTC_DATA_ATTR uint16_t recharge_time_val = OMNITRIX_RECHARGE_TIME_DEMO; // Recharging Time Variable
 
 //Time variables that are saved in deep sleep mode
 RTC_DATA_ATTR uint32_t transformation_start_time;
@@ -89,21 +89,21 @@ gray RGB: 171, 171, 171 = 0xABABAB = 0xAD55 in RGB565
 
 //Variables that are saved in deep sleep mode
 RTC_DATA_ATTR uint16_t bootCount = 0;  // Up to 65535 reboots before overflow
-RTC_DATA_ATTR uint16_t alienNo; // Up to 65535 aliens
-RTC_DATA_ATTR byte mode; // Up to 255 modes
+RTC_DATA_ATTR uint8_t alienNo; // Up to 255 aliens
+RTC_DATA_ATTR uint8_t mode; // Up to 255 modes
 
 //Variables to keep track of the timing of recent interrupts
 //This button timer uses millis() instead of Epoch so it can be smaller 
 //since it will often reset because of sleep mode.
 //Up to 18.2 hours of being awake and buttons functioning normaly
-uint16_t button_time = 0;  
-uint16_t last_button_time = 0; 
+volatile uint16_t button_time = 0;  
+volatile uint16_t last_button_time = 0; 
 
 //Input states
-bool buttonState = 0; //State of start button
-bool rightState = 0; //State of right
-bool leftState = 0; //State of left
-bool selectbuttonState = 0; //State of select button
+volatile bool buttonState = 0; //State of start button
+volatile bool rightState = 0; //State of right
+volatile bool leftState = 0; //State of left
+volatile bool selectbuttonState = 0; //State of select button
 
 
 //Display variables
