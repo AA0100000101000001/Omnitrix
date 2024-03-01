@@ -37,7 +37,9 @@ Follow the schematic on how to connect the wires. Some soldering will be needed 
 
 ## Uploading The Software  
 This project uses Arduino IDE to program the Esp32 so you need to [install the ESP32 board to it](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/).   
+   
 You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/tree/main/Test%20files/Used%20For%20Final%20Project) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
+   
  Inside the User_Setup folder there are some header files for pin configuration. You can edit the config_CUSTOM.h file for your own configuration or use one of other ones. Make sure that the configuration file is included in the main header. You can also remove features by commenting the `#define X_ENABLED` definitions. `BUTTONS_ENABLED` is the only essential feature.  
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
