@@ -47,7 +47,7 @@ You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Om
 | Board | Buttons Tested | Sound Tested | RGB LEDs Tested |
 |----|----|----|----| 
 | [ESP32 Development Board - NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit) | ✅ | ✅ | |
-|----|----|----|----|  
+
 
 ## Support
 * This project is developed in Arduino IDE version 2.1.1  
