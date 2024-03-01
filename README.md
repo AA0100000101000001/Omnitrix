@@ -9,7 +9,7 @@
 ![IMG_20230619_164351](media/Images/IMG_20230619_164351.jpg) 
 
 
-This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible when it comes to using it like in the series. I started it to learn how to develop a mechatronic project using the ESP32. It started with a ESP32 Development Board - NodeMCU-32S2 module but I found out that there are other boards with an intergrated LCD module on the market that are better to use.  
+This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible when it comes to using it like in the series. I started it to learn how to develop a mechatronic project using the ESP32. It started with a ESP32 Development Board - NodeMCU-32S2 module but I found out that there are other boards with an embedded LCD module on the market that are better to use.  
 
 I am also planning to develop an ESP-IDF framework version. See the  [ESP-IDF-Omnitrix-Tests](https://github.com/AA0100000101000001/ESP-IDF-Omnitrix-Tests) repository for testing the features (On hold).  
 
@@ -21,9 +21,9 @@ Video showcasing a first test of the project with most of the features included:
 These are instructions on how to use with a Esp32 Development Board to test the code.     
   
 You will need:  
-* ESP32 Development Board with embedded PSRAM, Currently I have only tested it with [NodeMCU-32S2 module] (https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit)  
+* ESP32 Development Board with embedded PSRAM, Currently I have only tested it with [NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit)  
 * [Waveshare Round LCD Display GC9A01](https://www.waveshare.com/1.28inch-lcd-module.htm), I am using the [EC Buying](https://www.aliexpress.com/item/1005004786844308.html) one but it is not longer available  
-* [Fermion DFPlayer Pro] (https://www.dfrobot.com/product-2232.html)  
+* [Fermion DFPlayer Pro](https://www.dfrobot.com/product-2232.html)  
 * 2X Mini Metal Speaker w/ Wires - 8 ohm 0.5W  
 * 2X MicroSwitch SPDT ON-(ON) - Long Lever 18mm (A,B on the Schematic)  
 * MicroSwitch SPDT ON-(ON) - Roller Lever (SW on the Schematic)  
@@ -36,12 +36,13 @@ Follow the schematic on how to connect the wires. Some soldering will be needed 
 ![EC Buying Display](media/Images/EC_Buying_Display.png)
 
 ## Uploading The Software  
-You can check the [Omnitrix-Test-Files]https://github.com/AA0100000101000001/Omnitrix-Test-Files/tree/main/Test%20files/Used%20For%20Final%20Project) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
-This project uses Arduino IDE to program the Esp32 so you need to [install the ESP32 board to it](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/). Inside the User_Setup folder there are some header files for pin configuration. You can edit the config_CUSTOM.h file for your own configuration or use one of other ones. Make sure that the configuration file is included in the main header. You can also remove features by commenting the `#define X_ENABLED` definitions. BUTTONS_ENABLED is the only essential feature.  
+This project uses Arduino IDE to program the Esp32 so you need to [install the ESP32 board to it](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/).   
+You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/tree/main/Test%20files/Used%20For%20Final%20Project) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
+ Inside the User_Setup folder there are some header files for pin configuration. You can edit the config_CUSTOM.h file for your own configuration or use one of other ones. Make sure that the configuration file is included in the main header. You can also remove features by commenting the `#define X_ENABLED` definitions. `BUTTONS_ENABLED` is the only essential feature.  
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
 ## Tested With
-* [ESP32 Development Board - NodeMCU-32S2 module] (https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit)  
+* [ESP32 Development Board - NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit)  
 
 ## Support
 * This project is developed in Arduino IDE version 2.1.1  
