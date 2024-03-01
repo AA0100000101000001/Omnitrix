@@ -1,3 +1,6 @@
+//Used as a pin configuration setup for the TFT-eSPI library
+//Edit the X's to the next number of User_Setups
+
 #define USER_SETUP_ID X
 #define USER_SETUP_INFO "Omnitrix_Custom"
 
