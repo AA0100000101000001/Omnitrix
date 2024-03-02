@@ -27,7 +27,9 @@ void startButtonModes() {
 //Switch statement for right button modes
 void rightButtonModes() {
 
+  #if defined SOUND_ENABLED
   playSound(3); //Play move encoder forward 
+  #endif
 
   switch (mode) {
     //Omnitrix is in select alien mode
@@ -60,7 +62,9 @@ void rightButtonModes() {
 //Switch statement for left button modes
 void leftButtonModes() {
 
+  #if defined SOUND_ENABLED
   playSound(4); //Play move encoder backwards 
+  #endif
 
   switch (mode) {
     //Omnitrix is in select alien mode

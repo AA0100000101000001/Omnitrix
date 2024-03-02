@@ -4,6 +4,7 @@
 
 //------INTERRUPTS------------------------
 //----------------------------------------
+#if defined BUTTONS_ENABLED
 
 void IRAM_ATTR button_interrupt() {
   //Debouncing
@@ -45,6 +46,7 @@ void IRAM_ATTR Selectbutton_interrupt() {
   }
 }
 
+#endif
 //------INTERRUPTS-END--------------------
 //----------------------------------------
 
@@ -54,19 +56,23 @@ void setup() {
   delay(100);
 
   //initialize inputs and interrupts
-  pinMode(buttonPin, INPUT);
-  attachInterrupt(buttonPin, button_interrupt, RISING);
-  pinMode(RightPin, INPUT);
-  attachInterrupt(RightPin, Rightbutton_interrupt, RISING);
-  pinMode(LeftPin, INPUT);
-  attachInterrupt(LeftPin, Leftbutton_interrupt, RISING);
-  pinMode(SelectPin, INPUT);
-  attachInterrupt(SelectPin, Selectbutton_interrupt, RISING);
+  #if defined BUTTONS_ENABLED
+    pinMode(START_BUTTON_PIN, INPUT);
+    attachInterrupt(START_BUTTON_PIN, button_interrupt, RISING);
+    pinMode(RIGHT_BUTTON_PIN, INPUT);
+    attachInterrupt(RIGHT_BUTTON_PIN, Rightbutton_interrupt, RISING);
+    pinMode(LEFT_BUTTON_PIN, INPUT);
+    attachInterrupt(LEFT_BUTTON_PIN, Leftbutton_interrupt, RISING);
+    pinMode(SELECT_BUTTON_PIN, INPUT);
+    attachInterrupt(SELECT_BUTTON_PIN, Selectbutton_interrupt, RISING);
+  #endif
 
   //Init leds
-  pinMode(RGB_R_PIN, OUTPUT);
-  pinMode(RGB_G_PIN, OUTPUT);
-  pinMode(RGB_B_PIN, OUTPUT);
+  #if defined RGB_LEDS_ENABLED
+    pinMode(RGB_R_PIN, OUTPUT);
+    pinMode(RGB_G_PIN, OUTPUT);
+    pinMode(RGB_B_PIN, OUTPUT);
+  #endif
   //pinMode(TFT_BL, OUTPUT); //Screen
 
   //Reduce Power consumption
@@ -74,21 +80,23 @@ void setup() {
   //WiFi.mode(WIFI_OFF); //Turn off WIFI
 
   //DFT sound initialise
-  Serial1.begin(115200, SERIAL_8N1, RXD1, TXD1);
-  //Check Connection
-  if (!DF1201S.begin(Serial1)){
-    Serial.println("DFT Init failed, Muted");
-    mute = true; //If no sound device is detected mute audio
-    delay(1000);
-  } 
-  else {
-    DF1201S.setVol(10); //Volume = 10
-    DF1201S.setPrompt(true); //shut down starting tone
-    DF1201S.setLED(true); //Set DFplayer led off
-    DF1201S.switchFunction(DF1201S.MUSIC); //MUSIC function
-    DF1201S.setPlayMode(DF1201S.SINGLE); //Play one sound only
-  }
-  //playSound(1); //Play boot sound
+  #if defined SOUND_ENABLED
+    Serial1.begin(115200, SERIAL_8N1, RXD1, TXD1);
+    //Check Connection
+    if (!DF1201S.begin(Serial1)){
+      Serial.println("DFT Init failed, Muted");
+      mute = true; //If no sound device is detected mute audio
+      delay(1000);
+    } 
+    else {
+      DF1201S.setVol(10); //Volume = 10
+      DF1201S.setPrompt(true); //shut down starting tone
+      DF1201S.setLED(true); //Set DFplayer led off
+      DF1201S.switchFunction(DF1201S.MUSIC); //MUSIC function
+      DF1201S.setPlayMode(DF1201S.SINGLE); //Play one sound only
+    }
+    //playSound(1); //Play boot sound
+  #endif
   
 
   Serial.println("START");
@@ -104,7 +112,10 @@ void setup() {
     alienNo = 0;
     mode = 1;
     RTC_setTime(0, 0, 0, 1, 1, 2023);  // Set Time to 1st Jan 2023 00:00:00
-    playSound(1); //Play boot sound
+
+    #if defined SOUND_ENABLED
+      playSound(1); //Play boot sound
+    #endif
 
     //Display start screen
     tft.fillScreen(OMNITRIX_GREEN);
@@ -121,17 +132,19 @@ void setup() {
   get_wakeup_reason();
 
   //After the wake up, turn on leds
-  if (mode == 4) {
-    //Green led colour
-    analogWrite(RGB_R_PIN, RED_LED_R);
-    analogWrite(RGB_G_PIN, RED_LED_G);
-    analogWrite(RGB_B_PIN, RED_LED_B);
-  } else {
-    //Red led colour
-    analogWrite(RGB_R_PIN, GREEN_LED_R);
-    analogWrite(RGB_G_PIN, GREEN_LED_G);
-    analogWrite(RGB_B_PIN, GREEN_LED_B);
-  }
+  #if defined RGB_LEDS_ENABLED
+    if (mode == 4) {
+      //Green led colour
+      analogWrite(RGB_R_PIN, RED_LED_R);
+      analogWrite(RGB_G_PIN, RED_LED_G);
+      analogWrite(RGB_B_PIN, RED_LED_B);
+    } else {
+      //Red led colour
+      analogWrite(RGB_R_PIN, GREEN_LED_R);
+      analogWrite(RGB_G_PIN, GREEN_LED_G);
+      analogWrite(RGB_B_PIN, GREEN_LED_B);
+    }
+  #endif
   
   //reset timer
   start = RTC_getLocalEpoch();
@@ -140,6 +153,7 @@ void setup() {
 
 void loop() {
   
+  #if defined BUTTONS_ENABLED
   if (buttonState) {
       //Serial.printf("Button pressed\n");
       buttonState = false;
@@ -178,6 +192,7 @@ void loop() {
     if (mode == 4){
       rechargeMode();
     }
+    #endif
 
     //Check timer for deep sleep
     check_timer();
@@ -199,6 +214,7 @@ void check_timer() {
   }
 }
 
+#if defined SOUND_ENABLED
 void playSound(int16_t s) {
 
   //If mute is false then play selected sound
@@ -206,6 +222,7 @@ void playSound(int16_t s) {
     DF1201S.playFileNum(s); 
   }
 }
+#endif
 
 void get_wakeup_reason() {
 
