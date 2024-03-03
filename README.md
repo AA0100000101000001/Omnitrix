@@ -24,17 +24,19 @@ Video showcasing a first test of the project with most of the features included:
 |----|----|----|
 | [ESP32-S3-Touch-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-1.28) | LiPo battery charging header | Few free pins to use for peripherals |
 | | Touch Display | No Rotary Encoder |
-| [M5Dial](https://docs.m5stack.com/en/core/M5Dial)| Rotary Encoder | Not compatible with this code (Hey I should probably use this one instead) |
-| | Buzzer | Unusual connector for pins |
-| | Under-screen button| |
+| [M5Dial](https://docs.m5stack.com/en/core/M5Dial)| Rotary Encoder | Bulky size |
+| | Buzzer | Not compatible with this code (Hey I should probably use this one instead) |
+| | Under-screen button| Unusual connector for pins |
 | | Built-in charging circuit| | 
 | | Touch Display | | 
 | | Free pins to use for peripherals | |
 | | Touch Screen | | 
 | [MaTouch ESP32 Rotary](https://www.makerfabs.com/matouch-esp32-s3-rotary-ips-display-with-touch-2-1-st7701.html) | Rotary Encoder | Too big display screen for a watch |  
 | | Touch Screen | Few free pins to use for peripherals | 
-| [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) | LiPo battery charging header | No Rotary Encoder |
-| | A lot of free pins to use for peripherals | Have to make own PCB shield to use pins |
+
+| [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) | A lot of free pins to use for peripherals | No Embedded Rotary Encoder |
+| | LiPo battery charging header | Have to make own PCB shield to use pins |
+| | Can make 4 pulse Rotary Encoder | Have to learn more about electronics | 
 | | Cheap price | | 
 
 # Instructions
