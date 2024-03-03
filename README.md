@@ -9,13 +9,37 @@
 ![IMG_20230619_164351](media/Images/IMG_20230619_164351.jpg) 
 
 
-This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible when it comes to using it like in the series. I started it to learn how to develop a mechatronic project using the ESP32. It started with a ESP32 Development Board - NodeMCU-32S2 module but I found out that there are other boards with an embedded LCD module on the market that are better to use.  
-
+This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible when it comes to operating it like in the series. I started it to learn how to develop a mechatronic project using the ESP32. It started with a ESP32 Development Board - NodeMCU-32S2 module but I found out that there are other boards with an embedded LCD module on the market that are better to use. More about that on Board Comparisons.  
+  
+In [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files) repository I am documenting varius tests for the features.  
 I am also planning to develop an ESP-IDF framework version. See the  [ESP-IDF-Omnitrix-Tests](https://github.com/AA0100000101000001/ESP-IDF-Omnitrix-Tests) repository for testing the features (On hold).  
 
 Video showcasing a first test of the project with most of the features included:  
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/lkjPJR9iCuw/0.jpg)](https://www.youtube.com/watch?v=lkjPJR9iCuw) 
+
+# Board Comparisons
+
+| Board | Pros | Cons |
+|----|----|----|
+| [ESP32-S3-Touch-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-1.28) | LiPo battery charging header | Few free pins to use for peripherals |
+| | Touch Display | No Rotary Encoder |
+| [M5Dial](https://docs.m5stack.com/en/core/M5Dial)| Rotary Encoder | Bulky size |
+| | Buzzer | Can't add support to this code (Hey I should probably use this board in the future) |
+| | Under-screen button| Unusual connector for pins |
+| | Built-in charging circuit| | 
+| | Touch Display | | 
+| | Free pins to use for peripherals | |
+| | Touch Screen | | 
+| [MaTouch ESP32 Rotary](https://www.makerfabs.com/matouch-esp32-s3-rotary-ips-display-with-touch-2-1-st7701.html) | Rotary Encoder | Too big display screen for a watch |  
+| | Touch Screen | Few free pins to use for peripherals | 
+| [ZX2D10GE01R](https://www.aliexpress.us/item/3256804935405680.html) | Rotary Encoder | Too big display screen for a watch | 
+| [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) | A lot of free pins to use for peripherals | No Embedded Rotary Encoder |
+| | LiPo battery charging header | Have to make own PCB shield to use pins |
+| | Can make 4 pulse rotary encoder to be more accurate | Have to learn more about electronics | 
+| | Cheap price | | 
+  
+I decided to use ESP32-S3-LCD-1.28 for now to learn how to make PCBs and rotary encoders in hopes that the size of the final Omnitrix core can be reduced.
 
 # Instructions
 These are instructions on how to use with a Esp32 Development Board to test the code.     
