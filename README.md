@@ -73,7 +73,7 @@ You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Om
 | [ESP32 Development Board - NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit) | ✅ | ✅ | |
 
 
-## Support
+## Dependencies
 * This project is developed in Arduino IDE version 2.1.1  
 * It uses the arduino-esp32 core by Espressif Systems version 2.0.14  
 * TFT_eSPI library version 2.5.34  
