@@ -22,7 +22,10 @@ Video showcasing a first test of the project with most of the features included:
 
 | Board | Pros | Cons |
 |----|----|----|
-| [ESP32-S3-Touch-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-1.28) | LiPo charging | * Not a lot of free pins to use * No Rotary Encoder |
+| [ESP32-S3-Touch-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-1.28) | LiPo battery charging header | Not a lot of free pins to use for peripherals|
+| | Touch Display | No Rotary Encoder |
+| [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) | LiPo battery charging header | No Rotary Encoder |
+| | A lot of free pins to use for peripherals | Have to make own PCB to use pins |
 
 # Instructions
 These are instructions on how to use with a Esp32 Development Board to test the code.     
