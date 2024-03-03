@@ -24,8 +24,14 @@ Video showcasing a first test of the project with most of the features included:
 |----|----|----|
 | [ESP32-S3-Touch-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-1.28) | LiPo battery charging header | Not a lot of free pins to use for peripherals|
 | | Touch Display | No Rotary Encoder |
+| [M5Dial](https://docs.m5stack.com/en/core/M5Dial)| Has Rotary Encoder | Not compatible with this code (Hey I should probably use this one instead) |
+| | Has Buzzer| |
+| | Has under-screen button| |
+| | Built-in charging circuit| | 
+| | Touch Display | | 
+| | A lot of free pins to use for peripherals | | 
 | [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) | LiPo battery charging header | No Rotary Encoder |
-| | A lot of free pins to use for peripherals | Have to make own PCB to connect to it and use pins |
+| | A lot of free pins to use for peripherals | Have to make own PCB to connect it and use pins |
 
 # Instructions
 These are instructions on how to use with a Esp32 Development Board to test the code.     
