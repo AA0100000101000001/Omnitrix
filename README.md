@@ -33,7 +33,7 @@ Video showcasing a first test of the project with most of the features included:
 | | Touch Screen | | 
 | [MaTouch ESP32 Rotary](https://www.makerfabs.com/matouch-esp32-s3-rotary-ips-display-with-touch-2-1-st7701.html) | Rotary Encoder | Too big display screen for a watch |  
 | | Touch Screen | Few free pins to use for peripherals | 
-
+| [ZX2D10GE01R](https://www.aliexpress.us/item/3256804935405680.html) | Rotary Encoder | Too big display screen for a watch | 
 | [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) | A lot of free pins to use for peripherals | No Embedded Rotary Encoder |
 | | LiPo battery charging header | Have to make own PCB shield to use pins |
 | | Can make 4 pulse Rotary Encoder | Have to learn more about electronics | 
