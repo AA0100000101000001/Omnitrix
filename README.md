@@ -1,7 +1,7 @@
 # Omnitrix
 
 # Status
-| Found a better board to use. It's [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) and it has a lot of pins usable for peripherals. Planning to add support for that.|
+| Ordered the PCB shield for [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) and if it woks then I'll upload the production files |
 |----|  
 
 # Work in Progress
