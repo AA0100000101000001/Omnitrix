@@ -1,9 +1,9 @@
 
 
 //Choose pin configuration
-//#include "User_Setup/config_CUSTOM.h" //Use your own configuration
-#include "User_Setup/config_ESP32_S2_PINOUT.h"  //Esp32-s2 Dev Board
-//#include "User_Setup/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
+//#include "User_Setups/config_CUSTOM.h" //Use your own configuration
+#include "User_Setups/config_ESP32_S2_PINOUT.h"  //Esp32-s2 Dev Board
+//#include "User_Setups/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
 
 #include <TFT_eSPI.h>
 #include <PNGdec.h>
