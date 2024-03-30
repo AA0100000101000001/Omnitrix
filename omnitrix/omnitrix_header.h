@@ -21,7 +21,10 @@
 
 #include "omnitrix_aliens.h"
 #include "omnitrix_alien_backround.h"
+//Start animation with images
+#if defined START_ANIMATION_WITH_IMAGES
 #include "omnitrix_anim.h"
+#endif
 
 //Configure LCD pins in User_Setup.h or create your own setup in 
 //libraries/TFT_eSPI/User_Setups folder and include it in User_Setup_Select.h

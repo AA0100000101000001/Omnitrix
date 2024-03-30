@@ -6,6 +6,9 @@ int16_t ypos = 0;
 //Method that shows animation
 void showAnimation() {
 
+  //Start animation with images
+  #if defined START_ANIMATION_WITH_IMAGES
+
   int frame = 0;
   int fps = 10;
 
@@ -20,12 +23,17 @@ void showAnimation() {
     tft.endWrite();
 
   }
+  #endif
+
 }
 
 
 
 //Method that shows the symbols for select mode
 void  ShowSelectSymbols() {
+
+  //Select Symbols with image
+  #if defined START_ANIMATION_WITH_IMAGES
 
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[10], sizeof(omnitrix_anim[10]), pngDraw);
 
@@ -36,6 +44,7 @@ void  ShowSelectSymbols() {
     rc = png.decode(NULL, 0);
     tft.endWrite();
   }
+  #endif
 
 }
 
@@ -44,6 +53,9 @@ void  ShowSelectSymbols() {
 void ShowSymbols() {
 
   //Serial.println("show symbols");
+
+  //Start Symbols with image
+  #if defined START_ANIMATION_WITH_IMAGES
 
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[0], sizeof(omnitrix_anim[0]), pngDraw);
 
@@ -54,6 +66,7 @@ void ShowSymbols() {
     rc = png.decode(NULL, 0);
     tft.endWrite();
   }
+  #endif
  
 }
 
