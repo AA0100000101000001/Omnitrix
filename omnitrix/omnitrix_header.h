@@ -7,9 +7,20 @@
 #include "SPI.h"
 //#include <PCM.h>
 
+#include "omnitrix_aliens.h"
+#include "omnitrix_alien_backround.h"
+//Start animation with images
+#if defined START_ANIMATION_WITH_IMAGES
+#include "omnitrix_anim.h"
+#endif
+
 #if defined SOUND_ENABLED
 
-  bool mute = false;
+  #if defined SOUND_MUTED_IN_BOOTING
+    bool mute = true;
+  #else
+    bool mute = false;
+  #endif
 
   //DFT sound
   #if defined SOUND_DFPLAYER_PRO_ENABLED
@@ -17,13 +28,6 @@
     DFRobot_DF1201S DF1201S;
   #endif
 
-#endif
-
-#include "omnitrix_aliens.h"
-#include "omnitrix_alien_backround.h"
-//Start animation with images
-#if defined START_ANIMATION_WITH_IMAGES
-#include "omnitrix_anim.h"
 #endif
 
 //Configure LCD pins in User_Setup.h or create your own setup in 

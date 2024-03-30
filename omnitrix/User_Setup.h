@@ -17,7 +17,7 @@
 //Choose if sound will be muted in booting
 //#define SOUND_MUTED_IN_BOOTING //Only if sound is enabled
 
-//Choose if demo is enebled
+//Choose if demo is enabled //not implemented yet
 //#define DEMO_ENABLED
 //Choose only one type of demo
 //1. Demo automated display of the features that can go out of that state when a button is pressed
