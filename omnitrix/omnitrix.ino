@@ -4,7 +4,7 @@
 
 //------INTERRUPTS------------------------
 //----------------------------------------
-#if defined BUTTONS_ENABLED
+#if defined POP_UP_BUTTONS_ENABLED
 
 void IRAM_ATTR button_interrupt() {
   //Debouncing
@@ -15,6 +15,20 @@ void IRAM_ATTR button_interrupt() {
     last_button_time = button_time;
   }
 }
+
+void IRAM_ATTR Selectbutton_interrupt() {
+  //Debouncing
+  button_time = millis();
+  if (button_time - last_button_time > 200)
+  {
+    selectbuttonState = true;
+    last_button_time = button_time;
+  }
+}
+
+#endif
+
+#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
 
 void IRAM_ATTR Rightbutton_interrupt() {
   //Debouncing
@@ -36,16 +50,6 @@ void IRAM_ATTR Leftbutton_interrupt() {
   }
 }
 
-void IRAM_ATTR Selectbutton_interrupt() {
-  //Debouncing
-  button_time = millis();
-  if (button_time - last_button_time > 200)
-  {
-    selectbuttonState = true;
-    last_button_time = button_time;
-  }
-}
-
 #endif
 //------INTERRUPTS-END--------------------
 //----------------------------------------
@@ -56,15 +60,17 @@ void setup() {
   delay(100);
 
   //initialize inputs and interrupts
-  #if defined BUTTONS_ENABLED
+  #if defined POP_UP_BUTTONS_ENABLED
     pinMode(START_BUTTON_PIN, INPUT);
     attachInterrupt(START_BUTTON_PIN, button_interrupt, RISING);
+    pinMode(SELECT_BUTTON_PIN, INPUT);
+    attachInterrupt(SELECT_BUTTON_PIN, Selectbutton_interrupt, RISING);
+  #endif
+  #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
     pinMode(RIGHT_BUTTON_PIN, INPUT);
     attachInterrupt(RIGHT_BUTTON_PIN, Rightbutton_interrupt, RISING);
     pinMode(LEFT_BUTTON_PIN, INPUT);
     attachInterrupt(LEFT_BUTTON_PIN, Leftbutton_interrupt, RISING);
-    pinMode(SELECT_BUTTON_PIN, INPUT);
-    attachInterrupt(SELECT_BUTTON_PIN, Selectbutton_interrupt, RISING);
   #endif
 
   //Init leds
@@ -153,7 +159,7 @@ void setup() {
 
 void loop() {
   
-  #if defined BUTTONS_ENABLED
+  #if defined POP_UP_BUTTONS_ENABLED
   if (buttonState) {
       //Serial.printf("Button pressed\n");
       buttonState = false;
@@ -161,41 +167,44 @@ void loop() {
       //Check mode for start button
       startButtonModes();
       
-    }
-    if (rightState) {
-      Serial.printf("Right Button pressed\n");
-      rightState = false;
+  }
+  if (selectbuttonState) {
+    //Serial.printf("Select Button pressed\n");
+    selectbuttonState = false;
 
-      //Check mode for right button
-      rightButtonModes();
+    //Check mode for select button
+    selectbuttonModes();
 
-    }
-    if (leftState) {
-      Serial.printf("Left Button pressed\n");
-      leftState = false;
+  }
+  #endif
+  #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
+  if (rightState) {
+    Serial.printf("Right Button pressed\n");
+    rightState = false;
 
-      //Check mode for left button
-      leftButtonModes();
+    //Check mode for right button
+    rightButtonModes();
 
-    }
-    if (selectbuttonState) {
-      //Serial.printf("Select Button pressed\n");
-      selectbuttonState = false;
+  }
+  if (leftState) {
+    Serial.printf("Left Button pressed\n");
+    leftState = false;
 
-      //Check mode for select button
-      selectbuttonModes();
+    //Check mode for left button
+    leftButtonModes();
 
-    }
-    if (mode == 3){
-      transformedMode();
-    }
-    if (mode == 4){
-      rechargeMode();
-    }
-    #endif
+  }
+  #endif
+  if (mode == 3){
+    transformedMode();
+  }
+  if (mode == 4){
+    rechargeMode();
+  }
+  
 
-    //Check timer for deep sleep
-    check_timer();
+  //Check timer for deep sleep
+  check_timer();
 
 }
 
