@@ -1,42 +1,33 @@
 
-
-//Choose pin configuration
-//#include "User_Setup/config_CUSTOM.h" //Use your own configuration
-#include "User_Setup/config_ESP32_S2_PINOUT.h"  //Esp32-s2 Dev Board
-//#include "User_Setup/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
+//Pin configuration and software settings
+#include "User_Setup.h"
 
 #include <TFT_eSPI.h>
 #include <PNGdec.h>
 #include "SPI.h"
 //#include <PCM.h>
 
-#if defined SOUND_ENABLED
-#include <DFRobot_DF1201S.h>
-#endif
-
 #include "omnitrix_aliens.h"
 #include "omnitrix_alien_backround.h"
+//Start animation with images
+#if defined START_ANIMATION_WITH_IMAGES
 #include "omnitrix_anim.h"
-
-//Input pins
-#if defined BUTTONS_ENABLED
-  #define START_BUTTON_PIN CONFIG_START_BUTTON_PIN //Start button
-  #define RIGHT_BUTTON_PIN CONFIG_RIGHT_BUTTON_PIN //Right button
-  #define LEFT_BUTTON_PIN CONFIG_LEFT_BUTTON_PIN //Left button
-  #define SELECT_BUTTON_PIN CONFIG_SELECT_BUTTON_PIN //Select button
 #endif
 
-//LED pins
-#if defined RGB_LEDS_ENABLED
-  #define RGB_R_PIN CONFIG_RGB_LED_R //Red
-  #define RGB_G_PIN CONFIG_RGB_LED_G //Green
-  #define RGB_B_PIN CONFIG_RGB_LED_B //Blue
-#endif
-
-//Sound pins
 #if defined SOUND_ENABLED
-  #define RXD1 CONFIG_RXD1 //RX1
-  #define TXD1 CONFIG_RXD1 //TX1
+
+  #if defined SOUND_MUTED_IN_BOOTING
+    bool mute = true;
+  #else
+    bool mute = false;
+  #endif
+
+  //DFT sound
+  #if defined SOUND_DFPLAYER_PRO_ENABLED
+    #include <DFRobot_DF1201S.h>
+    DFRobot_DF1201S DF1201S;
+  #endif
+
 #endif
 
 //Configure LCD pins in User_Setup.h or create your own setup in 
@@ -95,19 +86,22 @@ gray RGB: 171, 171, 171 = 0xABABAB = 0xAD55 in RGB565
 #define OMNITRIX_RED 0xC000
 #define OMNITRIX_GRAY 0xAD55
 
+//LED colours
+#if defined LEDS_ENABLED
 #define GREEN_LED_R 168
 #define GREEN_LED_G 226
 #define GREEN_LED_B 88
 #define RED_LED_R 229
 #define RED_LED_G 28
 #define RED_LED_B 34
+#endif
 
 //Variables that are saved in deep sleep mode
 RTC_DATA_ATTR uint16_t bootCount = 0;  // Up to 65535 reboots before overflow
 RTC_DATA_ATTR uint8_t alienNo; // Up to 255 aliens
 RTC_DATA_ATTR uint8_t mode; // Up to 255 modes
 
-#if defined BUTTONS_ENABLED
+#if defined POP_UP_BUTTONS_ENABLED
 //Variables to keep track of the timing of recent interrupts
 //This button timer uses millis() instead of Epoch so it can be smaller 
 //since it will often reset because of sleep mode.
@@ -117,9 +111,14 @@ volatile uint16_t last_button_time = 0;
 
 //Input states
 volatile bool buttonState = 0; //State of start button
+volatile bool selectbuttonState = 0; //State of select button
+#endif
+
+#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
+//Similar with pop up buttons, use of interrupts
+//Input states
 volatile bool rightState = 0; //State of right
 volatile bool leftState = 0; //State of left
-volatile bool selectbuttonState = 0; //State of select button
 #endif
 
 
@@ -127,12 +126,6 @@ volatile bool selectbuttonState = 0; //State of select button
 PNG png; // PNG decoder instance
 
 TFT_eSPI tft = TFT_eSPI();
-
-//DFT sound
-#if defined SOUND_ENABLED
-  DFRobot_DF1201S DF1201S;
-  bool mute = false;
-#endif
 
 void ShowSymbols();
 void ShowAlien();

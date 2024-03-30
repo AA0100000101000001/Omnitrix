@@ -4,7 +4,7 @@
 
 //------INTERRUPTS------------------------
 //----------------------------------------
-#if defined BUTTONS_ENABLED
+#if defined POP_UP_BUTTONS_ENABLED
 
 void IRAM_ATTR button_interrupt() {
   //Debouncing
@@ -15,6 +15,20 @@ void IRAM_ATTR button_interrupt() {
     last_button_time = button_time;
   }
 }
+
+void IRAM_ATTR Selectbutton_interrupt() {
+  //Debouncing
+  button_time = millis();
+  if (button_time - last_button_time > 200)
+  {
+    selectbuttonState = true;
+    last_button_time = button_time;
+  }
+}
+
+#endif
+
+#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
 
 void IRAM_ATTR Rightbutton_interrupt() {
   //Debouncing
@@ -36,16 +50,6 @@ void IRAM_ATTR Leftbutton_interrupt() {
   }
 }
 
-void IRAM_ATTR Selectbutton_interrupt() {
-  //Debouncing
-  button_time = millis();
-  if (button_time - last_button_time > 200)
-  {
-    selectbuttonState = true;
-    last_button_time = button_time;
-  }
-}
-
 #endif
 //------INTERRUPTS-END--------------------
 //----------------------------------------
@@ -56,22 +60,29 @@ void setup() {
   delay(100);
 
   //initialize inputs and interrupts
-  #if defined BUTTONS_ENABLED
+  #if defined POP_UP_BUTTONS_ENABLED
     pinMode(START_BUTTON_PIN, INPUT);
     attachInterrupt(START_BUTTON_PIN, button_interrupt, RISING);
+    pinMode(SELECT_BUTTON_PIN, INPUT);
+    attachInterrupt(SELECT_BUTTON_PIN, Selectbutton_interrupt, RISING);
+  #endif
+  #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
     pinMode(RIGHT_BUTTON_PIN, INPUT);
     attachInterrupt(RIGHT_BUTTON_PIN, Rightbutton_interrupt, RISING);
     pinMode(LEFT_BUTTON_PIN, INPUT);
     attachInterrupt(LEFT_BUTTON_PIN, Leftbutton_interrupt, RISING);
-    pinMode(SELECT_BUTTON_PIN, INPUT);
-    attachInterrupt(SELECT_BUTTON_PIN, Selectbutton_interrupt, RISING);
   #endif
 
   //Init leds
   #if defined RGB_LEDS_ENABLED
-    pinMode(RGB_R_PIN, OUTPUT);
-    pinMode(RGB_G_PIN, OUTPUT);
-    pinMode(RGB_B_PIN, OUTPUT);
+
+    //Use of three pin RGB LEDS
+    #if defined RGB_LEDS_ENABLED
+      pinMode(RGB_R_PIN, OUTPUT);
+      pinMode(RGB_G_PIN, OUTPUT);
+      pinMode(RGB_B_PIN, OUTPUT);
+    #endif
+
   #endif
   //pinMode(TFT_BL, OUTPUT); //Screen
 
@@ -79,23 +90,27 @@ void setup() {
   setCpuFrequencyMhz(80); //Reduce CPU Freq
   //WiFi.mode(WIFI_OFF); //Turn off WIFI
 
-  //DFT sound initialise
+  //Sound initialization
   #if defined SOUND_ENABLED
-    Serial1.begin(115200, SERIAL_8N1, RXD1, TXD1);
-    //Check Connection
-    if (!DF1201S.begin(Serial1)){
-      Serial.println("DFT Init failed, Muted");
-      mute = true; //If no sound device is detected mute audio
-      delay(1000);
-    } 
-    else {
-      DF1201S.setVol(10); //Volume = 10
-      DF1201S.setPrompt(true); //shut down starting tone
-      DF1201S.setLED(true); //Set DFplayer led off
-      DF1201S.switchFunction(DF1201S.MUSIC); //MUSIC function
-      DF1201S.setPlayMode(DF1201S.SINGLE); //Play one sound only
-    }
-    //playSound(1); //Play boot sound
+    //DFT sound initialise
+    #if defined SOUND_DFPLAYER_PRO_ENABLED
+      Serial1.begin(115200, SERIAL_8N1, RXD1, TXD1);
+      //Check Connection
+      if (!DF1201S.begin(Serial1)){
+        Serial.println("DFT Init failed, Muted");
+        mute = true; //If no sound device is detected mute audio
+        delay(1000);
+      } 
+      else {
+        DF1201S.setVol(10); //Volume = 10
+        DF1201S.setPrompt(true); //shut down starting tone
+        DF1201S.setLED(true); //Set DFplayer led off
+        DF1201S.switchFunction(DF1201S.MUSIC); //MUSIC function
+        DF1201S.setPlayMode(DF1201S.SINGLE); //Play one sound only
+      }
+      //playSound(1); //Play boot sound
+    #endif
+
   #endif
   
 
@@ -153,7 +168,7 @@ void setup() {
 
 void loop() {
   
-  #if defined BUTTONS_ENABLED
+  #if defined POP_UP_BUTTONS_ENABLED
   if (buttonState) {
       //Serial.printf("Button pressed\n");
       buttonState = false;
@@ -161,41 +176,46 @@ void loop() {
       //Check mode for start button
       startButtonModes();
       
-    }
-    if (rightState) {
-      Serial.printf("Right Button pressed\n");
-      rightState = false;
+  }
+  if (selectbuttonState) {
+    //Serial.printf("Select Button pressed\n");
+    selectbuttonState = false;
 
-      //Check mode for right button
-      rightButtonModes();
+    //Check mode for select button
+    selectbuttonModes();
 
-    }
-    if (leftState) {
-      Serial.printf("Left Button pressed\n");
-      leftState = false;
+  }
+  #endif
+  //Use of micro swithes for rotary encoder
+  #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
+  if (rightState) {
+    Serial.printf("Right Button pressed\n");
+    rightState = false;
 
-      //Check mode for left button
-      leftButtonModes();
+    //Check mode for right button
+    rightButtonModes();
 
-    }
-    if (selectbuttonState) {
-      //Serial.printf("Select Button pressed\n");
-      selectbuttonState = false;
+  }
+  if (leftState) {
+    Serial.printf("Left Button pressed\n");
+    leftState = false;
 
-      //Check mode for select button
-      selectbuttonModes();
+    //Check mode for left button
+    leftButtonModes();
 
-    }
-    if (mode == 3){
-      transformedMode();
-    }
-    if (mode == 4){
-      rechargeMode();
-    }
-    #endif
+  }
+  #endif
 
-    //Check timer for deep sleep
-    check_timer();
+  if (mode == 3){
+    transformedMode();
+  }
+  if (mode == 4){
+    rechargeMode();
+  }
+  
+
+  //Check timer for deep sleep
+  check_timer();
 
 }
 
@@ -219,7 +239,11 @@ void playSound(int16_t s) {
 
   //If mute is false then play selected sound
   if (!mute) {
+
+    //DFT sound
+    #if defined SOUND_DFPLAYER_PRO_ENABLED
     DF1201S.playFileNum(s); 
+    #endif
   }
 }
 #endif
