@@ -110,7 +110,7 @@ void setup() {
       }
       //playSound(1); //Play boot sound
     #endif
-    
+
   #endif
   
 
@@ -186,6 +186,7 @@ void loop() {
 
   }
   #endif
+  //Use of micro swithes for rotary encoder
   #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
   if (rightState) {
     Serial.printf("Right Button pressed\n");
