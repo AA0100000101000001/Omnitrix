@@ -75,9 +75,14 @@ void setup() {
 
   //Init leds
   #if defined RGB_LEDS_ENABLED
-    pinMode(RGB_R_PIN, OUTPUT);
-    pinMode(RGB_G_PIN, OUTPUT);
-    pinMode(RGB_B_PIN, OUTPUT);
+
+    //Use of three pin RGB LEDS
+    #if defined RGB_LEDS_ENABLED
+      pinMode(RGB_R_PIN, OUTPUT);
+      pinMode(RGB_G_PIN, OUTPUT);
+      pinMode(RGB_B_PIN, OUTPUT);
+    #endif
+
   #endif
   //pinMode(TFT_BL, OUTPUT); //Screen
 
@@ -86,23 +91,26 @@ void setup() {
   //WiFi.mode(WIFI_OFF); //Turn off WIFI
 
   //Sound initialization
-  //DFT sound initialise
-  #if defined SOUND_DFPLAYER_PRO_ENABLED
-    Serial1.begin(115200, SERIAL_8N1, RXD1, TXD1);
-    //Check Connection
-    if (!DF1201S.begin(Serial1)){
-      Serial.println("DFT Init failed, Muted");
-      mute = true; //If no sound device is detected mute audio
-      delay(1000);
-    } 
-    else {
-      DF1201S.setVol(10); //Volume = 10
-      DF1201S.setPrompt(true); //shut down starting tone
-      DF1201S.setLED(true); //Set DFplayer led off
-      DF1201S.switchFunction(DF1201S.MUSIC); //MUSIC function
-      DF1201S.setPlayMode(DF1201S.SINGLE); //Play one sound only
-    }
-    //playSound(1); //Play boot sound
+  #if defined SOUND_ENABLED
+    //DFT sound initialise
+    #if defined SOUND_DFPLAYER_PRO_ENABLED
+      Serial1.begin(115200, SERIAL_8N1, RXD1, TXD1);
+      //Check Connection
+      if (!DF1201S.begin(Serial1)){
+        Serial.println("DFT Init failed, Muted");
+        mute = true; //If no sound device is detected mute audio
+        delay(1000);
+      } 
+      else {
+        DF1201S.setVol(10); //Volume = 10
+        DF1201S.setPrompt(true); //shut down starting tone
+        DF1201S.setLED(true); //Set DFplayer led off
+        DF1201S.switchFunction(DF1201S.MUSIC); //MUSIC function
+        DF1201S.setPlayMode(DF1201S.SINGLE); //Play one sound only
+      }
+      //playSound(1); //Play boot sound
+    #endif
+    
   #endif
   
 

@@ -89,9 +89,9 @@
   //RGB LEDs are enabled
   #if (defined(RGB_LEDS_ENABLED) && !defined(NEOPIXEL_RING_LEDS_ENABLED) && !defined(IR_CONTROLLED_LEDS_ENABLED))
 
-    #define RGB_LED_R CONFIG_RGB_LED_R //Red
-    #define RGB_LED_G CONFIG_RGB_LED_G //Green
-    #define RGB_LED_B CONFIG_RGB_LED_B //Blue
+    #define RGB_R_PIN CONFIG_RGB_LED_R //Red
+    #define RGB_G_PIN CONFIG_RGB_LED_G //Green
+    #define RGB_B_PIN CONFIG_RGB_LED_B //Blue
 
   //Neopixel ring LEDs are enabled
   #elif (!defined(RGB_LEDS_ENABLED) && defined(NEOPIXEL_RING_LEDS_ENABLED) && !defined(IR_CONTROLLED_LEDS_ENABLED))

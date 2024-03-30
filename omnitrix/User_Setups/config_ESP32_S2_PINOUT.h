@@ -40,10 +40,10 @@
 
 
 //Uncomment for LEDs
-//#define LEDS_ENABLED
+#define LEDS_ENABLED
 
 //Uncomment for RGB LEDS
-//#define RGB_LEDS_ENABLED
+#define RGB_LEDS_ENABLED
 
 //1. Define RGB LED pins
 #define CONFIG_RGB_LED_R 6

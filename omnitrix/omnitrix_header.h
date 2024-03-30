@@ -79,12 +79,15 @@ gray RGB: 171, 171, 171 = 0xABABAB = 0xAD55 in RGB565
 #define OMNITRIX_RED 0xC000
 #define OMNITRIX_GRAY 0xAD55
 
+//LED colours
+#if defined LEDS_ENABLED
 #define GREEN_LED_R 168
 #define GREEN_LED_G 226
 #define GREEN_LED_B 88
 #define RED_LED_R 229
 #define RED_LED_G 28
 #define RED_LED_B 34
+#endif
 
 //Variables that are saved in deep sleep mode
 RTC_DATA_ATTR uint16_t bootCount = 0;  // Up to 65535 reboots before overflow
