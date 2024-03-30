@@ -85,8 +85,9 @@ void setup() {
   setCpuFrequencyMhz(80); //Reduce CPU Freq
   //WiFi.mode(WIFI_OFF); //Turn off WIFI
 
+  //Sound initialization
   //DFT sound initialise
-  #if defined SOUND_ENABLED
+  #if defined SOUND_DFPLAYER_PRO_ENABLED
     Serial1.begin(115200, SERIAL_8N1, RXD1, TXD1);
     //Check Connection
     if (!DF1201S.begin(Serial1)){
@@ -195,6 +196,7 @@ void loop() {
 
   }
   #endif
+
   if (mode == 3){
     transformedMode();
   }
@@ -228,7 +230,11 @@ void playSound(int16_t s) {
 
   //If mute is false then play selected sound
   if (!mute) {
+
+    //DFT sound
+    #if defined SOUND_DFPLAYER_PRO_ENABLED
     DF1201S.playFileNum(s); 
+    #endif
   }
 }
 #endif

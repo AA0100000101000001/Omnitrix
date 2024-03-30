@@ -22,11 +22,11 @@
 
 
 //Uncomment for sound
-//#define SOUND_ENABLED
+#define SOUND_ENABLED
 
 //Use one of these options for sound
 //1. Uncomment for use of Dfplayer Pro for sound
-//#define SOUND_DFPLAYER_PRO_ENABLED
+#define SOUND_DFPLAYER_PRO_ENABLED
 
 //Dfplayer Pro pins
 #define CONFIG_RXD1 18

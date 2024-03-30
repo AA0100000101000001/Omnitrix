@@ -8,7 +8,15 @@
 //#include <PCM.h>
 
 #if defined SOUND_ENABLED
-#include <DFRobot_DF1201S.h>
+
+  bool mute = false;
+
+  //DFT sound
+  #if defined SOUND_DFPLAYER_PRO_ENABLED
+    #include <DFRobot_DF1201S.h>
+    DFRobot_DF1201S DF1201S;
+  #endif
+
 #endif
 
 #include "omnitrix_aliens.h"
@@ -108,12 +116,6 @@ volatile bool leftState = 0; //State of left
 PNG png; // PNG decoder instance
 
 TFT_eSPI tft = TFT_eSPI();
-
-//DFT sound
-#if defined SOUND_ENABLED
-  DFRobot_DF1201S DF1201S;
-  bool mute = false;
-#endif
 
 void ShowSymbols();
 void ShowAlien();
