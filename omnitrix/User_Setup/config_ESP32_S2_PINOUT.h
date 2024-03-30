@@ -14,7 +14,7 @@
 
 
 //Uncomment for sound
-//#define SOUND_ENABLED
+#define SOUND_ENABLED
 
 #define CONFIG_RXD1 18
 #define CONFIG_RXD1 17

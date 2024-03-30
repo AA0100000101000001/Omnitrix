@@ -10,9 +10,9 @@
 #include "SPI.h"
 //#include <PCM.h>
 
-//#if defined SOUND_ENABLED
-#include <DFRobot_DF1201S.h>
-//#endif
+#if defined SOUND_ENABLED
+#include "DFRobot_DF1201S_Custom.h"
+#endif
 
 #include "omnitrix_aliens.h"
 #include "omnitrix_alien_backround.h"
