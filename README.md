@@ -64,16 +64,16 @@ This project uses Arduino IDE to program the Esp32 so you need to [install the E
    
 You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/tree/main/Test%20files/Used%20For%20Final%20Project) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
 
-### User_Setup.h 
- Inside the User_Setup folder there are some header files for the pin configuration of non LCD Display parts. You can edit the config_CUSTOM.h file for your own configuration or use one of other ones. In this file you can configure certain features such as what kind of rotary encoder is being used, if sound is enabled and how it is implemented and if LEDs are enabled and how they are implemented. Right now the configurations that are supported are: micro switches for rotary encoder, DFPLAYER_PRO for sound and three pin RGB LEDs.   
-Make sure that the pin configuration file is included in `User_Setup.h`. You can also remove features by commenting the `#define X_ENABLED` definitions. `POP_UP_BUTTONS_ENABLED` and one option for rotary encoder are the only essential features.   
+### User Setup
+ Inside the User_Setup folder there are some header files for the pin configuration of non LCD Display parts. You can edit the config_CUSTOM.h file for your own configuration or use one of other ones. In this file you can configure certain features such as what kind of rotary encoder is being used, if sound is enabled and how it is implemented and if LEDs are enabled and how they are implemented. Right now the configurations that are supported are: micro switches for rotary encoder, DFPLAYER_PRO for sound and three pin RGB LEDs. You can also remove features by commenting the `#define X_ENABLED` definitions. `POP_UP_BUTTONS_ENABLED` and one option for rotary encoder are the only essential features.      
+Make sure that the pin configuration file is included in `User_Setup.h`. In this file you can also configure some software settings. Like what king of animation is being used, if sound will be muted in booting and if demo mode will be enabled (it is not supported right now). The only essential setting is one option for the animation.
 
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
 ## Tested With
-| Board | Buttons Tested | Sound Tested | RGB LEDs Tested |
-|----|----|----|----| 
-| [ESP32 Development Board - NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit) | ✅ | ✅ | |
+| Board | Micro Switch Rotary Encoder | Magnetic Rotary Encoder | DFPlayer_Pro Sound | Buzzer Sound | RGB LEDs Tested | Neopixel Ring |
+|----|----|----|----|----|----|----| 
+| [ESP32 Development Board - NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit) | ✅ | | ✅ | | | |
 
 
 ## Dependencies
