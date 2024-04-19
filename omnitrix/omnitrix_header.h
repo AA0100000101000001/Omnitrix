@@ -52,8 +52,8 @@
 uint32_t start; //timer for deep sleep
 
 //Time definitions for demo and default mode
-#define TRANSFORMATION_TIME_DEMO 20 //20 sec
-#define OMNITRIX_RECHARGE_TIME_DEMO 20 //20 sec
+#define TRANSFORMATION_TIME_DEMO 10 //20 sec
+#define OMNITRIX_RECHARGE_TIME_DEMO 10 //20 sec
 #define TRANSFORMATION_TIME_DEFAULT 60 //1 min
 #define OMNITRIX_RECHARGE_TIME_DEFAULT 60 //1 min
 
