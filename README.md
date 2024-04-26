@@ -73,9 +73,9 @@ For software settings you can configure what kind of animation is being used, if
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
 ## Tested With
-| Board | Micro Switch Rotary Encoder | Magnetic Rotary Encoder | DFPlayer_Pro Sound | Buzzer Sound | RGB LEDs Tested | Neopixel Ring |
-|----|----|----|----|----|----|----| 
-| [ESP32 Development Board - NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit) | ✅ | | ✅ | | | |
+| Board | Micro Switches as Rotary Encoder | Rotary Encoder | Magnetic Rotary Encoder | DFPlayer_Pro Sound | Buzzer Sound | RGB LEDs Tested | Neopixel Ring |
+|----|----|----|----|----|----|----|----| 
+| [ESP32 Development Board - NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit) | ✅ | ✅ | | ✅ | | | |
 
 
 ## Dependencies
@@ -86,6 +86,7 @@ For software settings you can configure what kind of animation is being used, if
 * DFRobot_DF1201S library version 1.0.2 
 
 # Current Features:  
+* Settings for testing different hardware
 * Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
 * Support of the first twelve aliens  
 * Animation  
@@ -93,50 +94,50 @@ For software settings you can configure what kind of animation is being used, if
 * Ability to go into Deep Sleep Mode after a short time of inactivity  
 
 # To Do List:  
-✅ Use Micro switches instead of Encoder  
-✅ Power reduction code  
-✅ Make Schematic using EasyEDA  
-✅ Rewrite code to use GPIO interrupts  
-✅ Add config file for pin selection   
-☐ Add Default Demo mode   
-☐ Check current consumption  
-☐ Add support for ESP32-S3 Development Board   
-☐ Make PCB for ESP32-S3-LCD-1.28 1.27mm headers to 2.54mm   
-☐ Find cheaper component for sound or use passive buzzer  
-☐ Make rotary encoder mechanism with micro switches  
-☐ RGB LEDs  
-☐ Only enable GPIO outputs (LEDs) at the last moment   
-☐ Use multiple inputs to wake up from deep sleep (ext1)  
-☐ Make PCB that has RGB LEDs, micro switches and speaker for ESP32-S3-LCD-1.28  
-☐ Power reduction code for LCD display   
-☐ Test LiPo battery with the board  
-☐ Reduce size and memory usage of program sketch  
-☐ Test operation when all Serial.println are removed  
-☐ Create the rest of the mechanisms using a CAD program  
+- [x] Use Micro switches instead of Encoder  
+- [x] Power reduction code  
+- [x] Make Schematic using EasyEDA  
+- [x] Rewrite code to use GPIO interrupts  
+- [x] Add config file for pin selection   
+- [] Add Default Demo mode   
+- [] Check current consumption  
+- [] Add support for ESP32-S3 Development Board   
+- [] Make PCB for ESP32-S3-LCD-1.28 1.27mm headers to 2.54mm   
+- [] Find cheaper component for sound or use passive buzzer  
+- [] Make rotary encoder mechanism with micro switches  
+- [] RGB LEDs  
+- [] Only enable GPIO outputs (LEDs) at the last moment   
+- [] Use multiple inputs to wake up from deep sleep (ext1)  
+- [] Make PCB that has RGB LEDs, micro switches and speaker for ESP32-S3-LCD-1.28  
+- [] Power reduction code for LCD display   
+- [] Test LiPo battery with the board  
+- [] Reduce size and memory usage of program sketch  
+- [] Test operation when all Serial.println are removed  
+- [] Create the rest of the mechanisms using a CAD program  
 	
 # Future Plans:  
-☐ Create Omnitrix graphics for GC9A01 driver that uses library commands for animation  
-☐ Make PCB for multiple RGB LEDs  
-☐ Test current for LED PCB  
-☐ Make PCB that has RGB LEDs, micro switches and speaker   
-☐ GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
-☐ Add support for touch lcd  
-☐ Add energy system  
-☐ Secret combination input for Master Control Mode  
-☐ Smoother animation  
-☐ Xtra animation  
-☐ Download aliens from a server  
-☐ Update code with FOTA  
-☐ Rechargable battery  
-☐ Download additional aliens from a server  
-☐ Add motor to elevate display (for fun!)  
-☐ Make Omnitrix Microcontroller based on ESP32 chip  
-☐ Add Menu that includes:  
-* ☐ Time  
-* ☐ Battery state  
-* ☐ Sound options  
-* ☐ Option to turn off LEDs  
-* ☐ Options for Changing tranformation Time variables  
-* ☐ Low power mode disable/enable (ULP coprossesor use in ESP-IDF)  
-* ☐ Demo Mode disable/enable  
-* ☐ Search for Updates  
+- [] Create Omnitrix graphics for GC9A01 driver that uses library commands for animation  
+- [] Make PCB for multiple RGB LEDs  
+- [] Test current for LED PCB  
+- [] Make PCB that has RGB LEDs, micro switches and speaker   
+- [] GPIO pins as Vcc for inputs to reduce energy when in Deep Sleep  
+- [] Add support for touch lcd  
+- [] Add energy system  
+- [] Secret combination input for Master Control Mode  
+- [] Smoother animation  
+- [] Xtra animation  
+- [] Download aliens from a server  
+- [] Update code with FOTA  
+- [] Rechargable battery  
+- [] Download additional aliens from a server  
+- [] Add motor to elevate display (for fun!)  
+- [] Make Omnitrix Microcontroller based on ESP32 chip  
+- [] Add Menu that includes:  
+* - [] Time  
+* - [] Battery state  
+* - [] Sound options  
+* - [] Option to turn off LEDs  
+* - [] Options for Changing tranformation Time variables  
+* - [] Low power mode disable/enable (ULP coprossesor use in ESP-IDF)  
+* - [] Demo Mode disable/enable  
+* - [] Search for Updates  
