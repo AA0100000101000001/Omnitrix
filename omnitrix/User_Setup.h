@@ -5,8 +5,40 @@
 #include "User_Setups/config_ESP32_S2_PINOUT.h"  //Esp32-s2 Dev Board
 //#include "User_Setups/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
 
+//HARDWARE SETTINGS
 
-//Software Settings
+//POP UP BUTTONS SETTINGS: Uncomment for buttons
+#define POP_UP_BUTTONS_ENABLED
+
+//ROTARY ENCODER SETTINGS: Use one of these options for rotary encoder
+//1. Uncomment for use of micro switches for encoder
+//#define MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
+//2. Uncomment for use of magnetic encoder
+#define ROTARY_ENCODER_ENABLED
+//3. Uncomment for use of magnetic encoder
+//#define MAGNETIC_ROTARY_ENCODER_ENABLED
+
+//SOUND SETTINGS: Uncomment for sound
+#define SOUND_ENABLED
+
+//SOUND HARDWARE SELECTION: Use one of these options for sound
+//1. Uncomment for use of Dfplayer Pro for sound
+#define SOUND_DFPLAYER_PRO_ENABLED
+//2. Uncomment for use of buzzer for sound
+//#define SOUND_BUZZER_ENABLED
+
+//LED SETTINGS: Uncomment for LEDs
+//#define LEDS_ENABLED
+
+//LED SELECTION: Use one of these options
+//1. Uncomment for RGB LEDS
+//#define RGB_LEDS_ENABLED
+//LED 2. Uncomment for Neopixel ring LEDs
+//#define NEOPIXEL_RING_LEDS_ENABLED
+//LED 3. Uncomment for IR controlled LEDs
+//#define IR_CONTROLLED_LEDS_ENABLED
+
+//SOFTWARE SETTINGS
 
 //Choose only one type of animation
 //1. Start animation with images
