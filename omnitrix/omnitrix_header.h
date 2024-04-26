@@ -106,8 +106,8 @@ RTC_DATA_ATTR uint8_t mode; // Up to 255 modes
 //This button timer uses millis() instead of Epoch so it can be smaller 
 //since it will often reset because of sleep mode.
 //Up to 18.2 hours of being awake and buttons functioning normaly
-volatile uint16_t button_time = 0;  
-volatile uint16_t last_button_time = 0; 
+volatile uint16_t interruptTime = 0;  
+volatile uint16_t lastInterruptTime = 0; 
 
 //Input states
 volatile bool buttonState = 0; //State of start button

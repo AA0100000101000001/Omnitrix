@@ -8,21 +8,21 @@
 
 void IRAM_ATTR button_interrupt() {
   //Debouncing
-  button_time = millis();
-  if (button_time - last_button_time > 200)
+  interruptTime = millis();
+  if (interruptTime - lastInterruptTime > 200)
   {
     buttonState = true;
-    last_button_time = button_time;
+    lastInterruptTime = interruptTime;
   }
 }
 
 void IRAM_ATTR Selectbutton_interrupt() {
   //Debouncing
-  button_time = millis();
-  if (button_time - last_button_time > 200)
+  interruptTime = millis();
+  if (interruptTime - lastInterruptTime > 200)
   {
     selectbuttonState = true;
-    last_button_time = button_time;
+    lastInterruptTime = interruptTime;
   }
 }
 
@@ -32,21 +32,21 @@ void IRAM_ATTR Selectbutton_interrupt() {
 
 void IRAM_ATTR Rightbutton_interrupt() {
   //Debouncing
-  button_time = millis();
-  if (button_time - last_button_time > 200)
+  interruptTime = millis();
+  if (interruptTime - lastInterruptTime > 200)
   {
     rightState = true;
-    last_button_time = button_time;
+    lastInterruptTime = interruptTime;
   }
 }
 
 void IRAM_ATTR Leftbutton_interrupt() {
   //Debouncing
-  button_time = millis();
-  if (button_time - last_button_time > 200)
+  interruptTime = millis();
+  if (interruptTime - lastInterruptTime > 200)
   {
-    leftState = true;
-    last_button_time = button_time;
+    interruptTime = true;
+    lastInterruptTime = interruptTime;
   }
 }
 
