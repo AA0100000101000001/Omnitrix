@@ -67,7 +67,7 @@ You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Om
 ### User Setup
  Inside the User_Setup folder there are some header files for the pin configuration of non LCD Display parts. You can edit the config_CUSTOM.h file for your own pin configuration or use one of other ones.       
 Make sure that the pin configuration file is included in `User_Setup.h`. In this file you can configure hardware and software settings.    
-For hardware you can choose what kind of rotary encoder is being used, if sound is enabled and how it is implemented and if LEDs are enabled and how they are implemented. Right now the configurations that are supported are: micro switches for rotary encoder, DFPLAYER_PRO for sound and three pin RGB LEDs. You can also remove features by commenting the `#define X_ENABLED` definitions. `POP_UP_BUTTONS_ENABLED` and one option for rotary encoder are the only essential features.   
+For hardware you can choose what kind of rotary encoder is being used, if sound is enabled and how it is implemented and if LEDs are enabled and how they are implemented. Right now the configurations that are supported are: micro switches or rotary encoder for detection of right and left rotation, DFPLAYER_PRO for sound and three pin RGB LEDs. You can also remove features by commenting the `#define X_ENABLED` definitions. `POP_UP_BUTTONS_ENABLED` and one option for rotary encoder are the only essential features.   
 For software settings you can configure what kind of animation is being used, if sound will be muted in booting and if demo mode will be enabled (it is not supported right now). The only essential setting is one option for the animation.
 
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
