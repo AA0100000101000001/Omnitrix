@@ -7,8 +7,9 @@
 #if defined POP_UP_BUTTONS_ENABLED
 
 void IRAM_ATTR button_interrupt() {
+  static uint16_t lastInterruptTime = 0;
+  uint16_t interruptTime = millis();
   //Debouncing
-  interruptTime = millis();
   if (interruptTime - lastInterruptTime > 200)
   {
     buttonState = true;
@@ -17,8 +18,9 @@ void IRAM_ATTR button_interrupt() {
 }
 
 void IRAM_ATTR Selectbutton_interrupt() {
+  static uint16_t lastInterruptTime = 0;
+  uint16_t interruptTime = millis();
   //Debouncing
-  interruptTime = millis();
   if (interruptTime - lastInterruptTime > 200)
   {
     selectbuttonState = true;
@@ -32,8 +34,9 @@ void IRAM_ATTR Selectbutton_interrupt() {
 #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
 
 void IRAM_ATTR Rightbutton_interrupt() {
+  static uint16_t lastInterruptTime = 0;
+  uint16_t interruptTime = millis();
   //Debouncing
-  interruptTime = millis();
   if (interruptTime - lastInterruptTime > 200)
   {
     rightState = true;
@@ -42,8 +45,9 @@ void IRAM_ATTR Rightbutton_interrupt() {
 }
 
 void IRAM_ATTR Leftbutton_interrupt() {
+  static uint16_t lastInterruptTime = 0;
+  uint16_t interruptTime = millis();
   //Debouncing
-  interruptTime = millis();
   if (interruptTime - lastInterruptTime > 200)
   {
     interruptTime = true;
@@ -53,7 +57,7 @@ void IRAM_ATTR Leftbutton_interrupt() {
 //Rotary Encoder
 #elif defined ROTARY_ENCODER_ENABLED
 
-void rotEncoder() {
+void rotEncoder_interrupt() {
 
   static uint8_t old_AB = 3;  // Lookup table index
   static int8_t encval = 0;   // Encoder value  
@@ -112,8 +116,8 @@ void setup() {
   #elif defined ROTARY_ENCODER_ENABLED
     pinMode(RIGHT_BUTTON_PIN, INPUT_PULLUP);
     pinMode(LEFT_BUTTON_PIN, INPUT_PULLUP);
-    attachInterrupt(RIGHT_BUTTON_PIN, rotEncoder, CHANGE); // Need to detect both rising or falling signal
-    attachInterrupt(LEFT_BUTTON_PIN, rotEncoder, CHANGE);
+    attachInterrupt(RIGHT_BUTTON_PIN, rotEncoder_interrupt, CHANGE); // Need to detect both rising or falling signal
+    attachInterrupt(LEFT_BUTTON_PIN, rotEncoder_interrupt, CHANGE);
   #endif
 
   //Init leds
