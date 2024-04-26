@@ -102,19 +102,19 @@ RTC_DATA_ATTR uint8_t alienNo; // Up to 255 aliens
 RTC_DATA_ATTR uint8_t mode; // Up to 255 modes
 
 #if defined POP_UP_BUTTONS_ENABLED
-//Variables to keep track of the timing of recent interrupts
-//This button timer uses millis() instead of Epoch so it can be smaller 
+//Variables to keep track of the timing of recent interrupts are inside them for now
+//This interrupt timer uses millis() instead of Epoch so it can be smaller 
 //since it will often reset because of sleep mode.
-//Up to 18.2 hours of being awake and buttons functioning normaly
-volatile uint16_t interruptTime = 0;  
-volatile uint16_t lastInterruptTime = 0; 
+//Up to 18.2 hours of being awake and buttons functioning normaly, after sleep values reset
+//volatile uint16_t interruptTime = 0;  
+//volatile uint16_t lastInterruptTime = 0; 
 
 //Input states
 volatile bool buttonState = 0; //State of start button
 volatile bool selectbuttonState = 0; //State of select button
 #endif
 
-#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
+#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED || defined ROTARY_ENCODER_ENABLED
 //Similar with pop up buttons, use of interrupts
 //Input states
 volatile bool rightState = 0; //State of right

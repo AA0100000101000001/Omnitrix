@@ -19,6 +19,8 @@
 //1. Uncomment for use of micro switches for encoder
 #define MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
 //2. Uncomment for use of magnetic encoder
+#define ROTARY_ENCODER_ENABLED
+//3. Uncomment for use of magnetic encoder
 #define MAGNETIC_ROTARY_ENCODER_ENABLED
 
 //Define rotary encoder input pins
