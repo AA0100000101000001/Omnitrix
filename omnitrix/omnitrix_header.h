@@ -114,7 +114,7 @@ volatile bool buttonState = 0; //State of start button
 volatile bool selectbuttonState = 0; //State of select button
 #endif
 
-#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
+#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED || defined ROTARY_ENCODER_ENABLED
 //Similar with pop up buttons, use of interrupts
 //Input states
 volatile bool rightState = 0; //State of right
