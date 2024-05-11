@@ -62,7 +62,7 @@ Follow the schematic on how to connect the wires. Some soldering will be needed 
 ## Uploading The Software  
 This project uses Arduino IDE to program the Esp32 so you need to [install the ESP32 board to it](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/). It also uses Bodmer's [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) library for the control of the LCD Display and [PNGdec](https://github.com/bitbank2/PNGdec) for displaying png images. You can configure the LCD Display pins by editing the `TFT_eSPI/User_Setup.h` file or you can create a configuration file in `TFT_eSPI/User_Setups` folder and include it in `TFT_eSPI/User_Setup_Select.h` instead of `User_Setup.h`. I have added my configurations in the Supported Displays folder.     
 ```C
-/* User_Setup_Select.h */
+/* TFT_eSPI/User_Setup_Select.h */
 
 //#include <User_Setup.h>           // Default setup is root library folder
 //#include <User_Setups/Setup302_ESP32S3_GC9A01_TOUCH.h>
@@ -75,9 +75,72 @@ You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Om
 
 ### User Setup
  Inside the User_Setup folder there are some header files for the pin configuration of non LCD Display parts. You can edit the config_CUSTOM.h file for your own pin configuration or use one of other ones.       
+```C
+/* User_Setup.h */
+
+//Pin configuration
+//Edit User_Setups/config_DEFAULT to create your own configuration or uncomment your preferred configuration
+//#include "User_Setups/config_CUSTOM.h" //Use your own configuration
+#include "User_Setups/config_ESP32_S2_PINOUT.h"  //Esp32-s2 Dev Board
+//#include "User_Setups/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
+```
 Make sure that the pin configuration file is included in `User_Setup.h`. In this file you can configure hardware and software settings.    
 For hardware you can choose what kind of rotary encoder is being used, if sound is enabled and how it is implemented and if LEDs are enabled and how they are implemented. Right now the configurations that are supported are: micro switches or rotary encoder for detection of right and left rotation, DFPLAYER_PRO for sound and three pin RGB LEDs. You can also remove features by commenting the `#define X_ENABLED` definitions. `POP_UP_BUTTONS_ENABLED` and one option for rotary encoder are the only essential features.   
+```C
+//HARDWARE SETTINGS
+
+//POP UP BUTTONS SETTINGS: Uncomment for buttons
+#define POP_UP_BUTTONS_ENABLED
+
+//ROTARY ENCODER SETTINGS: Use one of these options for rotary encoder
+//1. Uncomment for use of micro switches for encoder
+//#define MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
+//2. Uncomment for use of magnetic encoder
+#define ROTARY_ENCODER_ENABLED
+//3. Uncomment for use of magnetic encoder
+//#define MAGNETIC_ROTARY_ENCODER_ENABLED
+
+//SOUND SETTINGS: Uncomment for sound
+#define SOUND_ENABLED
+
+//SOUND HARDWARE SELECTION: Use one of these options for sound
+//1. Uncomment for use of Dfplayer Pro for sound
+#define SOUND_DFPLAYER_PRO_ENABLED
+//2. Uncomment for use of buzzer for sound
+//#define SOUND_BUZZER_ENABLED
+
+//LED SETTINGS: Uncomment for LEDs
+//#define LEDS_ENABLED
+
+//LED SELECTION: Use one of these options
+//1. Uncomment for RGB LEDS
+//#define RGB_LEDS_ENABLED
+//LED 2. Uncomment for Neopixel ring LEDs
+//#define NEOPIXEL_RING_LEDS_ENABLED
+//LED 3. Uncomment for IR controlled LEDs
+//#define IR_CONTROLLED_LEDS_ENABLED
+```
 For software settings you can configure what kind of animation is being used, if sound will be muted in booting and if demo mode will be enabled (it is not supported right now). The only essential setting is one option for the animation.
+```C
+//SOFTWARE SETTINGS
+
+//Choose only one type of animation
+//1. Start animation with images
+#define START_ANIMATION_WITH_IMAGES //Has memory leaks
+//2. Hard coded start animation
+//#define START_ANIMATION_WITHOUT_IMAGES //Not finished
+
+//Choose if sound will be muted in booting
+//#define SOUND_MUTED_IN_BOOTING //Only if sound is enabled
+
+//Choose if demo is enabled //not implemented yet
+//#define DEMO_ENABLED
+//Choose only one type of demo
+//1. Demo automated display of the features that can go out of that state when a button is pressed
+//#define DEMO_AYTOMATED_ENABLED
+//2. Demo user controlled that can go out of that state from the menu
+//#define DEMO_CONTROLLED_ENABLED
+```
 
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
