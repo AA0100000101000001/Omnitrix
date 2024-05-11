@@ -60,7 +60,16 @@ Follow the schematic on how to connect the wires. Some soldering will be needed 
 ![EC Buying Display](media/Images/EC_Buying_Display.png)
 
 ## Uploading The Software  
-This project uses Arduino IDE to program the Esp32 so you need to [install the ESP32 board to it](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/). It also uses Bodmer's [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) library for the control of the LCD Display and [PNGdec](https://github.com/bitbank2/PNGdec) for displaying png images. You can configure the LCD Display pins by editing the libraries/TFT_eSPI/User_Setup.h file or you can create a configuration file in libraries/TFT_eSPI/User_Setups folder and include it in libraries/TFT_eSPI/User_Setup_Select.h instead of User_Setup.h. I have added my configurations in the Supported Displays folder.     
+This project uses Arduino IDE to program the Esp32 so you need to [install the ESP32 board to it](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/). It also uses Bodmer's [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) library for the control of the LCD Display and [PNGdec](https://github.com/bitbank2/PNGdec) for displaying png images. You can configure the LCD Display pins by editing the TFT_eSPI/User_Setup.h file or you can create a configuration file in TFT_eSPI/User_Setups folder and include it in TFT_eSPI/User_Setup_Select.h instead of User_Setup.h. I have added my configurations in the Supported Displays folder.     
+```
+/* User_Setup_Select.h */
+
+//#include <User_Setup.h>           // Default setup is root library folder
+//#include <User_Setups/Setup302_ESP32S3_GC9A01_TOUCH.h>
+#include <User_Setups/Setup303_ESP32S2_GC9A01.h>
+//#include <User_Setups/Setup304_ESP32S3_GC9A01.h>
+//#include <User_Setups/Setup305_ESP32S3_LCD128.h>
+```
    
 You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/tree/main/Test%20files/Used%20For%20Final%20Project) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
 
