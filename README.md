@@ -73,7 +73,7 @@ For hardware you can choose what kind of rotary encoder is being used, if sound 
 //ROTARY ENCODER SETTINGS: Use one of these options for rotary encoder
 //1. Uncomment for use of micro switches for encoder
 //#define MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
-//2. Uncomment for use of magnetic encoder
+//2. Uncomment for use of mechanical encoder
 #define ROTARY_ENCODER_ENABLED
 //3. Uncomment for use of magnetic encoder
 //#define MAGNETIC_ROTARY_ENCODER_ENABLED
