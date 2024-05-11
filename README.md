@@ -1,7 +1,7 @@
 # Omnitrix
 
 # Status
-| Ordered the PCB shield I made for [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) and if it works then I'll upload the production files |
+| Ordered the PCB shield I made for [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) and if it works then I'll upload the production files. Meanwhile I'll change the Esp32 Dev Board to Esp32-S3-Pico |
 |----|  
 
 # Work in Progress
