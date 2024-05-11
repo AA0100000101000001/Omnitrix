@@ -61,7 +61,7 @@ Follow the schematic on how to connect the wires. Some soldering will be needed 
 
 ## Uploading The Software  
 This project uses Arduino IDE to program the Esp32 so you need to [install the ESP32 board to it](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/). It also uses Bodmer's [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) library for the control of the LCD Display and [PNGdec](https://github.com/bitbank2/PNGdec) for displaying png images. You can configure the LCD Display pins by editing the TFT_eSPI/User_Setup.h file or you can create a configuration file in TFT_eSPI/User_Setups folder and include it in TFT_eSPI/User_Setup_Select.h instead of User_Setup.h. I have added my configurations in the Supported Displays folder.     
-```
+```C
 /* User_Setup_Select.h */
 
 //#include <User_Setup.h>           // Default setup is root library folder
