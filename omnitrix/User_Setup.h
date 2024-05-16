@@ -7,6 +7,24 @@
 
 //HARDWARE SETTINGS
 
+//WAKEUP SETTINGS: Use ext0 or ext1
+//1. Uncomment for use of ext0
+#define EXT0_ENABLED
+//Choose wakeup pin:
+#define EXT0_WAKEUP_PIN GPIO_NUM_5
+//#define EXT0_WAKEUP_PIN GPIO_NUM_1  //Wake up with rotary movement
+//Choose wakeup level:
+#define EXT0_WAKEUP_MODE 1
+//#define EXT0_WAKEUP_MODE 0 //Wake up with rotary movement
+//2. Uncomment for use of ext1
+//#define EXT1_ENABLED
+//Choose bitmap:
+//#define EXT1_BITMASK 0x0020 //gpio 5
+//Choose mode:
+//ESP_EXT1_WAKEUP_ALL_LOW: wake up when all GPIOs go low;
+//ESP_EXT1_WAKEUP_ANY_HIGH: wake up if any of the GPIOs go high.
+//#define EXT1_WAKEUP_MODE ESP_EXT1_WAKEUP_ANY_HIGH
+
 //POP UP BUTTONS SETTINGS: Uncomment for buttons
 #define POP_UP_BUTTONS_ENABLED
 
@@ -19,11 +37,11 @@
 //#define MAGNETIC_ROTARY_ENCODER_ENABLED
 
 //SOUND SETTINGS: Uncomment for sound
-#define SOUND_ENABLED
+//#define SOUND_ENABLED
 
 //SOUND HARDWARE SELECTION: Use one of these options for sound
 //1. Uncomment for use of Dfplayer Pro for sound
-#define SOUND_DFPLAYER_PRO_ENABLED
+//#define SOUND_DFPLAYER_PRO_ENABLED
 //2. Uncomment for use of buzzer for sound
 //#define SOUND_BUZZER_ENABLED
 
@@ -61,6 +79,13 @@
 //-------------------------------------------------------
 //----------DON'T EDIT THIS------------------------------
 //-------------------------------------------------------
+
+//Check external wakeup type
+#if defined EXT0_ENABLED && !defined EXT1_ENABLED
+#elif !defined EXT0_ENABLED && defined EXT1_ENABLED
+#else
+  #error "You must use at least only one option for the external wake up"
+#endif
 
 
 //Define button pins for the pop up mechanism

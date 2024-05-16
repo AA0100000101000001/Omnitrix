@@ -187,8 +187,16 @@ void setup() {
   Serial.print("Boot number: ");
   Serial.println(bootCount);
 
-  //The omnitrix will wake up when the button is pressed
-  esp_sleep_enable_ext0_wakeup(GPIO_NUM_5,1);
+  //External wakeup setup
+  //EXT0
+  #ifdef EXT0_ENABLED
+  //The omnitrix will wake up when a button is pressed
+  esp_sleep_enable_ext0_wakeup(EXT0_WAKEUP_PIN, EXT0_WAKEUP_MODE);
+  //EXT1
+  #elif defined EXT1_ENABLED
+  //The omnitrix will wake up when a combination of buttons is pressed
+  esp_sleep_enable_ext1_wakeup(EXT1_BITMASK, ESP_EXT1_WAKEUP_ANY_HIGH);
+  #endif
 
   //Check the wakeup reason for ESP32 and operate accordingly for timers
   get_wakeup_reason();
