@@ -1,7 +1,7 @@
 # Omnitrix
 
 # Status
-| Ordered the PCB shield I made for [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) and if it works then I'll upload the production files. Meanwhile I'll change the Esp32 Dev Board to Esp32-S3-Pico |
+| Ordered the PCB shield I made for [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) and if it works then I'll upload the production files. The Esp32 Dev Board is now set to Esp32-S3-Pico. |
 |----|  
 
 # Work in Progress
@@ -9,7 +9,7 @@
 ![IMG_20230619_164351](media/Images/IMG_20230619_164351.jpg) 
 
 
-This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible when it comes to operating it like in the series. I started it to learn how to develop a mechatronic project using the ESP32. It started with a ESP32 Development Board - NodeMCU-32S2 module but I found out that there are other boards with an embedded LCD module on the market that are better to use. I decided to use ESP32-S3-LCD-1.28 for now to learn how to make PCBs and rotary encoders in hopes that the size of the final Omnitrix core can be reduced.   
+This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible when it comes to operating it like in the series. I started it to learn how to develop a mechatronic project using the ESP32. It started with a ESP32 Development Board - NodeMCU-32S2 module but I found out that there are other boards with an embedded LCD module on the market that are better to use. I decided to use Esp32-S3 LCD 1.28 Inch for now to learn how to make PCBs and rotary encoders in hopes that the size of the final Omnitrix core can be reduced. The software can also be tested with the Esp32-S3-Pico Dev Board that uses the same MCU with Esp32-S3 LCD 1.28 Inch (Esp32-S3R2).   
   
 In [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files) repository I am documenting varius tests for the features.  
 I am also planning to develop an ESP-IDF framework version. See the  [ESP-IDF-Omnitrix-Tests](https://github.com/AA0100000101000001/ESP-IDF-Omnitrix-Tests) repository for testing the features (On hold).  
@@ -20,21 +20,24 @@ Video showcasing a first test of the project with most of the features included:
   
 
 # Instructions
-These are instructions on how to use with a Esp32 Development Board to test the code.     
+These are instructions on how to use with a Esp32 Development Board to test the code. Note that the software supports different hardware to test it.     
   
 You will need:  
-* ESP32 Development Board with embedded PSRAM, Currently I have only tested it with [NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit)  
-* [Waveshare Round LCD Display GC9A01](https://www.waveshare.com/1.28inch-lcd-module.htm), I am using the [EC Buying](https://www.aliexpress.com/item/1005004786844308.html) one
+* [Waveshare Esp32-S3-Pico](https://www.waveshare.com/wiki/ESP32-S3-Pico) or any ESP32 Development Board with PSRAM   
+* [Round LCD Display GC9A01](https://www.waveshare.com/1.28inch-lcd-module.htm), I am using the [EC Buying](https://www.aliexpress.com/item/1005004786844308.html) one
 * [Fermion DFPlayer Pro](https://www.dfrobot.com/product-2232.html)  
 * 2X Mini Metal Speaker w/ Wires - 8 ohm 0.5W  
-* 2X MicroSwitch SPDT ON-(ON) - Long Lever 18mm (A,B on the Schematic)  
+* Rotary Encoder OR 2X MicroSwitch SPDT ON-(ON) - Long Lever 18mm (For the rotary movement, A,B on the Schematic)  
 * MicroSwitch SPDT ON-(ON) - Roller Lever (SW on the Schematic)  
 * Tact Switch 6x6mm 5mm (ButtonPin on the Schematic)  
 * Breadboard, jumper wires, 4X 10 kohm resistor
   
-Follow the schematic on how to connect the wires. Some soldering will be needed to connect the pin headers and the speakers to the Fermion DFPlayer Pro.  
+Follow the schematic on how to connect the wires. Some soldering will be needed to connect the pin headers and the speakers to the Fermion DFPlayer Pro. (I have tested the Fermion DFPlayer Pro only with [NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit) but it possibly works with the Esp32-S3-Pico too)  
 
 ## Schematic:  
+The goal is to use the Esp32-S3-Pico for the software testing but not all features are tested in it yet. So the old schematic for the Esp32-S2 is still included.  
+![Esp32-S3-Pico-Schematic-Rev-1.0](media/Images/Esp32-S3-Pico-Schematic-Rev-1.0.png)
+Old Schematic:  
 ![EC Buying Display](media/Images/EC_Buying_Display.png)
 
 ## Uploading The Software  
@@ -155,7 +158,7 @@ The only essential setting is one option for the animation. You can configure wh
 | Board | Micro Switches as Rotary Encoder | Rotary Encoder | Magnetic Rotary Encoder | DFPlayer_Pro Sound | Buzzer Sound | RGB LEDs Tested | Neopixel Ring |
 |----|----|----|----|----|----|----|----| 
 | [Waveshare ESP32 Development Board - NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit) | ✅ | ✅ | | ✅ | | | |
-| [Waveshare Esp32-S3-Pico](https://www.waveshare.com/wiki/ESP32-S3-Pico) | | | | | | | |
+| [Waveshare Esp32-S3-Pico](https://www.waveshare.com/wiki/ESP32-S3-Pico) | | ✅ | | | | | |
 
 
 ## Dependencies
