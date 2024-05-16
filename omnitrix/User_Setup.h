@@ -16,8 +16,6 @@
 //Choose wakeup level:
 #define EXT0_WAKEUP_MODE 1
 //#define EXT0_WAKEUP_MODE 0 //Wake up with rotary movement
-/*
-*/
 //2. Uncomment for use of ext1
 //#define EXT1_ENABLED
 //Choose bitmap:

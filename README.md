@@ -64,9 +64,25 @@ You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Om
 //#include "User_Setups/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
 ```
 Make sure that the pin configuration file is included in `User_Setup.h`. In this file you can configure hardware and software settings.    
-For hardware you can choose what kind of rotary encoder is being used, if sound is enabled and how it is implemented and if LEDs are enabled and how they are implemented. Right now the configurations that are supported are: micro switches or rotary encoder for detection of right and left rotation, DFPLAYER_PRO for sound and three pin RGB LEDs. You can also remove features by commenting the `#define X_ENABLED` definitions. `POP_UP_BUTTONS_ENABLED` and one option for rotary encoder are the only essential features.   
+For hardware you can choose what kind of rotary encoder is being used, if sound is enabled and how it is implemented and if LEDs are enabled and how they are implemented. Right now the configurations that are supported are: micro switches or rotary encoder for detection of right and left rotation, DFPLAYER_PRO for sound and three pin RGB LEDs. You can also remove features by commenting the `#define X_ENABLED` definitions. `POP_UP_BUTTONS_ENABLED`, one option for rotary encoder and one option for external wakeup are the only essential features.   
 ```C
 //HARDWARE SETTINGS
+
+//WAKEUP SETTINGS: Use ext0 or ext1
+//1. Uncomment for use of ext0
+#define EXT0_ENABLED
+//Choose wakeup pin:
+#define EXT0_WAKEUP_PIN GPIO_NUM_5
+//Choose wakeup level:
+#define EXT0_WAKEUP_MODE 1
+//2. Uncomment for use of ext1
+//#define EXT1_ENABLED
+//Choose bitmap:
+//#define EXT1_BITMASK 0x0020 //gpio 5
+//Choose mode:
+//ESP_EXT1_WAKEUP_ALL_LOW: wake up when all GPIOs go low;
+//ESP_EXT1_WAKEUP_ANY_HIGH: wake up if any of the GPIOs go high.
+//#define EXT1_WAKEUP_MODE ESP_EXT1_WAKEUP_ANY_HIGH
 
 //POP UP BUTTONS SETTINGS: Uncomment for buttons
 #define POP_UP_BUTTONS_ENABLED
