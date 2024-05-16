@@ -52,7 +52,8 @@ This project uses Arduino IDE to program the Esp32 so you need to [install the E
 You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/tree/main/Test%20files/Used%20For%20Final%20Project) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
 
 ### User Setup
- Inside the User_Setup folder there are some header files for the pin configuration of non LCD Display parts. You can edit the config_CUSTOM.h file for your own pin configuration or use one of other ones.       
+ Inside the User_Setup folder there are some header files for the pin configuration of non LCD Display parts. You can edit the config_CUSTOM.h file for your own pin configuration or use one of other ones.  
+Make sure that the pin configuration file is included in `User_Setup.h`. In this file you can configure hardware and software settings.         
 ```C
 /* User_Setup.h */
 
@@ -63,11 +64,11 @@ You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Om
 #include "User_Setups/config_ESP32_S2_PINOUT.h"  //Esp32-s2 Dev Board
 //#include "User_Setups/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
 ```
-Make sure that the pin configuration file is included in `User_Setup.h`. In this file you can configure hardware and software settings.    
-For hardware you can choose what kind of rotary encoder is being used, if sound is enabled and how it is implemented and if LEDs are enabled and how they are implemented. Right now the configurations that are supported are: micro switches or rotary encoder for detection of right and left rotation, DFPLAYER_PRO for sound and three pin RGB LEDs. You can also remove features by commenting the `#define X_ENABLED` definitions. `POP_UP_BUTTONS_ENABLED`, one option for rotary encoder and one option for external wakeup are the only essential features.   
+You can also remove features by commenting the `#define X_ENABLED` definitions. 
+#### For hardware settings:   
+The only essential features for the software to work are `POP_UP_BUTTONS_ENABLED`, one option for rotary encoder and one option for external wakeup.  
+Configuration of external wakeup:  
 ```C
-//HARDWARE SETTINGS
-
 //WAKEUP SETTINGS: Use ext0 or ext1
 //1. Uncomment for use of ext0
 #define EXT0_ENABLED
@@ -83,7 +84,10 @@ For hardware you can choose what kind of rotary encoder is being used, if sound 
 //ESP_EXT1_WAKEUP_ALL_LOW: wake up when all GPIOs go low;
 //ESP_EXT1_WAKEUP_ANY_HIGH: wake up if any of the GPIOs go high.
 //#define EXT1_WAKEUP_MODE ESP_EXT1_WAKEUP_ANY_HIGH
-
+```
+Configuration of pop up buttons and rotary encoder:   
+(Magnetic rotary encoder is not supported yet)
+```C
 //POP UP BUTTONS SETTINGS: Uncomment for buttons
 #define POP_UP_BUTTONS_ENABLED
 
@@ -94,7 +98,10 @@ For hardware you can choose what kind of rotary encoder is being used, if sound 
 #define ROTARY_ENCODER_ENABLED
 //3. Uncomment for use of magnetic encoder
 //#define MAGNETIC_ROTARY_ENCODER_ENABLED
-
+```
+Configuration of sound:  
+(Buzzer is not supported yet)
+```C
 //SOUND SETTINGS: Uncomment for sound
 #define SOUND_ENABLED
 
@@ -103,6 +110,10 @@ For hardware you can choose what kind of rotary encoder is being used, if sound 
 #define SOUND_DFPLAYER_PRO_ENABLED
 //2. Uncomment for use of buzzer for sound
 //#define SOUND_BUZZER_ENABLED
+```
+Configuration of LEDs:  
+(They are not supported yet)
+```C
 
 //LED SETTINGS: Uncomment for LEDs
 //#define LEDS_ENABLED
@@ -115,7 +126,8 @@ For hardware you can choose what kind of rotary encoder is being used, if sound 
 //LED 3. Uncomment for IR controlled LEDs
 //#define IR_CONTROLLED_LEDS_ENABLED
 ```
-For software settings you can configure what kind of animation is being used, if sound will be muted in booting and if demo mode will be enabled (it is not supported right now). The only essential setting is one option for the animation.
+#### For software settings:  
+The only essential setting is one option for the animation. You can configure what kind of animation is being used, if sound will be muted in booting and if demo mode will be enabled (it is not supported right now). 
 ```C
 //SOFTWARE SETTINGS
 
