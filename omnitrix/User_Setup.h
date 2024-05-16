@@ -2,8 +2,9 @@
 //Pin configuration
 //Edit User_Setups/config_DEFAULT to create your own configuration or uncomment your preferred configuration
 //#include "User_Setups/config_CUSTOM.h" //Use your own configuration
-#include "User_Setups/config_ESP32_S2_PINOUT.h"  //Esp32-s2 Dev Board
+//#include "User_Setups/config_ESP32_S2_PINOUT.h"  //Esp32-s2 Dev Board
 //#include "User_Setups/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
+#include "User_Setups/config_ESP32_S3_PICO_PINOUT.h" //Esp32-s3-Pico Dev Board
 
 //HARDWARE SETTINGS
 
@@ -11,7 +12,8 @@
 //1. Uncomment for use of ext0
 #define EXT0_ENABLED
 //Choose wakeup pin:
-#define EXT0_WAKEUP_PIN GPIO_NUM_5
+#define EXT0_WAKEUP_PIN GPIO_NUM_2
+//#define EXT0_WAKEUP_PIN GPIO_NUM_5 //Esp32-S2 pinout
 //#define EXT0_WAKEUP_PIN GPIO_NUM_1  //Wake up with rotary movement
 //Choose wakeup level:
 #define EXT0_WAKEUP_MODE 1
