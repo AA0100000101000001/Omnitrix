@@ -36,8 +36,10 @@ Follow the schematic on how to connect the wires. Some soldering will be needed 
 
 ## Schematic:  
 The goal is to use the Esp32-S3-Pico for the software testing but not all features are tested in it yet. So the old schematic for the Esp32-S2 is still included.  
+  
 ![Esp32-S3-Pico-Schematic-Rev-1.0](media/Images/Esp32-S3-Pico-Schematic-Rev-1.0.png)
 Old Schematic:  
+   
 ![EC Buying Display](media/Images/EC_Buying_Display.png)
 
 ## Uploading The Software  
@@ -47,9 +49,10 @@ This project uses Arduino IDE to program the Esp32 so you need to [install the E
 
 //#include <User_Setup.h>           // Default setup is root library folder
 //#include <User_Setups/Setup302_ESP32S3_GC9A01_TOUCH.h>
-#include <User_Setups/Setup303_ESP32S2_GC9A01.h>
+//#include <User_Setups/Setup303_ESP32S2_GC9A01.h>
 //#include <User_Setups/Setup304_ESP32S3_GC9A01.h>
 //#include <User_Setups/Setup305_ESP32S3_LCD128.h>
+#include <User_Setups/Setup306_ESP32S3_PICO_GC9A01.h>
 ```
    
 You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/tree/main/Test%20files/Used%20For%20Final%20Project) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
@@ -61,11 +64,11 @@ Make sure that the pin configuration file is included in `User_Setup.h`. In this
 /* User_Setup.h */
 
 //Pin configuration
-//Edit User_Setups/config_DEFAULT to create your own configuration 
-//or uncomment your preferred configuration
+//Edit User_Setups/config_DEFAULT to create your own configuration or uncomment your preferred configuration
 //#include "User_Setups/config_CUSTOM.h" //Use your own configuration
-#include "User_Setups/config_ESP32_S2_PINOUT.h"  //Esp32-s2 Dev Board
+//#include "User_Setups/config_ESP32_S2_PINOUT.h"  //Esp32-s2 Dev Board
 //#include "User_Setups/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
+#include "User_Setups/config_ESP32_S3_PICO_PINOUT.h" //Esp32-s3-Pico Dev Board
 ```
 You can also remove features by commenting the `#define X_ENABLED` definitions. 
 #### For hardware settings:   
@@ -76,7 +79,8 @@ Configuration of external wakeup:
 //1. Uncomment for use of ext0
 #define EXT0_ENABLED
 //Choose wakeup pin:
-#define EXT0_WAKEUP_PIN GPIO_NUM_5
+#define EXT0_WAKEUP_PIN GPIO_NUM_2
+//#define EXT0_WAKEUP_PIN GPIO_NUM_5 //Esp32-S2 pinout
 //Choose wakeup level:
 #define EXT0_WAKEUP_MODE 1
 //2. Uncomment for use of ext1
