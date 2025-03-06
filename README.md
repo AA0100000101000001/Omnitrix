@@ -1,7 +1,7 @@
 # Omnitrix
 
 # Status
-| The Esp32 Dev Board is now set to Esp32-S3-Pico so that the software can be tested with Esp32-S3R2. Working on adding magnetic rotary encoder and replacing the dfplayer with a buzzer. |
+| The Esp32 Dev Board is now set to Esp32-S3-Pico so that the software can be tested with Esp32-S3R2. Planing on adding magnetic rotary encoder, doing changes on the graphics, using the RGB LED of the dev board and adding a buzzer selection for sound. |
 |----|  
 
 # Work in Progress
