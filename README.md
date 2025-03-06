@@ -1,7 +1,7 @@
 # Omnitrix
 
 # Status
-| Ordered the PCB shield I made for [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) and if it works then I'll upload the production files. The Esp32 Dev Board is now set to Esp32-S3-Pico. |
+| The Esp32 Dev Board is now set to Esp32-S3-Pico so that the software can be tested with Esp32-S3R2. Working on adding magnetic rotary encoder and replacing the dfplayer with a buzzer. |
 |----|  
 
 # Work in Progress
@@ -9,10 +9,9 @@
 ![IMG_20230619_164351](media/Images/IMG_20230619_164351.jpg) 
 
 
-This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible when it comes to operating it like in the series. I started it to learn how to develop a mechatronic project using the ESP32. It started with a ESP32 Development Board - NodeMCU-32S2 module but I found out that there are other boards with an embedded LCD module on the market that are better to use. I decided to use Esp32-S3 LCD 1.28 Inch for now to learn how to make PCBs and rotary encoders in hopes that the size of the final Omnitrix core can be reduced. The software can also be tested with the Esp32-S3-Pico Dev Board that uses the same MCU with Esp32-S3 LCD 1.28 Inch (Esp32-S3R2).   
+This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible when it comes to operating it like in the series. I started it to learn how to develop a mechatronic project using the ESP32. It started with a ESP32 Development Board - NodeMCU-32S2 module but I found out that there are other boards with an embedded LCD module on the market that are better to use. I decided to test the software with the Esp32-S3-Pico Dev Board that uses the same MCU as [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) (Esp32-S3R2). For a future version a custom PCB with LCD Display and rotary encoder can be used.    
   
-In [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files) repository I am documenting varius tests for the features.  
-I am also planning to develop an ESP-IDF framework version. See the  [ESP-IDF-Omnitrix-Tests](https://github.com/AA0100000101000001/ESP-IDF-Omnitrix-Tests) repository for testing the features (On hold).  
+In [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files) repository I am documenting varius tests for the features.   
 
 Video showcasing a first test of the project with most of the features included:  
 
@@ -24,7 +23,7 @@ These are instructions on how to use with a Esp32 Development Board to test the 
   
 You will need:  
 * [Waveshare Esp32-S3-Pico](https://www.waveshare.com/wiki/ESP32-S3-Pico) or any ESP32 Development Board with PSRAM   
-* [Round LCD Display GC9A01](https://www.waveshare.com/1.28inch-lcd-module.htm), I am using the [EC Buying](https://www.aliexpress.com/item/1005004786844308.html) one
+* [Round LCD Display GC9A01](https://www.waveshare.com/1.28inch-lcd-module.htm), I am using the [EC Buying](https://www.aliexpress.com/item/1005004786844308.html) without touch one
 * [Fermion DFPlayer Pro](https://www.dfrobot.com/product-2232.html)  
 * 2X Mini Metal Speaker w/ Wires - 8 ohm 0.5W  
 * Rotary Encoder OR 2X MicroSwitch SPDT ON-(ON) - Long Lever 18mm (For the rotary movement, A,B on the Schematic)  
@@ -175,7 +174,7 @@ The only essential setting is one option for the animation. You can configure wh
 # Current Features:  
 * Settings for testing different hardware
 * Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
-* Support of the first twelve aliens  
+* Twelve aliens  
 * Animation  
 * Sound  
 * Ability to go into Deep Sleep Mode after a short time of inactivity  
