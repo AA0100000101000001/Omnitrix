@@ -1,17 +1,18 @@
 # Omnitrix
 
 # Status
-| Released the nodemcu breadboard version of the Omnitrix. To see the development of the project with the Esp32-S3-Pico board check out the other branches|
-|----|  
+| The Esp32 Dev Board is now set to Esp32-S3-Pico. Planing on adding custom rotary encoder, doing changes on the graphics, using the RGB LED of the dev board and adding a buzzer selection for sound. |
 
 # Work in Progress
 
 ![IMG_20230619_164351](media/Images/IMG_20230619_164351.jpg) 
 
 
-This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible when it comes to operating it like in the series. I started it to learn how to develop a mechatronic project using the ESP32. It started with a ESP32 Development Board - NodeMCU-32S2 module but I found out that there are other boards with an embedded LCD module on the market that are better to use. I decided to use ESP32-S3-Pico for now to learn how to make PCBs and rotary encoders in hopes that the size of the final Omnitrix core can be reduced.   
+
+This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible when it comes to operating it like in the series. I started it to learn how to develop a mechatronic project using the ESP32. It started with a ESP32 Development Board - NodeMCU-32S2 module but I found out that there are other boards with an embedded LCD module on the market that are better to use. I decided to use ESP32-S3-Pico for now to learn how to make PCBs and rotary encoders in hopes that the size of the final Omnitrix core can be reduced. For a future version a custom PCB with LCD Display and rotary encoder can be used.   
   
 In [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files) repository I am documenting varius tests for the features.    
+
 
 Video showcasing a first test of the project with most of the features included:  
 
@@ -19,21 +20,26 @@ Video showcasing a first test of the project with most of the features included:
   
 
 # Instructions
-These are instructions on how to use with a Esp32 Development Board to test the code.     
+These are instructions on how to use with a Esp32 Development Board to test the code. Note that the software supports different hardware to test it.     
   
 You will need:  
-* ESP32 Development Board with embedded PSRAM, Currently I have only tested it with [NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit)  
-* [Waveshare Round LCD Display GC9A01](https://www.waveshare.com/1.28inch-lcd-module.htm), I am using the [EC Buying](https://www.aliexpress.com/item/1005004786844308.html) one
+* [Waveshare Esp32-S3-Pico](https://www.waveshare.com/wiki/ESP32-S3-Pico) or any ESP32 Development Board with PSRAM   
+* [Round LCD Display GC9A01](https://www.waveshare.com/1.28inch-lcd-module.htm), I am using the [EC Buying](https://www.aliexpress.com/item/1005004786844308.html) without touch one
 * [Fermion DFPlayer Pro](https://www.dfrobot.com/product-2232.html)  
 * 2X Mini Metal Speaker w/ Wires - 8 ohm 0.5W  
-* 2X MicroSwitch SPDT ON-(ON) - Long Lever 18mm (A,B on the Schematic)  
+* Rotary Encoder OR 2X MicroSwitch SPDT ON-(ON) - Long Lever 18mm (For the rotary movement, A,B on the Schematic)  
 * MicroSwitch SPDT ON-(ON) - Roller Lever (SW on the Schematic)  
 * Tact Switch 6x6mm 5mm (ButtonPin on the Schematic)  
 * Breadboard, jumper wires, 4X 10 kohm resistor
   
-Follow the schematic on how to connect the wires. Some soldering will be needed to connect the pin headers and the speakers to the Fermion DFPlayer Pro.  
+Follow the schematic on how to connect the wires. Some soldering will be needed to connect the pin headers and the speakers to the Fermion DFPlayer Pro. (I have tested the Fermion DFPlayer Pro only with [NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit) but it possibly works with the Esp32-S3-Pico too)  
 
 ## Schematic:  
+The goal is to use the Esp32-S3-Pico for the software testing but not all features are tested in it yet. So the old schematic for the Esp32-S2 is still included.  
+  
+![Esp32-S3-Pico-Schematic-Rev-1.0](media/Images/Esp32-S3-Pico-Schematic-Rev-1.0.png)
+Old Schematic:  
+   
 ![EC Buying Display](media/Images/EC_Buying_Display.png)
 
 ## Uploading The Software  
@@ -43,9 +49,10 @@ This project uses Arduino IDE to program the Esp32 so you need to [install the E
 
 //#include <User_Setup.h>           // Default setup is root library folder
 //#include <User_Setups/Setup302_ESP32S3_GC9A01_TOUCH.h>
-#include <User_Setups/Setup303_ESP32S2_GC9A01.h>
+//#include <User_Setups/Setup303_ESP32S2_GC9A01.h>
 //#include <User_Setups/Setup304_ESP32S3_GC9A01.h>
 //#include <User_Setups/Setup305_ESP32S3_LCD128.h>
+#include <User_Setups/Setup306_ESP32S3_PICO_GC9A01.h>
 ```
    
 You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/tree/main/Test%20files/Used%20For%20Final%20Project) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
@@ -57,11 +64,11 @@ Make sure that the pin configuration file is included in `User_Setup.h`. In this
 /* User_Setup.h */
 
 //Pin configuration
-//Edit User_Setups/config_DEFAULT to create your own configuration 
-//or uncomment your preferred configuration
+//Edit User_Setups/config_DEFAULT to create your own configuration or uncomment your preferred configuration
 //#include "User_Setups/config_CUSTOM.h" //Use your own configuration
-#include "User_Setups/config_ESP32_S2_PINOUT.h"  //Esp32-s2 Dev Board
+//#include "User_Setups/config_ESP32_S2_PINOUT.h"  //Esp32-s2 Dev Board
 //#include "User_Setups/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
+#include "User_Setups/config_ESP32_S3_PICO_PINOUT.h" //Esp32-s3-Pico Dev Board
 ```
 You can also remove features by commenting the `#define X_ENABLED` definitions. 
 #### For hardware settings:   
@@ -72,7 +79,8 @@ Configuration of external wakeup:
 //1. Uncomment for use of ext0
 #define EXT0_ENABLED
 //Choose wakeup pin:
-#define EXT0_WAKEUP_PIN GPIO_NUM_5
+#define EXT0_WAKEUP_PIN GPIO_NUM_2
+//#define EXT0_WAKEUP_PIN GPIO_NUM_5 //Esp32-S2 pinout
 //Choose wakeup level:
 #define EXT0_WAKEUP_MODE 1
 //2. Uncomment for use of ext1
@@ -157,6 +165,7 @@ The only essential setting is one option for the animation. You can configure wh
 | [Waveshare Esp32-S3-Pico](https://www.waveshare.com/wiki/ESP32-S3-Pico) | ✅ | ✅ | | | | | |
 
 
+
 ## Dependencies
 * This project is developed in Arduino IDE version 2.1.1  
 * It uses the arduino-esp32 core by Espressif Systems version 2.0.14  
@@ -167,7 +176,7 @@ The only essential setting is one option for the animation. You can configure wh
 # Current Features:  
 * Settings for testing different hardware
 * Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
-* Support of the first twelve aliens  
+* Twelve aliens  
 * Animation  
 * Sound  
 * Ability to go into Deep Sleep Mode after a short time of inactivity  
