@@ -1,7 +1,7 @@
 # Omnitrix
 
 # Status
-| Released the nodemcu board version of the Omnitrix. To see the development of the project with the Esp32-S3-Pico board check out the other branches|
+| Released the nodemcu breadboard version of the Omnitrix. To see the development of the project with the Esp32-S3-Pico board check out the other branches|
 |----|  
 
 # Work in Progress
