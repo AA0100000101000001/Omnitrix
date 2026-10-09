@@ -1,7 +1,7 @@
 # Omnitrix
 
 # Status
-| Ordered the PCB shield I made for [ESP32-S3-LCD-1.28](https://www.waveshare.com/wiki/ESP32-S3-LCD-1.28) and if it works then I'll upload the production files. Meanwhile I'll change the Esp32 Dev Board to Esp32-S3-Pico |
+| Released the nodemcu breadboard version of the Omnitrix. To see the development of the project with the Esp32-S3-Pico board check out the other branches|
 |----|  
 
 # Work in Progress
@@ -9,10 +9,9 @@
 ![IMG_20230619_164351](media/Images/IMG_20230619_164351.jpg) 
 
 
-This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible when it comes to operating it like in the series. I started it to learn how to develop a mechatronic project using the ESP32. It started with a ESP32 Development Board - NodeMCU-32S2 module but I found out that there are other boards with an embedded LCD module on the market that are better to use. I decided to use ESP32-S3-LCD-1.28 for now to learn how to make PCBs and rotary encoders in hopes that the size of the final Omnitrix core can be reduced.   
+This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible when it comes to operating it like in the series. I started it to learn how to develop a mechatronic project using the ESP32. It started with a ESP32 Development Board - NodeMCU-32S2 module but I found out that there are other boards with an embedded LCD module on the market that are better to use. I decided to use ESP32-S3-Pico for now to learn how to make PCBs and rotary encoders in hopes that the size of the final Omnitrix core can be reduced.   
   
-In [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files) repository I am documenting varius tests for the features.  
-I am also planning to develop an ESP-IDF framework version. See the  [ESP-IDF-Omnitrix-Tests](https://github.com/AA0100000101000001/ESP-IDF-Omnitrix-Tests) repository for testing the features (On hold).  
+In [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files) repository I am documenting varius tests for the features.    
 
 Video showcasing a first test of the project with most of the features included:  
 
@@ -155,7 +154,7 @@ The only essential setting is one option for the animation. You can configure wh
 | Board | Micro Switches as Rotary Encoder | Rotary Encoder | Magnetic Rotary Encoder | DFPlayer_Pro Sound | Buzzer Sound | RGB LEDs Tested | Neopixel Ring |
 |----|----|----|----|----|----|----|----| 
 | [Waveshare ESP32 Development Board - NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit) | ✅ | ✅ | | ✅ | | | |
-| [Waveshare Esp32-S3-Pico](https://www.waveshare.com/wiki/ESP32-S3-Pico) | | | | | | | |
+| [Waveshare Esp32-S3-Pico](https://www.waveshare.com/wiki/ESP32-S3-Pico) | ✅ | ✅ | | | | | |
 
 
 ## Dependencies
