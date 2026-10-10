@@ -147,7 +147,7 @@ The only essential setting is one option for the animation. You can configure wh
 
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
-## Roadmap
+## Roadmap for version 1.0.0
 - [ ] Update esp32 arduino core and libraries to current version
 - [ ] Refactor code to look more proffesional
 - [ ] Do the pending GUI updates
