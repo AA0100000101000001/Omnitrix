@@ -1,7 +1,8 @@
 # Omnitrix
 
 # Status
-| The Esp32 Dev Board is now set to Esp32-S3-Pico. Planing on adding custom rotary encoder, doing changes on the graphics, using the RGB LED of the dev board and adding a buzzer selection for sound. |
+| The project now uses a Esp32-S3-Pico board. To see the version of the linked video with the [NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit) check out the [nodemcu_omnitrix_0.1.0 branch](https://github.com/AA0100000101000001/Omnitrix/tree/nodemcu_omnitrix_0.1.0) |
+|----|
 
 # Work in Progress
 
@@ -9,7 +10,7 @@
 
 
 
-This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate as possible when it comes to operating it like in the series. I started it to learn how to develop a mechatronic project using the ESP32. It started with a ESP32 Development Board - NodeMCU-32S2 module but I found out that there are other boards with an embedded LCD module on the market that are better to use. I decided to use ESP32-S3-Pico for now to learn how to make PCBs and rotary encoders in hopes that the size of the final Omnitrix core can be reduced. For a future version a custom PCB with LCD Display and rotary encoder can be used.   
+This project is meant to be a replica of the Omnitrix from the Ben 10 Classic series and be as accurate and cheap as possible. I started it to learn how to develop a mechatronic project using the ESP32. It started with a ESP32 Development Board - NodeMCU-32S2 module but I found out that there are other boards with an embedded LCD module on the market that are better to use. I decided to use ESP32-S3-Pico for now to learn how to make PCBs and rotary encoders in hopes that the size of the final Omnitrix core can be reduced. For a future version a custom PCB with LCD Display and rotary encoder can be used.   
   
 In [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files) repository I am documenting varius tests for the features.    
 
@@ -25,22 +26,17 @@ These are instructions on how to use with a Esp32 Development Board to test the 
 You will need:  
 * [Waveshare Esp32-S3-Pico](https://www.waveshare.com/wiki/ESP32-S3-Pico) or any ESP32 Development Board with PSRAM   
 * [Round LCD Display GC9A01](https://www.waveshare.com/1.28inch-lcd-module.htm), I am using the [EC Buying](https://www.aliexpress.com/item/1005004786844308.html) without touch one
-* [Fermion DFPlayer Pro](https://www.dfrobot.com/product-2232.html)  
-* 2X Mini Metal Speaker w/ Wires - 8 ohm 0.5W  
 * Rotary Encoder OR 2X MicroSwitch SPDT ON-(ON) - Long Lever 18mm (For the rotary movement, A,B on the Schematic)  
 * MicroSwitch SPDT ON-(ON) - Roller Lever (SW on the Schematic)  
 * Tact Switch 6x6mm 5mm (ButtonPin on the Schematic)  
 * Breadboard, jumper wires, 4X 10 kohm resistor
   
-Follow the schematic on how to connect the wires. Some soldering will be needed to connect the pin headers and the speakers to the Fermion DFPlayer Pro. (I have tested the Fermion DFPlayer Pro only with [NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit) but it possibly works with the Esp32-S3-Pico too)  
+Follow the schematic on how to connect the wires.  
 
-## Schematic:  
-The goal is to use the Esp32-S3-Pico for the software testing but not all features are tested in it yet. So the old schematic for the Esp32-S2 is still included.  
+## Schematic:    
   
 ![Esp32-S3-Pico-Schematic-Rev-1.0](media/Images/Esp32-S3-Pico-Schematic-Rev-1.0.png)
-Old Schematic:  
    
-![EC Buying Display](media/Images/EC_Buying_Display.png)
 
 ## Uploading The Software  
 This project uses Arduino IDE to program the Esp32 so you need to [install the ESP32 board to it](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/). It also uses Bodmer's [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) library for the control of the LCD Display and [PNGdec](https://github.com/bitbank2/PNGdec) for displaying png images. You can configure the LCD Display pins by editing the `TFT_eSPI/User_Setup.h` file or you can create a configuration file in `TFT_eSPI/User_Setups` folder and include it in `TFT_eSPI/User_Setup_Select.h` instead of `User_Setup.h`. I have added my configurations in the Supported Displays folder.     
@@ -48,8 +44,6 @@ This project uses Arduino IDE to program the Esp32 so you need to [install the E
 /* TFT_eSPI/User_Setup_Select.h */
 
 //#include <User_Setup.h>           // Default setup is root library folder
-//#include <User_Setups/Setup302_ESP32S3_GC9A01_TOUCH.h>
-//#include <User_Setups/Setup303_ESP32S2_GC9A01.h>
 //#include <User_Setups/Setup304_ESP32S3_GC9A01.h>
 //#include <User_Setups/Setup305_ESP32S3_LCD128.h>
 #include <User_Setups/Setup306_ESP32S3_PICO_GC9A01.h>
@@ -66,7 +60,6 @@ Make sure that the pin configuration file is included in `User_Setup.h`. In this
 //Pin configuration
 //Edit User_Setups/config_DEFAULT to create your own configuration or uncomment your preferred configuration
 //#include "User_Setups/config_CUSTOM.h" //Use your own configuration
-//#include "User_Setups/config_ESP32_S2_PINOUT.h"  //Esp32-s2 Dev Board
 //#include "User_Setups/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
 #include "User_Setups/config_ESP32_S3_PICO_PINOUT.h" //Esp32-s3-Pico Dev Board
 ```
@@ -107,15 +100,13 @@ Configuration of pop up buttons and rotary encoder:
 //#define MAGNETIC_ROTARY_ENCODER_ENABLED
 ```
 Configuration of sound:  
-(Buzzer is not supported yet)
+(Buzzer is not supported yet but will be selected as the default)
 ```C
 //SOUND SETTINGS: Uncomment for sound
-#define SOUND_ENABLED
+//#define SOUND_ENABLED
 
 //SOUND HARDWARE SELECTION: Use one of these options for sound
-//1. Uncomment for use of Dfplayer Pro for sound
-#define SOUND_DFPLAYER_PRO_ENABLED
-//2. Uncomment for use of buzzer for sound
+// Uncomment for use of buzzer for sound
 //#define SOUND_BUZZER_ENABLED
 ```
 Configuration of LEDs:  
@@ -130,8 +121,6 @@ Configuration of LEDs:
 //#define RGB_LEDS_ENABLED
 //LED 2. Uncomment for Neopixel ring LEDs
 //#define NEOPIXEL_RING_LEDS_ENABLED
-//LED 3. Uncomment for IR controlled LEDs
-//#define IR_CONTROLLED_LEDS_ENABLED
 ```
 #### For software settings:  
 The only essential setting is one option for the animation. You can configure what kind of animation is being used, if sound will be muted in booting and if demo mode will be enabled (it is not supported right now). 
@@ -158,13 +147,13 @@ The only essential setting is one option for the animation. You can configure wh
 
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*
 
-## Tested With
-| Board | Micro Switches as Rotary Encoder | Rotary Encoder | Magnetic Rotary Encoder | DFPlayer_Pro Sound | Buzzer Sound | RGB LEDs Tested | Neopixel Ring |
-|----|----|----|----|----|----|----|----| 
-| [Waveshare ESP32 Development Board - NodeMCU-32S2 module](https://www.waveshare.com/wiki/NodeMCU-32-S2-Kit) | ✅ | ✅ | | ✅ | | | |
-| [Waveshare Esp32-S3-Pico](https://www.waveshare.com/wiki/ESP32-S3-Pico) | ✅ | ✅ | | | | | |
-
-
+## Roadmap
+- [ ] Update esp32 arduino core and libraries to current version
+- [ ] Refactor code to look more proffesional
+- [ ] Do the pending GUI updates
+- [ ] Use the RGB LED of the Esp32-S3-Pico
+- [ ] Add support for magnetic rotary encoder
+- [ ] Add support for passive buzzer
 
 ## Dependencies
 * This project is developed in Arduino IDE version 2.1.1  
@@ -177,6 +166,5 @@ The only essential setting is one option for the animation. You can configure wh
 * Settings for testing different hardware
 * Four states of control (Start mode, Alien Selection mode, Transformation mode, Recharging Mode)
 * Twelve aliens  
-* Animation  
-* Sound  
+* Animation   
 * Ability to go into Deep Sleep Mode after a short time of inactivity  
