@@ -17,6 +17,8 @@
 #define TFT_BL   40  // LED back-light
 #define TFT_BACKLIGHT_ON HIGH
 
+#define USE_HSPI_PORT
+
 //I don't need fonts cause aliens can't read human language
 
 //#define LOAD_GLCD   // Font 1. Original Adafruit 8 pixel font needs ~1820 bytes in FLASH

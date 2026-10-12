@@ -156,7 +156,7 @@ The only essential setting is one option for the animation. You can configure wh
 - [ ] Add support for passive buzzer
 
 ## Dependencies
-* This project is developed in Arduino IDE version 2.1.1  
+* This project is developed in Arduino IDE version 2.3.10  
 * It uses the arduino-esp32 core by Espressif Systems version 2.0.14  
 * TFT_eSPI library version 2.5.34  
 * PNGdec library version 1.0.1  
