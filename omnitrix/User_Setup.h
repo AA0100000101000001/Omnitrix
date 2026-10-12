@@ -2,7 +2,6 @@
 //Pin configuration
 //Edit User_Setups/config_DEFAULT to create your own configuration or uncomment your preferred configuration
 //#include "User_Setups/config_CUSTOM.h" //Use your own configuration
-//#include "User_Setups/config_ESP32_S2_PINOUT.h"  //Esp32-s2 Dev Board
 //#include "User_Setups/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
 #include "User_Setups/config_ESP32_S3_PICO_PINOUT.h" //Esp32-s3-Pico Dev Board
 
@@ -13,7 +12,6 @@
 #define EXT0_ENABLED
 //Choose wakeup pin:
 #define EXT0_WAKEUP_PIN GPIO_NUM_2
-//#define EXT0_WAKEUP_PIN GPIO_NUM_5 //Esp32-S2 pinout
 //#define EXT0_WAKEUP_PIN GPIO_NUM_1  //Wake up with rotary movement
 //Choose wakeup level:
 #define EXT0_WAKEUP_MODE 1
@@ -197,18 +195,6 @@
   #error "You must use at least only one option for the start animation"
 #endif
 
-/* Failed LCD pin configuration
-//Define Esp32-s2 development board pins
-#if defined ESP32_S2_PINOUT
-  #include "User_Setups/Setup303_ESP32S2_GC9A01.h"
-#endif
-
-//Define Esp32-s3 touch LCD pins
-#if defined ESP32_S3_TOUCH_LCD_1_28
-	//Using integrated Touch LCD with GC9A01/CST816S drivers
-  #include "User_Setups/Setup302_ESP32S3_GC9A01_TOUCH.h"
-#endif
-*/
 
 //-------------------------------------------------------
 //----------DON'T EDIT THIS------------------------------
