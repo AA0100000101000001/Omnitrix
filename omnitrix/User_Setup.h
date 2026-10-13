@@ -5,9 +5,6 @@
 //#include "User_Setups/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
 #include "User_Setups/config_ESP32_S3_PICO_PINOUT.h" //Esp32-s3-Pico Dev Board
 
-//TFTeSPI configuration
-#include "User_Setups/Setup306_ESP32S3_PICO_GC9A01.h" 
-
 //HARDWARE SETTINGS
 
 //WAKEUP SETTINGS: Use ext0 or ext1
