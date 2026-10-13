@@ -129,4 +129,4 @@ TFT_eSPI tft = TFT_eSPI();
 
 void ShowSymbols();
 void ShowAlien();
-void pngDraw(PNGDRAW *pDraw);
+int pngDraw(PNGDRAW *pDraw);
