@@ -159,7 +159,7 @@ The only essential setting is one option for the animation. You can configure wh
 * This project is developed in Arduino IDE version 2.3.10  
 * It uses the arduino-esp32 core by Espressif Systems version 3.3.12 
 * TFT_eSPI library version 2.5.43  
-* PNGdec library version 1.0.1  
+* PNGdec library version 1.1.6  
 * DFRobot_DF1201S library version 1.0.2 
 
 # Current Features:  
