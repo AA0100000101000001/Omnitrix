@@ -87,7 +87,7 @@ void ShowAlien() {
 //Method that displays green backround to erase alien
 void eraseAlien() {
   
-  int16_t rc = png.openFLASH((uint8_t *)omnitrix_alien_backround, sizeof(omnitrix_alien_backround), pngDraw);
+  int16_t rc = png.openFLASH((uint8_t *)omnitrix_alien_background, sizeof(omnitrix_alien_background), pngDraw);
 
   if (rc == PNG_SUCCESS) {
     //Serial.println("Successfully png file");

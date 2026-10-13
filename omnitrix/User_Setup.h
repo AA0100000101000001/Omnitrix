@@ -71,7 +71,7 @@
 //#define DEMO_ENABLED
 //Choose only one type of demo
 //1. Demo automated display of the features that can go out of that state when a button is pressed
-//#define DEMO_AYTOMATED_ENABLED
+//#define DEMO_AUTOMATED_ENABLED
 //2. Demo user controlled that can go out of that state from the menu
 //#define DEMO_CONTROLLED_ENABLED
 
@@ -173,13 +173,13 @@
 #endif
 
 //Check if demo is enabled
-#if !defined DEMO_ENABLED && (defined DEMO_AYTOMATED_ENABLED || defined DEMO_CONTROLLED_ENABLED)
+#if !defined DEMO_ENABLED && (defined DEMO_AUTOMATED_ENABLED || defined DEMO_CONTROLLED_ENABLED)
   #error "You must enable Demo to use one of these demo options"
 #endif
 #if defined DEMO_ENABLED
 
-  #if defined DEMO_AYTOMATED_ENABLED && !defined DEMO_CONTROLLED_ENABLED
-  #elif !defined DEMO_AYTOMATED_ENABLED && defined DEMO_CONTROLLED_ENABLED
+  #if defined DEMO_AUTOMATED_ENABLED && !defined DEMO_CONTROLLED_ENABLED
+  #elif !defined DEMO_AUTOMATED_ENABLED && defined DEMO_CONTROLLED_ENABLED
   #else
     #error "You must use at least only one option for the demo"
   #endif

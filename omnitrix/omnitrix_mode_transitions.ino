@@ -63,7 +63,7 @@ void mode2to3() {
   //Set offset to time passed since last time the timer was checked (in sec)
   transformation_start_time_offset = RTC_getLocalEpoch() - transformation_start_time;
 
-  //Configure the wake up source to wake up every time the transfomation is done
+  //Configure the wake up source to wake up every time the transformation is done
   esp_sleep_enable_timer_wakeup((transform_time_val - transformation_start_time_offset) * uS_TO_S_FACTOR);
   Serial.println("Transformation: Setup ESP32 to sleep for every " + String(transform_time_val - transformation_start_time_offset) +
   " Seconds");

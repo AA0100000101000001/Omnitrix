@@ -8,7 +8,7 @@
 //#include <PCM.h>
 
 #include "omnitrix_aliens.h"
-#include "omnitrix_alien_backround.h"
+#include "omnitrix_alien_background.h"
 //Start animation with images
 #if defined START_ANIMATION_WITH_IMAGES
 #include "omnitrix_anim.h"
@@ -44,7 +44,7 @@
 
 #define MAX_IMAGE_WDITH 240 // Set rendering line buffer lengths for image
 
-#define ALIEN_NUMBER 11 //0...11 = 12
+#define ALIEN_COUNT 11 //0...11 = 12 Total aliens
 
 //Time Variables
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
@@ -97,7 +97,7 @@ gray RGB: 171, 171, 171 = 0xABABAB = 0xAD55 in RGB565
 #endif
 
 //Variables that are saved in deep sleep mode
-RTC_DATA_ATTR uint16_t bootCount = 0;  // Up to 65535 reboots before overflow
+RTC_DATA_ATTR bool firstBoot = true;  // For initialization
 RTC_DATA_ATTR uint8_t alienNo; // Up to 255 aliens
 RTC_DATA_ATTR uint8_t mode; // Up to 255 modes
 

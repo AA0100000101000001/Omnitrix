@@ -36,7 +36,7 @@ void rightButtonModes() {
     case 2:
       //If the next alien number is bigger than the total number of aliens
       //then go back to first alien, else go to the next alien
-      if ((alienNo  + 1)> ALIEN_NUMBER ) {
+      if ((alienNo  + 1)> ALIEN_COUNT ) {
         alienNo = 0;
       }
       else {
@@ -71,9 +71,8 @@ void leftButtonModes() {
     case 2:
       //If the next alien number is less than 0
       //then go back to the last alien, else go to the previous alien
-      int alien_overflow = alienNo;
-      if ((alien_overflow - 1) < 0 ) {
-        alienNo = ALIEN_NUMBER;
+      if ((alienNo - 1) < 0 ) {
+        alienNo = ALIEN_COUNT;
       }
       else {
         alienNo -= 1;

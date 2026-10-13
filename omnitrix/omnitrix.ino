@@ -50,14 +50,14 @@ void IRAM_ATTR Leftbutton_interrupt() {
   //Debouncing
   if (interruptTime - lastInterruptTime > 200)
   {
-    interruptTime = true;
+    leftState = true;
     lastInterruptTime = interruptTime;
   }
 }
 //Rotary Encoder
 #elif defined ROTARY_ENCODER_ENABLED
 
-void rotEncoder_interrupt() {
+void IRAM_ATTR rotEncoder_interrupt() {
 
   static uint8_t old_AB = 3;  // Lookup table index
   static int8_t encval = 0;   // Encoder value  
@@ -170,7 +170,7 @@ void setup() {
 
   //If the omnitrix is booting for the first time then initialise alienNo, mode
   //When it wakes up from deep sleep the values will be saved
-  if (bootCount == 0) {
+  if (firstBoot) {
     alienNo = 0;
     mode = 1;
     RTC_setTime(0, 0, 0, 1, 1, 2023);  // Set Time to 1st Jan 2023 00:00:00
@@ -182,10 +182,9 @@ void setup() {
     //Display start screen
     tft.fillScreen(OMNITRIX_GREEN);
     ShowSymbols();
+
+    firstBoot = false; //Never go to this section again
   }
-  bootCount++;
-  Serial.print("Boot number: ");
-  Serial.println(bootCount);
 
   //External wakeup setup
   //EXT0
@@ -322,7 +321,7 @@ void get_wakeup_reason() {
         //Set offset to time passed since last time the timer was checked (in sec)
         transformation_start_time_offset = RTC_getLocalEpoch() - transformation_start_time;
 
-        //Configure the wake up source to wake up every time the transfomation is done
+        //Configure the wake up source to wake up every time the transformation is done
         esp_sleep_enable_timer_wakeup((transform_time_val - transformation_start_time_offset) * uS_TO_S_FACTOR);
         Serial.println("Transformation: Setup ESP32 to sleep for every " + String(transform_time_val - transformation_start_time_offset) +
         " Seconds");
@@ -348,7 +347,7 @@ void get_wakeup_reason() {
 
       //Serial.println("Wakeup caused by timer"); 
 
-      //Transformation mode is done, enable deep sleep timer for recharhing
+      //Transformation mode is done, enable deep sleep timer for recharging
       if (mode == 3) {
         
         delay(200);
@@ -365,7 +364,10 @@ void get_wakeup_reason() {
         break;
       }
     //Wake up not caused by deep sleep
-    default : { } //Serial.printf("Wakeup was not caused by deep sleep: %d\n",wakeup_reason); break;
+    default : {
+      //Serial.printf("Wakeup was not caused by deep sleep: %d\n",wakeup_reason); 
+      break;
+    }
   }
 
 }
