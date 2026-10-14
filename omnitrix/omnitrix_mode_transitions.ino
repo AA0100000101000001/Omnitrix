@@ -80,9 +80,9 @@ void mode3to4() {
 
   //Red led colour
   #if defined RGB_LEDS_ENABLED
-    analogWrite(RGB_R_PIN, GREEN_LED_R);
-    analogWrite(RGB_G_PIN, GREEN_LED_G);
-    analogWrite(RGB_B_PIN, GREEN_LED_B);
+    analogWrite(RGB_R_PIN, RED_LED_R);
+    analogWrite(RGB_G_PIN, RED_LED_G);
+    analogWrite(RGB_B_PIN, RED_LED_B);
   #endif
   
   //Display red screen
@@ -128,14 +128,14 @@ void mode3to1() {
   Serial.println("Disabled Timer1");
 }
 
-//Rechargin mode to Start mode
+//Recharging mode to Start mode
 void mode4to1() {
 
   //Green led colour
   #if defined RGB_LEDS_ENABLED
-  analogWrite(RGB_R_PIN, RED_LED_R);
-  analogWrite(RGB_G_PIN, RED_LED_G);
-  analogWrite(RGB_B_PIN, RED_LED_B);
+  analogWrite(RGB_R_PIN, GREEN_LED_R);
+  analogWrite(RGB_G_PIN, GREEN_LED_G);
+  analogWrite(RGB_B_PIN, GREEN_LED_B);
   #endif
 
   Serial.println("green screen");

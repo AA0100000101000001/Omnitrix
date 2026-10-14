@@ -44,7 +44,7 @@
 
 #define MAX_IMAGE_WDITH 240 // Set rendering line buffer lengths for image
 
-#define ALIEN_COUNT 11 //0...11 = 12 Total aliens
+#define ALIEN_LAST_INDEX 11 //0...11 = 12 Total aliens
 
 //Time Variables
 #define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
@@ -52,8 +52,8 @@
 uint32_t start; //timer for deep sleep
 
 //Time definitions for demo and default mode
-#define TRANSFORMATION_TIME_DEMO 10 //20 sec
-#define OMNITRIX_RECHARGE_TIME_DEMO 10 //20 sec
+#define TRANSFORMATION_TIME_DEMO 10 //10 sec
+#define OMNITRIX_RECHARGE_TIME_DEMO 10 //10 sec
 #define TRANSFORMATION_TIME_DEFAULT 60 //1 min
 #define OMNITRIX_RECHARGE_TIME_DEFAULT 60 //1 min
 
