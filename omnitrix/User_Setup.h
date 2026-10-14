@@ -58,6 +58,7 @@
 
 //SOFTWARE SETTINGS
 
+//SERIAL OUTPUT
 //Basic debugging info
 #define ENABLE_SERIAL
 
@@ -69,15 +70,18 @@
 //3. Info about FLASH/RAM
 //#define ENABLE_MEMORY_INFO
 
+//ANIMATION
 //Choose only one type of animation
 //1. Start animation with images
 #define START_ANIMATION_WITH_IMAGES //Has memory leaks
 //2. Hard coded start animation
 //#define START_ANIMATION_WITHOUT_IMAGES //Not finished
 
+//SOUND
 //Choose if sound will be muted in booting
 //#define SOUND_MUTED_IN_BOOTING //Only if sound is enabled
 
+//DEMO
 //Choose if demo is enabled //not implemented yet
 //#define DEMO_ENABLED
 //Choose only one type of demo
