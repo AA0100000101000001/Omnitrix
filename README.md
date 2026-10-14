@@ -123,19 +123,42 @@ Configuration of LEDs:
 //#define NEOPIXEL_RING_LEDS_ENABLED
 ```
 #### For software settings:  
-The only essential setting is one option for the animation. You can configure what kind of animation is being used, if sound will be muted in booting and if demo mode will be enabled (it is not supported right now). 
-```C
-//SOFTWARE SETTINGS
+The only essential setting is one option for the animation. You can configure:   
 
+To enable serial for debugging:  
+
+```C
+//Basic debugging info
+#define ENABLE_SERIAL
+
+//Choose one or more types of showing specialized Serial output
+//1. Verbose general info
+//#define ENABLE_VERBOSE_INFO
+//2. Verbose deep sleep info
+//#define ENABLE_DEEP_SLEEP_INFO
+//3. Info about FLASH/RAM
+//#define ENABLE_MEMORY_INFO
+```
+
+What kind of animation is being used:  
+
+```C
 //Choose only one type of animation
 //1. Start animation with images
 #define START_ANIMATION_WITH_IMAGES //Has memory leaks
 //2. Hard coded start animation
 //#define START_ANIMATION_WITHOUT_IMAGES //Not finished
+```
 
+If sound will be muted in booting: 
+
+```C
 //Choose if sound will be muted in booting
 //#define SOUND_MUTED_IN_BOOTING //Only if sound is enabled
+```
+And if demo mode will be enabled (it is not supported right now)  
 
+```C
 //Choose if demo is enabled //not implemented yet
 //#define DEMO_ENABLED
 //Choose only one type of demo

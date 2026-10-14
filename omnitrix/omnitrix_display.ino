@@ -38,7 +38,9 @@ void  ShowSelectSymbols() {
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[10], sizeof(omnitrix_anim[10]), pngDraw);
 
   if (rc == PNG_SUCCESS) {
-    //Serial.println("Successfully png file");
+    #if defined ENABLE_MEMORY_INFO
+      Serial.println("Successfully png file");
+    #endif
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
@@ -52,7 +54,9 @@ void  ShowSelectSymbols() {
 //Function that displays start icon symbols
 void ShowSymbols() {
 
-  //Serial.println("show symbols");
+  #if defined ENABLE_MEMORY_INFO
+    Serial.println("show symbols");
+  #endif
 
   //Start Symbols with image
   #if defined START_ANIMATION_WITH_IMAGES
@@ -60,7 +64,9 @@ void ShowSymbols() {
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[0], sizeof(omnitrix_anim[0]), pngDraw);
 
   if (rc == PNG_SUCCESS) {
-    //Serial.println("Successfully png file");
+    #if defined ENABLE_MEMORY_INFO
+      Serial.println("Successfully png file");
+    #endif
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
@@ -76,7 +82,9 @@ void ShowAlien() {
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_aliens[alienNo], sizeof(omnitrix_aliens[alienNo]), pngDraw);
 
   if (rc == PNG_SUCCESS) {
-    //Serial.println("Successfully png file");
+    #if defined ENABLE_MEMORY_INFO
+      Serial.println("Successfully png file");
+    #endif
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
@@ -90,7 +98,9 @@ void eraseAlien() {
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_alien_background, sizeof(omnitrix_alien_background), pngDraw);
 
   if (rc == PNG_SUCCESS) {
-    //Serial.println("Successfully png file");
+    #if defined ENABLE_MEMORY_INFO
+      Serial.println("Successfully png file");
+    #endif
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
