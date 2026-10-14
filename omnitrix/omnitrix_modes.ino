@@ -48,9 +48,11 @@ void rightButtonModes() {
       //Display alien
       ShowAlien();
 
-      Serial.print("Right, alien no:");
-      Serial.println(alienNo);
-      delay(200);
+      #if defined ENABLE_SERIAL
+        Serial.print("Right, alien no:");
+        Serial.println(alienNo);
+        delay(200);
+      #endif
       break;
   }
 
@@ -82,10 +84,12 @@ void leftButtonModes() {
       eraseAlien();
       //Display alien
       ShowAlien();
-
-      Serial.print("Left, alien no:");
-      Serial.println(alienNo);
-      delay(200);
+      
+      #if defined ENABLE_SERIAL
+        Serial.print("Left, alien no:");
+        Serial.println(alienNo);
+        delay(200);
+      #endif
       break;
   }
 
@@ -116,8 +120,10 @@ void selectbuttonModes() {
   //reset timer
   start = RTC_getLocalEpoch();
 
-  Serial.print("mode ");
-  Serial.println(mode);
+  #if defined ENABLE_SERIAL
+    Serial.print("mode ");
+    Serial.println(mode);
+  #endif
 
 }
 

@@ -58,6 +58,17 @@
 
 //SOFTWARE SETTINGS
 
+//Basic debugging info
+#define ENABLE_SERIAL
+
+//Choose one or more types of showing specialized Serial output
+//1. Verbose general info
+//#define ENABLE_VERBOSE_INFO
+//2. Verbose deep sleep info
+//#define ENABLE_DEEP_SLEEP_INFO
+//3. Info about FLASH/RAM
+//#define ENABLE_MEMORY_INFO
+
 //Choose only one type of animation
 //1. Start animation with images
 #define START_ANIMATION_WITH_IMAGES //Has memory leaks
@@ -116,7 +127,7 @@
 	#define LEFT_BUTTON_PIN		CONFIG_LEFT_BUTTON_PIN //Left button
   
 #else
-  #error "You must use at least only one option for the rotary encoder"
+  #error "You must use only one option for the rotary encoder"
 #endif
 
 //Check if sound is enabled
@@ -137,7 +148,7 @@
 		#define BUZZER_PIN CONFIG_BUZZER //buzzer
 
 	#else
-	  #error "You must use at least only one option for the sound"
+	  #error "You must use only one option for the sound"
 	#endif
 
 #endif
@@ -168,8 +179,29 @@
 
   //Error
   #else
-    #error "You must use at least only one option for the LEDs"
+    #error "You must use only one option for the LEDs"
   #endif
+#endif
+
+
+//Check if serial is enabled
+#if !defined ENABLE_SERIAL && (defined ENABLE_VERBOSE_INFO || defined ENABLE_DEEP_SLEEP_INFO || defined ENABLE_MEMORY_INFO)
+  #error "You must enable Serial to use one of these Serial info options"
+#endif
+
+//Choose one or more types of showing Serial output
+//1. Verbose general info
+// #define ENABLE_VERBOSE_INFO
+//2. Verbose deep sleep info
+// #define ENABLE_DEEP_SLEEP_INFO
+//3. Info about FLASH/RAM
+// #define ENABLE_MEMORY_INFO
+
+//Check type of animation
+#if defined START_ANIMATION_WITH_IMAGES && !defined START_ANIMATION_WITHOUT_IMAGES
+#elif !defined START_ANIMATION_WITH_IMAGES && defined START_ANIMATION_WITHOUT_IMAGES
+#else
+  #error "You must use at least only one option for the start animation"
 #endif
 
 //Check if demo is enabled
@@ -183,16 +215,6 @@
   #else
     #error "You must use at least only one option for the demo"
   #endif
-
-#endif
-
-
-
-//Check type of animation
-#if defined START_ANIMATION_WITH_IMAGES && !defined START_ANIMATION_WITHOUT_IMAGES
-#elif !defined START_ANIMATION_WITH_IMAGES && defined START_ANIMATION_WITHOUT_IMAGES
-#else
-  #error "You must use at least only one option for the start animation"
 #endif
 
 

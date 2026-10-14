@@ -7,7 +7,9 @@ void mode1to2() {
   #endif
 
   mode = 2;
-	Serial.println("Button pressed, select alien");
+  #if defined ENABLE_SERIAL
+	  Serial.println("Button pressed, select alien");
+  #endif
 
   //Display animation
   showAnimation();
@@ -27,7 +29,9 @@ void mode2to1() {
   #endif
 
   mode = 1;
-  Serial.println("Button pressed, back to start");
+  #if defined ENABLE_SERIAL
+    Serial.println("Button pressed, back to start");
+  #endif
 
   delay(300);
 
@@ -41,7 +45,9 @@ void mode2to1() {
 void mode2to3() {
 
   mode = 3;
-  Serial.println("Tranformed into alien");
+  #if defined ENABLE_SERIAL
+    Serial.println("Tranformed into alien");
+  #endif
 
   #if defined SOUND_ENABLED
   playSound(5); //Play transformation sound
@@ -65,8 +71,10 @@ void mode2to3() {
 
   //Configure the wake up source to wake up every time the transformation is done
   esp_sleep_enable_timer_wakeup((transform_time_val - transformation_start_time_offset) * uS_TO_S_FACTOR);
-  Serial.println("Transformation: Setup ESP32 to sleep for every " + String(transform_time_val - transformation_start_time_offset) +
+  #if defined ENABLE_SERIAL
+    Serial.println("Transformation: Setup ESP32 to sleep for every " + String(transform_time_val - transformation_start_time_offset) +
   " Seconds");
+  #endif
 
 }
 
@@ -89,7 +97,9 @@ void mode3to4() {
   tft.fillScreen(OMNITRIX_RED);
   ShowSymbols();
 
-  Serial.println("Omnitrix is recharging");
+  #if defined ENABLE_SERIAL
+    Serial.println("Omnitrix is recharging");
+  #endif
 
   //Start Rechargin timer
   //Set recharging start time to current epoch time
@@ -97,15 +107,19 @@ void mode3to4() {
   //Set offset to time passed since last time the timer was checked (in sec)
   recharging_start_time_offset = RTC_getLocalEpoch() - recharging_start_time;
 
-  //Serial.println(recharging_start_time_offset);
-  //Serial.println(recharge_time_val);
+  #if defined ENABLE_DEEP_SLEEP_INFO
+    Serial.println(recharging_start_time_offset);
+    Serial.println(recharge_time_val);
+  #endif
 
   mode = 4;
 
   //Configure the wake up source to wake up every time the recharge is done
   esp_sleep_enable_timer_wakeup((recharge_time_val - recharging_start_time_offset) * uS_TO_S_FACTOR);
-  Serial.println("Recharging: Setup ESP32 to sleep for every " + String(recharge_time_val - recharging_start_time_offset) +
+  #if defined ENABLE_SERIAL
+    Serial.println("Recharging: Setup ESP32 to sleep for every " + String(recharge_time_val - recharging_start_time_offset) +
   " Seconds");
+  #endif
   
 }
 
@@ -117,7 +131,9 @@ void mode3to1() {
   #endif
 
   mode = 1;
-  Serial.println("Button pressed, untransforming and going back to Start mode");
+  #if defined ENABLE_SERIAL
+    Serial.println("Button pressed, untransforming and going back to Start mode");
+  #endif
 
   //display start
   tft.fillScreen(OMNITRIX_GREEN);
@@ -125,7 +141,9 @@ void mode3to1() {
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-  Serial.println("Disabled Timer1");
+  #if defined ENABLE_SERIAL
+    Serial.println("Disabled Timer1");
+  #endif
 }
 
 //Recharging mode to Start mode
@@ -137,19 +155,22 @@ void mode4to1() {
   analogWrite(RGB_G_PIN, GREEN_LED_G);
   analogWrite(RGB_B_PIN, GREEN_LED_B);
   #endif
-
-  Serial.println("green screen");
+  
   //Display green screen
   tft.fillScreen(OMNITRIX_GREEN);
   ShowSymbols();
 
-  Serial.println("Going back to start");
+  #if defined ENABLE_SERIAL
+    Serial.println("Going back to start");
+  #endif
   
   mode = 1;
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-  Serial.println("Disabled Timer2");
+  #if defined ENABLE_SERIAL
+    Serial.println("Disabled Timer2");
+  #endif
   
   //reset timer
   start = RTC_getLocalEpoch();
