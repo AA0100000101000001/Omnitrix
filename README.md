@@ -123,7 +123,7 @@ Configuration of LEDs:
 //#define NEOPIXEL_RING_LEDS_ENABLED
 ```
 #### For software settings:  
-The only essential setting is one option for the animation. You can configure:   
+The only essential setting is one option for the animation. Default transformation and recharging time is 60 seconds. You can configure:   
 
 To enable serial for debugging:  
 
@@ -156,16 +156,12 @@ If sound will be muted in booting:
 //Choose if sound will be muted in booting
 //#define SOUND_MUTED_IN_BOOTING //Only if sound is enabled
 ```
-And if demo mode will be enabled (it is not supported right now)  
+And if demo mode will be enabled (sets transformation and recharge time to 10 sec)  
 
 ```C
-//Choose if demo is enabled //not implemented yet
-//#define DEMO_ENABLED
-//Choose only one type of demo
-//1. Demo automated display of the features that can go out of that state when a button is pressed
-//#define DEMO_AYTOMATED_ENABLED
-//2. Demo user controlled that can go out of that state from the menu
-//#define DEMO_CONTROLLED_ENABLED
+//DEMO
+//Choose if demo is enabled 
+#define DEMO_ENABLED
 ```
 
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*

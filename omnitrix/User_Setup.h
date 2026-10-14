@@ -82,13 +82,13 @@
 //#define SOUND_MUTED_IN_BOOTING //Only if sound is enabled
 
 //DEMO
-//Choose if demo is enabled //not implemented yet
-//#define DEMO_ENABLED
-//Choose only one type of demo
-//1. Demo automated display of the features that can go out of that state when a button is pressed
+//Choose if demo is enabled 
+#define DEMO_ENABLED
+//Choose additional special type of demo //not implemented yet
+//Demo automated display of the features
 //#define DEMO_AUTOMATED_ENABLED
-//2. Demo user controlled that can go out of that state from the menu
-//#define DEMO_CONTROLLED_ENABLED
+//Demo is user controlled (that could be implemented to go out of that state from the menu)
+//(Automated could be implemented to go out of that state when a button is pressed)
 
 
 //-------------------------------------------------------
@@ -209,16 +209,8 @@
 #endif
 
 //Check if demo is enabled
-#if !defined DEMO_ENABLED && (defined DEMO_AUTOMATED_ENABLED || defined DEMO_CONTROLLED_ENABLED)
-  #error "You must enable Demo to use one of these demo options"
-#endif
-#if defined DEMO_ENABLED
-
-  #if defined DEMO_AUTOMATED_ENABLED && !defined DEMO_CONTROLLED_ENABLED
-  #elif !defined DEMO_AUTOMATED_ENABLED && defined DEMO_CONTROLLED_ENABLED
-  #else
-    #error "You must use at least only one option for the demo"
-  #endif
+#if !defined DEMO_ENABLED && defined DEMO_AUTOMATED_ENABLED
+  #error "You must enable Demo to use this demo option"
 #endif
 
 
