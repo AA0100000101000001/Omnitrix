@@ -66,26 +66,18 @@ Make sure that the pin configuration file is included in `User_Setup.h`. In this
 You can also remove features by commenting the `#define X_ENABLED` definitions. 
 #### For hardware settings:   
 The only essential features for the software to work are `POP_UP_BUTTONS_ENABLED`, one option for rotary encoder and one option for external wakeup.  
-Configuration of external wakeup:  
+**Configuration of external wakeup:**  
+Right now the EXT0_ROTARY_ENCODER configuration works with the use of the mechanical rotary encoder
 ```C
-//WAKEUP SETTINGS: Use ext0 or ext1
+//WAKEUP SETTINGS: Use of ext0
+//EXT0
 //1. Uncomment for use of ext0
 #define EXT0_ENABLED
-//Choose wakeup pin:
-#define EXT0_WAKEUP_PIN GPIO_NUM_2
-//#define EXT0_WAKEUP_PIN GPIO_NUM_5 //Esp32-S2 pinout
-//Choose wakeup level:
-#define EXT0_WAKEUP_MODE 1
-//2. Uncomment for use of ext1
-//#define EXT1_ENABLED
-//Choose bitmap:
-//#define EXT1_BITMASK 0x0020 //gpio 5
-//Choose mode:
-//ESP_EXT1_WAKEUP_ALL_LOW: wake up when all GPIOs go low;
-//ESP_EXT1_WAKEUP_ANY_HIGH: wake up if any of the GPIOs go high.
-//#define EXT1_WAKEUP_MODE ESP_EXT1_WAKEUP_ANY_HIGH
+//Choose wakeup pin and level:
+#define EXT0_START_BUTTON
+//#define EXT0_ROTARY_ENCODER
 ```
-Configuration of pop up buttons and rotary encoder:   
+**Configuration of pop up buttons and rotary encoder:**   
 (Magnetic rotary encoder is not supported yet)
 ```C
 //POP UP BUTTONS SETTINGS: Uncomment for buttons
@@ -99,7 +91,7 @@ Configuration of pop up buttons and rotary encoder:
 //3. Uncomment for use of magnetic encoder
 //#define MAGNETIC_ROTARY_ENCODER_ENABLED
 ```
-Configuration of sound:  
+**Configuration of sound:**  
 (Buzzer is not supported yet but will be selected as the default)
 ```C
 //SOUND SETTINGS: Uncomment for sound
@@ -109,7 +101,7 @@ Configuration of sound:
 // Uncomment for use of buzzer for sound
 //#define SOUND_BUZZER_ENABLED
 ```
-Configuration of LEDs:  
+**Configuration of LEDs:**  
 (They are not supported yet)
 ```C
 
@@ -125,7 +117,7 @@ Configuration of LEDs:
 #### For software settings:  
 The only essential setting is one option for the animation. Default transformation and recharging time is 60 seconds. You can configure:   
 
-To enable serial for debugging:  
+**To enable serial for debugging:**  
 
 ```C
 //Basic debugging info
@@ -140,7 +132,7 @@ To enable serial for debugging:
 //#define ENABLE_MEMORY_INFO
 ```
 
-What kind of animation is being used:  
+**What kind of animation is being used:**  
 
 ```C
 //Choose only one type of animation
@@ -150,13 +142,13 @@ What kind of animation is being used:
 //#define START_ANIMATION_WITHOUT_IMAGES //Not finished
 ```
 
-If sound will be muted in booting: 
+**If sound will be muted in booting:** 
 
 ```C
 //Choose if sound will be muted in booting
 //#define SOUND_MUTED_IN_BOOTING //Only if sound is enabled
 ```
-And if demo mode will be enabled (sets transformation and recharge time to 10 sec)  
+**And if demo mode will be enabled** (sets transformation and recharge time to 10 sec)  
 
 ```C
 //DEMO

@@ -8,14 +8,21 @@
 //HARDWARE SETTINGS
 
 //WAKEUP SETTINGS: Use ext0 or ext1
+//EXT0
 //1. Uncomment for use of ext0
 #define EXT0_ENABLED
-//Choose wakeup pin:
-#define EXT0_WAKEUP_PIN (gpio_num_t) CONFIG_START_BUTTON_PIN  //Wake up with start button
-//#define EXT0_WAKEUP_PIN (gpio_num_t) CONFIG_RIGHT_BUTTON_PIN  //Wake up with rotary movement
-//Choose wakeup level:
-#define EXT0_WAKEUP_MODE 1  //Wake up with start button
-//#define EXT0_WAKEUP_MODE 0  //Wake up with rotary movement
+//Choose wakeup pin and level:
+#define EXT0_START_BUTTON
+//#define EXT0_ROTARY_ENCODER
+
+#if defined EXT0_START_BUTTON
+  #define EXT0_WAKEUP_PIN (gpio_num_t) CONFIG_START_BUTTON_PIN  //Wake up with start button
+  #define EXT0_WAKEUP_MODE 1  //Wake up with start button
+#elif defined EXT0_ROTARY_ENCODER
+  #define EXT0_WAKEUP_PIN (gpio_num_t) CONFIG_RIGHT_BUTTON_PIN  //Wake up with rotary movement
+  #define EXT0_WAKEUP_MODE 0  //Wake up with rotary movement
+#endif
+//EXT1
 //2. Uncomment for use of ext1
 //#define EXT1_ENABLED
 //Choose bitmap:
@@ -97,6 +104,11 @@
 
 //Check external wakeup type
 #if defined EXT0_ENABLED && !defined EXT1_ENABLED
+  #if defined EXT0_START_BUTTON && !defined EXT0_ROTARY_ENCODER
+  #elif !defined EXT0_START_BUTTON && defined EXT0_ROTARY_ENCODER
+  #else
+    #error "You must use only either EXT0_START_BUTTON or EXT0_ROTARY_ENCODER"
+  #endif
 #elif !defined EXT0_ENABLED && defined EXT1_ENABLED
 #else
   #error "You must use only one option for the external wake up"
