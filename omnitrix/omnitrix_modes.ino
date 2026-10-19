@@ -6,7 +6,7 @@ void startButtonModes() {
     //Omnitrix is in start mode
     case 1:
       //Go to select alien mode
-		  mode1to2();
+      mode1to2();
 
       //reset timer
       resetTimer();
@@ -21,25 +21,23 @@ void startButtonModes() {
       resetTimer();
       break;
   }
-
 }
 
 //Switch statement for right button modes
 void rightButtonModes() {
 
-  #if defined SOUND_ENABLED
-  playSound(3); //Play move encoder forward 
-  #endif
+#if defined SOUND_ENABLED
+  playSound(3);  //Play move encoder forward
+#endif
 
   switch (mode) {
     //Omnitrix is in select alien mode
     case 2:
       //If the next alien number is bigger than the total number of aliens
       //then go back to first alien, else go to the next alien
-      if ((alienNo  + 1)> ALIEN_LAST_INDEX ) {
+      if ((alienNo + 1) > ALIEN_LAST_INDEX) {
         alienNo = 0;
-      }
-      else {
+      } else {
         alienNo += 1;
       }
 
@@ -48,54 +46,49 @@ void rightButtonModes() {
       //Display alien
       ShowAlien();
 
-      #if defined ENABLE_SERIAL
-        Serial.print("Right, alien no:");
-        Serial.println(alienNo);
-        delay(200);
-      #endif
+#if defined ENABLE_SERIAL
+      Serial.print("Right, alien no:");
+      Serial.println(alienNo);
+#endif
       break;
   }
 
   //reset timer
   resetTimer();
-
 }
 
 //Switch statement for left button modes
 void leftButtonModes() {
 
-  #if defined SOUND_ENABLED
-  playSound(4); //Play move encoder backwards 
-  #endif
+#if defined SOUND_ENABLED
+  playSound(4);  //Play move encoder backwards
+#endif
 
   switch (mode) {
     //Omnitrix is in select alien mode
     case 2:
       //If the next alien number is less than 0
       //then go back to the last alien, else go to the previous alien
-      if ((alienNo - 1) < 0 ) {
+      if ((alienNo - 1) < 0) {
         alienNo = ALIEN_LAST_INDEX;
-      }
-      else {
+      } else {
         alienNo -= 1;
       }
-          
+
       //Erase previous alien
       eraseAlien();
       //Display alien
       ShowAlien();
-      
-      #if defined ENABLE_SERIAL
-        Serial.print("Left, alien no:");
-        Serial.println(alienNo);
-        delay(200);
-      #endif
+
+#if defined ENABLE_SERIAL
+      Serial.print("Left, alien no:");
+      Serial.println(alienNo);
+#endif
       break;
   }
 
   //reset timer
   resetTimer();
-
 }
 
 //Switch statement for select button modes
@@ -120,11 +113,10 @@ void selectbuttonModes() {
   //reset timer
   resetTimer();
 
-  #if defined ENABLE_SERIAL
-    Serial.print("mode ");
-    Serial.println(mode);
-  #endif
-
+#if defined ENABLE_SERIAL
+  Serial.print("mode ");
+  Serial.println(mode);
+#endif
 }
 
 //Mode 3
@@ -138,14 +130,14 @@ void transformedMode() {
     //Go to next mode
     mode3to4();
 
-  //Transformation time is not finished
+    //Transformation time is not finished
   } else {
-    #if defined ENABLE_DEEP_SLEEP_INFO
-      //Set offset to time passed since last time the timer was checked (in sec)
-      transformation_start_time_offset = getTimeNow() - transformation_start_time;
-      Serial.print("transformation_start_time_offset: ");
-      Serial.println(transformation_start_time_offset);
-    #endif
+#if defined ENABLE_DEEP_SLEEP_INFO
+    //Set offset to time passed since last time the timer was checked (in sec)
+    transformation_start_time_offset = getTimeNow() - transformation_start_time;
+    Serial.print("transformation_start_time_offset: ");
+    Serial.println(transformation_start_time_offset);
+#endif
   }
 }
 
@@ -156,18 +148,17 @@ void rechargeMode() {
   //Check recharging time
   //Recharging time is done while omnitrix is not sleeping
   if ((getTimeNow() - recharging_start_time) > recharge_time_val) {
-      
+
     //Go to first mode
     mode4to1();
 
-  //Recharging time is not finished
+    //Recharging time is not finished
   } else {
-    #if defined ENABLE_DEEP_SLEEP_INFO
-      //Set offset to time passed since last time the timer was checked (in sec)
-      recharging_start_time_offset = getTimeNow() - recharging_start_time;
-      Serial.print("recharging_start_time_offset: ");
-      Serial.println(recharging_start_time_offset);
-    #endif
+#if defined ENABLE_DEEP_SLEEP_INFO
+    //Set offset to time passed since last time the timer was checked (in sec)
+    recharging_start_time_offset = getTimeNow() - recharging_start_time;
+    Serial.print("recharging_start_time_offset: ");
+    Serial.println(recharging_start_time_offset);
+#endif
   }
-  
 }

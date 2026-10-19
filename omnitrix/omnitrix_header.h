@@ -4,8 +4,7 @@
 
 #include <TFT_eSPI.h>
 #include <PNGdec.h>
-#include "SPI.h"
-//#include <PCM.h>
+#include <SPI.h>
 
 #include "omnitrix_aliens.h"
 #include "omnitrix_alien_background.h"
@@ -16,21 +15,21 @@
 
 #if defined SOUND_ENABLED
 
-  #if defined SOUND_MUTED_IN_BOOTING
-    bool mute = true;
-  #else
-    bool mute = false;
-  #endif
+#if defined SOUND_MUTED_IN_BOOTING
+bool mute = true;
+#else
+bool mute = false;
+#endif
 
-  //DFT sound
-  #if defined SOUND_DFPLAYER_PRO_ENABLED
-    #include <DFRobot_DF1201S.h>
-    DFRobot_DF1201S DF1201S;
-  #endif
+//DFT sound
+#if defined SOUND_DFPLAYER_PRO_ENABLED
+#include <DFRobot_DF1201S.h>
+DFRobot_DF1201S DF1201S;
+#endif
 
 #endif
 
-//Configure LCD pins in User_Setup.h or create your own setup in 
+//Configure LCD pins in User_Setup.h or create your own setup in
 //libraries/TFT_eSPI/User_Setups folder and include it in User_Setup_Select.h
 /*
 #define TFT_MOSI 35 // In some display driver board, it might be written as "SDA" and so on.
@@ -42,28 +41,28 @@
 //#define TFT_BL   38  // LED back-light
 */
 
-#define MAX_IMAGE_WDITH 240 // Set rendering line buffer lengths for image
+#define MAX_IMAGE_WDITH 240  // Set rendering line buffer lengths for image
 
-#define ALIEN_LAST_INDEX 11 //0...11 = 12 Total aliens
+#define ALIEN_LAST_INDEX 11  //0...11 = 12 Total aliens
 
 //Time Variables
-#define uS_TO_S_FACTOR 1000000ULL  /* Conversion factor for micro seconds to seconds */
-#define DEEP_SLEEP_TIMER 5 // 5 sec
-uint32_t start; //timer for deep sleep
+#define uS_TO_S_FACTOR 1000000ULL /* Conversion factor for micro seconds to seconds */
+#define DEEP_SLEEP_TIMER 5        // 5 sec
+uint32_t start;                   //timer for deep sleep
 
 //Time definitions for demo and default mode
 #if defined DEMO_ENABLED
-  #define TRANSFORMATION_TIME 10 //10 sec
-  #define OMNITRIX_RECHARGE_TIME 10 //10 sec
+#define TRANSFORMATION_TIME 10     //10 sec
+#define OMNITRIX_RECHARGE_TIME 10  //10 sec
 #else
-  #define TRANSFORMATION_TIME 60 //1 min
-  #define OMNITRIX_RECHARGE_TIME 60 //1 min
+#define TRANSFORMATION_TIME 60     //1 min
+#define OMNITRIX_RECHARGE_TIME 60  //1 min
 #endif
 
 //Initialise timer variables as DEMO (in seconds)
 // Up to 65535 seconds = 1092.25 min = 18.2 hours of recharging/transformation
-RTC_DATA_ATTR uint16_t transform_time_val = TRANSFORMATION_TIME; // Transformation Time Variable
-RTC_DATA_ATTR uint16_t recharge_time_val = OMNITRIX_RECHARGE_TIME; // Recharging Time Variable
+RTC_DATA_ATTR uint16_t transform_time_val = TRANSFORMATION_TIME;    // Transformation Time Variable
+RTC_DATA_ATTR uint16_t recharge_time_val = OMNITRIX_RECHARGE_TIME;  // Recharging Time Variable
 
 //Time variables that are saved in deep sleep mode
 RTC_DATA_ATTR uint32_t transformation_start_time;
@@ -101,32 +100,32 @@ gray RGB: 171, 171, 171 = 0xABABAB = 0xAD55 in RGB565
 
 //Variables that are saved in deep sleep mode
 RTC_DATA_ATTR bool firstBoot = true;  // For initialization
-RTC_DATA_ATTR uint8_t alienNo; // Up to 255 aliens
-RTC_DATA_ATTR uint8_t mode; // Up to 255 modes
+RTC_DATA_ATTR uint8_t alienNo;        // Up to 255 aliens
+RTC_DATA_ATTR uint8_t mode;           // Up to 255 modes
 
 #if defined POP_UP_BUTTONS_ENABLED
 //Variables to keep track of the timing of recent interrupts are inside them for now
-//This interrupt timer uses millis() instead of Epoch so it can be smaller 
+//This interrupt timer uses millis() instead of Epoch so it can be smaller
 //since it will often reset because of sleep mode.
 //Up to 18.2 hours of being awake and buttons functioning normaly, after sleep values reset
-//volatile uint16_t interruptTime = 0;  
-//volatile uint16_t lastInterruptTime = 0; 
+//volatile uint16_t interruptTime = 0;
+//volatile uint16_t lastInterruptTime = 0;
 
 //Input states
-volatile bool buttonState = 0; //State of start button
-volatile bool selectbuttonState = 0; //State of select button
+volatile bool buttonState = 0;        //State of start button
+volatile bool selectbuttonState = 0;  //State of select button
 #endif
 
 #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED || defined ROTARY_ENCODER_ENABLED
 //Similar with pop up buttons, use of interrupts
 //Input states
-volatile bool rightState = 0; //State of right
-volatile bool leftState = 0; //State of left
+volatile bool rightState = 0;  //State of right
+volatile bool leftState = 0;   //State of left
 #endif
 
 
 //Display variables
-PNG png; // PNG decoder instance
+PNG png;  // PNG decoder instance
 
 TFT_eSPI tft = TFT_eSPI();
 

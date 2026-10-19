@@ -6,74 +6,70 @@ int16_t ypos = 0;
 //Method that shows animation
 void showAnimation() {
 
-  //Start animation with images
-  #if defined START_ANIMATION_WITH_IMAGES
+//Start animation with images
+#if defined START_ANIMATION_WITH_IMAGES
 
   int frame = 0;
   int fps = 10;
 
-  for (; frame <= omnitrix_anim_N; frame++)  {
-    
+  for (; frame <= omnitrix_anim_N; frame++) {
+
     delay(fps);
-    
+
     int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[frame], sizeof(omnitrix_anim[frame]), pngDraw);
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
     tft.endWrite();
-
   }
-  #endif
-
+#endif
 }
 
 
 
 //Method that shows the symbols for select mode
-void  ShowSelectSymbols() {
+void ShowSelectSymbols() {
 
-  //Select Symbols with image
-  #if defined START_ANIMATION_WITH_IMAGES
+//Select Symbols with image
+#if defined START_ANIMATION_WITH_IMAGES
 
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[10], sizeof(omnitrix_anim[10]), pngDraw);
 
   if (rc == PNG_SUCCESS) {
-    #if defined ENABLE_MEMORY_INFO
-      Serial.println("Successfully png file");
-    #endif
+#if defined ENABLE_MEMORY_INFO
+    Serial.println("Successfully png file");
+#endif
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
     tft.endWrite();
   }
-  #endif
-
+#endif
 }
 
 
 //Function that displays start icon symbols
 void ShowSymbols() {
 
-  #if defined ENABLE_MEMORY_INFO
-    Serial.println("show symbols");
-  #endif
+#if defined ENABLE_MEMORY_INFO
+  Serial.println("show symbols");
+#endif
 
-  //Start Symbols with image
-  #if defined START_ANIMATION_WITH_IMAGES
+//Start Symbols with image
+#if defined START_ANIMATION_WITH_IMAGES
 
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[0], sizeof(omnitrix_anim[0]), pngDraw);
 
   if (rc == PNG_SUCCESS) {
-    #if defined ENABLE_MEMORY_INFO
-      Serial.println("Successfully png file");
-    #endif
+#if defined ENABLE_MEMORY_INFO
+    Serial.println("Successfully png file");
+#endif
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
     tft.endWrite();
   }
-  #endif
- 
+#endif
 }
 
 //Function that displays alien on screen
@@ -82,9 +78,9 @@ void ShowAlien() {
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_aliens[alienNo], sizeof(omnitrix_aliens[alienNo]), pngDraw);
 
   if (rc == PNG_SUCCESS) {
-    #if defined ENABLE_MEMORY_INFO
-      Serial.println("Successfully png file");
-    #endif
+#if defined ENABLE_MEMORY_INFO
+    Serial.println("Successfully png file");
+#endif
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
@@ -94,13 +90,13 @@ void ShowAlien() {
 
 //Method that displays green backround to erase alien
 void eraseAlien() {
-  
+
   int16_t rc = png.openFLASH((uint8_t *)omnitrix_alien_background, sizeof(omnitrix_alien_background), pngDraw);
 
   if (rc == PNG_SUCCESS) {
-    #if defined ENABLE_MEMORY_INFO
-      Serial.println("Successfully png file");
-    #endif
+#if defined ENABLE_MEMORY_INFO
+    Serial.println("Successfully png file");
+#endif
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
