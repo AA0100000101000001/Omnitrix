@@ -1,4 +1,7 @@
 
+
+#define OMNITRIX_ANIM_FRAME_LAST_INDEX 10 //11 frames for animation
+
 // Display position variables must be global for PNGdec
 int16_t xpos = 0;
 int16_t ypos = 0;
@@ -12,7 +15,7 @@ void show_animation() {
   int frame = 0;
   int fps = 10;
 
-  for (; frame <= omnitrix_anim_N; frame++) {
+  for (; frame <= OMNITRIX_ANIM_FRAME_LAST_INDEX; frame++) {
 
     delay(fps);
 
