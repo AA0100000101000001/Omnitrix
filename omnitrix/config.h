@@ -1,9 +1,9 @@
 
 //Pin configuration
-//Edit User_Setups/config_DEFAULT to create your own configuration or uncomment your preferred configuration
-//#include "User_Setups/config_CUSTOM.h" //Use your own configuration
-//#include "User_Setups/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
-#include "User_Setups/config_ESP32_S3_PICO_PINOUT.h"  //Esp32-s3-Pico Dev Board
+//Edit configs/config_DEFAULT to create your own configuration or uncomment your preferred configuration
+//#include "configs/config_CUSTOM.h" //Use your own configuration
+//#include "configs/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
+#include "configs/config_ESP32_S3_PICO_PINOUT.h"  //Esp32-s3-Pico Dev Board
 
 //HARDWARE SETTINGS
 

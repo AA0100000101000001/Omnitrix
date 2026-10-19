@@ -39,7 +39,7 @@ Follow the schematic on how to connect the wires.
    
 
 ## Uploading The Software  
-This project uses Arduino IDE to program the Esp32 so you need to [install the ESP32 board to it](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/). It also uses Bodmer's [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) library for the control of the LCD Display and [PNGdec](https://github.com/bitbank2/PNGdec) for displaying png images. You can configure the LCD Display pins by editing the `TFT_eSPI/User_Setup.h` file or you can create a configuration file in `TFT_eSPI/User_Setups` folder and include it in `TFT_eSPI/User_Setup_Select.h` instead of `User_Setup.h`. I have added my configurations in the Supported Displays folder.     
+This project uses Arduino IDE to program the Esp32 so you need to [install the ESP32 board to it](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/). It also uses Bodmer's [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) library for the control of the LCD Display and [PNGdec](https://github.com/bitbank2/PNGdec) for displaying png images. You can configure the LCD Display pins by editing the `libraries/TFT_eSPI/User_Setup.h` file or you can create a configuration file in `libraries/TFT_eSPI/User_Setups` folder and include it in `libraries/TFT_eSPI/User_Setup_Select.h` instead of `User_Setup.h`. I have added my configurations in the Supported Displays folder.     
 ```C
 /* TFT_eSPI/User_Setup_Select.h */
 
@@ -52,16 +52,16 @@ This project uses Arduino IDE to program the Esp32 so you need to [install the E
 You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/tree/main/Test%20files/Used%20For%20Final%20Project) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
 
 ### User Setup
- Inside the User_Setup folder there are some header files for the pin configuration of non LCD Display parts. You can edit the config_CUSTOM.h file for your own pin configuration or use one of other ones.  
-Make sure that the pin configuration file is included in `User_Setup.h`. In this file you can configure hardware and software settings.         
+ Inside the configs folder there are some header files for the pin configuration of non LCD Display parts. You can edit the config_CUSTOM.h file for your own pin configuration or use one of other ones.  
+Make sure that the pin configuration file is included in `configs.h`. In this file you can configure hardware and software settings.         
 ```C
-/* User_Setup.h */
+/* config.h */
 
 //Pin configuration
-//Edit User_Setups/config_DEFAULT to create your own configuration or uncomment your preferred configuration
-//#include "User_Setups/config_CUSTOM.h" //Use your own configuration
-//#include "User_Setups/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
-#include "User_Setups/config_ESP32_S3_PICO_PINOUT.h" //Esp32-s3-Pico Dev Board
+//Edit configs/config_DEFAULT to create your own configuration or uncomment your preferred configuration
+//#include "configs/config_CUSTOM.h" //Use your own configuration
+//#include "configs/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
+#include "configs/config_ESP32_S3_PICO_PINOUT.h" //Esp32-s3-Pico Dev Board
 ```
 You can also remove features by commenting the `#define X_ENABLED` definitions. 
 #### For hardware settings:   

@@ -1,6 +1,6 @@
 
 //Pin configuration and software settings
-#include "User_Setup.h"
+#include "config.h"
 
 #include <TFT_eSPI.h>
 #include <PNGdec.h>
@@ -32,13 +32,12 @@ DFRobot_DF1201S DF1201S;
 //Configure LCD pins in User_Setup.h or create your own setup in
 //libraries/TFT_eSPI/User_Setups folder and include it in User_Setup_Select.h
 /*
-#define TFT_MOSI 35 // In some display driver board, it might be written as "SDA" and so on.
-#define TFT_SCLK 36
-#define TFT_CS   34  // Chip select control pin
-#define TFT_DC   26  // Data Command control pin
-#define TFT_RST  33  // Reset pin (could connect to Arduino RESET pin)
-
-//#define TFT_BL   38  // LED back-light
+#define TFT_MOSI 11 // In some display driver board, it might be written as "SDA" and so on.
+#define TFT_SCLK 12
+#define TFT_CS   10  // Chip select control pin
+#define TFT_DC   9  // Data Command control pin
+#define TFT_RST  14  // Reset pin (could connect to Arduino RESET pin)
+#define TFT_BL   40  // LED back-light
 */
 
 #define MAX_IMAGE_WDITH 240  // Set rendering line buffer lengths for image
