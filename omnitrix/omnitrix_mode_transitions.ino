@@ -66,9 +66,9 @@ void mode2to3() {
   //Start transformation timer
   //Set transformation start time to current epoch time
   transformation_start_time = getTimeNow();
+
   //Set offset to time passed since last time the timer was checked (in sec)
   transformation_start_time_offset = getTimeNow() - transformation_start_time;
-
   //Configure the wake up source to wake up every time the transformation is done
   esp_sleep_enable_timer_wakeup((transform_time_val - transformation_start_time_offset) * uS_TO_S_FACTOR);
   #if defined ENABLE_SERIAL
@@ -104,16 +104,11 @@ void mode3to4() {
   //Start Rechargin timer
   //Set recharging start time to current epoch time
   recharging_start_time = getTimeNow();
-  //Set offset to time passed since last time the timer was checked (in sec)
-  recharging_start_time_offset = getTimeNow() - recharging_start_time;
-
-  #if defined ENABLE_DEEP_SLEEP_INFO
-    Serial.println(recharging_start_time_offset);
-    Serial.println(recharge_time_val);
-  #endif
 
   mode = 4;
 
+  //Set offset to time passed since last time the timer was checked (in sec)
+  recharging_start_time_offset = getTimeNow() - recharging_start_time;
   //Configure the wake up source to wake up every time the recharge is done
   esp_sleep_enable_timer_wakeup((recharge_time_val - recharging_start_time_offset) * uS_TO_S_FACTOR);
   #if defined ENABLE_SERIAL

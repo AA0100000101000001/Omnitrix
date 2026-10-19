@@ -11,15 +11,15 @@
 //1. Uncomment for use of ext0
 #define EXT0_ENABLED
 //Choose wakeup pin:
-#define EXT0_WAKEUP_PIN GPIO_NUM_2
-//#define EXT0_WAKEUP_PIN GPIO_NUM_1  //Wake up with rotary movement
+#define EXT0_WAKEUP_PIN (gpio_num_t) CONFIG_START_BUTTON_PIN  //Wake up with start button
+//#define EXT0_WAKEUP_PIN (gpio_num_t) CONFIG_RIGHT_BUTTON_PIN  //Wake up with rotary movement
 //Choose wakeup level:
-#define EXT0_WAKEUP_MODE 1
-//#define EXT0_WAKEUP_MODE 0 //Wake up with rotary movement
+#define EXT0_WAKEUP_MODE 1  //Wake up with start button
+//#define EXT0_WAKEUP_MODE 0  //Wake up with rotary movement
 //2. Uncomment for use of ext1
 //#define EXT1_ENABLED
 //Choose bitmap:
-//#define EXT1_BITMASK 0x0020 //gpio 5
+//#define EXT1_BITMASK (1ULL << CONFIG_START_BUTTON_PIN)  //0x0020 //gpio 5
 //Choose mode:
 //ESP_EXT1_WAKEUP_ALL_LOW: wake up when all GPIOs go low;
 //ESP_EXT1_WAKEUP_ANY_HIGH: wake up if any of the GPIOs go high.
@@ -99,9 +99,8 @@
 #if defined EXT0_ENABLED && !defined EXT1_ENABLED
 #elif !defined EXT0_ENABLED && defined EXT1_ENABLED
 #else
-  #error "You must use at least only one option for the external wake up"
+  #error "You must use only one option for the external wake up"
 #endif
-
 
 //Define button pins for the pop up mechanism
 #if defined POP_UP_BUTTONS_ENABLED
