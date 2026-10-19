@@ -92,7 +92,6 @@ void setup() {
 
 #if defined ENABLE_SERIAL
   Serial.begin(115200);
-  delay(100);
 #endif
 
 //initialize inputs and interrupts
@@ -163,13 +162,13 @@ void setup() {
 #endif
 
   tft.begin();
-  delay(500);
   //disconnect TFT_BL from deep sleep to save energy
   //gpio_reset_pin(GPIO_NUM_38);
 
   //If the omnitrix is booting for the first time then initialise g_alien_n, g_mode
   //When it wakes up from deep sleep the values will be saved
   if (g_first_boot) {
+    delay(400); // delay fot tft.begin and serial
     g_alien_n = 0;
     g_mode = 1;
     rtc_set_time(0, 0, 0, 1, 1, 2023, 0);  // Set Time to 1st Jan 2023 00:00:00
