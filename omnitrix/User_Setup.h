@@ -66,7 +66,7 @@
 //1. Verbose general info
 //#define ENABLE_VERBOSE_INFO
 //2. Verbose deep sleep info
-//#define ENABLE_DEEP_SLEEP_INFO
+#define ENABLE_DEEP_SLEEP_INFO
 //3. Info about FLASH/RAM
 //#define ENABLE_MEMORY_INFO
 

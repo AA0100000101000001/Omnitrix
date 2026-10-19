@@ -9,7 +9,7 @@ void startButtonModes() {
 		  mode1to2();
 
       //reset timer
-      start = RTC_getLocalEpoch();
+      resetTimer();
       break;
 
     //Omnitrix is in select alien mode
@@ -18,7 +18,7 @@ void startButtonModes() {
       mode2to1();
 
       //reset timer
-      start = RTC_getLocalEpoch();
+      resetTimer();
       break;
   }
 
@@ -57,7 +57,7 @@ void rightButtonModes() {
   }
 
   //reset timer
-  start = RTC_getLocalEpoch();
+  resetTimer();
 
 }
 
@@ -94,7 +94,7 @@ void leftButtonModes() {
   }
 
   //reset timer
-  start = RTC_getLocalEpoch();
+  resetTimer();
 
 }
 
@@ -118,7 +118,7 @@ void selectbuttonModes() {
   }
 
   //reset timer
-  start = RTC_getLocalEpoch();
+  resetTimer();
 
   #if defined ENABLE_SERIAL
     Serial.print("mode ");
@@ -133,7 +133,7 @@ void transformedMode() {
 
   //Check transformation time
   //Transformation time is done while omnitrix is not sleeping
-  if ((RTC_getLocalEpoch() - transformation_start_time) > transform_time_val) {
+  if ((getTimeNow() - transformation_start_time) > transform_time_val) {
 
     //Go to next mode
     mode3to4();
@@ -141,7 +141,7 @@ void transformedMode() {
   //Transformation time is not finished
   } else {
     //Set offset to time passed since last time the timer was checked (in sec)
-    transformation_start_time_offset = RTC_getLocalEpoch() - transformation_start_time;
+    transformation_start_time_offset = getTimeNow() - transformation_start_time;
   }
 }
 
@@ -151,7 +151,7 @@ void rechargeMode() {
 
   //Check recharging time
   //Recharging time is done while omnitrix is not sleeping
-  if ((RTC_getLocalEpoch() - recharging_start_time) > recharge_time_val) {
+  if ((getTimeNow() - recharging_start_time) > recharge_time_val) {
       
     //Go to first mode
     mode4to1();
@@ -159,7 +159,7 @@ void rechargeMode() {
   //Recharging time is not finished
   } else {
     //Set offset to time passed since last time the timer was checked (in sec)
-    recharging_start_time_offset = RTC_getLocalEpoch() - recharging_start_time;
+    recharging_start_time_offset = getTimeNow() - recharging_start_time;
   }
   
 }
