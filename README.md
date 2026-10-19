@@ -39,7 +39,7 @@ Follow the schematic on how to connect the wires.
    
 
 ## Uploading The Software  
-This project uses Arduino IDE to program the Esp32 so you need to [install the ESP32 board to it](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/). It also uses Bodmer's [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) library for the control of the LCD Display and [PNGdec](https://github.com/bitbank2/PNGdec) for displaying png images. You can configure the LCD Display pins by editing the `TFT_eSPI/User_Setup.h` file or you can create a configuration file in `TFT_eSPI/User_Setups` folder and include it in `TFT_eSPI/User_Setup_Select.h` instead of `User_Setup.h`. I have added my configurations in the Supported Displays folder.     
+This project uses Arduino IDE to program the Esp32 so you need to [install the ESP32 board to it](https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/). It also uses Bodmer's [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) library for the control of the LCD Display and [PNGdec](https://github.com/bitbank2/PNGdec) for displaying png images. You can configure the LCD Display pins by editing the `libraries/TFT_eSPI/User_Setup.h` file or you can create a configuration file in `libraries/TFT_eSPI/User_Setups` folder and include it in `libraries/TFT_eSPI/User_Setup_Select.h` instead of `User_Setup.h`. I have added my configurations in the Supported Displays folder.     
 ```C
 /* TFT_eSPI/User_Setup_Select.h */
 
@@ -52,40 +52,32 @@ This project uses Arduino IDE to program the Esp32 so you need to [install the E
 You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/tree/main/Test%20files/Used%20For%20Final%20Project) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
 
 ### User Setup
- Inside the User_Setup folder there are some header files for the pin configuration of non LCD Display parts. You can edit the config_CUSTOM.h file for your own pin configuration or use one of other ones.  
-Make sure that the pin configuration file is included in `User_Setup.h`. In this file you can configure hardware and software settings.         
+ Inside the configs folder there are some header files for the pin configuration of non LCD Display parts. You can edit the config_CUSTOM.h file for your own pin configuration or use one of other ones.  
+Make sure that the pin configuration file is included in `configs.h`. In this file you can configure hardware and software settings.         
 ```C
-/* User_Setup.h */
+/* config.h */
 
 //Pin configuration
-//Edit User_Setups/config_DEFAULT to create your own configuration or uncomment your preferred configuration
-//#include "User_Setups/config_CUSTOM.h" //Use your own configuration
-//#include "User_Setups/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
-#include "User_Setups/config_ESP32_S3_PICO_PINOUT.h" //Esp32-s3-Pico Dev Board
+//Edit configs/config_DEFAULT to create your own configuration or uncomment your preferred configuration
+//#include "configs/config_CUSTOM.h" //Use your own configuration
+//#include "configs/config_ESP32_S3_PINOUT.h" //Esp32-s3 Dev Board
+#include "configs/config_ESP32_S3_PICO_PINOUT.h" //Esp32-s3-Pico Dev Board
 ```
 You can also remove features by commenting the `#define X_ENABLED` definitions. 
 #### For hardware settings:   
 The only essential features for the software to work are `POP_UP_BUTTONS_ENABLED`, one option for rotary encoder and one option for external wakeup.  
-Configuration of external wakeup:  
+**Configuration of external wakeup:**  
+Right now the EXT0_ROTARY_ENCODER configuration works with the use of the mechanical rotary encoder
 ```C
-//WAKEUP SETTINGS: Use ext0 or ext1
+//WAKEUP SETTINGS: Use of ext0
+//EXT0
 //1. Uncomment for use of ext0
 #define EXT0_ENABLED
-//Choose wakeup pin:
-#define EXT0_WAKEUP_PIN GPIO_NUM_2
-//#define EXT0_WAKEUP_PIN GPIO_NUM_5 //Esp32-S2 pinout
-//Choose wakeup level:
-#define EXT0_WAKEUP_MODE 1
-//2. Uncomment for use of ext1
-//#define EXT1_ENABLED
-//Choose bitmap:
-//#define EXT1_BITMASK 0x0020 //gpio 5
-//Choose mode:
-//ESP_EXT1_WAKEUP_ALL_LOW: wake up when all GPIOs go low;
-//ESP_EXT1_WAKEUP_ANY_HIGH: wake up if any of the GPIOs go high.
-//#define EXT1_WAKEUP_MODE ESP_EXT1_WAKEUP_ANY_HIGH
+//Choose wakeup pin and level:
+#define EXT0_START_BUTTON
+//#define EXT0_ROTARY_ENCODER
 ```
-Configuration of pop up buttons and rotary encoder:   
+**Configuration of pop up buttons and rotary encoder:**   
 (Magnetic rotary encoder is not supported yet)
 ```C
 //POP UP BUTTONS SETTINGS: Uncomment for buttons
@@ -99,7 +91,7 @@ Configuration of pop up buttons and rotary encoder:
 //3. Uncomment for use of magnetic encoder
 //#define MAGNETIC_ROTARY_ENCODER_ENABLED
 ```
-Configuration of sound:  
+**Configuration of sound:**  
 (Buzzer is not supported yet but will be selected as the default)
 ```C
 //SOUND SETTINGS: Uncomment for sound
@@ -109,7 +101,7 @@ Configuration of sound:
 // Uncomment for use of buzzer for sound
 //#define SOUND_BUZZER_ENABLED
 ```
-Configuration of LEDs:  
+**Configuration of LEDs:**  
 (They are not supported yet)
 ```C
 
@@ -123,9 +115,9 @@ Configuration of LEDs:
 //#define NEOPIXEL_RING_LEDS_ENABLED
 ```
 #### For software settings:  
-The only essential setting is one option for the animation. You can configure:   
+The only essential setting is one option for the animation. Default transformation and recharging time is 60 seconds. You can configure:   
 
-To enable serial for debugging:  
+**To enable serial for debugging:**  
 
 ```C
 //Basic debugging info
@@ -140,7 +132,7 @@ To enable serial for debugging:
 //#define ENABLE_MEMORY_INFO
 ```
 
-What kind of animation is being used:  
+**What kind of animation is being used:**  
 
 ```C
 //Choose only one type of animation
@@ -150,22 +142,18 @@ What kind of animation is being used:
 //#define START_ANIMATION_WITHOUT_IMAGES //Not finished
 ```
 
-If sound will be muted in booting: 
+**If sound will be muted in booting:** 
 
 ```C
 //Choose if sound will be muted in booting
 //#define SOUND_MUTED_IN_BOOTING //Only if sound is enabled
 ```
-And if demo mode will be enabled (it is not supported right now)  
+**And if demo mode will be enabled** (sets transformation and recharge time to 10 sec)  
 
 ```C
-//Choose if demo is enabled //not implemented yet
-//#define DEMO_ENABLED
-//Choose only one type of demo
-//1. Demo automated display of the features that can go out of that state when a button is pressed
-//#define DEMO_AYTOMATED_ENABLED
-//2. Demo user controlled that can go out of that state from the menu
-//#define DEMO_CONTROLLED_ENABLED
+//DEMO
+//Choose if demo is enabled 
+#define DEMO_ENABLED
 ```
 
 ## *Remember to enable PSRAM to avoid Guru Meditation Error*

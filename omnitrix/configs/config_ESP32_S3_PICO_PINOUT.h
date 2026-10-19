@@ -15,16 +15,13 @@
 #define CONFIG_TXD1 
 
 //SOUND 2. Buzzer pins if sound and buzzer are enabled
-#define CONFIG_BUZZER 18
+#define CONFIG_BUZZER 1
 
+
+//LED 2. Define addressable LEDs if enabled
+#define CONFIG_DI 21
 
 //LED 1. Define RGB LED pins if enabled
 #define CONFIG_RGB_LED_R 
 #define CONFIG_RGB_LED_G 
 #define CONFIG_RGB_LED_B 
-
-//LED 2. Define Neopixel ring LEDs if enabled
-#define CONFIG_DI 21
-
-//LED 3. Define IR controlled LEDs if enabled
-#define CONFIG_IR_TRANSMITTER 
