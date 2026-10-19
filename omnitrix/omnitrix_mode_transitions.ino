@@ -14,8 +14,6 @@ void mode1to2() {
   //Display animation
   show_animation();
 
-  delay(600);
-
   //Display alien
   show_alien();
 }
@@ -31,8 +29,6 @@ void mode2to1() {
 #if defined ENABLE_SERIAL
   Serial.println("Button pressed, back to start");
 #endif
-
-  delay(300);
 
   //display start
   tft.fillScreen(OMNITRIX_GREEN);
@@ -53,13 +49,11 @@ void mode2to3() {
 
   //Display tranformation image
   tft.fillScreen(OMNITRIX_GREEN);
-  delay(600);
+  delay(600); //animation delay
 
   //Display transformed state image
   tft.fillScreen(TFT_WHITE);
   show_symbols();
-
-  delay(200);
 
   //Start transformation timer
   //Set transformation start time to current epoch time
@@ -80,7 +74,6 @@ void mode3to4() {
 #if defined SOUND_ENABLED
   play_sound(7);  //Play detransformation sound
 #endif
-  delay(2500);  //sound delay
 
 //Red led colour
 #if defined RGB_LEDS_ENABLED
