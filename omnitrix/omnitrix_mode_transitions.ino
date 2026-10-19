@@ -84,7 +84,7 @@ void mode3to4() {
   #if defined SOUND_ENABLED
   playSound(7); //Play detransformation sound
   #endif
-  delay(2500);
+  delay(2500); //sound delay
 
   //Red led colour
   #if defined RGB_LEDS_ENABLED

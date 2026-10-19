@@ -140,8 +140,12 @@ void transformedMode() {
 
   //Transformation time is not finished
   } else {
-    //Set offset to time passed since last time the timer was checked (in sec)
-    transformation_start_time_offset = getTimeNow() - transformation_start_time;
+    #if defined ENABLE_DEEP_SLEEP_INFO
+      //Set offset to time passed since last time the timer was checked (in sec)
+      transformation_start_time_offset = getTimeNow() - transformation_start_time;
+      Serial.print("transformation_start_time_offset: ");
+      Serial.println(transformation_start_time_offset);
+    #endif
   }
 }
 
@@ -158,8 +162,12 @@ void rechargeMode() {
 
   //Recharging time is not finished
   } else {
-    //Set offset to time passed since last time the timer was checked (in sec)
-    recharging_start_time_offset = getTimeNow() - recharging_start_time;
+    #if defined ENABLE_DEEP_SLEEP_INFO
+      //Set offset to time passed since last time the timer was checked (in sec)
+      recharging_start_time_offset = getTimeNow() - recharging_start_time;
+      Serial.print("recharging_start_time_offset: ");
+      Serial.println(recharging_start_time_offset);
+    #endif
   }
   
 }
