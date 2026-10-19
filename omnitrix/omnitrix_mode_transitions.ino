@@ -3,31 +3,31 @@
 void mode1to2() {
 
 #if defined SOUND_ENABLED
-  playSound(2);  //Play select sound
+  play_sound(2);  //Play select sound
 #endif
 
-  mode = 2;
+  g_mode = 2;
 #if defined ENABLE_SERIAL
   Serial.println("Button pressed, select alien");
 #endif
 
   //Display animation
-  showAnimation();
+  show_animation();
 
   delay(600);
 
   //Display alien
-  ShowAlien();
+  show_alien();
 }
 
 //Alien Selection mode to Start mode
 void mode2to1() {
 
 #if defined SOUND_ENABLED
-  playSound(4);  //Play move backwards
+  play_sound(4);  //Play move backwards
 #endif
 
-  mode = 1;
+  g_mode = 1;
 #if defined ENABLE_SERIAL
   Serial.println("Button pressed, back to start");
 #endif
@@ -36,19 +36,19 @@ void mode2to1() {
 
   //display start
   tft.fillScreen(OMNITRIX_GREEN);
-  ShowSymbols();
+  show_symbols();
 }
 
 //Alien Selection mode to Transformation mode
 void mode2to3() {
 
-  mode = 3;
+  g_mode = 3;
 #if defined ENABLE_SERIAL
   Serial.println("Tranformed into alien");
 #endif
 
 #if defined SOUND_ENABLED
-  playSound(5);  //Play transformation sound
+  play_sound(5);  //Play transformation sound
 #endif
 
   //Display tranformation image
@@ -57,20 +57,20 @@ void mode2to3() {
 
   //Display transformed state image
   tft.fillScreen(TFT_WHITE);
-  ShowSymbols();
+  show_symbols();
 
   delay(200);
 
   //Start transformation timer
   //Set transformation start time to current epoch time
-  transformation_start_time = getTimeNow();
+  g_transformation_start_time = get_time_now();
 
   //Set offset to time passed since last time the timer was checked (in sec)
-  transformation_start_time_offset = getTimeNow() - transformation_start_time;
+  g_transformation_start_time_offset = get_time_now() - g_transformation_start_time;
   //Configure the wake up source to wake up every time the transformation is done
-  esp_sleep_enable_timer_wakeup((transform_time_val - transformation_start_time_offset) * uS_TO_S_FACTOR);
+  esp_sleep_enable_timer_wakeup((g_transform_time_val - g_transformation_start_time_offset) * uS_TO_S_FACTOR);
 #if defined ENABLE_SERIAL
-  Serial.println("Transformation: Setup ESP32 to sleep for every " + String(transform_time_val - transformation_start_time_offset) + " Seconds");
+  Serial.println("Transformation: Setup ESP32 to sleep for every " + String(g_transform_time_val - g_transformation_start_time_offset) + " Seconds");
 #endif
 }
 
@@ -78,7 +78,7 @@ void mode2to3() {
 void mode3to4() {
 
 #if defined SOUND_ENABLED
-  playSound(7);  //Play detransformation sound
+  play_sound(7);  //Play detransformation sound
 #endif
   delay(2500);  //sound delay
 
@@ -91,7 +91,7 @@ void mode3to4() {
 
   //Display red screen
   tft.fillScreen(OMNITRIX_RED);
-  ShowSymbols();
+  show_symbols();
 
 #if defined ENABLE_SERIAL
   Serial.println("Omnitrix is recharging");
@@ -99,16 +99,16 @@ void mode3to4() {
 
   //Start Rechargin timer
   //Set recharging start time to current epoch time
-  recharging_start_time = getTimeNow();
+  g_recharging_start_time = get_time_now();
 
-  mode = 4;
+  g_mode = 4;
 
   //Set offset to time passed since last time the timer was checked (in sec)
-  recharging_start_time_offset = getTimeNow() - recharging_start_time;
+  g_recharging_start_time_offset = get_time_now() - g_recharging_start_time;
   //Configure the wake up source to wake up every time the recharge is done
-  esp_sleep_enable_timer_wakeup((recharge_time_val - recharging_start_time_offset) * uS_TO_S_FACTOR);
+  esp_sleep_enable_timer_wakeup((g_recharge_time_val - g_recharging_start_time_offset) * uS_TO_S_FACTOR);
 #if defined ENABLE_SERIAL
-  Serial.println("Recharging: Setup ESP32 to sleep for every " + String(recharge_time_val - recharging_start_time_offset) + " Seconds");
+  Serial.println("Recharging: Setup ESP32 to sleep for every " + String(g_recharge_time_val - g_recharging_start_time_offset) + " Seconds");
 #endif
 }
 
@@ -116,17 +116,17 @@ void mode3to4() {
 void mode3to1() {
 
 #if defined SOUND_ENABLED
-  playSound(4);  //Play move backwards
+  play_sound(4);  //Play move backwards
 #endif
 
-  mode = 1;
+  g_mode = 1;
 #if defined ENABLE_SERIAL
   Serial.println("Button pressed, untransforming and going back to Start mode");
 #endif
 
   //display start
   tft.fillScreen(OMNITRIX_GREEN);
-  ShowSymbols();
+  show_symbols();
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
@@ -147,13 +147,13 @@ void mode4to1() {
 
   //Display green screen
   tft.fillScreen(OMNITRIX_GREEN);
-  ShowSymbols();
+  show_symbols();
 
 #if defined ENABLE_SERIAL
   Serial.println("Going back to start");
 #endif
 
-  mode = 1;
+  g_mode = 1;
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
@@ -162,5 +162,5 @@ void mode4to1() {
 #endif
 
   //reset timer
-  resetTimer();
+  reset_timer();
 }

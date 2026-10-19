@@ -16,9 +16,9 @@
 #if defined SOUND_ENABLED
 
 #if defined SOUND_MUTED_IN_BOOTING
-bool mute = true;
+bool g_mute = true;
 #else
-bool mute = false;
+bool g_mute = false;
 #endif
 
 //DFT sound
@@ -47,7 +47,7 @@ DFRobot_DF1201S DF1201S;
 //Time Variables
 #define uS_TO_S_FACTOR 1000000ULL /* Conversion factor for micro seconds to seconds */
 #define DEEP_SLEEP_TIMER 5        // 5 sec
-uint32_t start;                   //timer for deep sleep
+uint32_t g_start;                   //timer for deep sleep
 
 //Time definitions for demo and default mode
 #if defined DEMO_ENABLED
@@ -60,14 +60,14 @@ uint32_t start;                   //timer for deep sleep
 
 //Initialise timer variables as DEMO (in seconds)
 // Up to 65535 seconds = 1092.25 min = 18.2 hours of recharging/transformation
-RTC_DATA_ATTR uint16_t transform_time_val = TRANSFORMATION_TIME;    // Transformation Time Variable
-RTC_DATA_ATTR uint16_t recharge_time_val = OMNITRIX_RECHARGE_TIME;  // Recharging Time Variable
+RTC_DATA_ATTR uint16_t g_transform_time_val = TRANSFORMATION_TIME;    // Transformation Time Variable
+RTC_DATA_ATTR uint16_t g_recharge_time_val = OMNITRIX_RECHARGE_TIME;  // Recharging Time Variable
 
 //Time variables that are saved in deep sleep mode
-RTC_DATA_ATTR uint32_t transformation_start_time;
-RTC_DATA_ATTR uint32_t recharging_start_time;
-RTC_DATA_ATTR uint16_t transformation_start_time_offset;
-RTC_DATA_ATTR uint16_t recharging_start_time_offset;
+RTC_DATA_ATTR uint32_t g_transformation_start_time;
+RTC_DATA_ATTR uint32_t g_recharging_start_time;
+RTC_DATA_ATTR uint16_t g_transformation_start_time_offset;
+RTC_DATA_ATTR uint16_t g_recharging_start_time_offset;
 
 /* LCD Colours
 RGB to HEX: http://www.rinkydinkelectronics.com/calc_rgb565.php
@@ -98,9 +98,9 @@ gray RGB: 171, 171, 171 = 0xABABAB = 0xAD55 in RGB565
 #endif
 
 //Variables that are saved in deep sleep mode
-RTC_DATA_ATTR bool firstBoot = true;  // For initialization
-RTC_DATA_ATTR uint8_t alienNo;        // Up to 255 aliens
-RTC_DATA_ATTR uint8_t mode;           // Up to 255 modes
+RTC_DATA_ATTR bool g_first_boot = true;  // For initialization
+RTC_DATA_ATTR uint8_t g_alien_n;        // Up to 255 aliens
+RTC_DATA_ATTR uint8_t g_mode;           // Up to 255 modes
 
 #if defined POP_UP_BUTTONS_ENABLED
 //Variables to keep track of the timing of recent interrupts are inside them for now
@@ -111,15 +111,15 @@ RTC_DATA_ATTR uint8_t mode;           // Up to 255 modes
 //volatile uint16_t lastInterruptTime = 0;
 
 //Input states
-volatile bool buttonState = 0;        //State of start button
-volatile bool selectbuttonState = 0;  //State of select button
+volatile bool g_start_button_state = 0;        //State of start button
+volatile bool g_select_button_state = 0;  //State of select button
 #endif
 
 #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED || defined ROTARY_ENCODER_ENABLED
 //Similar with pop up buttons, use of interrupts
 //Input states
-volatile bool rightState = 0;  //State of right
-volatile bool leftState = 0;   //State of left
+volatile bool g_right_state = 0;  //State of right
+volatile bool g_left_state = 0;   //State of left
 #endif
 
 
@@ -128,6 +128,6 @@ PNG png;  // PNG decoder instance
 
 TFT_eSPI tft = TFT_eSPI();
 
-void ShowSymbols();
-void ShowAlien();
-int pngDraw(PNGDRAW *pDraw);
+void show_symbols();
+void show_alien();
+int png_draw(PNGDRAW *pDraw);

@@ -11,17 +11,17 @@ void IRAM_ATTR button_interrupt() {
   uint16_t interruptTime = millis();
   //Debouncing
   if (interruptTime - lastInterruptTime > 200) {
-    buttonState = true;
+    g_start_button_state = true;
     lastInterruptTime = interruptTime;
   }
 }
 
-void IRAM_ATTR Selectbutton_interrupt() {
+void IRAM_ATTR select_button_interrupt() {
   static uint16_t lastInterruptTime = 0;
   uint16_t interruptTime = millis();
   //Debouncing
   if (interruptTime - lastInterruptTime > 200) {
-    selectbuttonState = true;
+    g_select_button_state = true;
     lastInterruptTime = interruptTime;
   }
 }
@@ -31,29 +31,29 @@ void IRAM_ATTR Selectbutton_interrupt() {
 //Micro Switches alternative to rotary encoder
 #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
 
-void IRAM_ATTR Rightbutton_interrupt() {
+void IRAM_ATTR right_button_interrupt() {
   static uint16_t lastInterruptTime = 0;
   uint16_t interruptTime = millis();
   //Debouncing
   if (interruptTime - lastInterruptTime > 200) {
-    rightState = true;
+    g_right_state = true;
     lastInterruptTime = interruptTime;
   }
 }
 
-void IRAM_ATTR Leftbutton_interrupt() {
+void IRAM_ATTR left_button_interrupt() {
   static uint16_t lastInterruptTime = 0;
   uint16_t interruptTime = millis();
   //Debouncing
   if (interruptTime - lastInterruptTime > 200) {
-    leftState = true;
+    g_left_state = true;
     lastInterruptTime = interruptTime;
   }
 }
 //Rotary Encoder
 #elif defined ROTARY_ENCODER_ENABLED
 
-void IRAM_ATTR rotEncoder_interrupt() {
+void IRAM_ATTR rot_encoder_interrupt() {
 
   static uint8_t old_AB = 3;                                                                  // Lookup table index
   static int8_t encval = 0;                                                                   // Encoder value
@@ -71,13 +71,13 @@ void IRAM_ATTR rotEncoder_interrupt() {
   // Update counter if encoder has rotated a full indent, that is at least 4 steps
   if (encval > 3) {  // Four steps forward
     if (interruptTime - lastInterruptTime > 80) {
-      rightState = true;  //Right
+      g_right_state = true;  //Right
     }
     encval = 0;
     lastInterruptTime = millis();
   } else if (encval < -3) {  // Four steps backwards
     if (interruptTime - lastInterruptTime > 80) {
-      leftState = true;  //Left
+      g_left_state = true;  //Left
     }
     encval = 0;
     lastInterruptTime = millis();
@@ -100,21 +100,21 @@ void setup() {
   pinMode(START_BUTTON_PIN, INPUT);
   attachInterrupt(START_BUTTON_PIN, button_interrupt, RISING);
   pinMode(SELECT_BUTTON_PIN, INPUT);
-  attachInterrupt(SELECT_BUTTON_PIN, Selectbutton_interrupt, RISING);
+  attachInterrupt(SELECT_BUTTON_PIN, select_button_interrupt, RISING);
 #endif
 
 //Initialize micro switch rotary encoder
 #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
   pinMode(RIGHT_BUTTON_PIN, INPUT);
   pinMode(LEFT_BUTTON_PIN, INPUT);
-  attachInterrupt(RIGHT_BUTTON_PIN, Rightbutton_interrupt, RISING);
-  attachInterrupt(LEFT_BUTTON_PIN, Leftbutton_interrupt, RISING);
+  attachInterrupt(RIGHT_BUTTON_PIN, right_button_interrupt, RISING);
+  attachInterrupt(LEFT_BUTTON_PIN, left_button_interrupt, RISING);
 //Initialize rotary encoder
 #elif defined ROTARY_ENCODER_ENABLED
   pinMode(RIGHT_BUTTON_PIN, INPUT_PULLUP);
   pinMode(LEFT_BUTTON_PIN, INPUT_PULLUP);
-  attachInterrupt(RIGHT_BUTTON_PIN, rotEncoder_interrupt, CHANGE);  // Need to detect both rising or falling signal
-  attachInterrupt(LEFT_BUTTON_PIN, rotEncoder_interrupt, CHANGE);
+  attachInterrupt(RIGHT_BUTTON_PIN, rot_encoder_interrupt, CHANGE);  // Need to detect both rising or falling signal
+  attachInterrupt(LEFT_BUTTON_PIN, rot_encoder_interrupt, CHANGE);
 #endif
 
 //Init leds
@@ -144,7 +144,7 @@ void setup() {
 #if defined ENABLE_SERIAL
     Serial.println("DFT Init failed, Muted");
 #endif
-    mute = true;  //If no sound device is detected mute audio
+    g_mute = true;  //If no sound device is detected mute audio
     delay(1000);
   } else {
     DF1201S.setVol(10);                     //Volume = 10
@@ -153,7 +153,7 @@ void setup() {
     DF1201S.switchFunction(DF1201S.MUSIC);  //MUSIC function
     DF1201S.setPlayMode(DF1201S.SINGLE);    //Play one sound only
   }
-  //playSound(1); //Play boot sound
+  //play_sound(1); //Play boot sound
 #endif
 
 #endif
@@ -167,22 +167,22 @@ void setup() {
   //disconnect TFT_BL from deep sleep to save energy
   //gpio_reset_pin(GPIO_NUM_38);
 
-  //If the omnitrix is booting for the first time then initialise alienNo, mode
+  //If the omnitrix is booting for the first time then initialise g_alien_n, g_mode
   //When it wakes up from deep sleep the values will be saved
-  if (firstBoot) {
-    alienNo = 0;
-    mode = 1;
-    RTC_setTime(0, 0, 0, 1, 1, 2023, 0);  // Set Time to 1st Jan 2023 00:00:00
+  if (g_first_boot) {
+    g_alien_n = 0;
+    g_mode = 1;
+    rtc_set_time(0, 0, 0, 1, 1, 2023, 0);  // Set Time to 1st Jan 2023 00:00:00
 
 #if defined SOUND_ENABLED
-    playSound(1);  //Play boot sound
+    play_sound(1);  //Play boot sound
 #endif
 
     //Display start screen
     tft.fillScreen(OMNITRIX_GREEN);
-    ShowSymbols();
+    show_symbols();
 
-    firstBoot = false;  //Never go to this section again
+    g_first_boot = false;  //Never go to this section again
   }
 
 //External wakeup setup
@@ -201,7 +201,7 @@ void setup() {
 
 //After the wake up, turn on leds
 #if defined RGB_LEDS_ENABLED
-  if (mode == 4) {
+  if (g_mode == 4) {
     //Green led colour
     analogWrite(RGB_R_PIN, RED_LED_R);
     analogWrite(RGB_G_PIN, RED_LED_G);
@@ -215,58 +215,58 @@ void setup() {
 #endif
 
   //reset timer
-  resetTimer();
+  reset_timer();
 }
 
 void loop() {
 
 #if defined POP_UP_BUTTONS_ENABLED
-  if (buttonState) {
+  if (g_start_button_state) {
 #if defined ENABLE_VERBOSE_INFO
     Serial.printf("Button pressed\n");
 #endif
-    buttonState = false;
+    g_start_button_state = false;
 
     //Check mode for start button
-    startButtonModes();
+    start_button_mode();
   }
-  if (selectbuttonState) {
+  if (g_select_button_state) {
 #if defined ENABLE_VERBOSE_INFO
     Serial.printf("Select Button pressed\n");
 #endif
-    selectbuttonState = false;
+    g_select_button_state = false;
 
     //Check mode for select button
-    selectbuttonModes();
+    select_button_mode();
   }
 #endif
 //Rotary encoder
 #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED || defined ROTARY_ENCODER_ENABLED
-  if (rightState) {
+  if (g_right_state) {
 #if defined ENABLE_VERBOSE_INFO
     Serial.printf("Right Button pressed\n");
 #endif
-    rightState = false;
+    g_right_state = false;
 
     //Check mode for right button
-    rightButtonModes();
+    right_button_mode();
   }
-  if (leftState) {
+  if (g_left_state) {
 #if defined ENABLE_VERBOSE_INFO
     Serial.printf("Left Button pressed\n");
 #endif
-    leftState = false;
+    g_left_state = false;
 
     //Check mode for left button
-    leftButtonModes();
+    left_button_mode();
   }
 #endif
 
-  if (mode == 3) {
-    transformedMode();
+  if (g_mode == 3) {
+    transformed_mode();
   }
-  if (mode == 4) {
-    rechargeMode();
+  if (g_mode == 4) {
+    recharge_mode();
   }
 
 
@@ -278,7 +278,7 @@ void loop() {
 void check_timer() {
 
   //if the time has passed then go to deep sleep
-  if ((getTimeNow() - start) > DEEP_SLEEP_TIMER) {
+  if ((get_time_now() - g_start) > DEEP_SLEEP_TIMER) {
 
 #if defined ENABLE_SERIAL
     Serial.println("Going to sleep");
@@ -289,10 +289,10 @@ void check_timer() {
 }
 
 #if defined SOUND_ENABLED
-void playSound(int16_t s) {
+void play_sound(int16_t s) {
 
   //If mute is false then play selected sound
-  if (!mute) {
+  if (!g_mute) {
 
 //DFT sound
 #if defined SOUND_DFPLAYER_PRO_ENABLED
@@ -318,28 +318,28 @@ void get_wakeup_reason() {
 #endif
 
         //Transformation mode is not done, enable deep sleep timer for transformation offset
-        if (mode == 3) {
+        if (g_mode == 3) {
 
           //Set offset to time passed since last time the timer was checked (in sec)
-          transformation_start_time_offset = getTimeNow() - transformation_start_time;
+          g_transformation_start_time_offset = get_time_now() - g_transformation_start_time;
 
           //Configure the wake up source to wake up every time the transformation is done
-          esp_sleep_enable_timer_wakeup((transform_time_val - transformation_start_time_offset) * uS_TO_S_FACTOR);
+          esp_sleep_enable_timer_wakeup((g_transform_time_val - g_transformation_start_time_offset) * uS_TO_S_FACTOR);
 #if defined ENABLE_SERIAL
-          Serial.println("Transformation: Setup ESP32 to sleep for every " + String(transform_time_val - transformation_start_time_offset) + " Seconds");
+          Serial.println("Transformation: Setup ESP32 to sleep for every " + String(g_transform_time_val - g_transformation_start_time_offset) + " Seconds");
 #endif
 
         }
         //Recharging mode is not done, enable deep sleep timer for recharging offset
-        else if (mode == 4) {
+        else if (g_mode == 4) {
 
           //Set offset to time passed since last time the timer was checked (in sec)
-          recharging_start_time_offset = getTimeNow() - recharging_start_time;
+          g_recharging_start_time_offset = get_time_now() - g_recharging_start_time;
 
           //Configure the wake up source to wake up every time the recharge is done
-          esp_sleep_enable_timer_wakeup((recharge_time_val - recharging_start_time_offset) * uS_TO_S_FACTOR);
+          esp_sleep_enable_timer_wakeup((g_recharge_time_val - g_recharging_start_time_offset) * uS_TO_S_FACTOR);
 #if defined ENABLE_SERIAL
-          Serial.println("Recharging1: Setup ESP32 to sleep for every " + String(recharge_time_val - recharging_start_time_offset) + " Seconds");
+          Serial.println("Recharging1: Setup ESP32 to sleep for every " + String(g_recharge_time_val - g_recharging_start_time_offset) + " Seconds");
 #endif
         }
 
@@ -354,13 +354,13 @@ void get_wakeup_reason() {
 #endif
 
         //Transformation mode is done, enable deep sleep timer for recharging
-        if (mode == 3) {
+        if (g_mode == 3) {
 
           mode3to4();
 
 
           //Recharging mode is done, disable timer and go to start mode
-        } else if (mode == 4) {
+        } else if (g_mode == 4) {
 
           mode4to1();
         }

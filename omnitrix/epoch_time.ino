@@ -7,7 +7,7 @@ RTC_DATA_ATTR static bool overflow;
 static bool overflow;
 #endif
 
-void RTC_setTime(int sc, int mn, int hr, int dy, int mt, int yr, int ms) {
+void rtc_set_time(int sc, int mn, int hr, int dy, int mt, int yr, int ms) {
   // seconds, minute, hour, day, month, year $ microseconds(optional)
   // ie setTime(20, 34, 8, 1, 4, 2021) = 8:34:20 1/4/2021
   struct tm t = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };  // Initalize to all 0's
@@ -17,10 +17,10 @@ void RTC_setTime(int sc, int mn, int hr, int dy, int mt, int yr, int ms) {
   t.tm_hour = hr;
   t.tm_min = mn;
   t.tm_sec = sc;
-  time_t timeSinceEpoch = mktime(&t);
+  time_t time_since_epoch = mktime(&t);
 
   struct timeval tv;
-  unsigned long epoch = (unsigned long)timeSinceEpoch;
+  unsigned long epoch = (unsigned long)time_since_epoch;
   if (epoch > 2082758399) {
     overflow = true;
     tv.tv_sec = epoch - 2082758399;  // epoch time (seconds)
@@ -32,7 +32,7 @@ void RTC_setTime(int sc, int mn, int hr, int dy, int mt, int yr, int ms) {
   settimeofday(&tv, NULL);
 }
 
-uint64_t getTimeNow() {
+uint64_t get_time_now() {
   time_t now;
   time(&now);
   uint64_t timenow = (uint64_t)now;
@@ -42,6 +42,6 @@ uint64_t getTimeNow() {
   return timenow;
 }
 
-void resetTimer() {
-  start = getTimeNow();
+void reset_timer() {
+  g_start = get_time_now();
 }

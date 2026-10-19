@@ -4,7 +4,7 @@ int16_t xpos = 0;
 int16_t ypos = 0;
 
 //Method that shows animation
-void showAnimation() {
+void show_animation() {
 
 //Start animation with images
 #if defined START_ANIMATION_WITH_IMAGES
@@ -16,7 +16,7 @@ void showAnimation() {
 
     delay(fps);
 
-    int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[frame], sizeof(omnitrix_anim[frame]), pngDraw);
+    int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[frame], sizeof(omnitrix_anim[frame]), png_draw);
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
@@ -28,12 +28,12 @@ void showAnimation() {
 
 
 //Method that shows the symbols for select mode
-void ShowSelectSymbols() {
+void show_select_symbols() {
 
 //Select Symbols with image
 #if defined START_ANIMATION_WITH_IMAGES
 
-  int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[10], sizeof(omnitrix_anim[10]), pngDraw);
+  int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[10], sizeof(omnitrix_anim[10]), png_draw);
 
   if (rc == PNG_SUCCESS) {
 #if defined ENABLE_MEMORY_INFO
@@ -49,7 +49,7 @@ void ShowSelectSymbols() {
 
 
 //Function that displays start icon symbols
-void ShowSymbols() {
+void show_symbols() {
 
 #if defined ENABLE_MEMORY_INFO
   Serial.println("show symbols");
@@ -58,7 +58,7 @@ void ShowSymbols() {
 //Start Symbols with image
 #if defined START_ANIMATION_WITH_IMAGES
 
-  int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[0], sizeof(omnitrix_anim[0]), pngDraw);
+  int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[0], sizeof(omnitrix_anim[0]), png_draw);
 
   if (rc == PNG_SUCCESS) {
 #if defined ENABLE_MEMORY_INFO
@@ -73,9 +73,9 @@ void ShowSymbols() {
 }
 
 //Function that displays alien on screen
-void ShowAlien() {
+void show_alien() {
 
-  int16_t rc = png.openFLASH((uint8_t *)omnitrix_aliens[alienNo], sizeof(omnitrix_aliens[alienNo]), pngDraw);
+  int16_t rc = png.openFLASH((uint8_t *)omnitrix_aliens[g_alien_n], sizeof(omnitrix_aliens[g_alien_n]), png_draw);
 
   if (rc == PNG_SUCCESS) {
 #if defined ENABLE_MEMORY_INFO
@@ -89,9 +89,9 @@ void ShowAlien() {
 }
 
 //Method that displays green backround to erase alien
-void eraseAlien() {
+void erase_alien() {
 
-  int16_t rc = png.openFLASH((uint8_t *)omnitrix_alien_background, sizeof(omnitrix_alien_background), pngDraw);
+  int16_t rc = png.openFLASH((uint8_t *)omnitrix_alien_background, sizeof(omnitrix_alien_background), png_draw);
 
   if (rc == PNG_SUCCESS) {
 #if defined ENABLE_MEMORY_INFO
@@ -105,14 +105,14 @@ void eraseAlien() {
 }
 
 // This function will be called during decoding of the png file
-int pngDraw(PNGDRAW *pDraw) {
-  uint16_t lineBuffer[MAX_IMAGE_WDITH];         // Line buffer for rendering
-  uint8_t maskBuffer[1 + MAX_IMAGE_WDITH / 8];  // Mask buffer
+int png_draw(PNGDRAW *pDraw) {
+  uint16_t line_buffer[MAX_IMAGE_WDITH];         // Line buffer for rendering
+  uint8_t mask_buffer[1 + MAX_IMAGE_WDITH / 8];  // Mask buffer
 
-  png.getLineAsRGB565(pDraw, lineBuffer, PNG_RGB565_BIG_ENDIAN, 0xffffffff);
+  png.getLineAsRGB565(pDraw, line_buffer, PNG_RGB565_BIG_ENDIAN, 0xffffffff);
 
-  if (png.getAlphaMask(pDraw, maskBuffer, 255)) {
-    tft.pushMaskedImage(xpos, ypos + pDraw->y, pDraw->iWidth, 1, lineBuffer, maskBuffer);
+  if (png.getAlphaMask(pDraw, mask_buffer, 255)) {
+    tft.pushMaskedImage(xpos, ypos + pDraw->y, pDraw->iWidth, 1, line_buffer, mask_buffer);
   }
 
   return 1;
