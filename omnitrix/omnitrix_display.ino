@@ -19,82 +19,55 @@ void show_animation() {
 
     delay(fps);
 
-    int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[frame], sizeof(omnitrix_anim[frame]), png_draw);
-
-    tft.startWrite();
-    rc = png.decode(NULL, 0);
-    tft.endWrite();
+    show_image(omnitrix_anim[frame], sizeof(omnitrix_anim[frame]));
   }
 #endif
 }
-
-
 
 //Method that shows the symbols for select mode
 void show_select_symbols() {
 
-//Select Symbols with image
-#if defined START_ANIMATION_WITH_IMAGES
+  //Select Symbols with image
+  show_image(omnitrix_anim[10], sizeof(omnitrix_anim[10]));
 
-  int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[10], sizeof(omnitrix_anim[10]), png_draw);
-
-  if (rc == PNG_SUCCESS) {
-#if defined ENABLE_MEMORY_INFO
-    Serial.println("Successfully png file");
-#endif
-
-    tft.startWrite();
-    rc = png.decode(NULL, 0);
-    tft.endWrite();
-  }
-#endif
 }
-
 
 //Function that displays start icon symbols
 void show_symbols() {
 
-#if defined ENABLE_MEMORY_INFO
-  Serial.println("show symbols");
-#endif
-
-//Start Symbols with image
-#if defined START_ANIMATION_WITH_IMAGES
-
-  int16_t rc = png.openFLASH((uint8_t *)omnitrix_anim[0], sizeof(omnitrix_anim[0]), png_draw);
-
-  if (rc == PNG_SUCCESS) {
-#if defined ENABLE_MEMORY_INFO
-    Serial.println("Successfully png file");
-#endif
-
-    tft.startWrite();
-    rc = png.decode(NULL, 0);
-    tft.endWrite();
-  }
-#endif
+  //Start Symbols with image
+  show_image(omnitrix_anim[0], sizeof(omnitrix_anim[0]));
 }
 
 //Function that displays alien on screen
 void show_alien() {
 
-  int16_t rc = png.openFLASH((uint8_t *)omnitrix_aliens[g_alien_n], sizeof(omnitrix_aliens[g_alien_n]), png_draw);
+  show_image(omnitrix_aliens[g_alien_n], sizeof(omnitrix_aliens[g_alien_n]));
 
-  if (rc == PNG_SUCCESS) {
-#if defined ENABLE_MEMORY_INFO
-    Serial.println("Successfully png file");
-#endif
-
-    tft.startWrite();
-    rc = png.decode(NULL, 0);
-    tft.endWrite();
-  }
 }
 
 //Method that displays green backround to erase alien
 void erase_alien() {
 
-  int16_t rc = png.openFLASH((uint8_t *)omnitrix_alien_background, sizeof(omnitrix_alien_background), png_draw);
+  show_image(omnitrix_alien_background, sizeof(omnitrix_alien_background));
+
+}
+
+// This function displays png images
+void show_image(const uint8_t *img, int img_size) {
+
+#if defined ENABLE_MEMORY_INFO
+  Serial.printf("Free Internal Heap: %d\n", ESP.getFreeHeap());
+  Serial.printf("Min Free Internal Heap: %d\n", ESP.getMinFreeHeap());
+  Serial.printf("Total PSRAM Size: %d\n", ESP.getPsramSize());
+  Serial.printf("Free PSRAM: %d\n", ESP.getFreePsram());
+#endif
+
+  int16_t rc = png.openFLASH((uint8_t *)img, img_size, png_draw);
+
+#if defined ENABLE_MEMORY_INFO
+  Serial.printf("Open flash rc: %d\n", rc);
+#endif
 
   if (rc == PNG_SUCCESS) {
 #if defined ENABLE_MEMORY_INFO
@@ -105,6 +78,7 @@ void erase_alien() {
     rc = png.decode(NULL, 0);
     tft.endWrite();
   }
+
 }
 
 // This function will be called during decoding of the png file

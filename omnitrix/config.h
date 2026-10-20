@@ -75,7 +75,7 @@
 //2. Verbose deep sleep info
 //#define ENABLE_DEEP_SLEEP_INFO
 //3. Info about FLASH/RAM
-//#define ENABLE_MEMORY_INFO
+#define ENABLE_MEMORY_INFO
 
 //ANIMATION
 //Choose only one type of animation
