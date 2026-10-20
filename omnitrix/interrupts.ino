@@ -84,3 +84,74 @@ void IRAM_ATTR rot_encoder_interrupt() {
 #endif
 //------INTERRUPTS-END--------------------
 //----------------------------------------
+
+//Function that get input from interrupts. Returns:
+//INPUT_START_BUTTON if start button is pressed
+//INPUT_SELECT_BUTTON if select button is pressed
+//INPUT_RIGHT if it gets right movement from encoder
+//INPUT_LEFT if it gets left movement from encoder
+//INPUT_NONE if none
+static Input check_input() {
+
+//Rotary encoder
+#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED || defined ROTARY_ENCODER_ENABLED
+  if (g_right_state) {
+#if defined ENABLE_VERBOSE_INFO
+    Serial.printf("Right Button pressed\n");
+#endif
+
+//Play move encoder forward sound
+#if defined SOUND_ENABLED
+    play_sound(3); 
+#endif
+    g_right_state = false;
+
+    //Check mode for right button
+    //right_button_mode();
+    reset_timer();
+    return INPUT_RIGHT;
+  }
+  else if (g_left_state) {
+#if defined ENABLE_VERBOSE_INFO
+    Serial.printf("Left Button pressed\n");
+#endif
+
+//Play move encoder backwards
+#if defined SOUND_ENABLED
+    play_sound(4);  
+#endif
+    g_left_state = false;
+
+    //Check mode for left button
+    //left_button_mode();
+    reset_timer();
+    return INPUT_LEFT;
+  }
+#endif
+#if defined POP_UP_BUTTONS_ENABLED
+  else if (g_start_button_state) {
+#if defined ENABLE_VERBOSE_INFO
+    Serial.printf("Button pressed\n");
+#endif
+    g_start_button_state = false;
+
+    //Check mode for start button
+    //start_button_mode();
+    reset_timer();
+    return INPUT_START_BUTTON;
+  }
+  else if (g_select_button_state) {
+#if defined ENABLE_VERBOSE_INFO
+    Serial.printf("Select Button pressed\n");
+#endif
+    g_select_button_state = false;
+
+    //Check mode for select button
+    //select_button_mode();
+    reset_timer();
+    return INPUT_SELECT_BUTTON;
+  }
+#endif
+
+  return INPUT_NONE;
+}

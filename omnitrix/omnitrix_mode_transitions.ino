@@ -49,7 +49,7 @@ void mode2to3() {
 
   //Display tranformation image
   tft.fillScreen(OMNITRIX_GREEN);
-  delay(600); //animation delay
+  delay(600); //green display delay
 
   //Display transformed state image
   tft.fillScreen(TFT_WHITE);
@@ -123,7 +123,7 @@ void mode3to1() {
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-#if defined ENABLE_SERIAL
+#if defined ENABLE_DEEP_SLEEP_INFO
   Serial.println("Disabled Timer1");
 #endif
 }
@@ -150,7 +150,7 @@ void mode4to1() {
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-#if defined ENABLE_SERIAL
+#if defined ENABLE_DEEP_SLEEP_INFO
   Serial.println("Disabled Timer2");
 #endif
 

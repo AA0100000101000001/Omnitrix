@@ -135,55 +135,25 @@ void setup() {
 
 void loop() {
 
-#if defined POP_UP_BUTTONS_ENABLED
-  if (g_start_button_state) {
-#if defined ENABLE_VERBOSE_INFO
-    Serial.printf("Button pressed\n");
-#endif
-    g_start_button_state = false;
+  //Get input from interrupts
+  Input in = check_input();
 
-    //Check mode for start button
-    start_button_mode();
+  //Start mode
+  if (g_mode == 1) {
+    start_mode(in);
   }
-  if (g_select_button_state) {
-#if defined ENABLE_VERBOSE_INFO
-    Serial.printf("Select Button pressed\n");
-#endif
-    g_select_button_state = false;
-
-    //Check mode for select button
-    select_button_mode();
+  //Select alien mode
+  else if (g_mode == 2) {
+    select_alien_mode(in);
   }
-#endif
-//Rotary encoder
-#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED || defined ROTARY_ENCODER_ENABLED
-  if (g_right_state) {
-#if defined ENABLE_VERBOSE_INFO
-    Serial.printf("Right Button pressed\n");
-#endif
-    g_right_state = false;
-
-    //Check mode for right button
-    right_button_mode();
+  //Transformed mode
+  else if (g_mode == 3) {
+    transformed_mode(in);
   }
-  if (g_left_state) {
-#if defined ENABLE_VERBOSE_INFO
-    Serial.printf("Left Button pressed\n");
-#endif
-    g_left_state = false;
-
-    //Check mode for left button
-    left_button_mode();
-  }
-#endif
-
-  if (g_mode == 3) {
-    transformed_mode();
-  }
-  if (g_mode == 4) {
+  //Recharging mode
+  else if (g_mode == 4) {
     recharge_mode();
   }
-
 
   //Check timer for deep sleep
   check_timer();
