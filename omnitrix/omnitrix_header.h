@@ -131,3 +131,14 @@ TFT_eSPI tft = TFT_eSPI();
 void show_symbols();
 void show_alien();
 int png_draw(PNGDRAW *pDraw);
+
+#if defined POP_UP_BUTTONS_ENABLED
+void IRAM_ATTR button_interrupt();
+void IRAM_ATTR select_button_interrupt();
+#endif
+#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
+void IRAM_ATTR right_button_interrupt();
+void IRAM_ATTR left_button_interrupt();
+#elif defined ROTARY_ENCODER_ENABLED
+void IRAM_ATTR rot_encoder_interrupt();
+#endif
