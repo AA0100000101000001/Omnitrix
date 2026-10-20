@@ -18,8 +18,16 @@ void show_animation() {
   for (; frame <= OMNITRIX_ANIM_FRAME_LAST_INDEX; frame++) {
 
     delay(fps);
+#if defined ENABLE_VERBOSE_INFO
+    int start_frame_time = millis();
+#endif
 
     show_image(omnitrix_anim[frame], sizeof(omnitrix_anim[frame]));
+
+#if defined ENABLE_VERBOSE_INFO
+    int frame_duration_time = millis() - start_frame_time;
+    Serial.printf("Time passed since frame: %d\n", frame_duration_time);
+#endif
   }
 #endif
 }
