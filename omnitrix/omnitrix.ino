@@ -45,7 +45,7 @@ void setup() {
   //pinMode(TFT_BL, OUTPUT); //Screen
 
   //Reduce Power consumption
-  setCpuFrequencyMhz(80);  //Reduce CPU Freq
+  setCpuFrequencyMhz(DEFAULT_CPU_FREQ);  //Reduce CPU Freq
 //WiFi.mode(WIFI_OFF); //Turn off WIFI
 
 //Sound initialization

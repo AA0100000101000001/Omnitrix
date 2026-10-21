@@ -65,6 +65,14 @@
 
 //SOFTWARE SETTINGS
 
+//CPU FREQUENCY
+#define DEFAULT_CPU_FREQ 80
+//Allow cpu frequency to change for better FPS
+//#define ALLOW_CPU_FREQ_CHANGES
+//#define MAX_CPU_FREQ 80
+//#define MAX_CPU_FREQ 160
+//#define MAX_CPU_FREQ 240
+
 //SERIAL OUTPUT
 //Basic debugging info
 #define ENABLE_SERIAL
@@ -163,11 +171,9 @@
 //Buzzzer sound
 #elif !defined SOUND_DFPLAYER_PRO_ENABLED && defined SOUND_BUZZER_ENABLED
 #define BUZZER_PIN CONFIG_BUZZER  //buzzer
-
 #else
 #error "You must use only one option for the sound"
 #endif
-
 #endif
 
 //Define RGB LED pins
@@ -176,7 +182,7 @@
 #endif
 #if defined LEDS_ENABLED
 
-//Check which what kind of LED is enabled
+//Check what kind of LED is enabled
 //RGB LEDs are enabled
 #if (defined(RGB_LEDS_ENABLED) && !defined(NEOPIXEL_RING_LEDS_ENABLED) && !defined(IR_CONTROLLED_LEDS_ENABLED))
 
@@ -191,15 +197,18 @@
 
 //IR controlled LEDs are enebled
 #elif (!defined(RGB_LEDS_ENABLED) && !defined(NEOPIXEL_RING_LEDS_ENABLED) && defined(IR_CONTROLLED_LEDS_ENABLED))
-
 #define LED_IR_TRANS CONFIG_IR_TRANSMITTER
-
 //Error
 #else
 #error "You must use only one option for the LEDs"
 #endif
 #endif
 
+
+//Check if allowed to change CPU frequency
+#if defined ALLOW_CPU_FREQ_CHANGES ^ defined MAX_CPU_FREQ
+#error "You must set MAX_CPU_FREQ if ALLOW_CPU_FREQ_CHANGES is configured"
+#endif
 
 //Check if serial is enabled
 #if !defined ENABLE_SERIAL && (defined ENABLE_VERBOSE_INFO || defined ENABLE_DEEP_SLEEP_INFO || defined ENABLE_MEMORY_INFO)
