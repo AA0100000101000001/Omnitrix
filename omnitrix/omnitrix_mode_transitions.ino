@@ -14,8 +14,14 @@ void mode1to2start() {
   reset_timer(); // For the delay of the animation
   g_anim_start = millis(); //get time of animation begin
   is_animating = true;
-  //Display animation
-  show_animation();
+
+  g_current_frame = 0; //Set start frame
+  //Set debugging animation variables
+#if defined ENABLE_ANIM_INFO
+  end_animation_time;
+  avrg_frame_time = 0;
+  avrg_frame_decod_time = 0;
+#endif
 
 }
 

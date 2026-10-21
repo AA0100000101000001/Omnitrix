@@ -7,14 +7,13 @@ void start_mode(Input in) {
   if(is_animating) {
 
     // Animation time is done
-    if (animating_finished) {
+    if (show_animation()) {
 
 #if defined ENABLE_ANIM_INFO
       Serial.println("Start animation is done");
 #endif
 
       is_animating = false;
-      animating_finished = false;
       // Finish going to select alien mode
       mode1to2finish();
     }
