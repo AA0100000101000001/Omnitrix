@@ -3,16 +3,49 @@
 //First state, Omnitrix is in start mode
 void start_mode(Input in) {
 
+  //Animation for going to select alien mode is done
+  if(is_animating) {
+
+    // Animation time is done
+    if (animating_finished) {
+
+#if defined ENABLE_ANIM_INFO
+      Serial.println("Start animation is done");
+#endif
+
+      is_animating = false;
+      animating_finished = false;
+      // Finish going to select alien mode
+      mode1to2finish();
+    }
+  }
+
   // Start button is pressed
   if (in == INPUT_START_BUTTON) {
     //Go to select alien mode
-    mode1to2();
+    mode1to2start();
   }
 }
 
 //Mode 2
 //Omnitrix is in select alien mode
 void select_alien_mode(Input in) {
+
+  // Delay/animation for before going to transformed mode
+  if (is_animating) {
+
+    // Green display delay is done
+    if (millis() - g_anim_start >= 600) {
+
+#if defined ENABLE_ANIM_INFO
+      Serial.println("Delay for green display is done");
+#endif
+
+      is_animating = false;
+      // Finish going to transformation mode
+      mode2to3finish();
+    }
+  }
 
   // Right movement input
   if (in == INPUT_RIGHT) {
@@ -62,7 +95,7 @@ void select_alien_mode(Input in) {
   // Select button is pressed
   else if (in == INPUT_SELECT_BUTTON) {
     //Go to transformation mode
-    mode2to3();
+    mode2to3start();
   }
 }
 

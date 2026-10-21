@@ -6,29 +6,57 @@
 int16_t xpos = 0;
 int16_t ypos = 0;
 
+static bool is_animating = false;
+static bool animating_finished = false;
+uint32_t g_anim_start;    //Timer that helps with animation
+
+
 //Method that shows animation
 void show_animation() {
 
-//Start animation with images
+//Use of images for start animation
 #if defined START_ANIMATION_WITH_IMAGES
 
   int frame = 0;
-  int fps = 10;
+  //int fps = 10;
+#if defined ENABLE_ANIM_INFO
+  int start_animation_time = millis();
+  int end_animation_time;
+  double avrg_frame_time = 0;
+#endif
 
   for (; frame <= OMNITRIX_ANIM_FRAME_LAST_INDEX; frame++) {
 
-    delay(fps);
+    //delay(fps);
 #if defined ENABLE_ANIM_INFO
     int start_frame_time = millis();
 #endif
 
-    show_image(omnitrix_anim[frame], sizeof(omnitrix_anim[frame]));
+    draw_start_animation_frame(frame);
 
 #if defined ENABLE_ANIM_INFO
     int frame_duration_time = millis() - start_frame_time;
+    avrg_frame_time += frame_duration_time;
     Serial.printf("Time passed since frame: %d\n", frame_duration_time);
 #endif
   }
+#endif
+
+#if defined ENABLE_ANIM_INFO
+  end_animation_time = millis();
+  Serial.printf("Average frame rate: %.2f\n", avrg_frame_time/(OMNITRIX_ANIM_FRAME_LAST_INDEX + 1));
+  Serial.printf("Total start_animation time length : %d\n", end_animation_time - start_animation_time);
+#endif
+  animating_finished = true;
+}
+
+// Helper function for show_animation
+void draw_start_animation_frame(uint8_t i) {
+
+//Use of images for start animation
+#if defined START_ANIMATION_WITH_IMAGES
+  
+  show_image(omnitrix_anim[i], sizeof(omnitrix_anim[i]));
 #endif
 }
 

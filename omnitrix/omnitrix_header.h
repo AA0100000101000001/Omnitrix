@@ -47,7 +47,7 @@ DFRobot_DF1201S DF1201S;
 //Time Variables
 #define uS_TO_S_FACTOR 1000000ULL /* Conversion factor for micro seconds to seconds */
 #define DEEP_SLEEP_TIMER 5        // 5 sec
-uint32_t g_start;                   //timer for deep sleep
+uint32_t g_start;                 //timer for deep sleep
 
 //Time definitions for demo and default mode
 #if defined DEMO_ENABLED

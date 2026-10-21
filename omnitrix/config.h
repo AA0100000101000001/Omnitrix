@@ -77,7 +77,7 @@
 //3. Info about FLASH/RAM
 //#define ENABLE_MEMORY_INFO
 //4. Info about animation
-//#define ENABLE_ANIM_INFO
+#define ENABLE_ANIM_INFO
 
 //ANIMATION
 //Choose only one type of animation
