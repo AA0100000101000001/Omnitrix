@@ -242,7 +242,7 @@
 #if defined START_ANIMATION_WITH_IMAGES && !defined START_ANIMATION_WITHOUT_IMAGES
 #elif !defined START_ANIMATION_WITH_IMAGES && defined START_ANIMATION_WITHOUT_IMAGES
 #else
-#error "You must use at least only one option for the start animation"
+#error "You must use at least one option for the start animation"
 #endif
 
 //Check if demo is enabled

@@ -67,7 +67,7 @@ bool show_animation() {
   else {
 
     //Finished animation info
-#if defined ENABLE_ANIM_INFO
+#if defined ENABLE_VERBOSE_ANIM_INFO
     end_animation_time = millis();
     Serial.printf("Average frame rate: %.2f, Average frame decode time: %.2f\n", 
       avrg_frame_time/(OMNITRIX_ANIM_FRAME_LAST_INDEX + 1), 

@@ -17,6 +17,8 @@ void start_mode(Input in) {
       // Finish going to select alien mode
       mode1to2finish();
     }
+    //Do not allow other inputs to be read
+    return;
   }
 
   // Start button is pressed
@@ -44,6 +46,8 @@ void select_alien_mode(Input in) {
       // Finish going to transformation mode
       mode2to3finish();
     }
+    //Do not allow other inputs to be read
+    return;
   }
 
   // Right movement input
