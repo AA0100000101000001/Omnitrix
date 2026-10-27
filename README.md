@@ -118,7 +118,7 @@ Right now the EXT0_ROTARY_ENCODER configuration works with the use of the mechan
 The only essential setting is one option for the animation. Default transformation and recharging time is 60 seconds. You can configure:  
 
 **To choose max CPU frequency for bigger frame rates**   
-Default CPU frequency is used most of the time. If ALLOW_CPU_FREQ_CHANGES is enabled then the frequency can go faster just for the animation. (worked on)
+Default CPU frequency is used most of the time. If ALLOW_CPU_FREQ_CHANGES is enabled then the frequency can go faster just for the animation. 
 
 ```C
 //CPU FREQUENCY
@@ -145,6 +145,8 @@ Default CPU frequency is used most of the time. If ALLOW_CPU_FREQ_CHANGES is ena
 //#define ENABLE_MEMORY_INFO
 //4. Info about animation
 //#define ENABLE_ANIM_INFO
+//5. Verbose animation info
+//#define ENABLE_VERBOSE_ANIM_INFO
 ```
 
 **What kind of animation is being used:**  
@@ -152,7 +154,7 @@ Default CPU frequency is used most of the time. If ALLOW_CPU_FREQ_CHANGES is ena
 ```C
 //Choose only one type of animation
 //1. Start animation with images
-#define START_ANIMATION_WITH_IMAGES //Has memory leaks
+#define START_ANIMATION_WITH_IMAGES
 //2. Hard coded start animation
 //#define START_ANIMATION_WITHOUT_IMAGES //Not finished
 ```

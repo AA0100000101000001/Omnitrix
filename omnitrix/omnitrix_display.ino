@@ -11,7 +11,7 @@ uint32_t g_anim_start;    //Timer that helps with animation
 uint8_t g_current_frame; //Frame iterator (<= 255 total frames)
 
 //For debugging animation
-#if defined ENABLE_ANIM_INFO
+#if defined ENABLE_VERBOSE_ANIM_INFO
 int end_animation_time;
 double avrg_frame_time;
 double avrg_frame_decod_time;
@@ -28,21 +28,27 @@ bool show_animation() {
   //Animation frames not done
   if (g_current_frame <= OMNITRIX_ANIM_FRAME_LAST_INDEX) {
 
-#if defined ENABLE_ANIM_INFO
+#if defined ENABLE_VERBOSE_ANIM_INFO
       int start_frame_time = millis();
 #endif
 
-    //Check time for next frame
-    // g_anim_start + ((g_current_frame+1) * 53) is the next timestamp where the next frame appears
-    if (millis() >= g_anim_start + ((g_current_frame+1) * 53)) {
+    uint32_t next_frame = g_anim_start + ((g_current_frame+1) * FRAME_RATE);
 
 #if defined ENABLE_ANIM_INFO
+    Serial.printf("millis: %d, next frame at: %d\n", millis(), next_frame);
+#endif
+
+    //Check time for next frame
+    // g_anim_start + ((g_current_frame+1) * FRAME_RATE) is the next timestamp where the next frame appears
+    if (millis() >= next_frame) {
+
+#if defined ENABLE_VERBOSE_ANIM_INFO
       int start_frame_decod_time = millis();
 #endif
       //Draw current frame
       draw_start_animation_frame(g_current_frame);
 
-#if defined ENABLE_ANIM_INFO
+#if defined ENABLE_VERBOSE_ANIM_INFO
       int frame_decod_duration_time = millis() - start_frame_decod_time;
       int frame_duration_time = millis() - start_frame_time;
       int frame_duration_since_start = millis() - g_anim_start;

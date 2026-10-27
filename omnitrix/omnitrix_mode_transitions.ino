@@ -15,9 +15,13 @@ void mode1to2start() {
   g_anim_start = millis(); //get time of animation begin
   is_animating = true;
 
+#if defined ALLOW_CPU_FREQ_CHANGES
+  //Change cpu frequency to the faster allowed one for faster animation
+  setCpuFrequencyMhz(MAX_CPU_FREQ); //Change cpu frequency to the faster allowed one 
+#endif
   g_current_frame = 0; //Set start frame
   //Set debugging animation variables
-#if defined ENABLE_ANIM_INFO
+#if defined ENABLE_VERBOSE_ANIM_INFO
   end_animation_time;
   avrg_frame_time = 0;
   avrg_frame_decod_time = 0;
@@ -30,6 +34,11 @@ void mode1to2finish() {
 
 #if defined ENABLE_SERIAL
   Serial.println("Select alien");
+#endif
+
+#if defined ALLOW_CPU_FREQ_CHANGES
+  //Change cpu frequency to the default one for battery
+  setCpuFrequencyMhz(DEFAULT_CPU_FREQ); //Change cpu frequency to the faster allowed one 
 #endif
 
   //Set select alien mode now after animation is done
