@@ -1,19 +1,48 @@
 
-//Start mode to Alien Selection mode
-void mode1to2() {
+//Start mode to Alien Selection mode begining
+void mode1to2start() {
 
 #if defined SOUND_ENABLED
   play_sound(2);  //Play select sound
 #endif
 
-  g_mode = 2;
 #if defined ENABLE_SERIAL
-  Serial.println("Button pressed, select alien");
+  Serial.println("Button pressed, select alien initiating...");
 #endif
 
-  //Display animation
-  show_animation();
+  
+  reset_timer(); // For the delay of the animation
+  g_anim_start = millis(); //get time of animation begin
+  is_animating = true;
 
+#if defined ALLOW_CPU_FREQ_CHANGES
+  //Change cpu frequency to the faster allowed one for faster animation
+  setCpuFrequencyMhz(MAX_CPU_FREQ); //Change cpu frequency to the faster allowed one 
+#endif
+  g_current_frame = 0; //Set start frame
+  //Set debugging animation variables
+#if defined ENABLE_VERBOSE_ANIM_INFO
+  end_animation_time;
+  avrg_frame_time = 0;
+  avrg_frame_decod_time = 0;
+#endif
+
+}
+
+//Start mode to Alien Selection mode end
+void mode1to2finish() {
+
+#if defined ENABLE_SERIAL
+  Serial.println("Select alien");
+#endif
+
+#if defined ALLOW_CPU_FREQ_CHANGES
+  //Change cpu frequency to the default one for battery
+  setCpuFrequencyMhz(DEFAULT_CPU_FREQ); //Change cpu frequency to the faster allowed one 
+#endif
+
+  //Set select alien mode now after animation is done
+  g_mode = 2;
   //Display alien
   show_alien();
 }
@@ -35,12 +64,11 @@ void mode2to1() {
   show_symbols();
 }
 
-//Alien Selection mode to Transformation mode
-void mode2to3() {
+//Alien Selection mode to Transformation mode before delay/animation
+void mode2to3start() {
 
-  g_mode = 3;
 #if defined ENABLE_SERIAL
-  Serial.println("Tranformed into alien");
+  Serial.println("Tranforming into alien...");
 #endif
 
 #if defined SOUND_ENABLED
@@ -49,7 +77,25 @@ void mode2to3() {
 
   //Display tranformation image
   tft.fillScreen(OMNITRIX_GREEN);
-  delay(600); //animation delay
+  
+  reset_timer(); // For the delay of the green display
+  g_anim_start = millis(); //get time of animation/delay begin
+  is_animating = true;
+
+  //delay(600); //green display delay
+
+  
+}
+
+//Alien Selection mode to Transformation mode after delay/animation
+void mode2to3finish() {
+
+#if defined ENABLE_SERIAL
+  Serial.println("Tranformed into alien");
+#endif
+
+  //Set transformation mode now after animation/delay is done
+  g_mode = 3; 
 
   //Display transformed state image
   tft.fillScreen(TFT_WHITE);
@@ -123,7 +169,7 @@ void mode3to1() {
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-#if defined ENABLE_SERIAL
+#if defined ENABLE_DEEP_SLEEP_INFO
   Serial.println("Disabled Timer1");
 #endif
 }
@@ -150,7 +196,7 @@ void mode4to1() {
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-#if defined ENABLE_SERIAL
+#if defined ENABLE_DEEP_SLEEP_INFO
   Serial.println("Disabled Timer2");
 #endif
 

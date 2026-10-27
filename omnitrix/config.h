@@ -65,6 +65,27 @@
 
 //SOFTWARE SETTINGS
 
+//CPU FREQUENCY
+#define DEFAULT_CPU_FREQ 80
+//Allow cpu frequency to change for better FPS
+#define ALLOW_CPU_FREQ_CHANGES
+//#define MAX_CPU_FREQ 80
+#define MAX_CPU_FREQ 160
+//#define MAX_CPU_FREQ 240
+
+//Animation timing with certain frequencies
+#if defined ALLOW_CPU_FREQ_CHANGES
+#if MAX_CPU_FREQ == 80
+#define FRAME_RATE 53 //For freq of 80
+#elif MAX_CPU_FREQ == 160
+#define FRAME_RATE 31 //For freq of 160
+#elif MAX_CPU_FREQ == 240
+#define FRAME_RATE 24 //For freq of 240
+#endif
+#else
+#define FRAME_RATE 53 //For freq of 80
+#endif
+
 //SERIAL OUTPUT
 //Basic debugging info
 #define ENABLE_SERIAL
@@ -76,11 +97,15 @@
 //#define ENABLE_DEEP_SLEEP_INFO
 //3. Info about FLASH/RAM
 //#define ENABLE_MEMORY_INFO
+//4. Info about animation
+//#define ENABLE_ANIM_INFO
+//5. Verbose animation info
+//#define ENABLE_VERBOSE_ANIM_INFO
 
 //ANIMATION
 //Choose only one type of animation
 //1. Start animation with images
-#define START_ANIMATION_WITH_IMAGES  //Has memory leaks
+#define START_ANIMATION_WITH_IMAGES
 //2. Hard coded start animation
 //#define START_ANIMATION_WITHOUT_IMAGES //Not finished
 
@@ -161,11 +186,9 @@
 //Buzzzer sound
 #elif !defined SOUND_DFPLAYER_PRO_ENABLED && defined SOUND_BUZZER_ENABLED
 #define BUZZER_PIN CONFIG_BUZZER  //buzzer
-
 #else
 #error "You must use only one option for the sound"
 #endif
-
 #endif
 
 //Define RGB LED pins
@@ -174,7 +197,7 @@
 #endif
 #if defined LEDS_ENABLED
 
-//Check which what kind of LED is enabled
+//Check what kind of LED is enabled
 //RGB LEDs are enabled
 #if (defined(RGB_LEDS_ENABLED) && !defined(NEOPIXEL_RING_LEDS_ENABLED) && !defined(IR_CONTROLLED_LEDS_ENABLED))
 
@@ -189,9 +212,7 @@
 
 //IR controlled LEDs are enebled
 #elif (!defined(RGB_LEDS_ENABLED) && !defined(NEOPIXEL_RING_LEDS_ENABLED) && defined(IR_CONTROLLED_LEDS_ENABLED))
-
 #define LED_IR_TRANS CONFIG_IR_TRANSMITTER
-
 //Error
 #else
 #error "You must use only one option for the LEDs"
@@ -199,8 +220,13 @@
 #endif
 
 
+//Check if allowed to change CPU frequency
+#if defined ALLOW_CPU_FREQ_CHANGES ^ defined MAX_CPU_FREQ
+#error "You must set MAX_CPU_FREQ if ALLOW_CPU_FREQ_CHANGES is configured"
+#endif
+
 //Check if serial is enabled
-#if !defined ENABLE_SERIAL && (defined ENABLE_VERBOSE_INFO || defined ENABLE_DEEP_SLEEP_INFO || defined ENABLE_MEMORY_INFO)
+#if !defined ENABLE_SERIAL && (defined ENABLE_VERBOSE_INFO || defined ENABLE_DEEP_SLEEP_INFO || defined ENABLE_MEMORY_INFO || defined ENABLE_ANIM_INFO || defined ENABLE_VERBOSE_ANIM_INFO)
 #error "You must enable Serial to use one of these Serial info options"
 #endif
 

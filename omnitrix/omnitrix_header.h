@@ -47,7 +47,7 @@ DFRobot_DF1201S DF1201S;
 //Time Variables
 #define uS_TO_S_FACTOR 1000000ULL /* Conversion factor for micro seconds to seconds */
 #define DEEP_SLEEP_TIMER 5        // 5 sec
-uint32_t g_start;                   //timer for deep sleep
+uint32_t g_start;                 //timer for deep sleep
 
 //Time definitions for demo and default mode
 #if defined DEMO_ENABLED
@@ -102,6 +102,7 @@ RTC_DATA_ATTR bool g_first_boot = true;  // For initialization
 RTC_DATA_ATTR uint8_t g_alien_n;        // Up to 255 aliens
 RTC_DATA_ATTR uint8_t g_mode;           // Up to 255 modes
 
+// Input states
 #if defined POP_UP_BUTTONS_ENABLED
 //Variables to keep track of the timing of recent interrupts are inside them for now
 //This interrupt timer uses millis() instead of Epoch so it can be smaller
@@ -109,18 +110,22 @@ RTC_DATA_ATTR uint8_t g_mode;           // Up to 255 modes
 //Up to 18.2 hours of being awake and buttons functioning normaly, after sleep values reset
 //volatile uint16_t interruptTime = 0;
 //volatile uint16_t lastInterruptTime = 0;
-
-//Input states
 volatile bool g_start_button_state = 0;        //State of start button
 volatile bool g_select_button_state = 0;  //State of select button
 #endif
-
 #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED || defined ROTARY_ENCODER_ENABLED
 //Similar with pop up buttons, use of interrupts
-//Input states
 volatile bool g_right_state = 0;  //State of right
 volatile bool g_left_state = 0;   //State of left
 #endif
+// Types of inputs
+typedef enum : uint8_t { // Up to 255 inputs
+    INPUT_NONE,
+    INPUT_START_BUTTON,
+    INPUT_SELECT_BUTTON,
+    INPUT_RIGHT,
+    INPUT_LEFT
+} Input;
 
 
 //Display variables
@@ -131,3 +136,14 @@ TFT_eSPI tft = TFT_eSPI();
 void show_symbols();
 void show_alien();
 int png_draw(PNGDRAW *pDraw);
+
+#if defined POP_UP_BUTTONS_ENABLED
+void IRAM_ATTR button_interrupt();
+void IRAM_ATTR select_button_interrupt();
+#endif
+#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
+void IRAM_ATTR right_button_interrupt();
+void IRAM_ATTR left_button_interrupt();
+#elif defined ROTARY_ENCODER_ENABLED
+void IRAM_ATTR rot_encoder_interrupt();
+#endif

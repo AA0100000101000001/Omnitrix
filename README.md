@@ -115,7 +115,20 @@ Right now the EXT0_ROTARY_ENCODER configuration works with the use of the mechan
 //#define NEOPIXEL_RING_LEDS_ENABLED
 ```
 #### For software settings:  
-The only essential setting is one option for the animation. Default transformation and recharging time is 60 seconds. You can configure:   
+The only essential setting is one option for the animation. Default transformation and recharging time is 60 seconds. You can configure:  
+
+**To choose max CPU frequency for bigger frame rates**   
+Default CPU frequency is used most of the time. If ALLOW_CPU_FREQ_CHANGES is enabled then the frequency can go faster just for the animation. 
+
+```C
+//CPU FREQUENCY
+#define DEFAULT_CPU_FREQ 80
+//Allow cpu frequency to change for better FPS
+//#define ALLOW_CPU_FREQ_CHANGES
+//#define MAX_CPU_FREQ 80
+//#define MAX_CPU_FREQ 160
+//#define MAX_CPU_FREQ 240
+``` 
 
 **To enable serial for debugging:**  
 
@@ -130,6 +143,10 @@ The only essential setting is one option for the animation. Default transformati
 //#define ENABLE_DEEP_SLEEP_INFO
 //3. Info about FLASH/RAM
 //#define ENABLE_MEMORY_INFO
+//4. Info about animation
+//#define ENABLE_ANIM_INFO
+//5. Verbose animation info
+//#define ENABLE_VERBOSE_ANIM_INFO
 ```
 
 **What kind of animation is being used:**  
@@ -137,7 +154,7 @@ The only essential setting is one option for the animation. Default transformati
 ```C
 //Choose only one type of animation
 //1. Start animation with images
-#define START_ANIMATION_WITH_IMAGES //Has memory leaks
+#define START_ANIMATION_WITH_IMAGES
 //2. Hard coded start animation
 //#define START_ANIMATION_WITHOUT_IMAGES //Not finished
 ```
