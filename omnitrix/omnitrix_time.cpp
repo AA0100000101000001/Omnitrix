@@ -28,9 +28,6 @@ void init_time_sleep() {
   //The omnitrix will wake up when a combination of buttons is pressed
   esp_sleep_enable_ext1_wakeup(EXT1_BITMASK, ESP_EXT1_WAKEUP_ANY_HIGH);
 #endif
-
-  //Check the wakeup reason for ESP32 and operate accordingly for timers
-  get_wakeup_reason();
 }
 
 

@@ -5,9 +5,9 @@
 #include "omnitrix_types.h"
 #include "omnitrix_time.h"
 #include "interrupts.h"
+#include "omnitrix_display.h"
 #include "omnitrix_mode_transitions.h"
 #include "omnitrix_modes.h"
-#include "omnitrix_display.h"
 
 
 //Sound definition

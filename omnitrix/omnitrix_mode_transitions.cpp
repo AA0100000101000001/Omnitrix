@@ -69,9 +69,7 @@ void mode2to3start() {
   Serial.println("Tranforming into alien...");
 #endif
 
-#if defined SOUND_ENABLED
   play_sound(5);  //Play transformation sound
-#endif
 
   //Display tranformation image
   tft.fillScreen(OMNITRIX_GREEN);

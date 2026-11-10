@@ -46,6 +46,9 @@ void setup() {
     g_first_boot = false;  //Never go to this section again
   }
 
+  //Check the wakeup reason for ESP32 and operate accordingly for timers
+  get_wakeup_reason();
+
   //reset timer
   reset_timer();
 
