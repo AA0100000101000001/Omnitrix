@@ -28,7 +28,6 @@ DFRobot_DF1201S DF1201S;
 #endif
 
 
-
 //LED colours
 #if defined LEDS_ENABLED
 #define GREEN_LED_R 168

@@ -7,6 +7,33 @@ volatile bool g_select_button_state = 0;  //State of select button
 volatile bool g_right_state = 0;  //State of right
 volatile bool g_left_state = 0;   //State of left
 
+
+//initialize inputs and interrupts
+void init_input() {
+
+  //initialize inputs and interrupts
+#if defined POP_UP_BUTTONS_ENABLED
+  pinMode(START_BUTTON_PIN, INPUT);
+  attachInterrupt(START_BUTTON_PIN, button_interrupt, RISING);
+  pinMode(SELECT_BUTTON_PIN, INPUT);
+  attachInterrupt(SELECT_BUTTON_PIN, select_button_interrupt, RISING);
+#endif
+
+//Initialize micro switch rotary encoder
+#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
+  pinMode(RIGHT_BUTTON_PIN, INPUT);
+  pinMode(LEFT_BUTTON_PIN, INPUT);
+  attachInterrupt(RIGHT_BUTTON_PIN, right_button_interrupt, RISING);
+  attachInterrupt(LEFT_BUTTON_PIN, left_button_interrupt, RISING);
+//Initialize rotary encoder
+#elif defined ROTARY_ENCODER_ENABLED
+  pinMode(RIGHT_BUTTON_PIN, INPUT_PULLUP);
+  pinMode(LEFT_BUTTON_PIN, INPUT_PULLUP);
+  attachInterrupt(RIGHT_BUTTON_PIN, rot_encoder_interrupt, CHANGE);  // Need to detect both rising or falling signal
+  attachInterrupt(LEFT_BUTTON_PIN, rot_encoder_interrupt, CHANGE);
+#endif
+}
+
 //------INTERRUPTS------------------------
 //----------------------------------------
 
@@ -116,10 +143,9 @@ Input check_input() {
     Serial.printf("Right Button pressed\n");
 #endif
 
-//Play move encoder forward sound
-#if defined SOUND_ENABLED
+    //Play move encoder forward sound
     play_sound(3); 
-#endif
+
     g_right_state = false;
 
     //Check mode for right button
@@ -132,10 +158,8 @@ Input check_input() {
     Serial.printf("Left Button pressed\n");
 #endif
 
-//Play move encoder backwards
-#if defined SOUND_ENABLED
+    //Play move encoder backwards
     play_sound(4);  
-#endif
     g_left_state = false;
 
     //Check mode for left button

@@ -4,9 +4,7 @@
 //Start mode to Alien Selection mode begining
 void mode1to2start() {
 
-#if defined SOUND_ENABLED
   play_sound(2);  //Play select sound
-#endif
 
 #if defined ENABLE_SERIAL
   Serial.println("Button pressed, select alien initiating...");
@@ -52,9 +50,7 @@ void mode1to2finish() {
 //Alien Selection mode to Start mode
 void mode2to1() {
 
-#if defined SOUND_ENABLED
   play_sound(4);  //Play move backwards
-#endif
 
   g_mode = 1;
 #if defined ENABLE_SERIAL
@@ -119,9 +115,7 @@ void mode2to3finish() {
 //Transformation mode to Recharging mode
 void mode3to4() {
 
-#if defined SOUND_ENABLED
   play_sound(7);  //Play detransformation sound
-#endif
 
 //Red led colour
 #if defined RGB_LEDS_ENABLED
@@ -156,9 +150,7 @@ void mode3to4() {
 //Transformation mode to Start mode
 void mode3to1() {
 
-#if defined SOUND_ENABLED
   play_sound(4);  //Play move backwards
-#endif
 
   g_mode = 1;
 #if defined ENABLE_SERIAL

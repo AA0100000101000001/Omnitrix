@@ -38,5 +38,8 @@ void mode3to1();
 //Recharging mode to Start mode
 void mode4to1();
 
+//Function from sound
+extern void play_sound(int16_t s);
+
 
 #endif

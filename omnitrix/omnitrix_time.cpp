@@ -14,6 +14,26 @@ RTC_DATA_ATTR uint32_t g_recharging_start_time;
 RTC_DATA_ATTR uint16_t g_transformation_start_time_offset;
 RTC_DATA_ATTR uint16_t g_recharging_start_time_offset;
 
+
+//Initialize deep sleep mode
+void init_time_sleep() {
+
+  //External wakeup setup
+//EXT0
+#ifdef EXT0_ENABLED
+  //The omnitrix will wake up when a button is pressed
+  esp_sleep_enable_ext0_wakeup(EXT0_WAKEUP_PIN, EXT0_WAKEUP_MODE);
+//EXT1
+#elif defined EXT1_ENABLED
+  //The omnitrix will wake up when a combination of buttons is pressed
+  esp_sleep_enable_ext1_wakeup(EXT1_BITMASK, ESP_EXT1_WAKEUP_ANY_HIGH);
+#endif
+
+  //Check the wakeup reason for ESP32 and operate accordingly for timers
+  get_wakeup_reason();
+}
+
+
 //Based on ESP32Time Library by Felix Biego
 void rtc_set_time(int sc, int mn, int hr, int dy, int mt, int yr, int ms) {
   // seconds, minute, hour, day, month, year $ microseconds(optional)

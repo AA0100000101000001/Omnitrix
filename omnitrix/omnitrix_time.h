@@ -43,6 +43,7 @@ extern RTC_DATA_ATTR uint16_t g_recharging_start_time_offset;
 extern RTC_DATA_ATTR uint8_t g_mode;           // Up to 255 modes
 
 
+void init_time_sleep();  //Initialize deep sleep mode
 void rtc_set_time(int sc, int mn, int hr, int dy, int mt, int yr, int ms);
 uint64_t get_time_now();
 void reset_timer();
