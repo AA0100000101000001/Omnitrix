@@ -13,7 +13,7 @@ void mode1to2start() {
   
   reset_timer(); // For the delay of the animation
   g_anim_start = millis(); //get time of animation begin
-  is_animating = true;
+  set_is_animating(true);
 
 #if defined ALLOW_CPU_FREQ_CHANGES
   //Change cpu frequency to the faster allowed one for faster animation
@@ -80,7 +80,7 @@ void mode2to3start() {
   
   reset_timer(); // For the delay of the green display
   g_anim_start = millis(); //get time of animation/delay begin
-  is_animating = true;
+  set_is_animating(true);
 
   //delay(600); //green display delay
 

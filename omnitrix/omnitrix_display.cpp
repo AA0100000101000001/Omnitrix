@@ -1,4 +1,10 @@
 
+#include "omnitrix_display.h"
+
+
+//Display variables
+PNG png;  // PNG decoder instance
+TFT_eSPI tft = TFT_eSPI();
 
 #define OMNITRIX_ANIM_FRAME_LAST_INDEX 10 //11 frames for animation
 
@@ -7,6 +13,7 @@ int16_t xpos = 0;
 int16_t ypos = 0;
 
 static bool is_animating = false;
+//bool is_animating = false;
 uint32_t g_anim_start;    //Timer that helps with animation
 uint8_t g_current_frame; //Frame iterator (<= 255 total frames)
 
@@ -17,6 +24,16 @@ double avrg_frame_time;
 double avrg_frame_decod_time;
 #endif
 
+
+//Function that sets is_animating
+void set_is_animating(bool s) {
+  is_animating = s;
+}
+
+//Function that returns is_animating
+bool get_is_animating() {
+  return is_animating;
+}
 
 //Method that shows animation
 //Returns true if finished, false if not done

@@ -1,4 +1,12 @@
 
+#include "interrupts.h"
+
+
+volatile bool g_start_button_state = 0;        //State of start button
+volatile bool g_select_button_state = 0;  //State of select button
+volatile bool g_right_state = 0;  //State of right
+volatile bool g_left_state = 0;   //State of left
+
 //------INTERRUPTS------------------------
 //----------------------------------------
 
@@ -98,7 +106,8 @@ void IRAM_ATTR rot_encoder_interrupt() {
 //INPUT_RIGHT if it gets right movement from encoder
 //INPUT_LEFT if it gets left movement from encoder
 //INPUT_NONE if none
-static Input check_input() {
+//static Input check_input() {
+Input check_input() {
 
 //Rotary encoder
 #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED || defined ROTARY_ENCODER_ENABLED
@@ -162,3 +171,5 @@ static Input check_input() {
 
   return INPUT_NONE;
 }
+
+

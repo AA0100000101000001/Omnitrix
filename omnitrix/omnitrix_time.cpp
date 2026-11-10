@@ -1,11 +1,19 @@
 
+#include "omnitrix_time.h"
 
-//Based on ESP32Time Library by Felix Biego
-#ifdef RTC_DATA_ATTR
-RTC_DATA_ATTR static bool overflow;
-#else
-static bool overflow;
-#endif
+uint32_t g_start;                 //timer for deep sleep
+
+//Initialise timer variables as DEMO (in seconds)
+// Up to 65535 seconds = 1092.25 min = 18.2 hours of recharging/transformation
+RTC_DATA_ATTR uint16_t g_transform_time_val = TRANSFORMATION_TIME;    // Transformation Time Variable
+RTC_DATA_ATTR uint16_t g_recharge_time_val = OMNITRIX_RECHARGE_TIME;  // Recharging Time Variable
+
+//Time variables that are saved in deep sleep mode
+RTC_DATA_ATTR uint32_t g_transformation_start_time;
+RTC_DATA_ATTR uint32_t g_recharging_start_time;
+RTC_DATA_ATTR uint16_t g_transformation_start_time_offset;
+RTC_DATA_ATTR uint16_t g_recharging_start_time_offset;
+
 //Based on ESP32Time Library by Felix Biego
 void rtc_set_time(int sc, int mn, int hr, int dy, int mt, int yr, int ms) {
   // seconds, minute, hour, day, month, year $ microseconds(optional)

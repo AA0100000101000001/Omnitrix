@@ -4,7 +4,7 @@
 void start_mode(Input in) {
 
   //Animation for going to select alien mode is done
-  if(is_animating) {
+  if(get_is_animating()) {
 
     // Animation time is done
     if (show_animation()) {
@@ -13,7 +13,7 @@ void start_mode(Input in) {
       Serial.println("Start animation is done");
 #endif
 
-      is_animating = false;
+      set_is_animating(false);
       // Finish going to select alien mode
       mode1to2finish();
     }
@@ -33,7 +33,7 @@ void start_mode(Input in) {
 void select_alien_mode(Input in) {
 
   // Delay/animation for before going to transformed mode
-  if (is_animating) {
+  if (get_is_animating()) {
 
     // Green display delay is done
     if (millis() - g_anim_start >= 600) {
@@ -42,7 +42,7 @@ void select_alien_mode(Input in) {
       Serial.println("Delay for green display is done");
 #endif
 
-      is_animating = false;
+      set_is_animating(false);
       // Finish going to transformation mode
       mode2to3finish();
     }
