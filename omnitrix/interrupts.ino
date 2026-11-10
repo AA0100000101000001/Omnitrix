@@ -1,25 +1,36 @@
 
 //------INTERRUPTS------------------------
 //----------------------------------------
+
+#define INTERRUPT_DEBOUNCE_TIME 200
+
+//Debouncing wrapper function
+static bool IRAM_ATTR debounce(uint32_t *last_interrupt_time, uint32_t debounce_ms) {
+  
+  uint32_t interrupt_time = millis();
+  //Debouncing
+  if (interrupt_time - *last_interrupt_time > debounce_ms) {
+    *last_interrupt_time = interrupt_time;
+    return true;
+  }
+}
+
+
 #if defined POP_UP_BUTTONS_ENABLED
 
 void IRAM_ATTR button_interrupt() {
-  static uint16_t lastInterruptTime = 0;
-  uint16_t interruptTime = millis();
+  static uint32_t last_interrupt_time = 0;
   //Debouncing
-  if (interruptTime - lastInterruptTime > 200) {
+  if (debounce(&last_interrupt_time, INTERRUPT_DEBOUNCE_TIME)) {
     g_start_button_state = true;
-    lastInterruptTime = interruptTime;
   }
 }
 
 void IRAM_ATTR select_button_interrupt() {
-  static uint16_t lastInterruptTime = 0;
-  uint16_t interruptTime = millis();
+  static uint32_t last_interrupt_time = 0;
   //Debouncing
-  if (interruptTime - lastInterruptTime > 200) {
+  if (debounce(&last_interrupt_time, INTERRUPT_DEBOUNCE_TIME)) {
     g_select_button_state = true;
-    lastInterruptTime = interruptTime;
   }
 }
 
@@ -29,22 +40,18 @@ void IRAM_ATTR select_button_interrupt() {
 #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
 
 void IRAM_ATTR right_button_interrupt() {
-  static uint16_t lastInterruptTime = 0;
-  uint16_t interruptTime = millis();
+  static uint32_t last_interrupt_time = 0;
   //Debouncing
-  if (interruptTime - lastInterruptTime > 200) {
+  if (debounce(&last_interrupt_time, INTERRUPT_DEBOUNCE_TIME)) {
     g_right_state = true;
-    lastInterruptTime = interruptTime;
   }
 }
 
 void IRAM_ATTR left_button_interrupt() {
-  static uint16_t lastInterruptTime = 0;
-  uint16_t interruptTime = millis();
+  static uint32_t last_interrupt_time = 0;
   //Debouncing
-  if (interruptTime - lastInterruptTime > 200) {
+  if (debounce(&last_interrupt_time, INTERRUPT_DEBOUNCE_TIME)) {
     g_left_state = true;
-    lastInterruptTime = interruptTime;
   }
 }
 //Rotary Encoder
