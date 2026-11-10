@@ -2,7 +2,6 @@
 
 #ifndef O_DISPLAY_ANIMATION
 #define O_DISPLAY_ANIMATION
-#include <Arduino.h>
 
 
 const uint8_t omnitrix_anim[][9500] PROGMEM = { {

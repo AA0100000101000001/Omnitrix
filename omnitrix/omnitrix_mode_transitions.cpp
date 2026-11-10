@@ -1,4 +1,6 @@
 
+#include "omnitrix_mode_transitions.h"
+
 //Start mode to Alien Selection mode begining
 void mode1to2start() {
 

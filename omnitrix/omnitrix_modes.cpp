@@ -1,4 +1,6 @@
 
+#include "omnitrix_modes.h"
+
 //Mode 1
 //First state, Omnitrix is in start mode
 void start_mode(Input in) {

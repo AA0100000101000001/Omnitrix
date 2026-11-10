@@ -63,8 +63,6 @@ extern TFT_eSPI tft;
 extern int16_t xpos;
 extern int16_t ypos;
 
-//static bool is_animating;
-//extern bool is_animating;
 extern uint32_t g_anim_start;    //Timer that helps with animation
 extern uint8_t g_current_frame; //Frame iterator (<= 255 total frames)
 

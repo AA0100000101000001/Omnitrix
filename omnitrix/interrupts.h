@@ -4,6 +4,7 @@
 
 #include <Arduino.h>
 #include "config.h"
+#include "omnitrix_types.h"
 
 
 // Input states
@@ -23,17 +24,6 @@ extern volatile bool g_select_button_state;  //State of select button
 extern volatile bool g_right_state;  //State of right
 extern volatile bool g_left_state;   //State of left
 #endif
-
-// Types of inputs
-typedef enum : uint8_t { // Up to 255 inputs
-    INPUT_NONE,
-    INPUT_START_BUTTON,
-    INPUT_SELECT_BUTTON,
-    INPUT_RIGHT,
-    INPUT_LEFT
-} Input;
-
-
 
 
 //Debouncing wrapper function

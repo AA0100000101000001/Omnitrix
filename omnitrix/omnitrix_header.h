@@ -2,21 +2,12 @@
 //Pin configuration and software settings
 #include "config.h"
 
+#include "omnitrix_types.h"
 #include "omnitrix_time.h"
 #include "interrupts.h"
-//#include "omnitrix_modes.h"
-//#include "omnitrix_mode_transitions.h"
+#include "omnitrix_mode_transitions.h"
+#include "omnitrix_modes.h"
 #include "omnitrix_display.h"
-
-
-// Types of inputs
-// typedef enum : uint8_t { // Up to 255 inputs
-//     INPUT_NONE,
-//     INPUT_START_BUTTON,
-//     INPUT_SELECT_BUTTON,
-//     INPUT_RIGHT,
-//     INPUT_LEFT
-// } Input;
 
 
 //Sound definition
@@ -51,5 +42,4 @@ DFRobot_DF1201S DF1201S;
 //Variables that are saved in deep sleep mode
 RTC_DATA_ATTR bool g_first_boot = true;  // For initialization
 RTC_DATA_ATTR uint8_t g_alien_n;        // Up to 255 aliens
-
 RTC_DATA_ATTR uint8_t g_mode;           // Up to 255 modes
