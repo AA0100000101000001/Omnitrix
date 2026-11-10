@@ -50,7 +50,9 @@ extern RTC_DATA_ATTR uint8_t g_alien_n;        // Up to 255 aliens
 
 #define MAX_IMAGE_WDITH 240  // Set rendering line buffer lengths for image
 
+#ifndef OMNITRIX_ANIM_FRAME_LAST_INDEX
 #define OMNITRIX_ANIM_FRAME_LAST_INDEX 10 //11 frames for animation
+#endif
 #define ALIEN_LAST_INDEX 11  //0...11 = 12 Total aliens
 
 
@@ -68,7 +70,7 @@ extern uint8_t g_current_frame; //Frame iterator (<= 255 total frames)
 
 //For debugging animation
 #if defined ENABLE_VERBOSE_ANIM_INFO
-extern int end_animation_time;
+//extern int end_animation_time;
 extern double avrg_frame_time;
 extern double avrg_frame_decod_time;
 #endif
@@ -79,6 +81,10 @@ void set_is_animating(bool s);
 
 //Function that returns is_animating
 bool get_is_animating();
+
+//Function that gets curent time
+//Animation with images returns millis while hardcoded animation returns micros
+unsigned long get_anim_time();
 
 //Method that shows animation
 //Returns true if finished, false if not done

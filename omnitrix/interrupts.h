@@ -46,7 +46,6 @@ void IRAM_ATTR left_button_interrupt();
 void IRAM_ATTR rot_encoder_interrupt();
 #endif
 
-//static Input check_input();
 Input check_input();
 
 //Function from omnitrix_time

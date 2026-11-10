@@ -11,9 +11,7 @@ void start_mode(Input in) {
     // Animation time is done
     if (show_animation()) {
 
-#if defined ENABLE_ANIM_INFO
-      Serial.println("Start animation is done");
-#endif
+    print_anim_info("Start animation is done");
 
       set_is_animating(false);
       // Finish going to select alien mode
@@ -38,11 +36,9 @@ void select_alien_mode(Input in) {
   if (get_is_animating()) {
 
     // Green display delay is done
-    if (millis() - g_anim_start >= 600) {
+    if (get_anim_time() - g_anim_start >= 600) {
 
-#if defined ENABLE_ANIM_INFO
-      Serial.println("Delay for green display is done");
-#endif
+      print_anim_info("Delay for green display is done");
 
       set_is_animating(false);
       // Finish going to transformation mode
@@ -67,10 +63,7 @@ void select_alien_mode(Input in) {
     //Display alien
     show_alien();
 
-#if defined ENABLE_SERIAL
-    Serial.print("Right, alien no:");
-    Serial.println(g_alien_n);
-#endif
+    print_info_var("Right, alien no: ", g_alien_n);
   }
   // Left movement input
   else if (in == INPUT_LEFT) {
@@ -87,10 +80,7 @@ void select_alien_mode(Input in) {
     //Display alien
     show_alien();
 
-#if defined ENABLE_SERIAL
-    Serial.print("Left, alien no:");
-    Serial.println(g_alien_n);
-#endif
+    print_info_var("Left, alien no: ", g_alien_n);
   }
   // Start button is pressed
   else if (in == INPUT_START_BUTTON) {
@@ -123,12 +113,10 @@ void transformed_mode(Input in) {
 
     //Transformation time is not finished
   } else {
-#if defined ENABLE_DEEP_SLEEP_INFO
+
     //Set offset to time passed since last time the timer was checked (in sec)
     g_transformation_start_time_offset = get_time_now() - g_transformation_start_time;
-    Serial.print("transformation_start_time_offset: ");
-    Serial.println(g_transformation_start_time_offset);
-#endif
+    print_deep_sleep_info_var("transformation_start_time_offset: ", g_transformation_start_time_offset);
   }
 }
 
@@ -145,11 +133,9 @@ void recharge_mode() {
 
     //Recharging time is not finished
   } else {
-#if defined ENABLE_DEEP_SLEEP_INFO
+    
     //Set offset to time passed since last time the timer was checked (in sec)
     g_recharging_start_time_offset = get_time_now() - g_recharging_start_time;
-    Serial.print("recharging_start_time_offset: ");
-    Serial.println(g_recharging_start_time_offset);
-#endif
+    print_deep_sleep_info_var("recharging_start_time_offset: ", g_recharging_start_time_offset);
   }
 }

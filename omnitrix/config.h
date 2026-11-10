@@ -2,6 +2,7 @@
 #ifndef O_CONFIG
 #define O_CONFIG
 
+
 //Pin configuration
 //Edit configs/config_DEFAULT to create your own configuration or uncomment your preferred configuration
 //#include "configs/config_CUSTOM.h" //Use your own configuration
@@ -260,5 +261,8 @@
 //-------------------------------------------------------
 //----------DON'T EDIT THIS------------------------------
 //-------------------------------------------------------
+
+
+#include "info_print.h"
 
 #endif

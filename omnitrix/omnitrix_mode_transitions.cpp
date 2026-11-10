@@ -6,13 +6,10 @@ void mode1to2start() {
 
   play_sound(2);  //Play select sound
 
-#if defined ENABLE_SERIAL
-  Serial.println("Button pressed, select alien initiating...");
-#endif
-
+  print_info("Button pressed, select alien initiating...");
   
   reset_timer(); // For the delay of the animation
-  g_anim_start = millis(); //get time of animation begin
+  g_anim_start = get_anim_time(); //get time of animation begin
   set_is_animating(true);
 
 #if defined ALLOW_CPU_FREQ_CHANGES
@@ -22,7 +19,6 @@ void mode1to2start() {
   g_current_frame = 0; //Set start frame
   //Set debugging animation variables
 #if defined ENABLE_VERBOSE_ANIM_INFO
-  end_animation_time;
   avrg_frame_time = 0;
   avrg_frame_decod_time = 0;
 #endif
@@ -32,9 +28,7 @@ void mode1to2start() {
 //Start mode to Alien Selection mode end
 void mode1to2finish() {
 
-#if defined ENABLE_SERIAL
-  Serial.println("Select alien");
-#endif
+  print_info("Select alien");
 
 #if defined ALLOW_CPU_FREQ_CHANGES
   //Change cpu frequency to the default one for battery
@@ -53,9 +47,7 @@ void mode2to1() {
   play_sound(4);  //Play move backwards
 
   g_mode = 1;
-#if defined ENABLE_SERIAL
-  Serial.println("Button pressed, back to start");
-#endif
+  print_info("Button pressed, back to start");
 
   //display start
   tft.fillScreen(OMNITRIX_GREEN);
@@ -65,9 +57,7 @@ void mode2to1() {
 //Alien Selection mode to Transformation mode before delay/animation
 void mode2to3start() {
 
-#if defined ENABLE_SERIAL
-  Serial.println("Tranforming into alien...");
-#endif
+  print_info("Tranforming into alien...");
 
   play_sound(5);  //Play transformation sound
 
@@ -75,7 +65,7 @@ void mode2to3start() {
   tft.fillScreen(OMNITRIX_GREEN);
   
   reset_timer(); // For the delay of the green display
-  g_anim_start = millis(); //get time of animation/delay begin
+  g_anim_start = get_anim_time(); //get time of animation/delay begin
   set_is_animating(true);
 
   //delay(600); //green display delay
@@ -86,9 +76,7 @@ void mode2to3start() {
 //Alien Selection mode to Transformation mode after delay/animation
 void mode2to3finish() {
 
-#if defined ENABLE_SERIAL
-  Serial.println("Tranformed into alien");
-#endif
+  print_info("Tranformed into alien");
 
   //Set transformation mode now after animation/delay is done
   g_mode = 3; 
@@ -105,9 +93,7 @@ void mode2to3finish() {
   g_transformation_start_time_offset = get_time_now() - g_transformation_start_time;
   //Configure the wake up source to wake up every time the transformation is done
   esp_sleep_enable_timer_wakeup((g_transform_time_val - g_transformation_start_time_offset) * uS_TO_S_FACTOR);
-#if defined ENABLE_SERIAL
-  Serial.println("Transformation: Setup ESP32 to sleep for every " + String(g_transform_time_val - g_transformation_start_time_offset) + " Seconds");
-#endif
+  print_info_var("Transformation: Setup ESP32 to sleep for every (in sec) ", g_transform_time_val - g_transformation_start_time_offset);
 }
 
 //Transformation mode to Recharging mode
@@ -126,9 +112,7 @@ void mode3to4() {
   tft.fillScreen(OMNITRIX_RED);
   show_symbols();
 
-#if defined ENABLE_SERIAL
-  Serial.println("Omnitrix is recharging");
-#endif
+  print_info("Omnitrix is recharging");
 
   //Start Rechargin timer
   //Set recharging start time to current epoch time
@@ -140,9 +124,7 @@ void mode3to4() {
   g_recharging_start_time_offset = get_time_now() - g_recharging_start_time;
   //Configure the wake up source to wake up every time the recharge is done
   esp_sleep_enable_timer_wakeup((g_recharge_time_val - g_recharging_start_time_offset) * uS_TO_S_FACTOR);
-#if defined ENABLE_SERIAL
-  Serial.println("Recharging: Setup ESP32 to sleep for every " + String(g_recharge_time_val - g_recharging_start_time_offset) + " Seconds");
-#endif
+  print_info_var("Recharging: Setup ESP32 to sleep for every ", g_recharge_time_val - g_recharging_start_time_offset);
 }
 
 //Transformation mode to Start mode
@@ -151,9 +133,7 @@ void mode3to1() {
   play_sound(4);  //Play move backwards
 
   g_mode = 1;
-#if defined ENABLE_SERIAL
-  Serial.println("Button pressed, untransforming and going back to Start mode");
-#endif
+  print_info("Button pressed, untransforming and going back to Start mode");
 
   //display start
   tft.fillScreen(OMNITRIX_GREEN);
@@ -161,9 +141,7 @@ void mode3to1() {
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-#if defined ENABLE_DEEP_SLEEP_INFO
-  Serial.println("Disabled Timer1");
-#endif
+  print_deep_sleep_info("mode3to1: Disabled Timer");
 }
 
 //Recharging mode to Start mode
@@ -180,17 +158,13 @@ void mode4to1() {
   tft.fillScreen(OMNITRIX_GREEN);
   show_symbols();
 
-#if defined ENABLE_SERIAL
-  Serial.println("Going back to start");
-#endif
+  print_info("Going back to start");
 
   g_mode = 1;
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-#if defined ENABLE_DEEP_SLEEP_INFO
-  Serial.println("Disabled Timer2");
-#endif
+  print_deep_sleep_info("mode4to1: Disabled Timer");
 
   //reset timer
   reset_timer();

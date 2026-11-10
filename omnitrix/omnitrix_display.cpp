@@ -19,7 +19,7 @@ uint8_t g_current_frame; //Frame iterator (<= 255 total frames)
 
 //For debugging animation
 #if defined ENABLE_VERBOSE_ANIM_INFO
-int end_animation_time;
+//int end_animation_time;
 double avrg_frame_time;
 double avrg_frame_decod_time;
 #endif
@@ -35,6 +35,16 @@ bool get_is_animating() {
   return is_animating;
 }
 
+//Function that gets curent time
+//Animation with images returns millis while hardcoded animation returns micros
+unsigned long get_anim_time() {
+#if defined START_ANIMATION_WITH_IMAGES
+  return millis();
+#elif defined START_ANIMATION_HARD_CODED
+  return micros();
+#endif
+}
+
 //Method that shows animation
 //Returns true if finished, false if not done
 bool show_animation() {
@@ -45,35 +55,25 @@ bool show_animation() {
   //Animation frames not done
   if (g_current_frame <= OMNITRIX_ANIM_FRAME_LAST_INDEX) {
 
-#if defined ENABLE_VERBOSE_ANIM_INFO
-      int start_frame_time = millis();
-#endif
-
     uint32_t next_frame = g_anim_start + ((g_current_frame+1) * FRAME_RATE);
 
-#if defined ENABLE_ANIM_INFO
-    Serial.printf("millis: %d, next frame at: %d\n", millis(), next_frame);
-#endif
+    print_anim_info_vars("millis: ", get_anim_time(), ", next frame at: ", next_frame);
+
+      //These will be used only if animation info is enabled
+      unsigned long start_frame_time, start_frame_decod_time; 
+      //Save timestamp for the start of the frame
+      verbose_anim_info_save_anim_time(&start_frame_time);
 
     //Check time for next frame
     // g_anim_start + ((g_current_frame+1) * FRAME_RATE) is the next timestamp where the next frame appears
-    if (millis() >= next_frame) {
+    if (get_anim_time() >= next_frame) {
+      //Save timestamp for the start of the decoding
+      verbose_anim_info_save_anim_time(&start_frame_decod_time);
 
-#if defined ENABLE_VERBOSE_ANIM_INFO
-      int start_frame_decod_time = millis();
-#endif
       //Draw current frame
       draw_start_animation_frame(g_current_frame);
 
-#if defined ENABLE_VERBOSE_ANIM_INFO
-      int frame_decod_duration_time = millis() - start_frame_decod_time;
-      int frame_duration_time = millis() - start_frame_time;
-      int frame_duration_since_start = millis() - g_anim_start;
-      avrg_frame_time += frame_duration_time;
-      avrg_frame_decod_time += frame_decod_duration_time;
-      Serial.printf("Time passed since frame decoded: %d, time passed since frame real time: %d, total time since start: %d\n", 
-        frame_decod_duration_time, frame_duration_time, frame_duration_since_start);
-#endif
+      print_verbose_anim_info_end_frame(&start_frame_time, &start_frame_decod_time);
 
       g_current_frame++; //go to next frame
 
@@ -84,14 +84,7 @@ bool show_animation() {
   else {
 
     //Finished animation info
-#if defined ENABLE_VERBOSE_ANIM_INFO
-    end_animation_time = millis();
-    Serial.printf("Average frame rate: %.2f, Average frame decode time: %.2f\n", 
-      avrg_frame_time/(OMNITRIX_ANIM_FRAME_LAST_INDEX + 1), 
-      avrg_frame_decod_time/(OMNITRIX_ANIM_FRAME_LAST_INDEX + 1));
-    Serial.printf("Total start_animation time length : %d\n", end_animation_time - g_anim_start);
-#endif
-
+    verbose_anim_end_info();
     return true; //Animation done
   }
   
@@ -142,23 +135,14 @@ void erase_alien() {
 // This function displays png images
 void show_image(const uint8_t *img, int img_size) {
 
-#if defined ENABLE_MEMORY_INFO
-  Serial.printf("Free Internal Heap: %d\n", ESP.getFreeHeap());
-  Serial.printf("Min Free Internal Heap: %d\n", ESP.getMinFreeHeap());
-  Serial.printf("Total PSRAM Size: %d\n", ESP.getPsramSize());
-  Serial.printf("Free PSRAM: %d\n", ESP.getFreePsram());
-#endif
+  print_memory_info();
 
   int16_t rc = png.openFLASH((uint8_t *)img, img_size, png_draw);
 
-#if defined ENABLE_MEMORY_INFO
-  Serial.printf("Open flash rc: %d\n", rc);
-#endif
+  print_memory_info_mes_var("Open flash rc: ", rc);
 
   if (rc == PNG_SUCCESS) {
-#if defined ENABLE_MEMORY_INFO
-    Serial.println("Successfully png file");
-#endif
+    print_memory_info_mes("Successfully png file");
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
