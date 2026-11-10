@@ -68,6 +68,9 @@
 
 //SOFTWARE SETTINGS
 
+//TIME UNTIL DEEP SLEEP
+#define DEEP_SLEEP_TIMER_CONFIG 5 // 5 sec
+
 //CPU FREQUENCY
 #define DEFAULT_CPU_FREQ 80
 //Allow cpu frequency to change for better FPS

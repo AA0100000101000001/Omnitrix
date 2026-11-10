@@ -17,8 +17,8 @@ static bool overflow;
 
 //Time Variables
 #define uS_TO_S_FACTOR 1000000ULL /* Conversion factor for micro seconds to seconds */
-#define DEEP_SLEEP_TIMER 5        // 5 sec
-extern uint32_t g_start;                 //timer for deep sleep
+#define DEEP_SLEEP_TIMER DEEP_SLEEP_TIMER_CONFIG  // in sec
+extern uint32_t g_start;          //timer for deep sleep
 
 //Time definitions for demo and default mode
 #if defined DEMO_ENABLED

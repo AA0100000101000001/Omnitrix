@@ -117,6 +117,13 @@ Right now the EXT0_ROTARY_ENCODER configuration works with the use of the mechan
 #### For software settings:  
 The only essential setting is one option for the animation. Default transformation and recharging time is 60 seconds. You can configure:  
 
+**Time passed before the system goes to deep sleep mode:**  
+
+```C
+//TIME UNTIL DEEP SLEEP
+#define DEEP_SLEEP_TIMER_CONFIG 5 // 5 sec
+``` 
+
 **To choose max CPU frequency for bigger frame rates**   
 Default CPU frequency is used most of the time. If ALLOW_CPU_FREQ_CHANGES is enabled then the frequency can go faster just for the animation. 
 
