@@ -63,7 +63,7 @@ void select_alien_mode(Input in) {
     //Display alien
     show_alien();
 
-    ENABLE_SERIAL("Right, alien no: %d \n", g_alien_n);
+    PRINT_INFO("Right, alien no: %d \n", g_alien_n);
   }
   // Left movement input
   else if (in == INPUT_LEFT) {
@@ -80,7 +80,7 @@ void select_alien_mode(Input in) {
     //Display alien
     show_alien();
 
-    ENABLE_SERIAL("Left, alien no: %d \n", g_alien_n);
+    PRINT_INFO("Left, alien no: %d \n", g_alien_n);
   }
   // Start button is pressed
   else if (in == INPUT_START_BUTTON) {
