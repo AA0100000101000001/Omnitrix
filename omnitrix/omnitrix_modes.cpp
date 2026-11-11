@@ -11,7 +11,7 @@ void start_mode(Input in) {
     // Animation time is done
     if (show_animation()) {
 
-    print_anim_info("Start animation is done");
+    PRINT_ANIM_INFO("Start animation is done\n");
 
       set_is_animating(false);
       // Finish going to select alien mode
@@ -38,7 +38,7 @@ void select_alien_mode(Input in) {
     // Green display delay is done
     if (get_anim_time() - g_anim_start >= 600) {
 
-      print_anim_info("Delay for green display is done");
+      PRINT_ANIM_INFO("Delay for green display is done\n");
 
       set_is_animating(false);
       // Finish going to transformation mode
@@ -63,7 +63,7 @@ void select_alien_mode(Input in) {
     //Display alien
     show_alien();
 
-    print_info_var("Right, alien no: ", g_alien_n);
+    ENABLE_SERIAL("Right, alien no: %d \n", g_alien_n);
   }
   // Left movement input
   else if (in == INPUT_LEFT) {
@@ -80,7 +80,7 @@ void select_alien_mode(Input in) {
     //Display alien
     show_alien();
 
-    print_info_var("Left, alien no: ", g_alien_n);
+    ENABLE_SERIAL("Left, alien no: %d \n", g_alien_n);
   }
   // Start button is pressed
   else if (in == INPUT_START_BUTTON) {
@@ -116,7 +116,7 @@ void transformed_mode(Input in) {
 
     //Set offset to time passed since last time the timer was checked (in sec)
     g_transformation_start_time_offset = get_time_now() - g_transformation_start_time;
-    print_deep_sleep_info_var("transformation_start_time_offset: ", g_transformation_start_time_offset);
+    PRINT_DEEP_SLEEP_INFO("transformation_start_time_offset: %d\n", g_transformation_start_time_offset);
   }
 }
 
@@ -136,6 +136,6 @@ void recharge_mode() {
     
     //Set offset to time passed since last time the timer was checked (in sec)
     g_recharging_start_time_offset = get_time_now() - g_recharging_start_time;
-    print_deep_sleep_info_var("recharging_start_time_offset: ", g_recharging_start_time_offset);
+    PRINT_DEEP_SLEEP_INFO("recharging_start_time_offset: %d\n", g_recharging_start_time_offset);
   }
 }

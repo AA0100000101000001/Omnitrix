@@ -78,7 +78,7 @@ void check_timer() {
   //if the time has passed then go to deep sleep
   if ((get_time_now() - g_start) > DEEP_SLEEP_TIMER) {
 
-    print_info("Going to sleep");
+    PRINT_INFO("Going to sleep\n");
 
     esp_deep_sleep_start();
   }
@@ -95,7 +95,7 @@ void get_wakeup_reason() {
     case ESP_SLEEP_WAKEUP_EXT0:
       {
 
-        print_deep_sleep_info("Wakeup caused by external signal using RTC_IO");
+        PRINT_DEEP_SLEEP_INFO("Wakeup caused by external signal using RTC_IO\n");
 
         //Transformation mode is not done, enable deep sleep timer for transformation offset
         if (g_mode == 3) {
@@ -105,7 +105,7 @@ void get_wakeup_reason() {
 
           //Configure the wake up source to wake up every time the transformation is done
           esp_sleep_enable_timer_wakeup((g_transform_time_val - g_transformation_start_time_offset) * uS_TO_S_FACTOR);
-          print_info_var("Transformation: Setup ESP32 to sleep for every (in sec) ", g_transform_time_val - g_transformation_start_time_offset);
+          PRINT_INFO("Transformation: Setup ESP32 to sleep for every %d sec\n", g_transform_time_val - g_transformation_start_time_offset);
 
         }
         //Recharging mode is not done, enable deep sleep timer for recharging offset
@@ -116,7 +116,7 @@ void get_wakeup_reason() {
 
           //Configure the wake up source to wake up every time the recharge is done
           esp_sleep_enable_timer_wakeup((g_recharge_time_val - g_recharging_start_time_offset) * uS_TO_S_FACTOR);
-          print_info_var("GWR: Recharging: Setup ESP32 to sleep for every ", g_recharge_time_val - g_recharging_start_time_offset);
+          PRINT_INFO("GWR: Recharging: Setup ESP32 to sleep for every %d sec\n", g_recharge_time_val - g_recharging_start_time_offset);
         }
 
         break;
@@ -125,7 +125,7 @@ void get_wakeup_reason() {
     case ESP_SLEEP_WAKEUP_TIMER:
       {
 
-        print_deep_sleep_info("Wakeup caused by timer");
+        PRINT_DEEP_SLEEP_INFO("Wakeup caused by timer\n");
 
         //Transformation mode is done, enable deep sleep timer for recharging
         if (g_mode == 3) {
@@ -143,7 +143,7 @@ void get_wakeup_reason() {
     //Wake up not caused by deep sleep
     default:
       {
-        print_deep_sleep_info_var("Wakeup was not caused by deep sleep: ", wakeup_reason);
+        PRINT_DEEP_SLEEP_INFO("Wakeup was not caused by deep sleep: %d\n", wakeup_reason);
         break;
       }
   }

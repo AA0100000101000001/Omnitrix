@@ -6,7 +6,7 @@ void mode1to2start() {
 
   play_sound(2);  //Play select sound
 
-  print_info("Button pressed, select alien initiating...");
+  PRINT_INFO("Button pressed, select alien initiating...\n");
   
   reset_timer(); // For the delay of the animation
   g_anim_start = get_anim_time(); //get time of animation begin
@@ -28,7 +28,7 @@ void mode1to2start() {
 //Start mode to Alien Selection mode end
 void mode1to2finish() {
 
-  print_info("Select alien");
+  PRINT_INFO("Select alien\n");
 
 #if defined ALLOW_CPU_FREQ_CHANGES
   //Change cpu frequency to the default one for battery
@@ -47,7 +47,7 @@ void mode2to1() {
   play_sound(4);  //Play move backwards
 
   g_mode = 1;
-  print_info("Button pressed, back to start");
+  PRINT_INFO("Button pressed, back to start\n");
 
   //display start
   tft.fillScreen(OMNITRIX_GREEN);
@@ -57,7 +57,7 @@ void mode2to1() {
 //Alien Selection mode to Transformation mode before delay/animation
 void mode2to3start() {
 
-  print_info("Tranforming into alien...");
+  PRINT_INFO("Tranforming into alien...\n");
 
   play_sound(5);  //Play transformation sound
 
@@ -76,7 +76,7 @@ void mode2to3start() {
 //Alien Selection mode to Transformation mode after delay/animation
 void mode2to3finish() {
 
-  print_info("Tranformed into alien");
+  PRINT_INFO("Tranformed into alien\n");
 
   //Set transformation mode now after animation/delay is done
   g_mode = 3; 
@@ -93,7 +93,7 @@ void mode2to3finish() {
   g_transformation_start_time_offset = get_time_now() - g_transformation_start_time;
   //Configure the wake up source to wake up every time the transformation is done
   esp_sleep_enable_timer_wakeup((g_transform_time_val - g_transformation_start_time_offset) * uS_TO_S_FACTOR);
-  print_info_var("Transformation: Setup ESP32 to sleep for every (in sec) ", g_transform_time_val - g_transformation_start_time_offset);
+  PRINT_INFO("Transformation: Setup ESP32 to sleep for every %d sec\n", g_transform_time_val - g_transformation_start_time_offset);
 }
 
 //Transformation mode to Recharging mode
@@ -112,7 +112,7 @@ void mode3to4() {
   tft.fillScreen(OMNITRIX_RED);
   show_symbols();
 
-  print_info("Omnitrix is recharging");
+  PRINT_INFO("Omnitrix is recharging\n");
 
   //Start Rechargin timer
   //Set recharging start time to current epoch time
@@ -124,7 +124,7 @@ void mode3to4() {
   g_recharging_start_time_offset = get_time_now() - g_recharging_start_time;
   //Configure the wake up source to wake up every time the recharge is done
   esp_sleep_enable_timer_wakeup((g_recharge_time_val - g_recharging_start_time_offset) * uS_TO_S_FACTOR);
-  print_info_var("Recharging: Setup ESP32 to sleep for every ", g_recharge_time_val - g_recharging_start_time_offset);
+  PRINT_INFO("Recharging: Setup ESP32 to sleep for every %d sec\n", g_recharge_time_val - g_recharging_start_time_offset);
 }
 
 //Transformation mode to Start mode
@@ -133,7 +133,7 @@ void mode3to1() {
   play_sound(4);  //Play move backwards
 
   g_mode = 1;
-  print_info("Button pressed, untransforming and going back to Start mode");
+  PRINT_INFO("Button pressed, untransforming and going back to Start mode\n");
 
   //display start
   tft.fillScreen(OMNITRIX_GREEN);
@@ -141,7 +141,7 @@ void mode3to1() {
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-  print_deep_sleep_info("mode3to1: Disabled Timer");
+  PRINT_DEEP_SLEEP_INFO("mode3to1: Disabled Timer\n");
 }
 
 //Recharging mode to Start mode
@@ -158,13 +158,13 @@ void mode4to1() {
   tft.fillScreen(OMNITRIX_GREEN);
   show_symbols();
 
-  print_info("Going back to start");
+  PRINT_INFO("Going back to start\n");
 
   g_mode = 1;
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-  print_deep_sleep_info("mode4to1: Disabled Timer");
+  PRINT_DEEP_SLEEP_INFO("mode4to1: Disabled Timer\n");
 
   //reset timer
   reset_timer();

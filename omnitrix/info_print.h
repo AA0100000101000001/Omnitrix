@@ -22,38 +22,46 @@ extern unsigned long get_anim_time();
 
 //SERIAL ENABLED
 //Function that outputs message if Serial is enabld
-void print_info(String s);
-
-//Function that outputs a variable if Serial is enabld
-void print_info_var(String s, int v);
+#if defined ENABLE_SERIAL
+  #define PRINT_INFO(...) Serial.printf(__VA_ARGS__)
+#else
+  #define PRINT_INFO(...) ((void)0)
+#endif
 
 //VERBOSE INFO
 //Function that shows message if verbose info is enabled
-void print_verbose_info(String s);
+#if defined ENABLE_VERBOSE_INFO
+  #define PRINT_VERBOSE_INFO(...) Serial.printf("VERBOSE: " __VA_ARGS__)
+#else
+  #define PRINT_VERBOSE_INFO(...) ((void)0)
+#endif
 
 //DEEP SLEEP INFO
 //Function that outputs message if deep sleep info is enabled
-void print_deep_sleep_info(String s);
-
-//Function that outputs deep sleep time offset if deep sleep info is emabled
-void print_deep_sleep_info_var(String m, uint16_t x);
+#if defined ENABLE_DEEP_SLEEP_INFO
+  #define PRINT_DEEP_SLEEP_INFO(...) Serial.printf("DEEP_SLEEP_INFO: " __VA_ARGS__)
+#else
+  #define PRINT_DEEP_SLEEP_INFO(...) ((void)0)
+#endif
 
 //MEMORY INFO
-//Function that shows free memory if memory info is enabled
-void print_memory_info();
-
-//Function that outputs a message if mempry info is emabled
-void print_memory_info_mes(String m);
-
-//Function that outputs a variable if mempry info is emabled
-void print_memory_info_mes_var(String m, int x);
+#if defined ENABLE_MEMORY_INFO
+//Function that outputs a message if memory info is emabled
+  #define PRINT_MEMORY_INFO_MES(...) Serial.printf("MEMORY_INFO: " __VA_ARGS__)
+  //Function that shows free memory if memory info is enabled
+  #define PRINT_MEMORY_INFO Serial.printf("Free Internal Heap: %d\n", ESP.getFreeHeap()); Serial.printf("Min Free Internal Heap: %d\n", ESP.getMinFreeHeap()); Serial.printf("Total PSRAM Size: %d\n", ESP.getPsramSize()); Serial.printf("Free PSRAM: %d\n", ESP.getFreePsram())
+#else
+  #define PRINT_MEMORY_INFO_MES(...) ((void)0)
+  #define PRINT_MEMORY_INFO ((void)0)
+#endif
 
 //ANIMATION INFO
 //Function that outputs message if animation info is enabled
-void print_anim_info(String s);
-
-//Function that outputs variables with messages if animation info is emabled
-void print_anim_info_vars(String m1, int x1, String m2, int x2);
+#if defined ENABLE_ANIM_INFO
+  #define PRINT_ANIM_INFO(...) Serial.printf("ANIM_INFO: " __VA_ARGS__)
+#else
+  #define PRINT_ANIM_INFO(...) ((void)0)
+#endif
 
 //VERBOSE ANIMATION INFO
 //Saves in the variable the current time if verbose animation info is enabled

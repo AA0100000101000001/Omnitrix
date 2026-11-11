@@ -48,6 +48,7 @@ static bool IRAM_ATTR debounce(uint32_t *last_interrupt_time, uint32_t debounce_
     *last_interrupt_time = interrupt_time;
     return true;
   }
+  return false;
 }
 
 
@@ -138,7 +139,7 @@ Input check_input() {
 //Rotary encoder
 #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED || defined ROTARY_ENCODER_ENABLED
   if (g_right_state) {
-    print_verbose_info("Right Button pressed\n");
+    PRINT_VERBOSE_INFO("Right Button pressed\n");
 
     //Play move encoder forward sound
     play_sound(3); 
@@ -151,7 +152,7 @@ Input check_input() {
     return INPUT_RIGHT;
   }
   else if (g_left_state) {
-    print_verbose_info("Left Button pressed\n");
+    PRINT_VERBOSE_INFO("Left Button pressed\n");
 
     //Play move encoder backwards
     play_sound(4);  
@@ -165,7 +166,7 @@ Input check_input() {
 #endif
 #if defined POP_UP_BUTTONS_ENABLED
   else if (g_start_button_state) {
-    print_verbose_info("Button pressed\n");
+    PRINT_VERBOSE_INFO("Button pressed\n");
     g_start_button_state = false;
 
     //Check mode for start button
@@ -174,7 +175,7 @@ Input check_input() {
     return INPUT_START_BUTTON;
   }
   else if (g_select_button_state) {
-    print_verbose_info("Select Button pressed\n");
+    PRINT_VERBOSE_INFO("Select Button pressed\n");
     g_select_button_state = false;
 
     //Check mode for select button

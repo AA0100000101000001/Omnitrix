@@ -57,7 +57,7 @@ bool show_animation() {
 
     uint32_t next_frame = g_anim_start + ((g_current_frame+1) * FRAME_RATE);
 
-    print_anim_info_vars("millis: ", get_anim_time(), ", next frame at: ", next_frame);
+    PRINT_ANIM_INFO("millis: %lu, next frame at: %lu\n", get_anim_time(), next_frame);
 
       //These will be used only if animation info is enabled
       unsigned long start_frame_time, start_frame_decod_time; 
@@ -135,14 +135,14 @@ void erase_alien() {
 // This function displays png images
 void show_image(const uint8_t *img, int img_size) {
 
-  print_memory_info();
+  PRINT_MEMORY_INFO;
 
   int16_t rc = png.openFLASH((uint8_t *)img, img_size, png_draw);
 
-  print_memory_info_mes_var("Open flash rc: ", rc);
+  PRINT_MEMORY_INFO_MES("Open flash rc: %d\n", rc);
 
   if (rc == PNG_SUCCESS) {
-    print_memory_info_mes("Successfully png file");
+    PRINT_MEMORY_INFO_MES("Successfully png file\n");
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
