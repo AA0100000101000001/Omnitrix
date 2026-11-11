@@ -1,6 +1,13 @@
 
 #include "omnitrix_display.h"
 
+#include "omnitrix_aliens.h"
+//Start animation with images
+#if defined START_ANIMATION_WITH_IMAGES
+#include "omnitrix_anim.h"
+#include "omnitrix_alien_background.h"
+#endif
+
 
 //Display variables
 PNG png;  // PNG decoder instance
@@ -153,8 +160,8 @@ void show_image(const uint8_t *img, int img_size) {
 
 // This function will be called during decoding of the png file
 int png_draw(PNGDRAW *pDraw) {
-  uint16_t line_buffer[MAX_IMAGE_WDITH];         // Line buffer for rendering
-  uint8_t mask_buffer[1 + MAX_IMAGE_WDITH / 8];  // Mask buffer
+  uint16_t line_buffer[MAX_IMAGE_WIDTH];         // Line buffer for rendering
+  uint8_t mask_buffer[1 + MAX_IMAGE_WIDTH / 8];  // Mask buffer
 
   png.getLineAsRGB565(pDraw, line_buffer, PNG_RGB565_BIG_ENDIAN, 0xffffffff);
 

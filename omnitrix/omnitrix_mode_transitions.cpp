@@ -1,6 +1,8 @@
 
 #include "omnitrix_mode_transitions.h"
 
+RTC_DATA_ATTR uint8_t g_mode;           // Up to 255 modes
+
 //Start mode to Alien Selection mode begining
 void mode1to2start() {
 
@@ -36,7 +38,7 @@ void mode1to2finish() {
 #endif
 
   //Set select alien mode now after animation is done
-  g_mode = 2;
+  g_mode = SELECT_ALIEN_MODE;
   //Display alien
   show_alien();
 }
@@ -46,7 +48,7 @@ void mode2to1() {
 
   play_sound(4);  //Play move backwards
 
-  g_mode = 1;
+  g_mode = START_MODE;
   PRINT_INFO("Button pressed, back to start\n");
 
   //display start
@@ -79,7 +81,7 @@ void mode2to3finish() {
   PRINT_INFO("Tranformed into alien\n");
 
   //Set transformation mode now after animation/delay is done
-  g_mode = 3; 
+  g_mode = TRANSFORMED_MODE; 
 
   //Display transformed state image
   tft.fillScreen(TFT_WHITE);
@@ -118,7 +120,7 @@ void mode3to4() {
   //Set recharging start time to current epoch time
   g_recharging_start_time = get_time_now();
 
-  g_mode = 4;
+  g_mode = RECHARGING_MODE;
 
   //Set offset to time passed since last time the timer was checked (in sec)
   g_recharging_start_time_offset = get_time_now() - g_recharging_start_time;
@@ -132,7 +134,7 @@ void mode3to1() {
 
   play_sound(4);  //Play move backwards
 
-  g_mode = 1;
+  g_mode = START_MODE;
   PRINT_INFO("Button pressed, untransforming and going back to Start mode\n");
 
   //display start
@@ -160,7 +162,7 @@ void mode4to1() {
 
   PRINT_INFO("Going back to start\n");
 
-  g_mode = 1;
+  g_mode = START_MODE;
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);

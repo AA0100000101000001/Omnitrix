@@ -9,7 +9,6 @@
 #include "omnitrix_time.h"
 
 
-extern RTC_DATA_ATTR uint8_t g_mode;           // Up to 255 modes
 
 //Function from omnitrix_time
 extern void reset_timer();

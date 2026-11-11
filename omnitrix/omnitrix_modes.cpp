@@ -102,6 +102,7 @@ void transformed_mode(Input in) {
   if (in == INPUT_SELECT_BUTTON) {
     //Go to back to start
     mode3to1();
+    return; //Return to main loop
   }
 
   //Check transformation time

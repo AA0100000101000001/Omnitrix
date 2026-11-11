@@ -29,9 +29,6 @@ extern volatile bool g_left_state;   //State of left
 //initialize inputs and interrupts
 void init_input();
 
-//Debouncing wrapper function
-static bool IRAM_ATTR debounce(uint32_t *last_interrupt_time, uint32_t debounce_ms);
-
 #if defined POP_UP_BUTTONS_ENABLED
 void IRAM_ATTR button_interrupt();
 void IRAM_ATTR select_button_interrupt();

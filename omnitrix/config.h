@@ -107,7 +107,7 @@
 //4. Info about animation
 //#define ENABLE_ANIM_INFO
 //5. Verbose animation info
-#define ENABLE_VERBOSE_ANIM_INFO
+//#define ENABLE_VERBOSE_ANIM_INFO
 
 //ANIMATION
 //Choose only one type of animation

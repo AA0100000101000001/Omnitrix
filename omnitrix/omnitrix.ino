@@ -34,7 +34,7 @@ void setup() {
   if (g_first_boot) {
     delay(400); // delay fot tft.begin and serial
     g_alien_n = 0;
-    g_mode = 1;
+    g_mode = START_MODE;
     rtc_set_time(0, 0, 0, 1, 1, 2023, 0);  // Set Time to 1st Jan 2023 00:00:00
 
     play_sound(1);  //Play boot sound
@@ -60,19 +60,19 @@ void loop() {
   Input in = check_input();
 
   //Start mode
-  if (g_mode == 1) {
+  if (g_mode == START_MODE) {
     start_mode(in);
   }
   //Select alien mode
-  else if (g_mode == 2) {
+  else if (g_mode == SELECT_ALIEN_MODE) {
     select_alien_mode(in);
   }
   //Transformed mode
-  else if (g_mode == 3) {
+  else if (g_mode == TRANSFORMED_MODE) {
     transformed_mode(in);
   }
   //Recharging mode
-  else if (g_mode == 4) {
+  else if (g_mode == RECHARGING_MODE) {
     recharge_mode();
   }
 
@@ -134,7 +134,7 @@ void init_leds() {
 #endif
 
   //After the wake up, turn on leds
-  if (g_mode == 4) {
+  if (g_mode == RECHARGING_MODE) {
     //Green led colour
     analogWrite(RGB_R_PIN, RED_LED_R);
     analogWrite(RGB_G_PIN, RED_LED_G);

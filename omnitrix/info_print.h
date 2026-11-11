@@ -73,7 +73,7 @@ void verbose_anim_info_save_anim_time(unsigned long *start_frame_time);
 #if defined START_ANIMATION_WITH_IMAGES
 void print_verbose_anim_info_end_frame(unsigned long *start_frame_time, unsigned long *start_frame_decod_time);
   
-#elif defined START_ANIMATION_HARD_CODED
+#elif defined START_ANIMATION_WITHOUT_IMAGES
 void print_verbose_anim_info_end_frame(unsigned long *start_frame_time);
 #endif
 

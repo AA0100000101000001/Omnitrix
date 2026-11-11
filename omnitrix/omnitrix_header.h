@@ -10,6 +10,11 @@
 #include "omnitrix_modes.h"
 
 
+//Variables that are saved in deep sleep mode
+RTC_DATA_ATTR bool g_first_boot = true;  // For initialization
+//Variables that are saved in deep sleep mode
+RTC_DATA_ATTR uint8_t g_alien_n;        // Up to 255 aliens
+
 //Sound definition
 #if defined SOUND_ENABLED
 
@@ -38,7 +43,3 @@ DFRobot_DF1201S DF1201S;
 #define RED_LED_B 34
 #endif
 
-//Variables that are saved in deep sleep mode
-RTC_DATA_ATTR bool g_first_boot = true;  // For initialization
-RTC_DATA_ATTR uint8_t g_alien_n;        // Up to 255 aliens
-RTC_DATA_ATTR uint8_t g_mode;           // Up to 255 modes

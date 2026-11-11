@@ -40,7 +40,7 @@ void print_verbose_anim_info_end_frame(
 #endif
 }
 
-#elif defined START_ANIMATION_HARD_CODED
+#elif defined START_ANIMATION_WITHOUT_IMAGES
 void print_verbose_anim_info_end_frame(
   unsigned long *start_frame_time) {
   //, unsigned long *frame_duration_time, unsigned long *frame_duration_since_start) {
@@ -62,7 +62,7 @@ void verbose_anim_end_info() {
     Serial.printf("Total start_animation time length : %d\n", end_animation_time - g_anim_start);
 #endif
 }
-#elif defined START_ANIMATION_HARD_CODED
+#elif defined START_ANIMATION_WITHOUT_IMAGES
 void verbose_anim_end_info() {
 #if defined ENABLE_VERBOSE_ANIM_INFO
 

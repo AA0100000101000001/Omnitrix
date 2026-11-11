@@ -32,6 +32,12 @@ void init_time_sleep() {
 
 
 //Based on ESP32Time Library by Felix Biego
+#ifdef RTC_DATA_ATTR
+RTC_DATA_ATTR static bool overflow;
+#else
+static bool overflow;
+#endif
+//Based on ESP32Time Library by Felix Biego
 void rtc_set_time(int sc, int mn, int hr, int dy, int mt, int yr, int ms) {
   // seconds, minute, hour, day, month, year $ microseconds(optional)
   // ie setTime(20, 34, 8, 1, 4, 2021) = 8:34:20 1/4/2021
@@ -98,7 +104,7 @@ void get_wakeup_reason() {
         PRINT_DEEP_SLEEP_INFO("Wakeup caused by external signal using RTC_IO\n");
 
         //Transformation mode is not done, enable deep sleep timer for transformation offset
-        if (g_mode == 3) {
+        if (g_mode == TRANSFORMED_MODE) {
 
           //Set offset to time passed since last time the timer was checked (in sec)
           g_transformation_start_time_offset = get_time_now() - g_transformation_start_time;
@@ -109,7 +115,7 @@ void get_wakeup_reason() {
 
         }
         //Recharging mode is not done, enable deep sleep timer for recharging offset
-        else if (g_mode == 4) {
+        else if (g_mode == RECHARGING_MODE) {
 
           //Set offset to time passed since last time the timer was checked (in sec)
           g_recharging_start_time_offset = get_time_now() - g_recharging_start_time;
@@ -128,13 +134,13 @@ void get_wakeup_reason() {
         PRINT_DEEP_SLEEP_INFO("Wakeup caused by timer\n");
 
         //Transformation mode is done, enable deep sleep timer for recharging
-        if (g_mode == 3) {
+        if (g_mode == TRANSFORMED_MODE) {
 
           mode3to4();
 
 
           //Recharging mode is done, disable timer and go to start mode
-        } else if (g_mode == 4) {
+        } else if (g_mode == RECHARGING_MODE) {
 
           mode4to1();
         }

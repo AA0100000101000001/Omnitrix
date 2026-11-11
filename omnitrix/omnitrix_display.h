@@ -4,16 +4,10 @@
 
 #include <Arduino.h>
 #include "config.h"
+#include "omnitrix_types.h"
 #include <TFT_eSPI.h>
 #include <PNGdec.h>
 #include <SPI.h>
-
-#include "omnitrix_aliens.h"
-//Start animation with images
-#if defined START_ANIMATION_WITH_IMAGES
-#include "omnitrix_anim.h"
-#include "omnitrix_alien_background.h"
-#endif
 
 //Configure LCD pins in User_Setup.h or create your own setup in
 //libraries/TFT_eSPI/User_Setups folder and include it in User_Setup_Select.h
@@ -48,7 +42,7 @@ extern RTC_DATA_ATTR uint8_t g_alien_n;        // Up to 255 aliens
 #define OMNITRIX_RED 0xC000
 #define OMNITRIX_GRAY 0xAD55
 
-#define MAX_IMAGE_WDITH 240  // Set rendering line buffer lengths for image
+#define MAX_IMAGE_WIDTH 240  // Set rendering line buffer lengths for image
 
 #ifndef OMNITRIX_ANIM_FRAME_LAST_INDEX
 #define OMNITRIX_ANIM_FRAME_LAST_INDEX 10 //11 frames for animation

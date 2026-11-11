@@ -4,15 +4,9 @@
 
 #include <Arduino.h>
 #include "config.h"
+#include "omnitrix_types.h"
 #include <time.h>
 #include <sys/time.h>
-
-//Based on ESP32Time Library by Felix Biego
-#ifdef RTC_DATA_ATTR
-RTC_DATA_ATTR static bool overflow;
-#else
-static bool overflow;
-#endif
 
 
 //Time Variables
@@ -39,8 +33,6 @@ extern RTC_DATA_ATTR uint32_t g_transformation_start_time;
 extern RTC_DATA_ATTR uint32_t g_recharging_start_time;
 extern RTC_DATA_ATTR uint16_t g_transformation_start_time_offset;
 extern RTC_DATA_ATTR uint16_t g_recharging_start_time_offset;
-
-extern RTC_DATA_ATTR uint8_t g_mode;           // Up to 255 modes
 
 
 void init_time_sleep();  //Initialize deep sleep mode
