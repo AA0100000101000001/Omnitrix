@@ -3,7 +3,7 @@
 
 #include "omnitrix_aliens.h"
 //Start animation with images
-#if defined START_ANIMATION_WITH_IMAGES
+#if defined GRAPHICS_PRECOMPILED
 #include "omnitrix_anim.h"
 #include "omnitrix_alien_background.h"
 #endif
@@ -47,7 +47,7 @@ bool get_is_animating() {
 //Function that gets curent time
 //Animation with images returns millis while hardcoded animation returns micros
 unsigned long get_anim_time() {
-#if defined START_ANIMATION_WITH_IMAGES
+#if defined GRAPHICS_PRECOMPILED
   return millis();
 #elif defined START_ANIMATION_HARD_CODED
   return micros();
@@ -59,7 +59,7 @@ unsigned long get_anim_time() {
 bool show_animation() {
 
 //Use of images for start animation
-#if defined START_ANIMATION_WITH_IMAGES
+#if defined GRAPHICS_PRECOMPILED
   
   //Animation frames not done
   if (g_current_frame <= OMNITRIX_ANIM_FRAME_LAST_INDEX) {
@@ -106,7 +106,7 @@ bool show_animation() {
 void draw_start_animation_frame(uint8_t i) {
 
 //Use of images for start animation
-#if defined START_ANIMATION_WITH_IMAGES
+#if defined GRAPHICS_PRECOMPILED
   
   show_image(omnitrix_anim[i], sizeof(omnitrix_anim[i]));
 #endif

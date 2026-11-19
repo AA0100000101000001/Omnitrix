@@ -112,9 +112,9 @@
 //ANIMATION
 //Choose only one type of animation
 //1. Start animation with images
-#define START_ANIMATION_WITH_IMAGES
+#define GRAPHICS_PRECOMPILED
 //2. Hard coded start animation
-//#define START_ANIMATION_WITHOUT_IMAGES //Not finished
+//#define GRAPHICS_PROCEDURAL //Not finished
 
 //SOUND
 //Choose if sound will be muted in booting
@@ -246,8 +246,8 @@
 // #define ENABLE_MEMORY_INFO
 
 //Check type of animation
-#if defined START_ANIMATION_WITH_IMAGES && !defined START_ANIMATION_WITHOUT_IMAGES
-#elif !defined START_ANIMATION_WITH_IMAGES && defined START_ANIMATION_WITHOUT_IMAGES
+#if defined GRAPHICS_PRECOMPILED && !defined GRAPHICS_PROCEDURAL
+#elif !defined GRAPHICS_PRECOMPILED && defined GRAPHICS_PROCEDURAL
 #else
 #error "You must use at least one option for the start animation"
 #endif

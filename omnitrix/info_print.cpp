@@ -20,7 +20,7 @@ void verbose_anim_info_end_frame_wrapper(
 // Function print_verbose_anim_info_end_frame: prints info at the end of a frame
 // Prints frame_duration_time, frame_duration_since_start, does avrg_frame_time calculation 
 //If animation with images is used also shows frame_decod_duration_time
-#if defined START_ANIMATION_WITH_IMAGES
+#if defined GRAPHICS_PRECOMPILED
 void print_verbose_anim_info_end_frame(
   unsigned long *start_frame_time, 
   //unsigned long *frame_duration_time, 
@@ -40,7 +40,7 @@ void print_verbose_anim_info_end_frame(
 #endif
 }
 
-#elif defined START_ANIMATION_WITHOUT_IMAGES
+#elif defined GRAPHICS_PROCEDURAL
 void print_verbose_anim_info_end_frame(
   unsigned long *start_frame_time) {
   //, unsigned long *frame_duration_time, unsigned long *frame_duration_since_start) {
@@ -51,7 +51,7 @@ void print_verbose_anim_info_end_frame(
 
 // Function verbose_anim_end_info: prints info at the end of the animation
 // Prints Average frame rate, Total start_animation time length and if animation with images is enabled Average frame decode time
-#if defined START_ANIMATION_WITH_IMAGES
+#if defined GRAPHICS_PRECOMPILED
 void verbose_anim_end_info() {
 #if defined ENABLE_VERBOSE_ANIM_INFO
 
@@ -62,7 +62,7 @@ void verbose_anim_end_info() {
     Serial.printf("Total start_animation time length : %d\n", end_animation_time - g_anim_start);
 #endif
 }
-#elif defined START_ANIMATION_WITHOUT_IMAGES
+#elif defined GRAPHICS_PROCEDURAL
 void verbose_anim_end_info() {
 #if defined ENABLE_VERBOSE_ANIM_INFO
 

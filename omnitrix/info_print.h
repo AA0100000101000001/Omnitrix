@@ -10,7 +10,7 @@
 extern uint32_t g_anim_start;
 extern int end_animation_time;
 extern double avrg_frame_time;
-#if defined START_ANIMATION_WITH_IMAGES
+#if defined GRAPHICS_PRECOMPILED
 extern double avrg_frame_decod_time;
 #endif
 //Function from omnitrix_display
@@ -67,10 +67,10 @@ void verbose_anim_info_save_anim_time(unsigned long *start_frame_time);
 // Function print_verbose_anim_info_end_frame: prints info at the end of a frame
 // Prints frame_duration_time, frame_duration_since_start, does avrg_frame_time calculation 
 //If animation with images is used also shows frame_decod_duration_time
-#if defined START_ANIMATION_WITH_IMAGES
+#if defined GRAPHICS_PRECOMPILED
 void print_verbose_anim_info_end_frame(unsigned long *start_frame_time, unsigned long *start_frame_decod_time);
   
-#elif defined START_ANIMATION_WITHOUT_IMAGES
+#elif defined GRAPHICS_PROCEDURAL
 void print_verbose_anim_info_end_frame(unsigned long *start_frame_time);
 #endif
 
