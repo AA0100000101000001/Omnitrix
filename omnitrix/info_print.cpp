@@ -1,5 +1,5 @@
 
-#include "info_print.h";
+#include "info_print.h"
 
 //VERBOSE ANIMATION INFO
 //Saves in the variable the current time if verbose animation info is enabled

@@ -4,6 +4,7 @@
 
 #include <Arduino.h>
 #include "config.h"
+#include "info_print.h"
 #include "omnitrix_types.h"
 #include <TFT_eSPI.h>
 #include <PNGdec.h>
@@ -42,23 +43,12 @@ extern RTC_DATA_ATTR uint8_t g_alien_n;        // Up to 255 aliens
 #define OMNITRIX_RED 0xC000
 #define OMNITRIX_GRAY 0xAD55
 
-#define MAX_IMAGE_WIDTH 240  // Set rendering line buffer lengths for image
-
-#ifndef OMNITRIX_ANIM_FRAME_LAST_INDEX
 #define OMNITRIX_ANIM_FRAME_LAST_INDEX 10 //11 frames for animation
-#endif
 #define ALIEN_LAST_INDEX 11  //0...11 = 12 Total aliens
 
 
-
-extern PNG png;  // PNG decoder instance
+// Used by other modules
 extern TFT_eSPI tft;
-
-
-// Display position variables must be global for PNGdec
-extern int16_t xpos;
-extern int16_t ypos;
-
 extern uint32_t g_anim_start;    //Timer that helps with animation
 extern uint8_t g_current_frame; //Frame iterator (<= 255 total frames)
 

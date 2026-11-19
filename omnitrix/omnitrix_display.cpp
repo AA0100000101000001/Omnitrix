@@ -13,7 +13,9 @@
 PNG png;  // PNG decoder instance
 TFT_eSPI tft = TFT_eSPI();
 
-#define OMNITRIX_ANIM_FRAME_LAST_INDEX 10 //11 frames for animation
+
+#define MAX_IMAGE_WIDTH 240  // Set rendering line buffer lengths for image
+
 
 // Display position variables must be global for PNGdec
 int16_t xpos = 0;

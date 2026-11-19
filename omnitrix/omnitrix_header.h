@@ -2,6 +2,7 @@
 //Pin configuration and software settings
 #include "config.h"
 
+#include "info_print.h"
 #include "omnitrix_types.h"
 #include "omnitrix_time.h"
 #include "interrupts.h"

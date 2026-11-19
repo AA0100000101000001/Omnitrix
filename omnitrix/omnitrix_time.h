@@ -4,6 +4,7 @@
 
 #include <Arduino.h>
 #include "config.h"
+#include "info_print.h"
 #include "omnitrix_types.h"
 #include <time.h>
 #include <sys/time.h>
@@ -42,7 +43,7 @@ void reset_timer();
 void check_timer();
 void get_wakeup_reason();
 
-void mode3to4();
-void mode4to1();
+extern void mode3to4();
+extern void mode4to1();
 
 #endif

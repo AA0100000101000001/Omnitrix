@@ -2,10 +2,23 @@
 #include "interrupts.h"
 
 
+// Input states
+#if defined POP_UP_BUTTONS_ENABLED
+//Variables to keep track of the timing of recent interrupts are inside them for now
+//This interrupt timer uses millis() instead of Epoch so it can be smaller
+//since it will often reset because of sleep mode.
+//Up to 18.2 hours of being awake and buttons functioning normaly, after sleep values reset
+//volatile uint16_t interruptTime = 0;
+//volatile uint16_t lastInterruptTime = 0;
 volatile bool g_start_button_state = 0;        //State of start button
 volatile bool g_select_button_state = 0;  //State of select button
+#endif
+
+#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED || defined ROTARY_ENCODER_ENABLED
+//Similar with pop up buttons, use of interrupts
 volatile bool g_right_state = 0;  //State of right
 volatile bool g_left_state = 0;   //State of left
+#endif
 
 
 //initialize inputs and interrupts

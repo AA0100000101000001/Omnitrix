@@ -4,10 +4,7 @@
 
 #include <Arduino.h>
 #include "config.h"
-
-#ifndef OMNITRIX_ANIM_FRAME_LAST_INDEX
-#define OMNITRIX_ANIM_FRAME_LAST_INDEX 10 //11 frames for animation
-#endif
+#include "omnitrix_display.h"
 
 //Variables from omnitrix_display
 extern uint32_t g_anim_start;
