@@ -71,18 +71,18 @@ bool show_animation() {
       //These will be used only if animation info is enabled
       unsigned long start_frame_time, start_frame_decod_time; 
       //Save timestamp for the start of the frame
-      verbose_anim_info_save_anim_time(&start_frame_time);
+      verbose_anim_info_start(&start_frame_time);
 
     //Check time for next frame
     // g_anim_start + ((g_current_frame+1) * FRAME_RATE) is the next timestamp where the next frame appears
     if (get_anim_time() >= next_frame) {
       //Save timestamp for the start of the decoding
-      verbose_anim_info_save_anim_time(&start_frame_decod_time);
+      verbose_anim_info_start(&start_frame_decod_time);
 
       //Draw current frame
       draw_start_animation_frame(g_current_frame);
 
-      print_verbose_anim_info_end_frame(&start_frame_time, &start_frame_decod_time);
+      verbose_anim_info_frame(&start_frame_time, &start_frame_decod_time);
 
       g_current_frame++; //go to next frame
 
@@ -93,7 +93,7 @@ bool show_animation() {
   else {
 
     //Finished animation info
-    verbose_anim_end_info();
+    verbose_anim_info_end();
     return true; //Animation done
   }
   

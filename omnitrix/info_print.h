@@ -61,22 +61,34 @@ extern unsigned long get_anim_time();
 #endif
 
 //VERBOSE ANIMATION INFO
+#if defined ENABLE_VERBOSE_ANIM_INFO
 //Saves in the variable the current time if verbose animation info is enabled
-void verbose_anim_info_save_anim_time(unsigned long *start_frame_time);
+void verbose_anim_info_start(unsigned long *start_frame_time);
 
-// Function print_verbose_anim_info_end_frame: prints info at the end of a frame
+// Function verbose_anim_info_frame: prints info at the end of a frame
 // Prints frame_duration_time, frame_duration_since_start, does avrg_frame_time calculation 
 //If animation with images is used also shows frame_decod_duration_time
 #if defined GRAPHICS_PRECOMPILED
-void print_verbose_anim_info_end_frame(unsigned long *start_frame_time, unsigned long *start_frame_decod_time);
+void verbose_anim_info_frame(unsigned long *start_frame_time, unsigned long *start_frame_decod_time);
   
 #elif defined GRAPHICS_PROCEDURAL
-void print_verbose_anim_info_end_frame(unsigned long *start_frame_time);
+void verbose_anim_info_frame(unsigned long *start_frame_time);
 #endif
 
 // Function verbose_anim_end_info: prints info at the end of the animation
 // Prints Average frame rate, Total start_animation time length and if animation with images if enabled Average frame decode time
-void verbose_anim_end_info();
+void verbose_anim_info_end();
+
+#else
+//Leave functions empty and inline
+static inline void verbose_anim_info_start(unsigned long *start_frame_time) {}
+#if defined GRAPHICS_PRECOMPILED
+static inline void verbose_anim_info_frame(unsigned long *start_frame_time, unsigned long *start_frame_decod_time) {}
+#elif defined GRAPHICS_PROCEDURAL
+static inline void verbose_anim_info_frame(unsigned long *start_frame_time) {}
+#endif
+static inline void verbose_anim_info_end() {}
+#endif
 
 
 #endif

@@ -2,8 +2,10 @@
 #include "info_print.h"
 
 //VERBOSE ANIMATION INFO
+#if defined ENABLE_VERBOSE_ANIM_INFO
+
 //Saves in the variable the current time if verbose animation info is enabled
-void verbose_anim_info_save_anim_time(unsigned long *start_frame_time) {
+void verbose_anim_info_start(unsigned long *start_frame_time) {
 #if defined ENABLE_VERBOSE_ANIM_INFO
   *start_frame_time = get_anim_time();
 #endif
@@ -17,11 +19,11 @@ void verbose_anim_info_end_frame_wrapper(
 
 }*/
 
-// Function print_verbose_anim_info_end_frame: prints info at the end of a frame
+// Function verbose_anim_info_frame: prints info at the end of a frame
 // Prints frame_duration_time, frame_duration_since_start, does avrg_frame_time calculation 
 //If animation with images is used also shows frame_decod_duration_time
 #if defined GRAPHICS_PRECOMPILED
-void print_verbose_anim_info_end_frame(
+void verbose_anim_info_frame(
   unsigned long *start_frame_time, 
   //unsigned long *frame_duration_time, 
   //unsigned long *frame_duration_since_start, 
@@ -41,7 +43,7 @@ void print_verbose_anim_info_end_frame(
 }
 
 #elif defined GRAPHICS_PROCEDURAL
-void print_verbose_anim_info_end_frame(
+void verbose_anim_info_frame(
   unsigned long *start_frame_time) {
   //, unsigned long *frame_duration_time, unsigned long *frame_duration_since_start) {
 
@@ -49,10 +51,10 @@ void print_verbose_anim_info_end_frame(
 }
 #endif
 
-// Function verbose_anim_end_info: prints info at the end of the animation
+// Function verbose_anim_info_end: prints info at the end of the animation
 // Prints Average frame rate, Total start_animation time length and if animation with images is enabled Average frame decode time
 #if defined GRAPHICS_PRECOMPILED
-void verbose_anim_end_info() {
+void verbose_anim_info_end() {
 #if defined ENABLE_VERBOSE_ANIM_INFO
 
     unsigned long end_animation_time = get_anim_time();
@@ -63,9 +65,12 @@ void verbose_anim_end_info() {
 #endif
 }
 #elif defined GRAPHICS_PROCEDURAL
-void verbose_anim_end_info() {
+void verbose_anim_info_end() {
 #if defined ENABLE_VERBOSE_ANIM_INFO
 
 #endif
 }
+#endif
+
+
 #endif
