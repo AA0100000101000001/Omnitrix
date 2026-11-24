@@ -93,6 +93,22 @@
 #define FRAME_RATE 53 //For freq of 80
 #endif
 
+//SERIAL OUTPUT
+//Basic debugging info
+#define ENABLE_SERIAL
+
+//Choose one or more types of showing specialized Serial output
+//1. Verbose general info
+//#define ENABLE_VERBOSE_INFO
+//2. Verbose deep sleep info
+//#define ENABLE_DEEP_SLEEP_INFO
+//3. Info about FLASH/RAM
+//#define ENABLE_MEMORY_INFO
+//4. Info about animation
+//#define ENABLE_ANIM_INFO
+//5. Verbose animation info
+//#define ENABLE_VERBOSE_ANIM_INFO
+
 //GRAPHICS
 /* LCD Colours
 RGB to HEX: http://www.rinkydinkelectronics.com/calc_rgb565.php
@@ -110,22 +126,6 @@ gray RGB: 171, 171, 171 = 0xABABAB = 0xAD55 in RGB565
 #define OMNITRIX_GREEN_CONFIG 0xA707
 #define OMNITRIX_RED_CONFIG 0xC000
 #define OMNITRIX_GRAY_CONFIG 0xAD55
-
-//SERIAL OUTPUT
-//Basic debugging info
-#define ENABLE_SERIAL
-
-//Choose one or more types of showing specialized Serial output
-//1. Verbose general info
-//#define ENABLE_VERBOSE_INFO
-//2. Verbose deep sleep info
-//#define ENABLE_DEEP_SLEEP_INFO
-//3. Info about FLASH/RAM
-//#define ENABLE_MEMORY_INFO
-//4. Info about animation
-//#define ENABLE_ANIM_INFO
-//5. Verbose animation info
-//#define ENABLE_VERBOSE_ANIM_INFO
 
 //ANIMATION
 //Choose only one type of animation

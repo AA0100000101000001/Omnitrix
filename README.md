@@ -137,16 +137,6 @@ Default CPU frequency is used most of the time. If ALLOW_CPU_FREQ_CHANGES is ena
 //#define MAX_CPU_FREQ 240
 ``` 
 
-**Graphics settings**  
-These are the default colors that mirror the ones in the saved image frames.
-
-```C
-//GRAPHICS
-#define OMNITRIX_GREEN_CONFIG 0xA707
-#define OMNITRIX_RED_CONFIG 0xC000
-#define OMNITRIX_GRAY_CONFIG 0xAD55
-```
-
 **To enable serial for debugging:**  
 
 ```C
@@ -164,6 +154,16 @@ These are the default colors that mirror the ones in the saved image frames.
 //#define ENABLE_ANIM_INFO
 //5. Verbose animation info
 //#define ENABLE_VERBOSE_ANIM_INFO
+```
+
+**Graphics settings**  
+These are the default colors that mirror the ones in the saved image frames.
+
+```C
+//GRAPHICS
+#define OMNITRIX_GREEN_CONFIG 0xA707
+#define OMNITRIX_RED_CONFIG 0xC000
+#define OMNITRIX_GRAY_CONFIG 0xAD55
 ```
 
 **What kind of animation is being used:**  
