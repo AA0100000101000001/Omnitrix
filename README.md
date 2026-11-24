@@ -167,13 +167,15 @@ These are the default colors that mirror the ones in the saved image frames.
 ```
 
 **What kind of animation is being used:**  
+'GRAPHICS_PRECOMPILED' uses the images saved in flash for the animation  
+'GRAPHICS_PROCEDURAL' generates the animation with an algorithm
 
 ```C
 //Choose only one type of animation
 //1. Start animation with images
-#define START_ANIMATION_WITH_IMAGES
+#define GRAPHICS_PRECOMPILED
 //2. Hard coded start animation
-//#define START_ANIMATION_WITHOUT_IMAGES //Not finished
+//#define GRAPHICS_PROCEDURAL //Not finished
 ```
 
 **If sound will be muted in booting:** 
