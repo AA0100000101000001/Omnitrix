@@ -184,11 +184,11 @@ Default CPU frequency is used most of the time. If ALLOW_CPU_FREQ_CHANGES is ena
 
 ## Roadmap for version 1.0.0
 - [x] Update esp32 arduino core and libraries to current version
-- [ ] Refactor code to look more proffesional
+- [x] Refactor code to look more proffesional
 - [ ] Do the pending GUI updates
 - [ ] Use the RGB LED of the Esp32-S3-Pico
-- [ ] Add support for magnetic rotary encoder
 - [ ] Add support for passive buzzer
+- [ ] Add support for magnetic rotary encoder
 
 ## Dependencies
 * This project is developed in Arduino IDE version 2.3.10  
