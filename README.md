@@ -167,8 +167,8 @@ These are the default colors that mirror the ones in the saved image frames.
 ```
 
 **What kind of animation is being used:**  
-'GRAPHICS_PRECOMPILED' uses the images saved in flash for the animation  
-'GRAPHICS_PROCEDURAL' generates the animation with an algorithm
+`GRAPHICS_PRECOMPILED` uses the images saved in flash for the animation  
+`GRAPHICS_PROCEDURAL` generates the animation with an algorithm
 
 ```C
 //Choose only one type of animation
