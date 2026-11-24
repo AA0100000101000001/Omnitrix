@@ -1,62 +1,88 @@
 
+#include "omnitrix_display.h"
 
-#define OMNITRIX_ANIM_FRAME_LAST_INDEX 10 //11 frames for animation
+#include "omnitrix_aliens.h"
+//Start animation with images
+#if defined GRAPHICS_PRECOMPILED
+#include "omnitrix_anim.h"
+#include "omnitrix_alien_background.h"
+#endif
+
+
+//Display variables
+PNG png;  // PNG decoder instance
+TFT_eSPI tft = TFT_eSPI();
+
+
+#define MAX_IMAGE_WIDTH 240  // Set rendering line buffer lengths for image
+
 
 // Display position variables must be global for PNGdec
 int16_t xpos = 0;
 int16_t ypos = 0;
 
 static bool is_animating = false;
+//bool is_animating = false;
 uint32_t g_anim_start;    //Timer that helps with animation
 uint8_t g_current_frame; //Frame iterator (<= 255 total frames)
 
 //For debugging animation
 #if defined ENABLE_VERBOSE_ANIM_INFO
-int end_animation_time;
+//int end_animation_time;
 double avrg_frame_time;
 double avrg_frame_decod_time;
 #endif
 
+
+//Function that sets is_animating
+void set_is_animating(bool s) {
+  is_animating = s;
+}
+
+//Function that returns is_animating
+bool get_is_animating() {
+  return is_animating;
+}
+
+//Function that gets curent time
+//Animation with images returns millis while hardcoded animation returns micros
+unsigned long get_anim_time() {
+#if defined GRAPHICS_PRECOMPILED
+  return millis();
+#elif defined START_ANIMATION_HARD_CODED
+  return micros();
+#endif
+}
 
 //Method that shows animation
 //Returns true if finished, false if not done
 bool show_animation() {
 
 //Use of images for start animation
-#if defined START_ANIMATION_WITH_IMAGES
+#if defined GRAPHICS_PRECOMPILED
   
   //Animation frames not done
   if (g_current_frame <= OMNITRIX_ANIM_FRAME_LAST_INDEX) {
 
-#if defined ENABLE_VERBOSE_ANIM_INFO
-      int start_frame_time = millis();
-#endif
-
     uint32_t next_frame = g_anim_start + ((g_current_frame+1) * FRAME_RATE);
 
-#if defined ENABLE_ANIM_INFO
-    Serial.printf("millis: %d, next frame at: %d\n", millis(), next_frame);
-#endif
+    PRINT_ANIM_INFO("millis: %lu, next frame at: %lu\n", get_anim_time(), next_frame);
+
+      //These will be used only if animation info is enabled
+      unsigned long start_frame_time, start_frame_decod_time; 
+      //Save timestamp for the start of the frame
+      verbose_anim_info_start(&start_frame_time);
 
     //Check time for next frame
     // g_anim_start + ((g_current_frame+1) * FRAME_RATE) is the next timestamp where the next frame appears
-    if (millis() >= next_frame) {
+    if (get_anim_time() >= next_frame) {
+      //Save timestamp for the start of the decoding
+      verbose_anim_info_start(&start_frame_decod_time);
 
-#if defined ENABLE_VERBOSE_ANIM_INFO
-      int start_frame_decod_time = millis();
-#endif
       //Draw current frame
       draw_start_animation_frame(g_current_frame);
 
-#if defined ENABLE_VERBOSE_ANIM_INFO
-      int frame_decod_duration_time = millis() - start_frame_decod_time;
-      int frame_duration_time = millis() - start_frame_time;
-      int frame_duration_since_start = millis() - g_anim_start;
-      avrg_frame_time += frame_duration_time;
-      avrg_frame_decod_time += frame_decod_duration_time;
-      Serial.printf("Time passed since frame decoded: %d, time passed since frame real time: %d, total time since start: %d\n", 
-        frame_decod_duration_time, frame_duration_time, frame_duration_since_start);
-#endif
+      verbose_anim_info_frame(&start_frame_time, &start_frame_decod_time);
 
       g_current_frame++; //go to next frame
 
@@ -67,14 +93,7 @@ bool show_animation() {
   else {
 
     //Finished animation info
-#if defined ENABLE_VERBOSE_ANIM_INFO
-    end_animation_time = millis();
-    Serial.printf("Average frame rate: %.2f, Average frame decode time: %.2f\n", 
-      avrg_frame_time/(OMNITRIX_ANIM_FRAME_LAST_INDEX + 1), 
-      avrg_frame_decod_time/(OMNITRIX_ANIM_FRAME_LAST_INDEX + 1));
-    Serial.printf("Total start_animation time length : %d\n", end_animation_time - g_anim_start);
-#endif
-
+    verbose_anim_info_end();
     return true; //Animation done
   }
   
@@ -87,7 +106,7 @@ bool show_animation() {
 void draw_start_animation_frame(uint8_t i) {
 
 //Use of images for start animation
-#if defined START_ANIMATION_WITH_IMAGES
+#if defined GRAPHICS_PRECOMPILED
   
   show_image(omnitrix_anim[i], sizeof(omnitrix_anim[i]));
 #endif
@@ -125,23 +144,14 @@ void erase_alien() {
 // This function displays png images
 void show_image(const uint8_t *img, int img_size) {
 
-#if defined ENABLE_MEMORY_INFO
-  Serial.printf("Free Internal Heap: %d\n", ESP.getFreeHeap());
-  Serial.printf("Min Free Internal Heap: %d\n", ESP.getMinFreeHeap());
-  Serial.printf("Total PSRAM Size: %d\n", ESP.getPsramSize());
-  Serial.printf("Free PSRAM: %d\n", ESP.getFreePsram());
-#endif
+  PRINT_MEMORY_INFO;
 
   int16_t rc = png.openFLASH((uint8_t *)img, img_size, png_draw);
 
-#if defined ENABLE_MEMORY_INFO
-  Serial.printf("Open flash rc: %d\n", rc);
-#endif
+  PRINT_MEMORY_INFO_MES("Open flash rc: %d\n", rc);
 
   if (rc == PNG_SUCCESS) {
-#if defined ENABLE_MEMORY_INFO
-    Serial.println("Successfully png file");
-#endif
+    PRINT_MEMORY_INFO_MES("Successfully png file\n");
 
     tft.startWrite();
     rc = png.decode(NULL, 0);
@@ -152,8 +162,8 @@ void show_image(const uint8_t *img, int img_size) {
 
 // This function will be called during decoding of the png file
 int png_draw(PNGDRAW *pDraw) {
-  uint16_t line_buffer[MAX_IMAGE_WDITH];         // Line buffer for rendering
-  uint8_t mask_buffer[1 + MAX_IMAGE_WDITH / 8];  // Mask buffer
+  uint16_t line_buffer[MAX_IMAGE_WIDTH];         // Line buffer for rendering
+  uint8_t mask_buffer[1 + MAX_IMAGE_WIDTH / 8];  // Mask buffer
 
   png.getLineAsRGB565(pDraw, line_buffer, PNG_RGB565_BIG_ENDIAN, 0xffffffff);
 

@@ -1,19 +1,18 @@
 
+#include "omnitrix_mode_transitions.h"
+
+RTC_DATA_ATTR uint8_t g_mode;           // Up to 255 modes
+
 //Start mode to Alien Selection mode begining
 void mode1to2start() {
 
-#if defined SOUND_ENABLED
   play_sound(2);  //Play select sound
-#endif
 
-#if defined ENABLE_SERIAL
-  Serial.println("Button pressed, select alien initiating...");
-#endif
-
+  PRINT_INFO("Button pressed, select alien initiating...\n");
   
   reset_timer(); // For the delay of the animation
-  g_anim_start = millis(); //get time of animation begin
-  is_animating = true;
+  g_anim_start = get_anim_time(); //get time of animation begin
+  set_is_animating(true);
 
 #if defined ALLOW_CPU_FREQ_CHANGES
   //Change cpu frequency to the faster allowed one for faster animation
@@ -22,7 +21,6 @@ void mode1to2start() {
   g_current_frame = 0; //Set start frame
   //Set debugging animation variables
 #if defined ENABLE_VERBOSE_ANIM_INFO
-  end_animation_time;
   avrg_frame_time = 0;
   avrg_frame_decod_time = 0;
 #endif
@@ -32,9 +30,7 @@ void mode1to2start() {
 //Start mode to Alien Selection mode end
 void mode1to2finish() {
 
-#if defined ENABLE_SERIAL
-  Serial.println("Select alien");
-#endif
+  PRINT_INFO("Select alien\n");
 
 #if defined ALLOW_CPU_FREQ_CHANGES
   //Change cpu frequency to the default one for battery
@@ -42,7 +38,7 @@ void mode1to2finish() {
 #endif
 
   //Set select alien mode now after animation is done
-  g_mode = 2;
+  g_mode = SELECT_ALIEN_MODE;
   //Display alien
   show_alien();
 }
@@ -50,14 +46,10 @@ void mode1to2finish() {
 //Alien Selection mode to Start mode
 void mode2to1() {
 
-#if defined SOUND_ENABLED
   play_sound(4);  //Play move backwards
-#endif
 
-  g_mode = 1;
-#if defined ENABLE_SERIAL
-  Serial.println("Button pressed, back to start");
-#endif
+  g_mode = START_MODE;
+  PRINT_INFO("Button pressed, back to start\n");
 
   //display start
   tft.fillScreen(OMNITRIX_GREEN);
@@ -67,20 +59,16 @@ void mode2to1() {
 //Alien Selection mode to Transformation mode before delay/animation
 void mode2to3start() {
 
-#if defined ENABLE_SERIAL
-  Serial.println("Tranforming into alien...");
-#endif
+  PRINT_INFO("Tranforming into alien...\n");
 
-#if defined SOUND_ENABLED
   play_sound(5);  //Play transformation sound
-#endif
 
   //Display tranformation image
   tft.fillScreen(OMNITRIX_GREEN);
   
   reset_timer(); // For the delay of the green display
-  g_anim_start = millis(); //get time of animation/delay begin
-  is_animating = true;
+  g_anim_start = get_anim_time(); //get time of animation/delay begin
+  set_is_animating(true);
 
   //delay(600); //green display delay
 
@@ -90,12 +78,10 @@ void mode2to3start() {
 //Alien Selection mode to Transformation mode after delay/animation
 void mode2to3finish() {
 
-#if defined ENABLE_SERIAL
-  Serial.println("Tranformed into alien");
-#endif
+  PRINT_INFO("Tranformed into alien\n");
 
   //Set transformation mode now after animation/delay is done
-  g_mode = 3; 
+  g_mode = TRANSFORMED_MODE; 
 
   //Display transformed state image
   tft.fillScreen(TFT_WHITE);
@@ -109,17 +95,13 @@ void mode2to3finish() {
   g_transformation_start_time_offset = get_time_now() - g_transformation_start_time;
   //Configure the wake up source to wake up every time the transformation is done
   esp_sleep_enable_timer_wakeup((g_transform_time_val - g_transformation_start_time_offset) * uS_TO_S_FACTOR);
-#if defined ENABLE_SERIAL
-  Serial.println("Transformation: Setup ESP32 to sleep for every " + String(g_transform_time_val - g_transformation_start_time_offset) + " Seconds");
-#endif
+  PRINT_INFO("Transformation: Setup ESP32 to sleep for every %d sec\n", g_transform_time_val - g_transformation_start_time_offset);
 }
 
 //Transformation mode to Recharging mode
 void mode3to4() {
 
-#if defined SOUND_ENABLED
   play_sound(7);  //Play detransformation sound
-#endif
 
 //Red led colour
 #if defined RGB_LEDS_ENABLED
@@ -132,36 +114,28 @@ void mode3to4() {
   tft.fillScreen(OMNITRIX_RED);
   show_symbols();
 
-#if defined ENABLE_SERIAL
-  Serial.println("Omnitrix is recharging");
-#endif
+  PRINT_INFO("Omnitrix is recharging\n");
 
   //Start Rechargin timer
   //Set recharging start time to current epoch time
   g_recharging_start_time = get_time_now();
 
-  g_mode = 4;
+  g_mode = RECHARGING_MODE;
 
   //Set offset to time passed since last time the timer was checked (in sec)
   g_recharging_start_time_offset = get_time_now() - g_recharging_start_time;
   //Configure the wake up source to wake up every time the recharge is done
   esp_sleep_enable_timer_wakeup((g_recharge_time_val - g_recharging_start_time_offset) * uS_TO_S_FACTOR);
-#if defined ENABLE_SERIAL
-  Serial.println("Recharging: Setup ESP32 to sleep for every " + String(g_recharge_time_val - g_recharging_start_time_offset) + " Seconds");
-#endif
+  PRINT_INFO("Recharging: Setup ESP32 to sleep for every %d sec\n", g_recharge_time_val - g_recharging_start_time_offset);
 }
 
 //Transformation mode to Start mode
 void mode3to1() {
 
-#if defined SOUND_ENABLED
   play_sound(4);  //Play move backwards
-#endif
 
-  g_mode = 1;
-#if defined ENABLE_SERIAL
-  Serial.println("Button pressed, untransforming and going back to Start mode");
-#endif
+  g_mode = START_MODE;
+  PRINT_INFO("Button pressed, untransforming and going back to Start mode\n");
 
   //display start
   tft.fillScreen(OMNITRIX_GREEN);
@@ -169,9 +143,7 @@ void mode3to1() {
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-#if defined ENABLE_DEEP_SLEEP_INFO
-  Serial.println("Disabled Timer1");
-#endif
+  PRINT_DEEP_SLEEP_INFO("mode3to1: Disabled Timer\n");
 }
 
 //Recharging mode to Start mode
@@ -188,17 +160,13 @@ void mode4to1() {
   tft.fillScreen(OMNITRIX_GREEN);
   show_symbols();
 
-#if defined ENABLE_SERIAL
-  Serial.println("Going back to start");
-#endif
+  PRINT_INFO("Going back to start\n");
 
-  g_mode = 1;
+  g_mode = START_MODE;
 
   //Disable waking up by timer
   esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
-#if defined ENABLE_DEEP_SLEEP_INFO
-  Serial.println("Disabled Timer2");
-#endif
+  PRINT_DEEP_SLEEP_INFO("mode4to1: Disabled Timer\n");
 
   //reset timer
   reset_timer();

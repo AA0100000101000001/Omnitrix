@@ -1,4 +1,35 @@
 
+#include "omnitrix_time.h"
+
+uint32_t g_start;                 //timer for deep sleep
+
+//Initialise timer variables as DEMO (in seconds)
+// Up to 65535 seconds = 1092.25 min = 18.2 hours of recharging/transformation
+RTC_DATA_ATTR uint16_t g_transform_time_val = TRANSFORMATION_TIME;    // Transformation Time Variable
+RTC_DATA_ATTR uint16_t g_recharge_time_val = OMNITRIX_RECHARGE_TIME;  // Recharging Time Variable
+
+//Time variables that are saved in deep sleep mode
+RTC_DATA_ATTR uint32_t g_transformation_start_time;
+RTC_DATA_ATTR uint32_t g_recharging_start_time;
+RTC_DATA_ATTR uint16_t g_transformation_start_time_offset;
+RTC_DATA_ATTR uint16_t g_recharging_start_time_offset;
+
+
+//Initialize deep sleep mode
+void init_time_sleep() {
+
+  //External wakeup setup
+//EXT0
+#ifdef EXT0_ENABLED
+  //The omnitrix will wake up when a button is pressed
+  esp_sleep_enable_ext0_wakeup(EXT0_WAKEUP_PIN, EXT0_WAKEUP_MODE);
+//EXT1
+#elif defined EXT1_ENABLED
+  //The omnitrix will wake up when a combination of buttons is pressed
+  esp_sleep_enable_ext1_wakeup(EXT1_BITMASK, ESP_EXT1_WAKEUP_ANY_HIGH);
+#endif
+}
+
 
 //Based on ESP32Time Library by Felix Biego
 #ifdef RTC_DATA_ATTR
@@ -53,9 +84,7 @@ void check_timer() {
   //if the time has passed then go to deep sleep
   if ((get_time_now() - g_start) > DEEP_SLEEP_TIMER) {
 
-#if defined ENABLE_SERIAL
-    Serial.println("Going to sleep");
-#endif
+    PRINT_INFO("Going to sleep\n");
 
     esp_deep_sleep_start();
   }
@@ -72,34 +101,28 @@ void get_wakeup_reason() {
     case ESP_SLEEP_WAKEUP_EXT0:
       {
 
-#if defined ENABLE_DEEP_SLEEP_INFO
-        Serial.println("Wakeup caused by external signal using RTC_IO");
-#endif
+        PRINT_DEEP_SLEEP_INFO("Wakeup caused by external signal using RTC_IO\n");
 
         //Transformation mode is not done, enable deep sleep timer for transformation offset
-        if (g_mode == 3) {
+        if (g_mode == TRANSFORMED_MODE) {
 
           //Set offset to time passed since last time the timer was checked (in sec)
           g_transformation_start_time_offset = get_time_now() - g_transformation_start_time;
 
           //Configure the wake up source to wake up every time the transformation is done
           esp_sleep_enable_timer_wakeup((g_transform_time_val - g_transformation_start_time_offset) * uS_TO_S_FACTOR);
-#if defined ENABLE_SERIAL
-          Serial.println("Transformation: Setup ESP32 to sleep for every " + String(g_transform_time_val - g_transformation_start_time_offset) + " Seconds");
-#endif
+          PRINT_INFO("Transformation: Setup ESP32 to sleep for every %d sec\n", g_transform_time_val - g_transformation_start_time_offset);
 
         }
         //Recharging mode is not done, enable deep sleep timer for recharging offset
-        else if (g_mode == 4) {
+        else if (g_mode == RECHARGING_MODE) {
 
           //Set offset to time passed since last time the timer was checked (in sec)
           g_recharging_start_time_offset = get_time_now() - g_recharging_start_time;
 
           //Configure the wake up source to wake up every time the recharge is done
           esp_sleep_enable_timer_wakeup((g_recharge_time_val - g_recharging_start_time_offset) * uS_TO_S_FACTOR);
-#if defined ENABLE_SERIAL
-          Serial.println("Recharging1: Setup ESP32 to sleep for every " + String(g_recharge_time_val - g_recharging_start_time_offset) + " Seconds");
-#endif
+          PRINT_INFO("GWR: Recharging: Setup ESP32 to sleep for every %d sec\n", g_recharge_time_val - g_recharging_start_time_offset);
         }
 
         break;
@@ -108,18 +131,16 @@ void get_wakeup_reason() {
     case ESP_SLEEP_WAKEUP_TIMER:
       {
 
-#if defined ENABLE_DEEP_SLEEP_INFO
-        Serial.println("Wakeup caused by timer");
-#endif
+        PRINT_DEEP_SLEEP_INFO("Wakeup caused by timer\n");
 
         //Transformation mode is done, enable deep sleep timer for recharging
-        if (g_mode == 3) {
+        if (g_mode == TRANSFORMED_MODE) {
 
           mode3to4();
 
 
           //Recharging mode is done, disable timer and go to start mode
-        } else if (g_mode == 4) {
+        } else if (g_mode == RECHARGING_MODE) {
 
           mode4to1();
         }
@@ -128,9 +149,7 @@ void get_wakeup_reason() {
     //Wake up not caused by deep sleep
     default:
       {
-#if defined ENABLE_DEEP_SLEEP_INFO
-        Serial.printf("Wakeup was not caused by deep sleep: %d\n", wakeup_reason);
-#endif
+        PRINT_DEEP_SLEEP_INFO("Wakeup was not caused by deep sleep: %d\n", wakeup_reason);
         break;
       }
   }

@@ -51,7 +51,7 @@ This project uses Arduino IDE to program the Esp32 so you need to [install the E
    
 You can check the [Omnitrix-Test-Files](https://github.com/AA0100000101000001/Omnitrix-Test-Files/tree/main/Test%20files/Used%20For%20Final%20Project) repository to test the features separately before uploading the code (omnitrix folder) to the MCU. These projects are also helpfull if someone wants to use a different board.  
 
-### User Setup
+## User Setup
  Inside the configs folder there are some header files for the pin configuration of non LCD Display parts. You can edit the config_CUSTOM.h file for your own pin configuration or use one of other ones.  
 Make sure that the pin configuration file is included in `configs.h`. In this file you can configure hardware and software settings.         
 ```C
@@ -64,7 +64,7 @@ Make sure that the pin configuration file is included in `configs.h`. In this fi
 #include "configs/config_ESP32_S3_PICO_PINOUT.h" //Esp32-s3-Pico Dev Board
 ```
 You can also remove features by commenting the `#define X_ENABLED` definitions. 
-#### For hardware settings:   
+### For hardware settings:    
 The only essential features for the software to work are `POP_UP_BUTTONS_ENABLED`, one option for rotary encoder and one option for external wakeup.  
 **Configuration of external wakeup:**  
 Right now the EXT0_ROTARY_ENCODER configuration works with the use of the mechanical rotary encoder
@@ -114,8 +114,15 @@ Right now the EXT0_ROTARY_ENCODER configuration works with the use of the mechan
 //LED 2. Uncomment for Neopixel ring LEDs
 //#define NEOPIXEL_RING_LEDS_ENABLED
 ```
-#### For software settings:  
+### For software settings:  
 The only essential setting is one option for the animation. Default transformation and recharging time is 60 seconds. You can configure:  
+
+**Time passed before the system goes to deep sleep mode:**  
+
+```C
+//TIME UNTIL DEEP SLEEP
+#define DEEP_SLEEP_TIMER_CONFIG 5 // 5 sec
+``` 
 
 **To choose max CPU frequency for bigger frame rates**   
 Default CPU frequency is used most of the time. If ALLOW_CPU_FREQ_CHANGES is enabled then the frequency can go faster just for the animation. 
@@ -149,14 +156,26 @@ Default CPU frequency is used most of the time. If ALLOW_CPU_FREQ_CHANGES is ena
 //#define ENABLE_VERBOSE_ANIM_INFO
 ```
 
+**Graphics settings**  
+These are the default colors that mirror the ones in the saved image frames.
+
+```C
+//GRAPHICS
+#define OMNITRIX_GREEN_CONFIG 0xA707
+#define OMNITRIX_RED_CONFIG 0xC000
+#define OMNITRIX_GRAY_CONFIG 0xAD55
+```
+
 **What kind of animation is being used:**  
+`GRAPHICS_PRECOMPILED` uses the images saved in flash for the animation  
+`GRAPHICS_PROCEDURAL` generates the animation with an algorithm
 
 ```C
 //Choose only one type of animation
 //1. Start animation with images
-#define START_ANIMATION_WITH_IMAGES
+#define GRAPHICS_PRECOMPILED
 //2. Hard coded start animation
-//#define START_ANIMATION_WITHOUT_IMAGES //Not finished
+//#define GRAPHICS_PROCEDURAL //Not finished
 ```
 
 **If sound will be muted in booting:** 
@@ -177,11 +196,11 @@ Default CPU frequency is used most of the time. If ALLOW_CPU_FREQ_CHANGES is ena
 
 ## Roadmap for version 1.0.0
 - [x] Update esp32 arduino core and libraries to current version
-- [ ] Refactor code to look more proffesional
+- [x] Refactor code to look more proffesional
 - [ ] Do the pending GUI updates
 - [ ] Use the RGB LED of the Esp32-S3-Pico
-- [ ] Add support for magnetic rotary encoder
 - [ ] Add support for passive buzzer
+- [ ] Add support for magnetic rotary encoder
 
 ## Dependencies
 * This project is developed in Arduino IDE version 2.3.10  

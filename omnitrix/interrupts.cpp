@@ -1,25 +1,85 @@
 
+#include "interrupts.h"
+
+
+// Input states
+#if defined POP_UP_BUTTONS_ENABLED
+//Variables to keep track of the timing of recent interrupts are inside them for now
+//This interrupt timer uses millis() instead of Epoch so it can be smaller
+//since it will often reset because of sleep mode.
+//Up to 18.2 hours of being awake and buttons functioning normaly, after sleep values reset
+//volatile uint16_t interruptTime = 0;
+//volatile uint16_t lastInterruptTime = 0;
+volatile bool g_start_button_state = 0;        //State of start button
+volatile bool g_select_button_state = 0;  //State of select button
+#endif
+
+#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED || defined ROTARY_ENCODER_ENABLED
+//Similar with pop up buttons, use of interrupts
+volatile bool g_right_state = 0;  //State of right
+volatile bool g_left_state = 0;   //State of left
+#endif
+
+
+//initialize inputs and interrupts
+void init_input() {
+
+  //initialize inputs and interrupts
+#if defined POP_UP_BUTTONS_ENABLED
+  pinMode(START_BUTTON_PIN, INPUT);
+  attachInterrupt(START_BUTTON_PIN, button_interrupt, RISING);
+  pinMode(SELECT_BUTTON_PIN, INPUT);
+  attachInterrupt(SELECT_BUTTON_PIN, select_button_interrupt, RISING);
+#endif
+
+//Initialize micro switch rotary encoder
+#if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
+  pinMode(RIGHT_BUTTON_PIN, INPUT);
+  pinMode(LEFT_BUTTON_PIN, INPUT);
+  attachInterrupt(RIGHT_BUTTON_PIN, right_button_interrupt, RISING);
+  attachInterrupt(LEFT_BUTTON_PIN, left_button_interrupt, RISING);
+//Initialize rotary encoder
+#elif defined ROTARY_ENCODER_ENABLED
+  pinMode(RIGHT_BUTTON_PIN, INPUT_PULLUP);
+  pinMode(LEFT_BUTTON_PIN, INPUT_PULLUP);
+  attachInterrupt(RIGHT_BUTTON_PIN, rot_encoder_interrupt, CHANGE);  // Need to detect both rising or falling signal
+  attachInterrupt(LEFT_BUTTON_PIN, rot_encoder_interrupt, CHANGE);
+#endif
+}
+
 //------INTERRUPTS------------------------
 //----------------------------------------
+
+#define INTERRUPT_DEBOUNCE_TIME 200
+
+//Debouncing wrapper function
+static bool IRAM_ATTR debounce(uint32_t *last_interrupt_time, uint32_t debounce_ms) {
+  
+  uint32_t interrupt_time = millis();
+  //Debouncing
+  if (interrupt_time - *last_interrupt_time > debounce_ms) {
+    *last_interrupt_time = interrupt_time;
+    return true;
+  }
+  return false;
+}
+
+
 #if defined POP_UP_BUTTONS_ENABLED
 
 void IRAM_ATTR button_interrupt() {
-  static uint16_t lastInterruptTime = 0;
-  uint16_t interruptTime = millis();
+  static uint32_t last_interrupt_time = 0;
   //Debouncing
-  if (interruptTime - lastInterruptTime > 200) {
+  if (debounce(&last_interrupt_time, INTERRUPT_DEBOUNCE_TIME)) {
     g_start_button_state = true;
-    lastInterruptTime = interruptTime;
   }
 }
 
 void IRAM_ATTR select_button_interrupt() {
-  static uint16_t lastInterruptTime = 0;
-  uint16_t interruptTime = millis();
+  static uint32_t last_interrupt_time = 0;
   //Debouncing
-  if (interruptTime - lastInterruptTime > 200) {
+  if (debounce(&last_interrupt_time, INTERRUPT_DEBOUNCE_TIME)) {
     g_select_button_state = true;
-    lastInterruptTime = interruptTime;
   }
 }
 
@@ -29,22 +89,18 @@ void IRAM_ATTR select_button_interrupt() {
 #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED
 
 void IRAM_ATTR right_button_interrupt() {
-  static uint16_t lastInterruptTime = 0;
-  uint16_t interruptTime = millis();
+  static uint32_t last_interrupt_time = 0;
   //Debouncing
-  if (interruptTime - lastInterruptTime > 200) {
+  if (debounce(&last_interrupt_time, INTERRUPT_DEBOUNCE_TIME)) {
     g_right_state = true;
-    lastInterruptTime = interruptTime;
   }
 }
 
 void IRAM_ATTR left_button_interrupt() {
-  static uint16_t lastInterruptTime = 0;
-  uint16_t interruptTime = millis();
+  static uint32_t last_interrupt_time = 0;
   //Debouncing
-  if (interruptTime - lastInterruptTime > 200) {
+  if (debounce(&last_interrupt_time, INTERRUPT_DEBOUNCE_TIME)) {
     g_left_state = true;
-    lastInterruptTime = interruptTime;
   }
 }
 //Rotary Encoder
@@ -91,19 +147,16 @@ void IRAM_ATTR rot_encoder_interrupt() {
 //INPUT_RIGHT if it gets right movement from encoder
 //INPUT_LEFT if it gets left movement from encoder
 //INPUT_NONE if none
-static Input check_input() {
+Input check_input() {
 
 //Rotary encoder
 #if defined MICRO_SWITCHES_ROTARY_ENCODER_ENABLED || defined ROTARY_ENCODER_ENABLED
   if (g_right_state) {
-#if defined ENABLE_VERBOSE_INFO
-    Serial.printf("Right Button pressed\n");
-#endif
+    PRINT_VERBOSE_INFO("Right Button pressed\n");
 
-//Play move encoder forward sound
-#if defined SOUND_ENABLED
+    //Play move encoder forward sound
     play_sound(3); 
-#endif
+
     g_right_state = false;
 
     //Check mode for right button
@@ -112,14 +165,10 @@ static Input check_input() {
     return INPUT_RIGHT;
   }
   else if (g_left_state) {
-#if defined ENABLE_VERBOSE_INFO
-    Serial.printf("Left Button pressed\n");
-#endif
+    PRINT_VERBOSE_INFO("Left Button pressed\n");
 
-//Play move encoder backwards
-#if defined SOUND_ENABLED
+    //Play move encoder backwards
     play_sound(4);  
-#endif
     g_left_state = false;
 
     //Check mode for left button
@@ -130,9 +179,7 @@ static Input check_input() {
 #endif
 #if defined POP_UP_BUTTONS_ENABLED
   else if (g_start_button_state) {
-#if defined ENABLE_VERBOSE_INFO
-    Serial.printf("Button pressed\n");
-#endif
+    PRINT_VERBOSE_INFO("Button pressed\n");
     g_start_button_state = false;
 
     //Check mode for start button
@@ -141,9 +188,7 @@ static Input check_input() {
     return INPUT_START_BUTTON;
   }
   else if (g_select_button_state) {
-#if defined ENABLE_VERBOSE_INFO
-    Serial.printf("Select Button pressed\n");
-#endif
+    PRINT_VERBOSE_INFO("Select Button pressed\n");
     g_select_button_state = false;
 
     //Check mode for select button
@@ -155,3 +200,5 @@ static Input check_input() {
 
   return INPUT_NONE;
 }
+
+
