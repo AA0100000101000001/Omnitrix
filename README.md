@@ -64,7 +64,7 @@ Make sure that the pin configuration file is included in `configs.h`. In this fi
 #include "configs/config_ESP32_S3_PICO_PINOUT.h" //Esp32-s3-Pico Dev Board
 ```
 You can also remove features by commenting the `#define X_ENABLED` definitions. 
-#### For hardware settings:   
+#### <span style="color:blue"> For hardware settings: </span>   
 The only essential features for the software to work are `POP_UP_BUTTONS_ENABLED`, one option for rotary encoder and one option for external wakeup.  
 **Configuration of external wakeup:**  
 Right now the EXT0_ROTARY_ENCODER configuration works with the use of the mechanical rotary encoder
@@ -114,7 +114,7 @@ Right now the EXT0_ROTARY_ENCODER configuration works with the use of the mechan
 //LED 2. Uncomment for Neopixel ring LEDs
 //#define NEOPIXEL_RING_LEDS_ENABLED
 ```
-#### For software settings:  
+#### <span style="color:blue"> For software settings: </span> 
 The only essential setting is one option for the animation. Default transformation and recharging time is 60 seconds. You can configure:  
 
 **Time passed before the system goes to deep sleep mode:**  
@@ -137,7 +137,7 @@ Default CPU frequency is used most of the time. If ALLOW_CPU_FREQ_CHANGES is ena
 //#define MAX_CPU_FREQ 240
 ``` 
 
-**Graphics settings**
+**Graphics settings**  
 These are the default colors that mirror the ones in the saved image frames.
 
 ```C
