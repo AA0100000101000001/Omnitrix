@@ -10,38 +10,12 @@
 #include <PNGdec.h>
 #include <SPI.h>
 
-//Configure LCD pins in User_Setup.h or create your own setup in
-//libraries/TFT_eSPI/User_Setups folder and include it in User_Setup_Select.h
-/*
-#define TFT_MOSI 11 // In some display driver board, it might be written as "SDA" and so on.
-#define TFT_SCLK 12
-#define TFT_CS   10  // Chip select control pin
-#define TFT_DC   9  // Data Command control pin
-#define TFT_RST  14  // Reset pin (could connect to Arduino RESET pin)
-#define TFT_BL   40  // LED back-light
-*/
-
-
-/* LCD Colours
-RGB to HEX: http://www.rinkydinkelectronics.com/calc_rgb565.php
-HEX to RGB565: https://rgbcolorpicker.com/565
-green RGB: 160, 225, 58 = 0xA0E13A = 0xA707 in RGB565
-          : 143, 219, 53 = 0x8FDB34 = 0x8ec6
-          : 168, 226, 88 = 0xA8E258 = 0xa70b
-red RGB: 199, 0, 3 = 0xC70003 = 0xC000 in RGB565
-        :229, 28, 34 = 0xE51C22 = 0xe0e4
-gray RGB: 171, 171, 171 = 0xABABAB = 0xAD55 in RGB565
-        : 99, 97, 98 = 0x636162 = 0x630c in RGB565
-        : 101, 94, 112 = 0x655E70 = 0x62ee
-        : 135, 133, 134 = 0x878586 = 0x8430
-*/
-
 //From main header
 extern RTC_DATA_ATTR uint8_t g_alien_n;        // Up to 255 aliens
 
-#define OMNITRIX_GREEN 0xA707
-#define OMNITRIX_RED 0xC000
-#define OMNITRIX_GRAY 0xAD55
+#define OMNITRIX_GREEN OMNITRIX_GREEN_CONFIG
+#define OMNITRIX_RED OMNITRIX_RED_CONFIG
+#define OMNITRIX_GRAY OMNITRIX_GRAY_CONFIG
 
 #define OMNITRIX_ANIM_FRAME_LAST_INDEX 10 //11 frames for animation
 #define ALIEN_LAST_INDEX 11  //0...11 = 12 Total aliens

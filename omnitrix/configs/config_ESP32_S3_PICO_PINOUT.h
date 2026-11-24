@@ -1,4 +1,17 @@
 
+
+//Configure LCD pins in User_Setup.h or create your own setup in
+//libraries/TFT_eSPI/User_Setups folder and include it in User_Setup_Select.h
+/*
+#define TFT_MOSI 11 // In some display driver board, it might be written as "SDA" and so on.
+#define TFT_SCLK 12
+#define TFT_CS   10  // Chip select control pin
+#define TFT_DC   9  // Data Command control pin
+#define TFT_RST  14  // Reset pin (could connect to Arduino RESET pin)
+#define TFT_BL   40  // LED back-light
+#define TFT_BACKLIGHT_ON HIGH
+*/
+
 //Uncomment for no touch GC9A01 display
 #define ESP32_S3_PINOUT
 

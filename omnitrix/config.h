@@ -93,6 +93,24 @@
 #define FRAME_RATE 53 //For freq of 80
 #endif
 
+//GRAPHICS
+/* LCD Colours
+RGB to HEX: http://www.rinkydinkelectronics.com/calc_rgb565.php
+HEX to RGB565: https://rgbcolorpicker.com/565
+green RGB: 160, 225, 58 = 0xA0E13A = 0xA707 in RGB565
+          : 143, 219, 53 = 0x8FDB34 = 0x8ec6
+          : 168, 226, 88 = 0xA8E258 = 0xa70b
+red RGB: 199, 0, 3 = 0xC70003 = 0xC000 in RGB565
+        :229, 28, 34 = 0xE51C22 = 0xe0e4
+gray RGB: 171, 171, 171 = 0xABABAB = 0xAD55 in RGB565
+        : 99, 97, 98 = 0x636162 = 0x630c in RGB565
+        : 101, 94, 112 = 0x655E70 = 0x62ee
+        : 135, 133, 134 = 0x878586 = 0x8430
+*/
+#define OMNITRIX_GREEN_CONFIG 0xA707
+#define OMNITRIX_RED_CONFIG 0xC000
+#define OMNITRIX_GRAY_CONFIG 0xAD55
+
 //SERIAL OUTPUT
 //Basic debugging info
 #define ENABLE_SERIAL
